@@ -248,6 +248,76 @@ void initialRealKesicLeeDynamicLinkLibraryLoad(const RealKesicLeeDynamicLinkLibr
 
 	RealKesicLeeImageImageListDestroy   = (IMAGE_LIST_DESTROY)GetProcAddress(obj.comctl32, "ImageList_Destroy");
 
+	if (RealKesicLeeImageListDraw == nullptr)
+	{
+		throw std::runtime_error("ImageList_Draw");
+	}
+	if (RealKesicLeeImageListGetImageInfo == nullptr)
+	{
+		throw std::runtime_error("ImageList_GetImageInfo");
+	}
+	if (RealKesicLeeTrackMouseEvent == nullptr)
+	{
+		throw std::runtime_error("_TrackMouseEvent");
+	}
+	if (RealKesicLeeImageListCreate == nullptr)
+	{
+		throw std::runtime_error("ImageList_Create");
+	}
+	if (RealKesicLeeImageListDestroy == nullptr)
+	{
+		throw std::runtime_error("ImageList_Destroy");
+	}
+	if (RealKesicLeeImageListReplaceIcon == nullptr)
+	{
+		throw std::runtime_error("ImageList_ReplaceIcon");
+	}
+	if (RealKesicLeeImageListGetImageCount == nullptr)
+	{
+		throw std::runtime_error("ImageList_GetImageCount");
+	}
+	if (RealKesicLeeImageListAddMasked == nullptr)
+	{
+		throw std::runtime_error("ImageList_AddMasked");
+	}
+	if (RealKesicLeeInitCommonControlsEx == nullptr)
+	{
+		throw std::runtime_error("InitCommonControlsEx");
+	}
+	if (RealKesicLeeInitCommonControls == nullptr)
+	{
+		throw std::runtime_error("InitCommonControls");
+	}
+	if (RealKesicLeeImageListSetIconSize == nullptr)
+	{
+		throw std::runtime_error("ImageList_SetIconSize");
+	}
+	if (RealKesicLeeImageListBeginDrag == nullptr)
+	{
+		throw std::runtime_error("ImageList_BeginDrag");
+	}
+	if (RealKesicLeeImageListEndDrag == nullptr)
+	{
+		throw std::runtime_error("ImageList_EndDrag");
+	}
+	if (RealKesicLeeImageListDragEnter == nullptr)
+	{
+		throw std::runtime_error("ImageList_DragEnter");
+	}
+	if (RealKesicLeeImageListDragMove == nullptr)
+	{
+		throw std::runtime_error("ImageList_DragMove");
+	}
+	if (RealKesicLeeImageListDragShowNolock == nullptr)
+	{
+		throw std::runtime_error("ImageList_DragShowNolock");
+	}
+
+	if (RealKesicLeeImageImageListDestroy == nullptr)
+	{
+		throw std::runtime_error("ImageList_Destroy");
+	}
+
 	/***********************************************************************************************************************************************************************************************************/
 }
 #endif
