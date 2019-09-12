@@ -1,0 +1,286 @@
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\*.cpp F:\NotepadPlusMixed\npp
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\*.h F:\NotepadPlusMixed\npp
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\*.hpp F:\NotepadPlusMixed\npp
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\*.rc F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\json\*.cpp F:\NotepadPlusMixed\npp
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\json\*.hpp F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\MISC\*.h F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\MISC\Common\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\MISC\crc16\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\MISC\Exception\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\MISC\md5\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\MISC\PluginsManager\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\MISC\Process\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\MISC\RegExt\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\MISC\sha2\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\ScitillaComponent\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\TinyXml\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\TinyXml\tinyXmlA\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\uchardet\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\*.h F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\AboutDlg\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\AnsiCharPanel\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\ClipboardHistory\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\ColourPicker\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\ContextMenu\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\DockingWnd\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\DocumentMap\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\FileBrowser\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\FindCharsInRange\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\FunctionList\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\Grid\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\ImageListSet\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\OpenSaveFileDialog\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\PluginsAdmin\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\Preference\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\ProjectPanel\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\ReadDirectoryChanges\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\shortcut\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\SplitterContainer\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\StaticDialog\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\StaticDialog\RunDlg\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\StatusBar\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\TabBar\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\TaskList\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\ToolBar\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\ToolTip\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\TrayIcon\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\TreeView\* F:\NotepadPlusMixed\npp ***
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\VerticalFileSwitcher\* F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\PowerEditor\src\WinControls\WindowsDlg\* F:\NotepadPlusMixed\npp
+
+===============================================================================================================
+headers
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\scintilla\gtk\*.h F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\scintilla\include\*.h F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\scintilla\lexlib\*.h F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\scintilla\src\*.h F:\NotepadPlusMixed\npp UniConversion.h
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\scintilla\win32\*.h F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy \*.h F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy \*.h F:\NotepadPlusMixed\npp
+
+C:\Users\AK>copy \*.h F:\NotepadPlusMixed\npp
+
+
+
+
+
+
+
+
+
+
+
+
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\scintilla\gtk\*.h F:\NotepadPlusMixed\npp
+F:\notepad-plus-plus-master\scintilla\gtk\Converter.h
+F:\notepad-plus-plus-master\scintilla\gtk\scintilla-marshal.h
+F:\notepad-plus-plus-master\scintilla\gtk\ScintillaGTK.h
+F:\notepad-plus-plus-master\scintilla\gtk\ScintillaGTKAccessible.h
+已复制         4 个文件。
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\scintilla\include\*.h F:\NotepadPlusMixed\npp
+F:\notepad-plus-plus-master\scintilla\include\BoostRegexSearch.h
+F:\notepad-plus-plus-master\scintilla\include\ILexer.h
+F:\notepad-plus-plus-master\scintilla\include\ILoader.h
+F:\notepad-plus-plus-master\scintilla\include\Platform.h
+F:\notepad-plus-plus-master\scintilla\include\SciLexer.h
+F:\notepad-plus-plus-master\scintilla\include\Scintilla.h
+F:\notepad-plus-plus-master\scintilla\include\ScintillaWidget.h
+F:\notepad-plus-plus-master\scintilla\include\Sci_Position.h
+已复制         8 个文件。
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\scintilla\lexlib\*.h F:\NotepadPlusMixed\npp
+F:\notepad-plus-plus-master\scintilla\lexlib\Accessor.h
+F:\notepad-plus-plus-master\scintilla\lexlib\CharacterCategory.h
+F:\notepad-plus-plus-master\scintilla\lexlib\CharacterSet.h
+F:\notepad-plus-plus-master\scintilla\lexlib\DefaultLexer.h
+F:\notepad-plus-plus-master\scintilla\lexlib\LexAccessor.h
+F:\notepad-plus-plus-master\scintilla\lexlib\LexerBase.h
+F:\notepad-plus-plus-master\scintilla\lexlib\LexerModule.h
+F:\notepad-plus-plus-master\scintilla\lexlib\LexerNoExceptions.h
+F:\notepad-plus-plus-master\scintilla\lexlib\LexerSimple.h
+F:\notepad-plus-plus-master\scintilla\lexlib\OptionSet.h
+F:\notepad-plus-plus-master\scintilla\lexlib\PropSetSimple.h
+F:\notepad-plus-plus-master\scintilla\lexlib\SparseState.h
+F:\notepad-plus-plus-master\scintilla\lexlib\StringCopy.h
+F:\notepad-plus-plus-master\scintilla\lexlib\StyleContext.h
+F:\notepad-plus-plus-master\scintilla\lexlib\SubStyles.h
+F:\notepad-plus-plus-master\scintilla\lexlib\WordList.h
+已复制        16 个文件。
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\scintilla\src\*.h F:\NotepadPlusMixed\npp
+F:\notepad-plus-plus-master\scintilla\src\AutoComplete.h
+F:\notepad-plus-plus-master\scintilla\src\CallTip.h
+F:\notepad-plus-plus-master\scintilla\src\CaseConvert.h
+F:\notepad-plus-plus-master\scintilla\src\CaseFolder.h
+F:\notepad-plus-plus-master\scintilla\src\Catalogue.h
+F:\notepad-plus-plus-master\scintilla\src\CellBuffer.h
+F:\notepad-plus-plus-master\scintilla\src\CharClassify.h
+F:\notepad-plus-plus-master\scintilla\src\ContractionState.h
+F:\notepad-plus-plus-master\scintilla\src\DBCS.h
+F:\notepad-plus-plus-master\scintilla\src\Decoration.h
+F:\notepad-plus-plus-master\scintilla\src\Document.h
+F:\notepad-plus-plus-master\scintilla\src\EditModel.h
+F:\notepad-plus-plus-master\scintilla\src\Editor.h
+F:\notepad-plus-plus-master\scintilla\src\EditView.h
+F:\notepad-plus-plus-master\scintilla\src\ElapsedPeriod.h
+F:\notepad-plus-plus-master\scintilla\src\ExternalLexer.h
+F:\notepad-plus-plus-master\scintilla\src\FontQuality.h
+F:\notepad-plus-plus-master\scintilla\src\Indicator.h
+F:\notepad-plus-plus-master\scintilla\src\IntegerRectangle.h
+F:\notepad-plus-plus-master\scintilla\src\KeyMap.h
+F:\notepad-plus-plus-master\scintilla\src\LineMarker.h
+F:\notepad-plus-plus-master\scintilla\src\MarginView.h
+F:\notepad-plus-plus-master\scintilla\src\Partitioning.h
+F:\notepad-plus-plus-master\scintilla\src\PerLine.h
+F:\notepad-plus-plus-master\scintilla\src\Position.h
+F:\notepad-plus-plus-master\scintilla\src\PositionCache.h
+F:\notepad-plus-plus-master\scintilla\src\RESearch.h
+F:\notepad-plus-plus-master\scintilla\src\RunStyles.h
+F:\notepad-plus-plus-master\scintilla\src\ScintillaBase.h
+F:\notepad-plus-plus-master\scintilla\src\Selection.h
+F:\notepad-plus-plus-master\scintilla\src\SparseVector.h
+F:\notepad-plus-plus-master\scintilla\src\SplitVector.h
+F:\notepad-plus-plus-master\scintilla\src\Style.h
+F:\notepad-plus-plus-master\scintilla\src\UniConversion.h
+覆盖 F:\NotepadPlusMixed\npp\UniConversion.h 吗? (Yes/No/All): No
+F:\notepad-plus-plus-master\scintilla\src\UniqueString.h
+F:\notepad-plus-plus-master\scintilla\src\ViewStyle.h
+F:\notepad-plus-plus-master\scintilla\src\XPM.h
+已复制        36 个文件。
+
+C:\Users\AK>copy F:\notepad-plus-plus-master\scintilla\win32\*.h F:\NotepadPlusMixed\npp
+F:\notepad-plus-plus-master\scintilla\win32\HanjaDic.h
+F:\notepad-plus-plus-master\scintilla\win32\PlatWin.h
+F:\notepad-plus-plus-master\scintilla\win32\ScintillaWin.h
+已复制         3 个文件。
+
+=========================================================================================
+cd /D F:\NotepadPlusMixed\npp
+
+Converter.h
+scintilla-marshal.h
+ScintillaGTK.h
+ScintillaGTKAccessible.h
+
+BoostRegexSearch.h
+ILexer.h
+ILoader.h
+Platform.h
+SciLexer.h
+Scintilla.h
+ScintillaWidget.h
+Sci_Position.h
+
+Accessor.h
+CharacterCategory.h
+CharacterSet.h
+DefaultLexer.h
+LexAccessor.h
+LexerBase.h
+LexerModule.h
+LexerNoExceptions.h
+LexerSimple.h
+OptionSet.h
+PropSetSimple.h
+SparseState.h
+StringCopy.h
+StyleContext.h
+SubStyles.h
+WordList.h
+
+AutoComplete.h
+CallTip.h
+CaseConvert.h
+CaseFolder.h
+Catalogue.h
+CellBuffer.h
+CharClassify.h
+ContractionState.h
+DBCS.h
+Decoration.h
+Document.h
+EditModel.h
+Editor.h
+EditView.h
+ElapsedPeriod.h
+ExternalLexer.h
+FontQuality.h
+Indicator.h
+IntegerRectangle.h
+KeyMap.h
+LineMarker.h
+MarginView.h
+Partitioning.h
+PerLine.h
+Position.h
+PositionCache.h
+RESearch.h
+RunStyles.h
+ScintillaBase.h
+Selection.h
+SparseVector.h
+SplitVector.h
+Style.h
+UniConversion.h
+UniqueString.h
+ViewStyle.h
+XPM.h
+
+HanjaDic.h
+PlatWin.h
+ScintillaWin.h
