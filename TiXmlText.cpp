@@ -15,19 +15,10 @@ TiXmlText::TiXmlText(const TCHAR * initValue) : TiXmlNode(TiXmlNode::TEXT)
 {
 	SetValue(initValue);
 }
+
 TiXmlText::~TiXmlText()
 {
 }
-
-#ifdef TIXML_USE_STL
-/****************
- * Constructor. *
- ****************/
-TiXmlText(const generic_string& initValue) : TiXmlNode(TiXmlNode::TEXT)
-{
-	SetValue(initValue);
-}
-#endif
 
 /******************
  * [internal use] *
@@ -70,47 +61,6 @@ bool TiXmlText::Blank() const
 			return false;
 	return true;
 }
-
-/*****************************************************
- * internal use]									 *
- * Attribtue parsing starts: First TCHAR of the text *
- * returns: next TCHAR past '>'                      *
- *****************************************************/
-const TCHAR * TiXmlText::Parse(const TCHAR * p, TiXmlParsingData * data)
-{
-	value = TEXT("");
-	//	TiXmlParsingData data( p, prevData );
-	if (data)
-	{
-		data->Stamp(p);
-		location = data->Cursor();
-	}
-	bool ignoreWhite = true;
-
-	const TCHAR* end = TEXT("<");
-	p = ReadText(p, &value, ignoreWhite, end, false);
-	if (p)
-		return p - 1;	// don't truncate the '<'
-	return 0;
-}
-
-/******************
- * [internal use] *
- ******************/
-#ifdef TIXML_USE_STL
-void TiXmlText::StreamIn(TIXML_ISTREAM * in, TIXML_STRING * tag)
-{
-	while (in->good())
-	{
-		int c = in->peek();
-		if (c == '<')
-			return;
-
-		(*tag) += static_cast<TCHAR>(c);
-		in->get();
-	}
-}
-#endif
 
 
 

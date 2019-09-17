@@ -32,6 +32,9 @@
 #include "lesDlgs.h"
 #include "EncodingMapper.h"
 #include "localization.h"
+#include "TiXmlNode.h"
+#include "TiXmlDocument.h"
+#include "TiXmlElement.h"
 
 #define MyGetGValue(rgb)      (LOBYTE((rgb)>>8))
 
@@ -1822,10 +1825,58 @@ INT_PTR CALLBACK LangMenuDlg::run_dlgProc(UINT message, WPARAM wParam, LPARAM lP
 						bool found(false);
 						for (size_t x = 0; x < pNppParam->getExternalLexerDoc()->size() && !found; ++x)
 						{
-							TiXmlNode *lexersRoot = pNppParam->getExternalLexerDoc()->at(x)->FirstChild(TEXT("NotepadPlus"))->FirstChildElement(TEXT("LexerStyles"));
-							for (TiXmlNode *childNode = lexersRoot->FirstChildElement(TEXT("LexerType"));
-								childNode ;
-								childNode = childNode->NextSibling(TEXT("LexerType")))
+							/*TiXmlNode *lexersRoot = pNppParam->getExternalLexerDoc()->at(x)->FirstChild(TEXT("NotepadPlus"))->FirstChildElement(TEXT("LexerStyles"));*/
+							/********************************************************************************************
+							 * 先把pNppParam->getExternalLexerDoc()的返回值强转为：(std::vector<TiXmlDocument *> *)     *
+							 * 再把整个的执行结果强转为：(TiXmlNode *)                                                  *
+							 ********************************************************************************************/
+							TiXmlNode * lexersRoot =
+								(
+									TiXmlNode *
+								)
+								(
+									(
+										(
+											std::vector<TiXmlDocument *> *
+										)
+										(
+											pNppParam->getExternalLexerDoc()
+										)
+									)
+									->at(x)
+									->FirstChild(TEXT("NotepadPlus"))
+									->FirstChildElement(TEXT("LexerStyles"))
+								);
+							/*for (TiXmlNode *childNode = lexersRoot->FirstChildElement(TEXT("LexerType")); childNode ; childNode = childNode->NextSibling(TEXT("LexerType")))*/
+							for
+							(
+								/**********
+								 * 初始化 *
+								 **********/
+								TiXmlNode * childNode =
+								(
+									TiXmlNode *
+								)
+								(
+									(
+										(TiXmlNode *)lexersRoot
+									)->FirstChildElement
+									(
+										TEXT("LexerType")
+									)
+								);
+								/************
+								 * 判断条件 *
+								 ************/
+								childNode;
+								/****************
+								 * 判断值的修改 *
+								 ****************/
+								childNode = childNode->NextSibling
+								(
+									TEXT("LexerType")
+								)
+							)
 							{
 								TiXmlElement *element = childNode->ToElement();
 

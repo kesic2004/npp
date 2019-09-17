@@ -28,7 +28,7 @@
 
 #include "fileBrowser.h"
 #include "resource.h"
-#include "tinyxml.h"
+/*#include "tinyxml.h"*/
 #include "FileDialog.h"
 #include "localization.h"
 #include "Parameters.h"

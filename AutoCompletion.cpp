@@ -30,6 +30,8 @@
 #include <shlwapi.h>
 #include "AutoCompletion.h"
 #include "Notepad_plus_msgs.h"
+#include "TiXmlDocument.h"
+#include "TiXmlElement.h"
 
 using namespace std;
 

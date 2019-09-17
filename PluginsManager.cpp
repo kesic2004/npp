@@ -33,6 +33,7 @@
 #include "PluginsManager.h"
 #include "resource.h"
 #include "Real_Kesic_Lee_Dynamic_Link_Library_Load_And_Proc_Address_Type.h"	// 因为有的库不能被正常链接，所以使用动态库进行链接
+#include "TiXmlDocument.h"
 
 using namespace std;
 

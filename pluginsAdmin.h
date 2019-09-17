@@ -33,7 +33,7 @@
 #include "pluginsAdminRes.h"
 #include "TabBar.h"
 #include "ListView.h"
-#include "tinyxml.h"
+/*#include "tinyxml.h"*/
 
 class PluginsManager;
 

@@ -28,7 +28,7 @@
 #pragma once
 
 #include "tinyxmlA.h"
-#include "tinyxml.h"
+/*#include "tinyxml.h"*/
 #include "Scintilla.h"
 #include "ScintillaRef.h"
 #include "ToolBar.h"
@@ -39,6 +39,7 @@
 #include "dpiManager.h"
 #include <assert.h>
 #include <tchar.h>
+#include "TinyXmlBaseClassName.h"
 
 class NativeLangSpeaker;
 

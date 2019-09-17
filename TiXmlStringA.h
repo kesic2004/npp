@@ -17,6 +17,11 @@
 #define TIXMLA_OSTREAM	TiXmlOutStreamA
 #endif
 
+#ifndef TIXMLA_USE_STL
+
+#ifndef _INCLUDED
+#define TIXMLA_STRING_INCLUDED
+#pragma warning( disable : 4514 )
  /*
  TiXmlStringA is an emulation of the std::string template.
  Its purpose is to allow compiling TinyXML on compilers with no or poor STL support.
@@ -31,35 +36,19 @@ public:
 	TiXmlStringA(const char * instring);
 
 	// TiXmlStringA empty constructor
-	TiXmlStringA()
-	{
-		allocated = 0;
-		cstring = NULL;
-		current_length = 0;
-	}
+	TiXmlStringA();
 
 	// TiXmlStringA copy constructor
 	TiXmlStringA(const TiXmlStringA& copy);
 
 	// TiXmlStringA destructor
-	~TiXmlStringA()
-	{
-		empty_it();
-	}
+	~TiXmlStringA();
 
 	// Convert a TiXmlStringA into a classical char *
-	const char * c_str() const
-	{
-		if (allocated)
-			return cstring;
-		return "";
-	}
+	const char * c_str() const;
 
 	// Return the length of a TiXmlStringA
-	unsigned length() const
-	{
-		return (allocated) ? current_length : 0;
-	}
+	unsigned length() const;
 
 	// TiXmlStringA = operator
 	void operator = (const char * content);
@@ -68,34 +57,22 @@ public:
 	void operator = (const TiXmlStringA & copy);
 
 	// += operator. Maps to append
-	TiXmlStringA& operator += (const char * suffix)
-	{
-		append(suffix);
-		return *this;
-	}
+	TiXmlStringA& operator += (const char * suffix);
 
 	// += operator. Maps to append
-	TiXmlStringA& operator += (char single)
-	{
-		append(single);
-		return *this;
-	}
+	TiXmlStringA& operator += (char single);
 
 	// += operator. Maps to append
-	TiXmlStringA& operator += (TiXmlStringA & suffix)
-	{
-		append(suffix);
-		return *this;
-	}
+	TiXmlStringA& operator += (TiXmlStringA & suffix);
+
 	bool operator == (const TiXmlStringA & compare) const;
+
 	bool operator < (const TiXmlStringA & compare) const;
+
 	bool operator > (const TiXmlStringA & compare) const;
 
 	// Checks if a TiXmlStringA is empty
-	bool empty() const
-	{
-		return length() ? false : true;
-	}
+	bool empty() const;
 
 	// Checks if a TiXmlStringA contains only whitespace (same rules as isspace)
 	// Not actually used in tinyxml. Conflicts with a C macro, "isblank",
@@ -103,17 +80,10 @@ public:
 	//    bool isblank () const;
 
 	// single char extraction
-	const char& at(unsigned index) const
-	{
-		assert(index < length());
-		return cstring[index];
-	}
+	const char & at(unsigned index) const;
 
 	// find a char in a string. Return TiXmlStringA::notfound if not found
-	unsigned find(char lookup) const
-	{
-		return find(lookup, 0);
-	}
+	unsigned find(char lookup) const;
 
 	// find a char in a string from an offset. Return TiXmlStringA::notfound if not found
 	unsigned find(char tofind, unsigned offset) const;
@@ -121,24 +91,10 @@ public:
 	/*	Function to reserve a big amount of data when we know we'll need it. Be aware that this
 	function clears the content of the TiXmlStringA if any exists.
 	*/
-	void reserve(unsigned size)
-	{
-		empty_it();
-		if (size)
-		{
-			allocated = size;
-			TIXMLA_STRING cstring = new char[size];
-			cstring[0] = 0;
-			current_length = 0;
-		}
-	}
+	void reserve(unsigned size);
 
 	// [] operator 
-	char& operator [] (unsigned index) const
-	{
-		assert(index < length());
-		return cstring[index];
-	}
+	char & operator [] (unsigned index) const;
 
 	// Error value for find primitive 
 	enum {
@@ -146,7 +102,7 @@ public:
 		npos = notfound
 	};
 
-	void append(const char *str, int len);
+	void append(const char * str, int len);
 
 protected:
 
@@ -159,38 +115,23 @@ protected:
 
 	// New size computation. It is simplistic right now : it returns twice the amount
 	// we need
-	unsigned assign_new_size(unsigned minimum_to_allocate)
-	{
-		return minimum_to_allocate * 2;
-	}
+	unsigned assign_new_size(unsigned minimum_to_allocate);
 
 	// Internal function that clears the content of a TiXmlStringA
-	void empty_it()
-	{
-		if (cstring)
-			delete[] cstring;
-		cstring = NULL;
-		allocated = 0;
-		current_length = 0;
-	}
+	void empty_it();
 
 	void append(const char *suffix);
 
 	// append function for another TiXmlStringA
-	void append(const TiXmlStringA & suffix)
-	{
-		append(suffix.c_str());
-	}
+	void append(const TiXmlStringA & suffix);
 
 	// append for a single char. This could be improved a lot if needed
-	void append(char single)
-	{
-		char smallstr[2];
-		smallstr[0] = single;
-		smallstr[1] = 0;
-		append(smallstr);
-	}
+	void append(char single);
 
 };
+#endif	// TIXMLA_STRING_INCLUDED
+#endif	// TIXMLA_USE_STL
 
-#endif
+#endif // !__REAL_KESIC_LEE_TI_XML_STRINGA_H__
+
+

@@ -29,6 +29,10 @@
 #include "ScintillaEditView.h"
 #include "functionParser.h"
 #include "BoostRegexSearch.h"
+#include "TiXmlNode.h"
+#include "TiXmlDocument.h"
+#include "TiXmlElement.h"
+
 
 using namespace std;
 
@@ -62,34 +66,69 @@ bool FunctionParsersManager::init(const generic_string& xmlPath, ScintillaEditVi
 
 bool FunctionParsersManager::getZonePaserParameters(TiXmlNode *classRangeParser, generic_string &mainExprStr, generic_string &openSymboleStr, generic_string &closeSymboleStr, std::vector<generic_string> &classNameExprArray, generic_string &functionExprStr, std::vector<generic_string> &functionNameExprArray)
 {
-	const TCHAR *mainExpr = NULL;
-	const TCHAR *openSymbole = NULL;
-	const TCHAR *closeSymbole = NULL;
-	const TCHAR *functionExpr = NULL;
+	const TCHAR * mainExpr     = NULL;
+	const TCHAR * openSymbole  = NULL;
+	const TCHAR * closeSymbole = NULL;
+	const TCHAR * functionExpr = NULL;
 
-	mainExpr = (classRangeParser->ToElement())->Attribute(TEXT("mainExpr"));
+	TiXmlElement * classRangeParserTiXmlElement = classRangeParser->ToElement();
+
+	/*mainExpr = (classRangeParser->ToElement())->Attribute(TEXT("mainExpr"));*/
+	mainExpr = classRangeParserTiXmlElement->Attribute(TEXT("mainExpr"));
 	if (!mainExpr || !mainExpr[0])
 		return false;
 	mainExprStr = mainExpr;
 
-	openSymbole = (classRangeParser->ToElement())->Attribute(TEXT("openSymbole"));
+	/*openSymbole = (classRangeParser->ToElement())->Attribute(TEXT("openSymbole"));*/
+	openSymbole = classRangeParserTiXmlElement->Attribute(TEXT("openSymbole"));
 	if (openSymbole && openSymbole[0])
 		openSymboleStr = openSymbole;
 
-	closeSymbole = (classRangeParser->ToElement())->Attribute(TEXT("closeSymbole"));
+	/*closeSymbole = (classRangeParser->ToElement())->Attribute(TEXT("closeSymbole"));*/
+	closeSymbole = classRangeParserTiXmlElement->Attribute(TEXT("closeSymbole"));
 	if (closeSymbole && closeSymbole[0])
+	{
 		closeSymboleStr = closeSymbole;
+	}
 
-	TiXmlNode *classNameParser = classRangeParser->FirstChild(TEXT("className"));
+	TiXmlNode * classNameParser = classRangeParser->FirstChild(TEXT("className"));
 	if (classNameParser)
 	{
-		for (TiXmlNode *childNode2 = classNameParser->FirstChildElement(TEXT("nameExpr"));
+		/*for (TiXmlNode *childNode2 = classNameParser->FirstChildElement(TEXT("nameExpr")); childNode2; childNode2 = childNode2->NextSibling(TEXT("nameExpr")) )*/
+		for
+		(
+			TiXmlNode * childNode2 =
+			(
+				TiXmlNode *
+			)
+			(
+				classNameParser->FirstChildElement
+				(
+					TEXT("nameExpr")
+				)
+			);
 			childNode2;
-			childNode2 = childNode2->NextSibling(TEXT("nameExpr")) )
+			childNode2 = childNode2->NextSibling
+			(
+				TEXT("nameExpr")
+			)
+		)
 		{
-			const TCHAR *expr = (childNode2->ToElement())->Attribute(TEXT("expr"));
+			/*const TCHAR * expr = (childNode2->ToElement())->Attribute(TEXT("expr"));*/
+			const TCHAR * expr =
+				(
+					(
+						TiXmlElement *
+					)
+					(
+						childNode2->ToElement()
+					)
+				)->Attribute(TEXT("expr"));
+
 			if (expr && expr[0])
+			{
 				classNameExprArray.push_back(expr);
+			}
 		}
 	}
 
@@ -102,10 +141,10 @@ bool FunctionParsersManager::getZonePaserParameters(TiXmlNode *classRangeParser,
 		return false;
 	functionExprStr = functionExpr;
 
-	TiXmlNode *functionNameParser = functionParser->FirstChild(TEXT("functionName"));
+	TiXmlNode * functionNameParser = functionParser->FirstChild(TEXT("functionName"));
 	if (functionNameParser)
 	{
-		for (TiXmlNode *childNode3 = functionNameParser->FirstChildElement(TEXT("funcNameExpr"));
+		for (TiXmlNode * childNode3 = functionNameParser->FirstChildElement(TEXT("funcNameExpr"));
 			childNode3;
 			childNode3 = childNode3->NextSibling(TEXT("funcNameExpr")) )
 		{

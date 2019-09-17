@@ -31,6 +31,9 @@
 #include "Parameters.h"
 #include "FindReplaceDlg_rc.h"
 #include "Real_Kesic_Lee_Dynamic_Link_Library_Load_And_Proc_Address_Type.h"	// 因为有的库不能被正常链接，所以使用动态库进行链接
+#include "TiXmlNode.h"
+#include "TiXmlDocument.h"
+#include "TiXmlElement.h"
 
 const int WS_TOOLBARSTYLE = WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN | WS_CLIPSIBLINGS | TBSTYLE_TOOLTIPS |TBSTYLE_FLAT | CCS_TOP | BTNS_AUTOSIZE | CCS_NOPARENTALIGN | CCS_NORESIZE | CCS_NODIVIDER;
 

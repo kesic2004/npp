@@ -29,11 +29,14 @@
 
 #include "ProjectPanel.h"
 #include "resource.h"
-#include "tinyxml.h"
+/*#include "tinyxml.h"*/
 #include "FileDialog.h"
 #include "localization.h"
 #include "Parameters.h"
 #include "Real_Kesic_Lee_Dynamic_Link_Library_Load_And_Proc_Address_Type.h"	// 因为有的库不能被正常链接，所以使用动态库进行链接
+#include "TiXmlNode.h"
+#include "TiXmlDocument.h"
+#include "TiXmlElement.h"
 
 #define CX_BITMAP         16
 #define CY_BITMAP         16

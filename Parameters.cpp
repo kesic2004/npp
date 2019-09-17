@@ -35,6 +35,11 @@
 #include "localization.h"
 #include "localizationString.h"
 #include "UserDefineDialog.h"
+#include "TiXmlNode.h"
+#include "TiXmlDeclaration.h"
+#include "TiXmlDocument.h"
+#include "TiXmlElement.h"
+#include "TiXmlText.h"
 
 using namespace std;
 
@@ -3642,7 +3647,7 @@ bool NppParameters::writeProjectPanelsSettings() const
 	{
 		TiXmlElement projPanelNode{TEXT("ProjectPanel")};
 		(projPanelNode.ToElement())->SetAttribute(TEXT("id"), i);
-		(projPanelNode.ToElement())->SetAttribute(TEXT("workSpaceFile"), _workSpaceFilePathes[i]);
+		(projPanelNode.ToElement())->SetAttribute(TEXT("workSpaceFile"), _workSpaceFilePathes[i].c_str());
 
 		(projPanelRootNode.ToElement())->InsertEndChild(projPanelNode);
 	}
@@ -5838,7 +5843,7 @@ void NppParameters::createXmlTreeFromGUIParams()
 		TiXmlElement *GUIConfigElement = (newGUIRoot->InsertEndChild(TiXmlElement(TEXT("GUIConfig"))))->ToElement();
 		GUIConfigElement->SetAttribute(TEXT("name"), TEXT("searchEngine"));
 		GUIConfigElement->SetAttribute(TEXT("searchEngineChoice"), _nppGUI._searchEngineChoice);
-		GUIConfigElement->SetAttribute(TEXT("searchEngineCustom"), _nppGUI._searchEngineCustom);
+		GUIConfigElement->SetAttribute(TEXT("searchEngineCustom"), _nppGUI._searchEngineCustom.c_str());
 	}
 
 	// <GUIConfig name="SmartHighLight" matchCase="no" wholeWordOnly="yes" useFindSettings="no" onAnotherView="no">yes</GUIConfig>
@@ -5957,7 +5962,7 @@ void NppParameters::insertDockingParamNode(TiXmlNode *GUIRoot)
 	{
 		PluginDlgDockingInfo & pdi = _nppGUI._dockingData._pluginDockInfo[i];
 		TiXmlElement PDNode(TEXT("PluginDlg"));
-		PDNode.SetAttribute(TEXT("pluginName"), pdi._name);
+		PDNode.SetAttribute(TEXT("pluginName"), pdi._name.c_str());
 		PDNode.SetAttribute(TEXT("id"), pdi._internalID);
 		PDNode.SetAttribute(TEXT("curr"), pdi._currContainer);
 		PDNode.SetAttribute(TEXT("prev"), pdi._prevContainer);
@@ -5980,7 +5985,7 @@ void NppParameters::insertDockingParamNode(TiXmlNode *GUIRoot)
 
 void NppParameters::writePrintSetting(TiXmlElement *element)
 {
-	const TCHAR *pStr = _nppGUI._printSettings._printLineNumber?TEXT("yes"):TEXT("no");
+	const TCHAR * pStr = _nppGUI._printSettings._printLineNumber?TEXT("yes"):TEXT("no");
 	element->SetAttribute(TEXT("lineNumber"), pStr);
 
 	element->SetAttribute(TEXT("printOption"), _nppGUI._printSettings._printOption);
@@ -6554,8 +6559,8 @@ void NppParameters::insertUserLang2Tree(TiXmlNode *node, UserLangContainer *user
 	udlVersion += TEXT(".");
 	udlVersion += generic_itoa(SCE_UDL_VERSION_MINOR, temp, 10);
 
-	rootElement->SetAttribute(TEXT("name"), userLang->_name);
-	rootElement->SetAttribute(TEXT("ext"), userLang->_ext);
+	rootElement->SetAttribute(TEXT("name"), userLang->_name.c_str());
+	rootElement->SetAttribute(TEXT("ext"), userLang->_ext.c_str());
 	rootElement->SetAttribute(TEXT("udlVersion"), udlVersion.c_str());
 
 	TiXmlElement *settingsElement = (rootElement->InsertEndChild(TiXmlElement(TEXT("Settings"))))->ToElement();
@@ -6569,7 +6574,7 @@ void NppParameters::insertUserLang2Tree(TiXmlNode *node, UserLangContainer *user
 
 		TiXmlElement *prefixElement = (settingsElement->InsertEndChild(TiXmlElement(TEXT("Prefix"))))->ToElement();
 		for (int i = 0 ; i < SCE_USER_TOTAL_KEYWORD_GROUPS ; ++i)
-			prefixElement->SetAttribute(globalMappper().keywordNameMapper[i+SCE_USER_KWLIST_KEYWORDS1], userLang->_isPrefix[i]?TEXT("yes"):TEXT("no"));
+			prefixElement->SetAttribute(globalMappper().keywordNameMapper[i+SCE_USER_KWLIST_KEYWORDS1].c_str(), userLang->_isPrefix[i]?TEXT("yes"):TEXT("no"));
 	}
 
 	TiXmlElement *kwlElement = (rootElement->InsertEndChild(TiXmlElement(TEXT("KeywordLists"))))->ToElement();
@@ -6577,7 +6582,7 @@ void NppParameters::insertUserLang2Tree(TiXmlNode *node, UserLangContainer *user
 	for (int i = 0 ; i < SCE_USER_KWLIST_TOTAL ; ++i)
 	{
 		TiXmlElement *kwElement = (kwlElement->InsertEndChild(TiXmlElement(TEXT("Keywords"))))->ToElement();
-		kwElement->SetAttribute(TEXT("name"), globalMappper().keywordNameMapper[i]);
+		kwElement->SetAttribute(TEXT("name"), globalMappper().keywordNameMapper[i].c_str());
 		kwElement->InsertEndChild(TiXmlText(userLang->_keywordLists[i]));
 	}
 

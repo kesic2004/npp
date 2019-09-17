@@ -27,6 +27,7 @@
 
 
 #include "FunctionCallTip.h"
+#include "TiXmlElement.h"
 
 
 struct Token {

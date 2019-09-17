@@ -29,7 +29,7 @@
 #pragma once
 
 #include "FunctionCallTip.h"
-#include "tinyxml.h"
+/*#include "tinyxml.h"*/
 
 const size_t tagMaxLen = 256;
 

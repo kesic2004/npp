@@ -1,7 +1,7 @@
 /********************************
-* 移动自：Common.h            *
-* 由不明真相的吃瓜群众移动至此 *
-********************************/
+ * 移动自：Common.h             *
+ * 由不明真相的吃瓜群众移动至此 *
+ ********************************/
 #ifndef __REAL_KESIC_LEE_COMMON_FUNCTION_DEFINE_H__
 #define __REAL_KESIC_LEE_COMMON_FUNCTION_DEFINE_H__ 1
 
