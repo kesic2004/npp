@@ -10,3 +10,6 @@ TinyXml 重构版本
 # branch3
 Notepad Plus Plus 基于 Visual Studio 2017 (15.9) 的版本
 
+# branch4
+基于 Visual Studio 2017 (15.0) 的调试版本一
+
