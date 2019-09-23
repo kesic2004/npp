@@ -2400,13 +2400,38 @@ private:
 	/*
 	* @member
 	*/
+
+	/*
+	 * %NPP_HOME%\\lang.xml的Document对象
+	 */
 	TiXmlDocument                * _pXmlDoc           = nullptr;
+
+	/*
+	 * %NPP_HOME%\\config.xml的Document对象
+	 */
 	TiXmlDocument                * _pXmlUserDoc       = nullptr;
+
+	/*
+	 * %NPP_HOME%\\stylers.xml的Document对象
+	 */
 	TiXmlDocument                * _pXmlUserStylerDoc = nullptr;
+
+	/*
+	 * %NPP_HOME%\\userDefineLang.xml的Document对象
+	 */
 	TiXmlDocument                * _pXmlUserLangDoc   = nullptr;
 	std::vector<UdlXmlFileState>   _pXmlUserLangsDoc;
+	/*
+	 * %NPP_HOME%\\toolbarIcons.xml的Document对象
+	 */
 	TiXmlDocument                * _pXmlToolIconsDoc = nullptr;
+	/*
+	 * %NPP_HOME%\\shortcuts.xml的Document对象
+	 */
 	TiXmlDocument                * _pXmlShortcutDoc  = nullptr;
+	/*
+	 * %NPP_HOME%\\session.xml的Document对象
+	 */
 	TiXmlDocument                * _pXmlSessionDoc   = nullptr;
 	TiXmlDocument                * _pXmlBlacklistDoc = nullptr;
 
@@ -2415,7 +2440,13 @@ private:
 	/*
 	 * @member
 	 */
+	 /*
+	  * %NPP_HOME%\\nativeLang.xml的Document对象
+	  */
 	TiXmlDocumentA * _pXmlNativeLangDocA  = nullptr;
+	/*
+	 * %NPP_HOME%\\contextMenu.xml的Document对象
+	 */
 	TiXmlDocumentA * _pXmlContextMenuDocA = nullptr;
 
 	/***********************************************************************************************************************/
@@ -2468,6 +2499,9 @@ private:
 	UserLangContainer     *_userLangArray[NB_MAX_USER_LANG];
 	// won't be exceeded to 255;
 	unsigned char          _nbUserLang                              = 0;
+	/**************************************
+	 * %NPP_HOME%\\userDefineLang.xml文件 *
+	 **************************************/
 	generic_string         _userDefineLangPath;
 	ExternalLangContainer *_externalLangArray[NB_MAX_EXTERNAL_LANG];
 	int                    _nbExternalLang                          = 0;
@@ -2518,6 +2552,9 @@ private:
 	 */
 	WNDPROC _transparentFuncAddr              = nullptr;
 	WNDPROC _enableThemeDialogTextureFuncAddr = nullptr;
+	/*************************************************
+	 * %NPP_HOME%所在文件夹下doLocalConf.xml是否存在 *
+	 *************************************************/
 	bool                                      _isLocal;
 	// by default 32-bit
 	bool                                      _isx64 = false;
@@ -2597,20 +2634,50 @@ private:
 	/*
 	 * @member
 	 */
+	 /****************************************************
+	  * %NPP_HOME%\\plugins\\shortcuts.xml文件的绝对路径 *
+	  ****************************************************/
 	generic_string _shortcutsPath;
+	 /******************************************************
+	  * %NPP_HOME%\\plugins\\contextMenu.xml文件的绝对路径 *
+	  ******************************************************/
 	generic_string _contextMenuPath;
+	/*****************************************
+	 * %NPP_HOME%即NPP可执行文件所在的文件夹 *
+	 *****************************************/
 	generic_string _sessionPath;
+	/**************************************
+	 * %NPP_HOME%\\blacklist.xml文件 *
+	 **************************************/
 	generic_string _blacklistPath;
+	/*
+	 * %NPP_HOME%即NPP可执行文件所在的文件夹
+	 */
 	generic_string _nppPath;
+	/*****************************************
+	 * %NPP_HOME%即NPP可执行文件所在的文件夹 *
+	 *****************************************/
 	generic_string _userPath;
-	generic_string _stylerPath;
+	/**************************************
+	 * %NPP_HOME%\\stylers.xml文件 *
+	 **************************************/
+	generic_string _stylerPath; // stylers
 	// sentinel of the absence of "doLocalConf.xml" : (_appdataNppDir == TEXT(""))?"doLocalConf.xml present":"doLocalConf.xml absent"
 	generic_string _appdataNppDir;
 	// plugins root where all the plugins are installed
+	/***************************************
+	 * %NPP_HOME%\\plugins文件夹的绝对路径 *
+	 ***************************************/
 	generic_string _pluginRootDir;
 	// plugins config dir where the plugin list is installed
+	/***********************************************
+	* %NPP_HOME%\\plugins\\Config文件夹的绝对路径 *
+	***********************************************/
 	generic_string _pluginConfDir;
 	// plugins config dir for per user where the plugin parameters are saved / loaded
+	/***********************************************
+	 * %NPP_HOME%\\plugins\\Config文件夹的绝对路径 *
+	 ***********************************************/
 	generic_string _userPluginConfDir;
 	generic_string _currentDirectory;
 	generic_string _workSpaceFilePathes[3];
@@ -2636,6 +2703,9 @@ private:
 	 * @member
 	 */
 	FindDlgTabTitiles _findDlgTabTitiles;
+	/*
+	 * _asNotepadStyle是否在%NPP_HOME%文件夹中存在
+	 */
 	bool              _asNotepadStyle    = false;
 
 	/***********************************************************************************************************************/

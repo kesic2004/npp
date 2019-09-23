@@ -870,19 +870,19 @@ NppParameters::NppParameters()
     _winVersion = getWindowsVersion();
 
     // Prepare for default path
-	/**************************************
-	 * 用于存放当前可执行文件所在的文件夹 *
-	 **************************************/
+	/**********************
+	 * 用于存放%NPP_HOME% *
+	 **********************/
     TCHAR nppPath[MAX_PATH];
 
-	/********************************
-	 * 获取当前可执行文件的绝对路径 *
-	 ********************************/
+	/***************************
+	 * 获取%NPP_HOME%\\npp.exe *
+	 ***************************/
     ::GetModuleFileName(NULL, nppPath, MAX_PATH);
 
-	/****************************************
-	 * 获取绝对路径的上一级文件夹的绝对中径 *
-	 ****************************************/
+	/******************
+	 * 获取%NPP_HOME% *
+	 ******************/
     ::PathRemoveFileSpec(nppPath);
     _nppPath = nppPath;
 
@@ -895,6 +895,9 @@ NppParameters::NppParameters()
     _currentDirectory = curDir;
 
     _appdataNppDir.clear();
+	/*************************************************
+	 * %NPP_HOME%所在文件夹下asNotepad.xml的绝对路径 *
+	 *************************************************/
     generic_string notepadStylePath(_nppPath);
     ::PathAppend(notepadStylePath, notepadStyleFile);
 
@@ -1032,7 +1035,10 @@ bool NppParameters::load()
     _isx64 = sizeof(void *) == 8;
 
     // Make localConf.xml path
-    generic_string localConfPath(_nppPath);
+	/***************************************************
+	 * %NPP_HOME%所在文件夹下doLocalConf.xml的绝对路径 *
+	 ***************************************************/
+	generic_string localConfPath(_nppPath);
     PathAppend(localConfPath, localConfFile);
 
     // Test if localConf.xml exist
@@ -1054,11 +1060,16 @@ bool NppParameters::load()
                 _isLocal = false;
         }
     }
-
-    _pluginRootDir = _nppPath;
+	/*************************************************
+	 * %NPP_HOME%\\plugins文件夹的绝对路径 *
+	 *************************************************/
+	_pluginRootDir = _nppPath;
     PathAppend(_pluginRootDir, TEXT("plugins"));
 
-    generic_string nppPluginRootParent;
+	/*************************************************
+	 * %NPP_HOME%文件夹的绝对路径 *
+	 *************************************************/
+	generic_string nppPluginRootParent;
     if (_isLocal)
     {
         _userPath = nppPluginRootParent = _nppPath;
@@ -1070,16 +1081,22 @@ bool NppParameters::load()
         _userPath = getSpecialFolderLocation(CSIDL_APPDATA);
 
         PathAppend(_userPath, TEXT("Notepad++"));
-        if (!PathFileExists(_userPath.c_str()))
-            ::CreateDirectory(_userPath.c_str(), NULL);
+		if (!PathFileExists(_userPath.c_str()))
+		{
+			::CreateDirectory(_userPath.c_str(), NULL);
+		}
 
         _appdataNppDir = _userPluginConfDir = _userPath;
         PathAppend(_userPluginConfDir, TEXT("plugins"));
-        if (!PathFileExists(_userPluginConfDir.c_str()))
-            ::CreateDirectory(_userPluginConfDir.c_str(), NULL);
+		if (!PathFileExists(_userPluginConfDir.c_str()))
+		{
+			::CreateDirectory(_userPluginConfDir.c_str(), NULL);
+		}
         PathAppend(_userPluginConfDir, TEXT("Config"));
-        if (!PathFileExists(_userPluginConfDir.c_str()))
-            ::CreateDirectory(_userPluginConfDir.c_str(), NULL);
+		if (!PathFileExists(_userPluginConfDir.c_str()))
+		{
+			::CreateDirectory(_userPluginConfDir.c_str(), NULL);
+		}
 
         // For PluginAdmin to launch the wingup with UAC
         setElevationRequired(true);
@@ -1088,10 +1105,14 @@ bool NppParameters::load()
     _pluginConfDir = _pluginRootDir; // for plugin list home
     PathAppend(_pluginConfDir, TEXT("Config"));
 
-    if (!PathFileExists(nppPluginRootParent.c_str()))
-        ::CreateDirectory(nppPluginRootParent.c_str(), NULL);
-    if (!PathFileExists(_pluginRootDir.c_str()))
-        ::CreateDirectory(_pluginRootDir.c_str(), NULL);
+	if (!PathFileExists(nppPluginRootParent.c_str()))
+	{
+		::CreateDirectory(nppPluginRootParent.c_str(), NULL);
+	}
+	if (!PathFileExists(_pluginRootDir.c_str()))
+	{
+		::CreateDirectory(_pluginRootDir.c_str(), NULL);
+	}
 
     _sessionPath = _userPath; // Session stock the absolute file path, it should never be on cloud
 
@@ -1120,15 +1141,19 @@ bool NppParameters::load()
     // Transparent function for w2k and xp //
     //-------------------------------------//
     HMODULE hUser32 = ::GetModuleHandle(TEXT("User32"));
-    if (hUser32)
-        _transparentFuncAddr = (WNDPROC)::GetProcAddress(hUser32, "SetLayeredWindowAttributes");
+	if (hUser32)
+	{
+		_transparentFuncAddr = (WNDPROC)::GetProcAddress(hUser32, "SetLayeredWindowAttributes");
+	}
 
     //---------------------------------------------//
     // Dlg theme texture function for xp and vista //
     //---------------------------------------------//
     _hUXTheme = ::LoadLibrary(TEXT("uxtheme.dll"));
-    if (_hUXTheme)
-        _enableThemeDialogTextureFuncAddr = (WNDPROC)::GetProcAddress(_hUXTheme, "EnableThemeDialogTexture");
+	if (_hUXTheme)
+	{
+		_enableThemeDialogTextureFuncAddr = (WNDPROC)::GetProcAddress(_hUXTheme, "EnableThemeDialogTexture");
+	}
 
     //--------------------------//
     // langs.xml : for per user //
@@ -1160,8 +1185,10 @@ bool NppParameters::load()
             }
         }
     }
-    else
-        doRecover = true;
+	else
+	{
+		doRecover = true;
+	}
 
     if (doRecover)
     {
@@ -1205,8 +1232,10 @@ bool NppParameters::load()
     generic_string srcConfigPath(_nppPath);
     PathAppend(srcConfigPath, TEXT("config.model.xml"));
 
-    if (!::PathFileExists(configPath.c_str()))
-        ::CopyFile(srcConfigPath.c_str(), configPath.c_str(), FALSE);
+	if (!::PathFileExists(configPath.c_str()))
+	{
+		::CopyFile(srcConfigPath.c_str(), configPath.c_str(), FALSE);
+	}
 
     _pXmlUserDoc = new TiXmlDocument(configPath.data());
     loadOkay = _pXmlUserDoc->LoadFile();
@@ -1236,8 +1265,10 @@ bool NppParameters::load()
         ::CopyFile(srcStylersPath.c_str(), _stylerPath.c_str(), TRUE);
     }
 
-    if (_nppGUI._themeName.empty() || (!PathFileExists(_nppGUI._themeName.c_str())))
-        _nppGUI._themeName.assign(_stylerPath);
+	if (_nppGUI._themeName.empty() || (!PathFileExists(_nppGUI._themeName.c_str())))
+	{
+		_nppGUI._themeName.assign(_stylerPath);
+	}
 
     _pXmlUserStylerDoc = new TiXmlDocument(_nppGUI._themeName.c_str());
 
@@ -1262,8 +1293,10 @@ bool NppParameters::load()
         _pXmlUserStylerDoc = NULL;
         isAllLaoded = false;
     }
-    else
-        getUserStylersFromXmlTree();
+	else
+	{
+		getUserStylersFromXmlTree();
+	}
 
     _themeSwitcher._stylesXmlPath = _stylerPath;
     // Firstly, add the default theme
@@ -1318,6 +1351,10 @@ bool NppParameters::load()
 
     generic_string nativeLangPath;
     nativeLangPath = _userPath;
+	/*
+	 * https://blog.csdn.net/yyyzlf/article/details/6228384
+	 * https://www.cnblogs.com/beneathginkgo/p/4612736.html
+	 */
     PathAppend(nativeLangPath, TEXT("nativeLang.xml"));
 
     // LocalizationSwitcher should use always user path
