@@ -30,6 +30,10 @@
 #include <shlwapi.h>
 #include "Notepad_plus_Window.h"
 
+/*********************************************
+ * 主窗口标题和主窗口类的名称                *
+ * TEXT("已经被光杆儿司令员篡改了(哈哈哈)"); *
+ *********************************************/
 const TCHAR Notepad_plus_Window::_className[32] = TEXT("Notepad++");
 HWND Notepad_plus_Window::gNppHWND = NULL;
 
@@ -71,11 +75,17 @@ void Notepad_plus_Window::init(HINSTANCE hInst, HWND parent, const TCHAR *cmdLin
 	time_t timestampBegin = 0;
 	if (cmdLineParams->_showLoadingTime)
 		timestampBegin = time(NULL);
-
+	/****************************************
+	 * 设置当前实例句柄和父窗口(实际是空值) *
+	 ****************************************/
 	Window::init(hInst, parent);
 	WNDCLASS nppClass;
 
 	nppClass.style = CS_BYTEALIGNWINDOW | CS_DBLCLKS;
+
+	/********************
+	 * 主窗口的系统回调 *
+	 ********************/
 	nppClass.lpfnWndProc = Notepad_plus_Proc;
 	nppClass.cbClsExtra = 0;
 	nppClass.cbWndExtra = 0;
@@ -99,17 +109,20 @@ void Notepad_plus_Window::init(HINSTANCE hInst, HWND parent, const TCHAR *cmdLin
 	if (cmdLineParams->_isNoPlugin)
 		_notepad_plus_plus_core._pluginsManager.disable();
 
+	/****************************************************************
+	 * 初始化当前窗口实例句柄，并把当前对象的指针传递给窗口类的对象 *
+	 ****************************************************************/
 	_hSelf = ::CreateWindowEx(
 		WS_EX_ACCEPTFILES | (_notepad_plus_plus_core._nativeLangSpeaker.isRTL()?WS_EX_LAYOUTRTL:0),
 		_className,
-		TEXT("Notepad++"),
+		TEXT("Notepad++"),/*默认窗口的标题*/
 		(WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN),
 		// CreateWindowEx bug : set all 0 to walk around the pb
 		0, 0, 0, 0,
 		_hParent, nullptr, _hInst,
-		(LPVOID) this); // pass the ptr of this instantiated object
-        // for retrieve it in Notepad_plus_Proc from
-        // the CREATESTRUCT.lpCreateParams afterward.
+		(LPVOID) this);		// pass the ptr of this instantiated object
+							// for retrieve it in Notepad_plus_Proc from
+							// the CREATESTRUCT.lpCreateParams afterward.
 
 	if (NULL == _hSelf)
 		throw std::runtime_error("Notepad_plus_Window::init : CreateWindowEx() function return null");

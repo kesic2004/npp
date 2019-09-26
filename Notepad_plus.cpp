@@ -157,7 +157,7 @@ Notepad_plus::Notepad_plus()
 
 	// Determine if user is administrator.
 	BOOL is_admin;
-	winVer ver = NppParameters::getInstance()->getWinVersion();
+ 	winVer ver = NppParameters::getInstance()->getWinVersion();
 	if (ver >= WV_VISTA || ver == WV_UNKNOWN)
 	{
 		SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;

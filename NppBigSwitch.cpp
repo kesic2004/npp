@@ -68,23 +68,36 @@ struct SortTaskListPred final
 LRESULT CALLBACK Notepad_plus_Window::Notepad_plus_Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (hwnd == NULL)
+	{
 		return FALSE;
-
+	}
+	/*****************************************************************
+	 * 把窗口句柄和Notepad_plus_Window对象的地址一一绑定在一起       *
+	 * 在需要时进行调用对象的runProc函数                             *
+	 * 由于WM_NCCREATE分支没有break语句，所以当消息为WM_NCCREATE时， *
+	 * 不但要把窗口句柄和Notepad_plus_Window对象的地址绑定在一起，   *
+	 * 还要调用Notepad_plus_Window对象的runProc函数                  *
+	 *****************************************************************/
 	switch(message)
 	{
 		case WM_NCCREATE:
 		{
 			// First message we get the ptr of instantiated object
 			// then stock it into GWLP_USERDATA index in order to retrieve afterward
-			Notepad_plus_Window *pM30ide = static_cast<Notepad_plus_Window *>((reinterpret_cast<LPCREATESTRUCT>(lParam))->lpCreateParams);
+			Notepad_plus_Window * pM30ide = static_cast<Notepad_plus_Window *>
+				(
+					(
+						reinterpret_cast<LPCREATESTRUCT>(lParam)
+					)->lpCreateParams
+				);
 			pM30ide->_hSelf = hwnd;
 			::SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pM30ide));
-			return TRUE;
 		}
 
 		default:
 		{
-			return (reinterpret_cast<Notepad_plus_Window *>(::GetWindowLongPtr(hwnd, GWLP_USERDATA))->runProc(hwnd, message, wParam, lParam));
+			LONG_PTR lptr = ::GetWindowLongPtr(hwnd, GWLP_USERDATA);
+			return (reinterpret_cast<Notepad_plus_Window *>(lptr)->runProc(hwnd, message, wParam, lParam));
 		}
 	}
 }
@@ -128,6 +141,9 @@ int CharacterIs(TCHAR c, const TCHAR *any)
 	return FALSE;
 }
 
+/**********************************
+ * Notepad_plus类的非静态成员函数 *
+ **********************************/
 LRESULT Notepad_plus::process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	LRESULT result = FALSE;
@@ -609,7 +625,10 @@ LRESULT Notepad_plus::process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 			}
 			else
 			{
-				command(LOWORD(wParam));
+				/************
+				 * 命令执行 *
+				 ************/
+				Notepad_plus::command(LOWORD(wParam));/*非静态成员函数调用*/
 			}
 			return TRUE;
 		}
@@ -670,7 +689,10 @@ LRESULT Notepad_plus::process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 
 		case NPPM_MENUCOMMAND:
 		{
-			command(static_cast<int32_t>(lParam));
+			/************
+			 * 命令执行 *
+			 ************/
+			Notepad_plus::command(static_cast<int32_t>(lParam));/*非静态成员函数调用*/
 			return TRUE;
 		}
 
@@ -1915,7 +1937,10 @@ LRESULT Notepad_plus::process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 
 				case WM_MBUTTONUP:
 				{
-					command(IDM_SYSTRAYPOPUP_NEW_AND_PASTE);
+					/************
+					 * 命令执行 *
+					 ************/
+					Notepad_plus::command(IDM_SYSTRAYPOPUP_NEW_AND_PASTE);/*非静态成员函数调用*/
 					return TRUE;
 				}
 

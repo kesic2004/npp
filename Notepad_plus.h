@@ -119,7 +119,9 @@ struct QuoteParams
 {
 	enum Speed { slow = 0, rapid, speedOfLight };
 
-	QuoteParams() {};
+	QuoteParams()
+	{
+	}
 	QuoteParams(const wchar_t* quoter, Speed speed, bool shouldBeTrolling, int encoding, LangType lang, const wchar_t* quote) :
 		_quoter(quoter), _speed(speed), _shouldBeTrolling(shouldBeTrolling), _encoding(encoding), _lang(lang), _quote(quote) {}
 
@@ -256,61 +258,64 @@ public:
 
 private:
 	Notepad_plus_Window *_pPublicInterface = nullptr;
-    Window *_pMainWindow = nullptr;
-	DockingManager _dockingManager;
+    Window              *_pMainWindow      = nullptr;
+	DockingManager   _dockingManager;
 	std::vector<int> _internalFuncIDs;
 
 	AutoCompletion _autoCompleteMain;
 	AutoCompletion _autoCompleteSub; // each Scintilla has its own autoComplete
 
-	SmartHighlighter _smartHighlighter;
-    NativeLangSpeaker _nativeLangSpeaker;
-    DocTabView _mainDocTab;
-    DocTabView _subDocTab;
-    DocTabView* _pDocTab = nullptr;
-	DocTabView* _pNonDocTab = nullptr;
+	SmartHighlighter   _smartHighlighter;
+	/***********************
+	 *                     *
+	 ***********************/
+    NativeLangSpeaker  _nativeLangSpeaker;
+    DocTabView         _mainDocTab;
+    DocTabView         _subDocTab;
+    DocTabView       * _pDocTab = nullptr;
+	DocTabView       * _pNonDocTab = nullptr;
 
-    ScintillaEditView _subEditView;
-    ScintillaEditView _mainEditView;
-	ScintillaEditView _invisibleEditView; // for searches
-	ScintillaEditView _fileEditView;      // for FileManager
-    ScintillaEditView* _pEditView = nullptr;
-	ScintillaEditView* _pNonEditView = nullptr;
+    ScintillaEditView   _subEditView;
+    ScintillaEditView   _mainEditView;
+	ScintillaEditView   _invisibleEditView; // for searches
+	ScintillaEditView   _fileEditView;      // for FileManager
+    ScintillaEditView * _pEditView         = nullptr;
+	ScintillaEditView * _pNonEditView      = nullptr;
 
-    SplitterContainer* _pMainSplitter = nullptr;
-    SplitterContainer _subSplitter;
+    SplitterContainer * _pMainSplitter = nullptr;
+    SplitterContainer   _subSplitter;
 
     ContextMenu _tabPopupMenu;
 	ContextMenu _tabPopupDropMenu;
 	ContextMenu _fileSwitcherMultiFilePopupMenu;
 
-	ToolBar	_toolBar;
+	ToolBar  _toolBar;
 	IconList _docTabIconList;
 
     StatusBar _statusBar;
-	bool _toReduceTabBar = false;
+	bool      _toReduceTabBar = false;
 	ReBar _rebarTop;
 	ReBar _rebarBottom;
 
 	// Dialog
-	FindReplaceDlg _findReplaceDlg;
+	FindReplaceDlg  _findReplaceDlg;
 	FindInFinderDlg _findInFinderDlg;
 
-	FindIncrementDlg _incrementFindDlg;
-    AboutDlg _aboutDlg;
-	DebugInfoDlg _debugInfoDlg;
-	RunDlg _runDlg;
-	HashFromFilesDlg _md5FromFilesDlg;
-	HashFromTextDlg _md5FromTextDlg;
-	HashFromFilesDlg _sha2FromFilesDlg;
-	HashFromTextDlg _sha2FromTextDlg;
-    GoToLineDlg _goToLineDlg;
-	ColumnEditorDlg _colEditorDlg;
-	WordStyleDlg _configStyleDlg;
-	PreferenceDlg _preference;
+	FindIncrementDlg    _incrementFindDlg;
+    AboutDlg            _aboutDlg;
+	DebugInfoDlg        _debugInfoDlg;
+	RunDlg              _runDlg;
+	HashFromFilesDlg    _md5FromFilesDlg;
+	HashFromTextDlg     _md5FromTextDlg;
+	HashFromFilesDlg    _sha2FromFilesDlg;
+	HashFromTextDlg     _sha2FromTextDlg;
+    GoToLineDlg         _goToLineDlg;
+	ColumnEditorDlg     _colEditorDlg;
+	WordStyleDlg        _configStyleDlg;
+	PreferenceDlg       _preference;
 	FindCharsInRangeDlg _findCharsInRangeDlg;
-	PluginsAdminDlg _pluginsAdminDlg;
-	DocumentPeeker _documentPeeker;
+	PluginsAdminDlg     _pluginsAdminDlg;
+	DocumentPeeker      _documentPeeker;
 
 	// a handle list of all the Notepad++ dialogs
 	std::vector<HWND> _hModelessDlgs;
@@ -333,10 +338,10 @@ private:
 	void postItToggle();
 
 	// Keystroke macro recording and playback
-	Macro _macro;
-	bool _recordingMacro = false;
-	bool _playingBackMacro = false;
-	bool _recordingSaved = false;
+	Macro       _macro;
+	bool        _recordingMacro = false;
+	bool        _playingBackMacro = false;
+	bool        _recordingSaved = false;
 	RunMacroDlg _runMacroDlg;
 
 	// For conflict detection when saving Macros or RunCommands
@@ -363,16 +368,16 @@ private:
 
 	bool _isUDDocked = false;
 
-	trayIconControler* _pTrayIco = nullptr;
-	int _zoomOriginalValue = 0;
+	trayIconControler * _pTrayIco          = nullptr;
+	int                 _zoomOriginalValue = 0;
 
-	Accelerator _accelerator;
+	Accelerator          _accelerator;
 	ScintillaAccelerator _scintaccelerator;
 
 	PluginsManager _pluginsManager;
-    ButtonDlg _restoreButton;
+    ButtonDlg      _restoreButton;
 
-	bool _isFileOpening = false;
+	bool _isFileOpening   = false;
 	bool _isAdministrator = false;
 
 	ScintillaCtrls _scintillaCtrls4Plugins;
@@ -380,24 +385,24 @@ private:
 	std::vector<std::pair<int, int> > _hideLinesMarks;
 	StyleArray _hotspotStyles;
 
-	AnsiCharPanel* _pAnsiCharPanel = nullptr;
-	ClipboardHistoryPanel* _pClipboardHistoryPanel = nullptr;
-	VerticalFileSwitcher* _pFileSwitcherPanel = nullptr;
-	ProjectPanel* _pProjectPanel_1 = nullptr;
-	ProjectPanel* _pProjectPanel_2 = nullptr;
-	ProjectPanel* _pProjectPanel_3 = nullptr;
+	AnsiCharPanel         * _pAnsiCharPanel         = nullptr;
+	ClipboardHistoryPanel * _pClipboardHistoryPanel = nullptr;
+	VerticalFileSwitcher  * _pFileSwitcherPanel     = nullptr;
+	ProjectPanel          * _pProjectPanel_1        = nullptr;
+	ProjectPanel          * _pProjectPanel_2        = nullptr;
+	ProjectPanel          * _pProjectPanel_3        = nullptr;
 
 	FileBrowser* _pFileBrowser = nullptr;
 
-	DocumentMap* _pDocMap = nullptr;
-	FunctionListPanel* _pFuncList = nullptr;
+	DocumentMap       * _pDocMap   = nullptr;
+	FunctionListPanel * _pFuncList = nullptr;
 
 	BOOL notify(SCNotification *notification);
 	void command(int id);
 
 //Document management
 	UCHAR _mainWindowStatus = 0; //For 2 views and user dialog if docked
-	int _activeView = MAIN_VIEW;
+	int   _activeView       = MAIN_VIEW;
 
 	//User dialog docking
 	void dockUserDlg();
@@ -412,15 +417,18 @@ private:
 	bool reloadLang();
 	bool loadStyles();
 
-	int currentView() {
+	int currentView()
+	{
 		return _activeView;
 	}
 
-	int otherView(){
+	int otherView()
+	{
 		return (_activeView == MAIN_VIEW?SUB_VIEW:MAIN_VIEW);
 	}
 
-	int otherFromView(int whichOne){
+	int otherFromView(int whichOne)
+	{
 		return (whichOne == MAIN_VIEW?SUB_VIEW:MAIN_VIEW);
 	}
 
@@ -475,7 +483,8 @@ private:
 	BOOL processIncrFindAccel(MSG *msg) const;
 	BOOL processFindAccel(MSG *msg) const;
 
-	void checkMenuItem(int itemID, bool willBeChecked) const {
+	void checkMenuItem(int itemID, bool willBeChecked) const
+	{
 		::CheckMenuItem(_mainMenuHandle, itemID, MF_BYCOMMAND | (willBeChecked?MF_CHECKED:MF_UNCHECKED));
 	}
 
@@ -488,23 +497,33 @@ private:
     void bookmarkAdd(int lineno) const
 	{
 		if (lineno == -1)
+		{
 			lineno = static_cast<int32_t>(_pEditView->getCurrentLineNumber());
+		}
 		if (!bookmarkPresent(lineno))
+		{
 			_pEditView->execute(SCI_MARKERADD, lineno, MARK_BOOKMARK);
+		}
 	}
 
     void bookmarkDelete(int lineno) const
 	{
 		if (lineno == -1)
+		{
 			lineno = static_cast<int32_t>(_pEditView->getCurrentLineNumber());
+		}
 		while (bookmarkPresent(lineno))
+		{
 			_pEditView->execute(SCI_MARKERDELETE, lineno, MARK_BOOKMARK);
+		}
 	}
 
     bool bookmarkPresent(int lineno) const
 	{
 		if (lineno == -1)
+		{
 			lineno = static_cast<int32_t>(_pEditView->getCurrentLineNumber());
+		}
 		LRESULT state = _pEditView->execute(SCI_MARKERGET, lineno);
 		return ((state & (1 << MARK_BOOKMARK)) != 0);
 	}
@@ -512,12 +531,18 @@ private:
     void bookmarkToggle(int lineno) const
 	{
 		if (lineno == -1)
+		{
 			lineno = static_cast<int32_t>(_pEditView->getCurrentLineNumber());
+		}
 
 		if (bookmarkPresent(lineno))
+		{
 			bookmarkDelete(lineno);
+		}
 		else
+		{
 			bookmarkAdd(lineno);
+		}
 	}
 
     void bookmarkNext(bool forwardScan);
@@ -607,18 +632,22 @@ private:
 	{
 		int randomNumber = rand();
 		if (rangeMax == -1)
+		{
 			return randomNumber;
+		}
 		return (rand() % rangeMax);
 	}
 
 	static DWORD WINAPI backupDocument(void *params);
 
 	static DWORD WINAPI monitorFileOnChange(void * params);
-	struct MonitorInfo final {
-		MonitorInfo(Buffer *buf, HWND nppHandle) :
-			_buffer(buf), _nppHandle(nppHandle) {};
-		Buffer *_buffer = nullptr;
-		HWND _nppHandle = nullptr;
+	struct MonitorInfo final
+	{
+		Buffer * _buffer    = nullptr;
+		HWND     _nppHandle = nullptr;
+		MonitorInfo(Buffer *buf, HWND nppHandle) : _buffer(buf), _nppHandle(nppHandle)
+		{
+		}
 	};
 
 	void monitoringStartOrStopAndUpdateUI(Buffer* pBuf, bool isStarting);

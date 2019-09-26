@@ -25,6 +25,7 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #pragma once
+//#include <map>
 #include "Notepad_plus.h"
 
 
@@ -68,7 +69,10 @@ filePath : file or folder name to open (absolute or relative path name)\r\
 class Notepad_plus_Window : public Window
 {
 public:
-	void init(HINSTANCE, HWND, const TCHAR *cmdLine, CmdLineParams *cmdLineParams);
+	Notepad_plus_Window() : Window()
+	{
+	}
+	void init(HINSTANCE, HWND, const TCHAR * cmdLine, CmdLineParams * cmdLineParams);
 
 	bool isDlgsMsg(MSG *msg) const;
 
@@ -107,13 +111,25 @@ public:
 
 private:
 	Notepad_plus _notepad_plus_plus_core;
+
+	/******************
+	 * 主窗口回调函数 *
+	 ******************/
 	static LRESULT CALLBACK Notepad_plus_Proc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
-	LRESULT runProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
+	//static std::map<HWND, Notepad_plus_Window *> pM30ideMap;
 
 	static const TCHAR _className[32];
-	bool _isPrelaunch = false;
-	bool _disablePluginsManager = false;
 
-	QuoteParams _quoteParams; // keep the availability of quote parameters for thread using
-	std::wstring _userQuote; // keep the availability of this string for thread using
+	// keep the availability of quote parameters for thread using
+	QuoteParams  _quoteParams;
+
+	// keep the availability of this string for thread using
+	std::wstring _userQuote;
+
+	bool               _isPrelaunch           = false;
+	bool               _disablePluginsManager = false;
+
+	LRESULT runProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
+
+	
 };

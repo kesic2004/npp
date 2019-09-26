@@ -1030,23 +1030,32 @@ bool NppParameters::load()
     L_END = L_EXTERNAL;
     bool isAllLaoded = true;
     for (int i = 0 ; i < NB_LANG ; _langList[i] = NULL, ++i)
-    {}
+    {
+	}
 
     _isx64 = sizeof(void *) == 8;
 
     // Make localConf.xml path
 	/***************************************************
-	 * %NPP_HOME%所在文件夹下doLocalConf.xml的绝对路径 *
+	 * %NPP_HOME%\\doLocalConf.xml的绝对路径 *
 	 ***************************************************/
 	generic_string localConfPath(_nppPath);
     PathAppend(localConfPath, localConfFile);
 
     // Test if localConf.xml exist
-    _isLocal = (PathFileExists(localConfPath.c_str()) == TRUE);
+	/*************************************************
+	 * %NPP_HOME%\\doLocalConf.xml是否存在           *
+	 *************************************************/
+	_isLocal = (PathFileExists(localConfPath.c_str()) == TRUE);
 
     // Under vista and windows 7, the usage of doLocalConf.xml is not allowed
     // if Notepad++ is installed in "program files" directory, because of UAC
-    if (_isLocal)
+	/*************************************************************
+	 * 在Vista和Windows 7以上，使用doLocalConf.xml不被允许时，   *
+	 * 判断Notepad++是否安装在C:\Program Files(默认安装文件夹)， *
+	 * 如果是，设置_isLocal成员变量为假                          *
+	 *************************************************************/
+	if (_isLocal)
     {
         // We check if OS is Vista or greater version
         if (_winVersion >= WV_VISTA)
@@ -1056,10 +1065,13 @@ bool NppParameters::load()
             wcscpy_s(nppDirLocation, _nppPath.c_str());
             ::PathRemoveFileSpec(nppDirLocation);
 
-            if  (progPath == nppDirLocation)
-                _isLocal = false;
+			if (progPath == nppDirLocation)
+			{
+				_isLocal = false;
+			}
         }
     }
+
 	/*************************************************
 	 * %NPP_HOME%\\plugins文件夹的绝对路径 *
 	 *************************************************/
@@ -1067,7 +1079,7 @@ bool NppParameters::load()
     PathAppend(_pluginRootDir, TEXT("plugins"));
 
 	/*************************************************
-	 * %NPP_HOME%文件夹的绝对路径 *
+	 * %NPP_HOME%文件夹的绝对路径                    *
 	 *************************************************/
 	generic_string nppPluginRootParent;
     if (_isLocal)
@@ -1092,7 +1104,8 @@ bool NppParameters::load()
 		{
 			::CreateDirectory(_userPluginConfDir.c_str(), NULL);
 		}
-        PathAppend(_userPluginConfDir, TEXT("Config"));
+ 
+		PathAppend(_userPluginConfDir, TEXT("Config"));
 		if (!PathFileExists(_userPluginConfDir.c_str()))
 		{
 			::CreateDirectory(_userPluginConfDir.c_str(), NULL);
@@ -1102,7 +1115,8 @@ bool NppParameters::load()
         setElevationRequired(true);
     }
 
-    _pluginConfDir = _pluginRootDir; // for plugin list home
+	// for plugin list home
+    _pluginConfDir = _pluginRootDir;
     PathAppend(_pluginConfDir, TEXT("Config"));
 
 	if (!PathFileExists(nppPluginRootParent.c_str()))
@@ -1114,7 +1128,8 @@ bool NppParameters::load()
 		::CreateDirectory(_pluginRootDir.c_str(), NULL);
 	}
 
-    _sessionPath = _userPath; // Session stock the absolute file path, it should never be on cloud
+	// Session stock the absolute file path, it should never be on cloud
+    _sessionPath = _userPath;
 
     // Detection cloud settings
     generic_string cloudChoicePath{_userPath};
@@ -1130,34 +1145,34 @@ bool NppParameters::load()
 
         if (not cloudChoiceStrW.empty() and ::PathFileExists(cloudChoiceStrW.c_str()))
         {
-            _userPath = cloudChoiceStrW;
-            _nppGUI._cloudPath = cloudChoiceStrW;
+            _userPath           = cloudChoiceStrW;
+            _nppGUI._cloudPath  = cloudChoiceStrW;
             _initialCloudChoice = _nppGUI._cloudPath;
         }
     }
 
 
-    //-------------------------------------//
-    // Transparent function for w2k and xp //
-    //-------------------------------------//
+    /***************************************
+     * Transparent function for w2k and xp *
+     ***************************************/
     HMODULE hUser32 = ::GetModuleHandle(TEXT("User32"));
 	if (hUser32)
 	{
 		_transparentFuncAddr = (WNDPROC)::GetProcAddress(hUser32, "SetLayeredWindowAttributes");
 	}
 
-    //---------------------------------------------//
-    // Dlg theme texture function for xp and vista //
-    //---------------------------------------------//
+    /***********************************************
+     * Dlg theme texture function for xp and vista *
+     ***********************************************/
     _hUXTheme = ::LoadLibrary(TEXT("uxtheme.dll"));
 	if (_hUXTheme)
 	{
 		_enableThemeDialogTextureFuncAddr = (WNDPROC)::GetProcAddress(_hUXTheme, "EnableThemeDialogTexture");
 	}
 
-    //--------------------------//
-    // langs.xml : for per user //
-    //--------------------------//
+    /****************************
+     * langs.xml : for per user *
+     ****************************/
     generic_string langs_xml_path(_userPath);
     PathAppend(langs_xml_path, TEXT("langs.xml"));
 
@@ -1223,9 +1238,9 @@ bool NppParameters::load()
     else
         getLangKeywordsFromXmlTree();
 
-    //---------------------------//
-    // config.xml : for per user //
-    //---------------------------//
+    /*****************************
+     * config.xml : for per user *
+     *****************************/
     generic_string configPath(_userPath);
     PathAppend(configPath, TEXT("config.xml"));
 
@@ -1250,10 +1265,9 @@ bool NppParameters::load()
         getUserParametersFromXmlTree();
     }
 
-    //----------------------------//
-    // stylers.xml : for per user //
-    //----------------------------//
-
+    /******************************
+     * stylers.xml : for per user *
+     ******************************/
     _stylerPath = _userPath;
     PathAppend(_stylerPath, TEXT("stylers.xml"));
 
@@ -1302,9 +1316,9 @@ bool NppParameters::load()
     // Firstly, add the default theme
     _themeSwitcher.addDefaultThemeFromXml(_stylerPath);
 
-    //-----------------------------------//
-    // userDefineLang.xml : for per user //
-    //-----------------------------------//
+    /*************************************
+     * userDefineLang.xml : for per user * 
+     *************************************/
     generic_string userDefineLangsFolderPath = _userDefineLangPath = _userPath;
     PathAppend(_userDefineLangPath, TEXT("userDefineLang.xml"));
     PathAppend(userDefineLangsFolderPath, TEXT("userDefineLangs"));
@@ -1323,8 +1337,10 @@ bool NppParameters::load()
     else
     {
         auto r = addUserDefineLangsFromXmlTree(_pXmlUserLangDoc);
-        if (r.second - r.first > 0)
-            _pXmlUserLangsDoc.push_back(UdlXmlFileState(_pXmlUserLangDoc, false, r));
+		if (r.second - r.first > 0)
+		{
+			_pXmlUserLangsDoc.push_back(UdlXmlFileState(_pXmlUserLangDoc, false, r));
+		}
     }
 
     for (const auto & i : udlFiles)
@@ -1338,8 +1354,10 @@ bool NppParameters::load()
         else
         {
             auto r = addUserDefineLangsFromXmlTree(udlDoc);
-            if (r.second - r.first > 0)
-                _pXmlUserLangsDoc.push_back(UdlXmlFileState(udlDoc, false, r));
+			if (r.second - r.first > 0)
+			{
+				_pXmlUserLangsDoc.push_back(UdlXmlFileState(udlDoc, false, r));
+			}
         }
     }
 

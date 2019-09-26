@@ -2736,7 +2736,10 @@ void Notepad_plus::command(int id)
 
 					wchar_t sha2hashStr[65] = { '\0' };
 					for (size_t i = 0; i < 32; i++)
+					{
 						wsprintf(sha2hashStr + i * 2, TEXT("%02x"), sha2hash[i]);
+					}
+					sha2hashStr[64] = '\0';
 
 					str2Clipboard(sha2hashStr, _pPublicInterface->getHSelf());
 

@@ -1243,14 +1243,19 @@ bool deleteFileOrFolder(const generic_string& f2delete)
 	return (res == 0);
 }
 
-// Get a vector of full file paths in a given folder. File extension type filter should be *.*, *.xml, *.dll... according the type of file you want to get.  
-void getFilesInFolder(std::vector<generic_string>& files, const generic_string& extTypeFilter, const generic_string& inFolder)
+/*************************************************************
+ * Get a vector of full file paths in a given folder.        *
+ * File extension type filter should be *.*, *.xml, *.dll... *
+ * according the type of file you want to get.               *
+ *************************************************************/
+void getFilesInFolder(std::vector<generic_string> & files, const generic_string & extTypeFilter, const generic_string & inFolder)
 {
+/*
 	generic_string filter = inFolder;
 	PathAppend(filter, extTypeFilter);
 
 	WIN32_FIND_DATA foundData;
-	HANDLE hFindFile = ::FindFirstFile(filter.c_str(), &foundData);
+	HANDLE hFindFile = ::FindFirstFile(filter.c_str(), & foundData);
 
 	if (hFindFile != INVALID_HANDLE_VALUE && !(foundData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
 	{
@@ -1265,6 +1270,35 @@ void getFilesInFolder(std::vector<generic_string>& files, const generic_string& 
 			files.push_back(foundFullPath2);
 		}
 	}
+*/
+
+	/******************
+	 * 存储查找的结果 *
+	 ******************/
+	WIN32_FIND_DATA foundData;
+
+	/******************
+	 * 查找时的过滤器 *
+	 ******************/
+	generic_string filter    = inFolder;
+	::PathAppend(filter, extTypeFilter);
+	HANDLE         hFindFile = ::FindFirstFile(filter.c_str(), & foundData);
+
+	if ( ( hFindFile != INVALID_HANDLE_VALUE ) && ( !( foundData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY ) ) )
+	{
+		do
+		{
+			/**************************
+			 * 查找到的文件的绝对路径 *
+			 **************************/
+			generic_string  foundFullPath = inFolder;
+			::PathAppend(foundFullPath, foundData.cFileName);
+			files.push_back(foundFullPath);
+		} while ( ::FindNextFile(hFindFile, & foundData) );
+	}
+
+	/************
+	 * 关闭句柄 *
+	 ************/
 	::FindClose(hFindFile);
 }
-

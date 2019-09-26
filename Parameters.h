@@ -1362,7 +1362,7 @@ struct Lang final
 		return _defaultExtList;
 	}
 
-	void setWords(const TCHAR *words, int index)
+	void setWords(const TCHAR * words, int index)
 	{
 		_langKeyWordList[index] = words;
 	}
@@ -1707,10 +1707,16 @@ const bool FREE     = false;
 const int RECENTFILES_SHOWFULLPATH     = -1;
 const int RECENTFILES_SHOWONLYFILENAME = 0;
 
+/*************************************************************************
+ * final 修饰符该类不允许有派生类，该类是单例模式，用于存储NPP的相关参数 *
+ *************************************************************************/
 class NppParameters final
 {
 public:
-	static NppParameters* getInstance()
+	/**********************
+	 * 返回单例实例的地址 *
+	 **********************/
+	static NppParameters * getInstance()
 	{
 		static NppParameters instance;
 		return &instance;
@@ -1809,7 +1815,7 @@ public:
 		return _nbRecentFile;
 	}
 
-	generic_string *getLRFile(int index) const
+	generic_string * getLRFile(int index) const
 	{
 		return _LRFileList[index];
 	}
@@ -2158,7 +2164,7 @@ public:
 		return _fileBrowserRoot;
 	}
 
-	void setWorkSpaceFilePath(int i, const TCHAR *wsFile);
+	void setWorkSpaceFilePath(int i, const TCHAR * wsFile);
 
 	/***********************************************************************************************************************/
 
@@ -2174,7 +2180,8 @@ public:
 		_doFunctionListExport = doIt;
 	}
 
-	bool doFunctionListExport() const {
+	bool doFunctionListExport() const
+	{
 		return _doFunctionListExport;
 	}
 
@@ -2296,7 +2303,7 @@ public:
 	{
 		return _pNativeLangSpeaker;
 	}
-	void setNativeLangSpeaker(NativeLangSpeaker *nls)
+	void setNativeLangSpeaker(NativeLangSpeaker * nls)
 	{
 		_pNativeLangSpeaker = nls;
 	}
@@ -2383,17 +2390,23 @@ private:
 
 	/***********************************************************************************************************************/
 
+	/********************************************
+	 * 为了实现单例，禁止了复制构造和赋值运算符 *
+	 ********************************************/
 	// No copy ctor and assignment
-	NppParameters(const NppParameters&) = delete;
+	NppParameters(const NppParameters &) = delete;
 
-	NppParameters& operator=(const NppParameters&) = delete;
+	NppParameters & operator = (const NppParameters &) = delete;
 
 	/***********************************************************************************************************************/
 
+	/***************************************************************
+	* 为了实现单例，禁止了移动计算的复制构造和移动计算的赋值运算符 *
+	****************************************************************/
 	// No move ctor and assignment
-	NppParameters(NppParameters&&) = delete;
+	NppParameters(NppParameters &&) = delete;
 
-	NppParameters& operator=(NppParameters&&) = delete;
+	NppParameters & operator =(NppParameters &&) = delete;
 
 	/***********************************************************************************************************************/
 
@@ -2420,15 +2433,21 @@ private:
 	 * %NPP_HOME%\\userDefineLang.xml的Document对象
 	 */
 	TiXmlDocument                * _pXmlUserLangDoc   = nullptr;
+	/*
+	 * %NPP_HOME%\\userDefineLang.xml的Document对象
+	 */
 	std::vector<UdlXmlFileState>   _pXmlUserLangsDoc;
+
 	/*
 	 * %NPP_HOME%\\toolbarIcons.xml的Document对象
 	 */
 	TiXmlDocument                * _pXmlToolIconsDoc = nullptr;
+
 	/*
 	 * %NPP_HOME%\\shortcuts.xml的Document对象
 	 */
 	TiXmlDocument                * _pXmlShortcutDoc  = nullptr;
+
 	/*
 	 * %NPP_HOME%\\session.xml的Document对象
 	 */
@@ -2444,6 +2463,7 @@ private:
 	  * %NPP_HOME%\\nativeLang.xml的Document对象
 	  */
 	TiXmlDocumentA * _pXmlNativeLangDocA  = nullptr;
+
 	/*
 	 * %NPP_HOME%\\contextMenu.xml的Document对象
 	 */
@@ -2496,9 +2516,11 @@ private:
 	/*
 	 * @member
 	 */
-	UserLangContainer     *_userLangArray[NB_MAX_USER_LANG];
+	UserLangContainer     * _userLangArray[NB_MAX_USER_LANG];
+
 	// won't be exceeded to 255;
 	unsigned char          _nbUserLang                              = 0;
+
 	/**************************************
 	 * %NPP_HOME%\\userDefineLang.xml文件 *
 	 **************************************/
@@ -2543,6 +2565,9 @@ private:
 	/*
 	 * @member
 	 */
+	/*********************************
+	 * 用于加载动态链接库uxtheme.dll *
+	 *********************************/
 	HMODULE _hUXTheme = nullptr;
 
 	/***********************************************************************************************************************/
@@ -2550,13 +2575,29 @@ private:
 	/*
 	 * @member
 	 */
+	/***********************************************************************************
+	 * typedef LRESULT (CALLBACK* WNDPROC)(HWND, UINT, WPARAM, LPARAM);                *
+	 * WINUSERAPI BOOL WINAPI SetLayeredWindowAttributes(HWND, COLORREF, BYTE, DWORD); *
+	 ***********************************************************************************/
 	WNDPROC _transparentFuncAddr              = nullptr;
+
+	/********************************************************************
+	 * typedef LRESULT (CALLBACK* WNDPROC)(HWND, UINT, WPARAM, LPARAM); *
+	 * THEMEAPI EnableThemeDialogTexture(HWND, DWORD);                  *
+	 ********************************************************************/
 	WNDPROC _enableThemeDialogTextureFuncAddr = nullptr;
+
 	/*************************************************
-	 * %NPP_HOME%所在文件夹下doLocalConf.xml是否存在 *
+	 * %NPP_HOME%\\doLocalConf.xml是否存在           *
 	 *************************************************/
 	bool                                      _isLocal;
-	// by default 32-bit
+
+	/********************************************
+	 * 当前可执行程序是否是64位的当前可执行程序 *
+	 * 默认值：false，即32位当前可执行程序      *
+	 * 其他值：true，即64位当前可执行程序       *
+	 * by default 32-bit                        *
+	 ********************************************/
 	bool                                      _isx64 = false;
 
 	/***********************************************************************************************************************/
@@ -2646,21 +2687,22 @@ private:
 	 * %NPP_HOME%即NPP可执行文件所在的文件夹 *
 	 *****************************************/
 	generic_string _sessionPath;
-	/**************************************
-	 * %NPP_HOME%\\blacklist.xml文件 *
-	 **************************************/
+	/*******************************************
+	 * %NPP_HOME%\\blacklist.xml文件的绝对路径 *
+	 *******************************************/
 	generic_string _blacklistPath;
-	/*
-	 * %NPP_HOME%即NPP可执行文件所在的文件夹
-	 */
-	generic_string _nppPath;
 	/*****************************************
 	 * %NPP_HOME%即NPP可执行文件所在的文件夹 *
 	 *****************************************/
+	generic_string _nppPath;
+	/*****************************************
+	 * 用户指定的默认文件夹，默认指向：      *
+	 * %NPP_HOME%即NPP可执行文件所在的文件夹 *
+	 *****************************************/
 	generic_string _userPath;
-	/**************************************
-	 * %NPP_HOME%\\stylers.xml文件 *
-	 **************************************/
+	/*****************************************
+	 * %NPP_HOME%\\stylers.xml文件的绝对路径 *
+	 *****************************************/
 	generic_string _stylerPath; // stylers
 	// sentinel of the absence of "doLocalConf.xml" : (_appdataNppDir == TEXT(""))?"doLocalConf.xml present":"doLocalConf.xml absent"
 	generic_string _appdataNppDir;
@@ -2669,15 +2711,19 @@ private:
 	 * %NPP_HOME%\\plugins文件夹的绝对路径 *
 	 ***************************************/
 	generic_string _pluginRootDir;
+
 	// plugins config dir where the plugin list is installed
-	/***********************************************
-	* %NPP_HOME%\\plugins\\Config文件夹的绝对路径 *
-	***********************************************/
+	/**************************************************************
+	* %NPP_HOME%\\plugins\\Config文件夹的绝对路径，这个是非用户的 *
+	***************************************************************/
 	generic_string _pluginConfDir;
+
 	// plugins config dir for per user where the plugin parameters are saved / loaded
-	/***********************************************
-	 * %NPP_HOME%\\plugins\\Config文件夹的绝对路径 *
-	 ***********************************************/
+	/*************************************************************
+	 * %NPP_HOME%\\plugins\\Config文件夹的绝对路径，这个是用户的 *
+	 * 就是用户的plugins\\Config文件夹的绝对路径                 *
+	 * 也有可能是<user name>\Application Data\\plugins\\Config   *
+	 *************************************************************/
 	generic_string _userPluginConfDir;
 	generic_string _currentDirectory;
 	generic_string _workSpaceFilePathes[3];

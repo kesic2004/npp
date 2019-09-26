@@ -593,7 +593,10 @@ public:
 	void bufferUpdated(Buffer * buffer, int mask);
 	BufferID getCurrentBufferID() { return _currentBufferID; };
 	Buffer * getCurrentBuffer() { return _currentBuffer; };
-	void setCurrentBuffer(Buffer *buf2set) { _currentBuffer = buf2set; };
+	void setCurrentBuffer(Buffer * buf2set)
+	{
+		_currentBuffer = buf2set;
+	}
 	void styleChange();
 
 	void hideLines();
@@ -960,7 +963,7 @@ protected:
 
 	void setREBOLLexer() {
 		setLexer(SCLEX_REBOL, L_REBOL, LIST_0 | LIST_1 | LIST_2 | LIST_3 | LIST_4 | LIST_5 | LIST_6);
-		execute(SCI_SETWORDCHARS, 0, reinterpret_cast<LPARAM>("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!.’+-*&|=_~"));
+		execute(SCI_SETWORDCHARS, 0, reinterpret_cast<LPARAM>("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!.?-*&|=_~"));
 	};
 
 	void setRegistryLexer() {

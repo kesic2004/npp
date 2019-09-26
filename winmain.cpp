@@ -45,14 +45,14 @@
  ****************************************************/
 #include "Real_Kesic_Lee_Dynamic_Link_Library_Load_And_Proc_Address.h"
 
-typedef std::vector<generic_string> ParamVector;
+// typedef std::vector<generic_string> ParamVector;
 
 
 
 namespace
 {
 
-    void allowWmCopydataMessages(Notepad_plus_Window& notepad_plus_plus, const NppParameters* pNppParameters, winVer ver)
+    void allowWmCopydataMessages(Notepad_plus_Window & notepad_plus_plus, const NppParameters * pNppParameters, winVer ver)
     {
         #ifndef MSGFLT_ADD
         const DWORD MSGFLT_ADD = 1;
@@ -100,9 +100,9 @@ namespace
     /*************************************************************
      * commandLine should contain path to n++ executable running *
      *************************************************************/
-    ParamVector parseCommandLine(const TCHAR* commandLine)
+    std::vector<generic_string> parseCommandLine(const TCHAR* commandLine)
     {
-        ParamVector result;
+        std::vector<generic_string> result;
         if ( commandLine[0] != '\0' )
         {
             int numArgs;
@@ -121,9 +121,9 @@ namespace
      * 2. Concatenates all remaining parameters to form a file path, adding appending .txt extension if necessary *
      * This seems to mirror Notepad's behaviour                                                                   *
      **************************************************************************************************************/
-    ParamVector convertParamsToNotepadStyle(PWSTR pCmdLine)
+    std::vector<generic_string> convertParamsToNotepadStyle(PWSTR pCmdLine)
     {
-        ParamVector params;
+        std::vector<generic_string> params;
 
         // Notepad accepts both /p and /P, so compare case insensitively
         if ( _tcsnicmp(TEXT("/p"), pCmdLine, 2) == 0 )
@@ -152,7 +152,7 @@ namespace
         return params;
     }
 
-    bool isInList(const TCHAR *token2Find, ParamVector& params, bool eraseArg = true)
+    bool isInList(const TCHAR *token2Find, std::vector<generic_string> & params, bool eraseArg = true)
     {
         for (auto it = params.begin(); it != params.end(); ++it)
         {
@@ -165,7 +165,7 @@ namespace
         return false;
     };
 
-    bool getParamVal(TCHAR c, ParamVector & params, generic_string & value)
+    bool getParamVal(TCHAR c, std::vector<generic_string> & params, generic_string & value)
     {
         value = TEXT("");
         size_t nbItems = params.size();
@@ -184,7 +184,7 @@ namespace
         return false;
     }
 
-    bool getParamValFromString(const TCHAR *str, ParamVector & params, generic_string & value)
+    bool getParamValFromString(const TCHAR *str, std::vector<generic_string> & params, generic_string & value)
     {
         value = TEXT("");
         size_t nbItems = params.size();
@@ -204,7 +204,7 @@ namespace
         return false;
     }
 
-    LangType getLangTypeFromParam(ParamVector & params)
+    LangType getLangTypeFromParam(std::vector<generic_string> & params)
     {
         generic_string langStr;
         if (!getParamVal('l', params, langStr))
@@ -214,7 +214,7 @@ namespace
         return NppParameters::getLangIDFromStr(langStr.c_str());
     }
 
-    generic_string getLocalizationPathFromParam(ParamVector & params)
+    generic_string getLocalizationPathFromParam(std::vector<generic_string> & params)
     {
         generic_string locStr;
         if (!getParamVal('L', params, locStr))
@@ -224,7 +224,7 @@ namespace
         return NppParameters::getLocPathFromStr(locStr.c_str());
     }
 
-    int getNumberFromParam(char paramName, ParamVector & params, bool & isParamePresent)
+    int getNumberFromParam(char paramName, std::vector<generic_string> & params, bool & isParamePresent)
     {
         generic_string numStr;
         if (!getParamVal(paramName, params, numStr))
@@ -236,7 +236,7 @@ namespace
         return generic_atoi(numStr.c_str());
     };
 
-    generic_string getEasterEggNameFromParam(ParamVector & params, unsigned char & type)
+    generic_string getEasterEggNameFromParam(std::vector<generic_string> & params, unsigned char & type)
     {
         generic_string EasterEggName;
         if (!getParamValFromString(TEXT("-qn"), params, EasterEggName))  // get internal easter egg
@@ -276,7 +276,7 @@ namespace
         return EasterEggName;
     }
 
-    int getGhostTypingSpeedFromParam(ParamVector & params)
+    int getGhostTypingSpeedFromParam(std::vector<generic_string> & params)
     {
         generic_string speedStr;
         if (!getParamValFromString(TEXT("-qSpeed"), params, speedStr))
@@ -373,7 +373,7 @@ namespace
      * Also advances pCmdLine to point after the last ignored parameter
      * -notepadStyleCmdline is also considered an ignored parameter here, as we don't want it to be part of the assembled file name
      */
-    PWSTR stripIgnoredParams(ParamVector & params, PWSTR pCmdLine)
+    PWSTR stripIgnoredParams(std::vector<generic_string> & params, PWSTR pCmdLine)
     {
         for ( auto it = params.begin(); it != params.end(); )
         {
@@ -408,8 +408,8 @@ namespace
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
 {
-    ParamVector params = parseCommandLine(pCmdLine);
-    PWSTR pCmdLineWithoutIgnores = stripIgnoredParams(params, pCmdLine);
+    std::vector<generic_string> params                 = parseCommandLine(pCmdLine);
+    PWSTR                       pCmdLineWithoutIgnores = stripIgnoredParams(params, pCmdLine);
 
     //for debugging purposes.
     MiniDumper mdump;
@@ -434,33 +434,33 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
     }
 
     bool isParamePresent;
-    bool showHelp = isInList(FLAG_HELP, params);
-    bool isMultiInst = isInList(FLAG_MULTI_INSTANCE, params);
+    bool showHelp             = isInList(FLAG_HELP, params);
+    bool isMultiInst          = isInList(FLAG_MULTI_INSTANCE, params);
     bool doFunctionListExport = isInList(FLAG_FUNCLSTEXPORT, params);
-    bool doPrintAndQuit = isInList(FLAG_PRINTANDQUIT, params);
+    bool doPrintAndQuit       = isInList(FLAG_PRINTANDQUIT, params);
 
     CmdLineParams cmdLineParams;
-    cmdLineParams._isNoTab = isInList(FLAG_NOTABBAR, params);
-    cmdLineParams._isNoPlugin = isInList(FLAG_NO_PLUGIN, params);
-    cmdLineParams._isReadOnly = isInList(FLAG_READONLY, params);
-    cmdLineParams._isNoSession = isInList(FLAG_NOSESSION, params);
-    cmdLineParams._isPreLaunch = isInList(FLAG_SYSTRAY, params);
-    cmdLineParams._alwaysOnTop = isInList(FLAG_ALWAYS_ON_TOP, params);
-    cmdLineParams._showLoadingTime = isInList(FLAG_LOADINGTIME, params);
-    cmdLineParams._isSessionFile = isInList(FLAG_OPENSESSIONFILE, params);
-    cmdLineParams._isRecursive = isInList(FLAG_RECURSIVE, params);
+    cmdLineParams._isNoTab                = isInList(FLAG_NOTABBAR, params);
+    cmdLineParams._isNoPlugin             = isInList(FLAG_NO_PLUGIN, params);
+    cmdLineParams._isReadOnly             = isInList(FLAG_READONLY, params);
+    cmdLineParams._isNoSession            = isInList(FLAG_NOSESSION, params);
+    cmdLineParams._isPreLaunch            = isInList(FLAG_SYSTRAY, params);
+    cmdLineParams._alwaysOnTop            = isInList(FLAG_ALWAYS_ON_TOP, params);
+    cmdLineParams._showLoadingTime        = isInList(FLAG_LOADINGTIME, params);
+    cmdLineParams._isSessionFile          = isInList(FLAG_OPENSESSIONFILE, params);
+    cmdLineParams._isRecursive            = isInList(FLAG_RECURSIVE, params);
     cmdLineParams._openFoldersAsWorkspace = isInList(FLAG_OPEN_FOLDERS_AS_WORKSPACE, params);
-    cmdLineParams._langType = getLangTypeFromParam(params);
-    cmdLineParams._localizationPath = getLocalizationPathFromParam(params);
-    cmdLineParams._easterEggName = getEasterEggNameFromParam(params, cmdLineParams._quoteType);
-    cmdLineParams._ghostTypingSpeed = getGhostTypingSpeedFromParam(params);
+    cmdLineParams._langType               = getLangTypeFromParam(params);
+    cmdLineParams._localizationPath       = getLocalizationPathFromParam(params);
+    cmdLineParams._easterEggName          = getEasterEggNameFromParam(params, cmdLineParams._quoteType);
+    cmdLineParams._ghostTypingSpeed       = getGhostTypingSpeedFromParam(params);
 
     // getNumberFromParam should be run at the end, to not consuming the other params
-    cmdLineParams._line2go = getNumberFromParam('n', params, isParamePresent);
+    cmdLineParams._line2go   = getNumberFromParam('n', params, isParamePresent);
     cmdLineParams._column2go = getNumberFromParam('c', params, isParamePresent);
-    cmdLineParams._pos2go = getNumberFromParam('p', params, isParamePresent);
-    cmdLineParams._point.x = getNumberFromParam('x', params, cmdLineParams._isPointXValid);
-    cmdLineParams._point.y = getNumberFromParam('y', params, cmdLineParams._isPointYValid);
+    cmdLineParams._pos2go    = getNumberFromParam('p', params, isParamePresent);
+    cmdLineParams._point.x   = getNumberFromParam('x', params, cmdLineParams._isPointXValid);
+    cmdLineParams._point.y   = getNumberFromParam('y', params, cmdLineParams._isPointYValid);
 
     /****************
      * œ‘ æ∞Ô÷˙–≈œ¢ *
