@@ -26,6 +26,7 @@
 // Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #pragma once
 //#include <map>
+//#include <vector>
 #include "Notepad_plus.h"
 
 
@@ -116,6 +117,7 @@ private:
 	 * 主窗口回调函数 *
 	 ******************/
 	static LRESULT CALLBACK Notepad_plus_Proc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
+	
 	//static std::map<HWND, Notepad_plus_Window *> pM30ideMap;
 
 	static const TCHAR _className[32];

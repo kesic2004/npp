@@ -257,6 +257,9 @@ public:
 
 
 private:
+	/***********************************************************
+	 * 指向包含Notepad_plus对象的Notepad_plus_Window对象的地址 *
+	 ***********************************************************/
 	Notepad_plus_Window *_pPublicInterface = nullptr;
     Window              *_pMainWindow      = nullptr;
 	DockingManager   _dockingManager;

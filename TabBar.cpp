@@ -271,6 +271,9 @@ void TabBarPlus::destroy()
 
 void TabBarPlus::init(HINSTANCE hInst, HWND parent, bool isVertical, bool isMultiLine)
 {
+	/*******************************
+	 * 标记当前实例句柄和父窗口句柄*
+	 *******************************/
 	Window::init(hInst, parent);
 	int vertical = isVertical?(TCS_VERTICAL | TCS_MULTILINE | TCS_RIGHTJUSTIFY):0;
 	_isVertical = isVertical;
@@ -342,6 +345,9 @@ void TabBarPlus::init(HINSTANCE hInst, HWND parent, bool isVertical, bool isMult
 	}
 	++_nbCtrl;
 
+	/****************************************************
+	 * 初始化的同时把当前对象的指针和窗口句柄绑定在一起 *
+	 ****************************************************/
 	::SetWindowLongPtr(_hSelf, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 	_tabBarDefaultProc = reinterpret_cast<WNDPROC>(::SetWindowLongPtr(_hSelf, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(TabBarPlus_Proc)));
 

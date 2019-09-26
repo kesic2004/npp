@@ -230,6 +230,9 @@ void ScintillaEditView::init(HINSTANCE hInst, HWND hPere)
 	}
 
 	Window::init(hInst, hPere);
+	/****************************************
+	 * Scintilla 窗口对象已经在其他地方注册 *
+	 ****************************************/
    _hSelf = ::CreateWindowEx(
 					WS_EX_CLIENTEDGE,\
 					TEXT("Scintilla"),\
@@ -332,8 +335,15 @@ void ScintillaEditView::init(HINSTANCE hInst, HWND hPere)
 
 	_codepage = ::GetACP();
 
+	/******************************************
+	 * 把当前窗口句柄和当前对象指针绑定在一起 *
+	 ******************************************/
 	::SetWindowLongPtr(_hSelf, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 	_callWindowProc = CallWindowProc;
+
+	/******************************
+	 * 重新对窗口对象绑定回调函数 *
+	 ******************************/
 	_scintillaDefaultProc = reinterpret_cast<WNDPROC>(::SetWindowLongPtr(_hSelf, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(scintillaStatic_Proc)));
 
 	if (_defaultCharList.empty())

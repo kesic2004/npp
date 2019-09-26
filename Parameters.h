@@ -2617,6 +2617,9 @@ private:
 	bool                           _isAnyShortcutModified = false;
 
 	//main menu shortuts. Static size
+	/****************
+	 * 主菜单快捷键 *
+	 ****************/
 	std::vector<CommandShortcut>   _shortcuts;
 
 	//altered main menu shortcuts. Indices static. Needed when saving alterations
@@ -2640,6 +2643,9 @@ private:
 	 * @member
 	 */
 	//scintilla keycommands. Static size
+	/*******************
+	 * Scintilla快捷键 *
+	 *******************/
 	std::vector<ScintillaKeyMap> _scintillaKeyCommands;
 	//modified scintilla keys. Indices static, determined by searching for commandId. Needed when saving alterations
 	std::vector<int>             _scintillaModifiedKeyIndices;
@@ -2725,6 +2731,10 @@ private:
 	 * 也有可能是<user name>\Application Data\\plugins\\Config   *
 	 *************************************************************/
 	generic_string _userPluginConfDir;
+
+	/****************************
+	 * 调用可执行文件的绝对路径 *
+	 ****************************/
 	generic_string _currentDirectory;
 	generic_string _workSpaceFilePathes[3];
 
@@ -2749,9 +2759,10 @@ private:
 	 * @member
 	 */
 	FindDlgTabTitiles _findDlgTabTitiles;
-	/*
-	 * _asNotepadStyle是否在%NPP_HOME%文件夹中存在
-	 */
+
+	/*************************************
+	 * %NPP_HOME%\\asNotepad.xml是否存在 *
+	 *************************************/
 	bool              _asNotepadStyle    = false;
 
 	/***********************************************************************************************************************/
@@ -2759,6 +2770,9 @@ private:
 	/*
 	 * @member
 	 */
+	/***************************************************
+	 * 当前的操作系统 @See winVer(Notepad_plus_msgs.h) *
+	 ***************************************************/
 	winVer   _winVersion;
 	Platform _platForm;
 
@@ -2941,9 +2955,15 @@ private:
 	void writePrintSetting(TiXmlElement *element);
 
 	//initialise menu keys and scintilla keys. Other keys are initialized on their own
+	/******************
+	 * 初始化菜单热键 *
+	 ******************/
 	void initMenuKeys();
 
 	//these functions have to be called first before any modifications are loaded
+	/*************************
+	 * 初始化Scintilla快捷键 *
+	 *************************/
 	void initScintillaKeys();
 
 	// return -1 if not found

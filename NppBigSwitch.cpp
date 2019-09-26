@@ -64,13 +64,54 @@ struct SortTaskListPred final
 	}
 };
 
-
 LRESULT CALLBACK Notepad_plus_Window::Notepad_plus_Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (hwnd == NULL)
 	{
 		return FALSE;
 	}
+/*
+	static UINT * MessageVector = new UINT[100];
+	static int count   = 100;
+	static int current = 0;
+	static int created = 0;
+	static int nccreate = 0;
+	switch (created)
+	{
+		case 0: 
+		{
+			if (current >= count)
+			{
+				UINT * newArray = new UINT[count * 2];
+				for (int i = 0; i < count; ++i)
+				{
+					newArray[i] = MessageVector[i];
+				}
+				delete[] MessageVector;
+				MessageVector = newArray;
+				count *= 2;
+			}
+			MessageVector[current++] = message;
+			switch (message)
+			{
+			case  WM_CREATE:
+				created = 1;
+				break;
+			case WM_NCCREATE:
+				nccreate = current;
+				break;
+			}
+			break;
+		}
+		case 1:
+		{
+			delete[] MessageVector;
+			MessageVector = nullptr;
+			created = 2;
+			break;
+		}
+	}
+*/
 	/*****************************************************************
 	 * 把窗口句柄和Notepad_plus_Window对象的地址一一绑定在一起       *
 	 * 在需要时进行调用对象的runProc函数                             *
@@ -80,6 +121,11 @@ LRESULT CALLBACK Notepad_plus_Window::Notepad_plus_Proc(HWND hwnd, UINT message,
 	 *****************************************************************/
 	switch(message)
 	{
+		case WM_GETMINMAXINFO:
+		{
+			MINMAXINFO * info = (MINMAXINFO *)(reinterpret_cast<LPCREATESTRUCT>(lParam));
+			break;
+		}
 		case WM_NCCREATE:
 		{
 			// First message we get the ptr of instantiated object
@@ -96,6 +142,11 @@ LRESULT CALLBACK Notepad_plus_Window::Notepad_plus_Proc(HWND hwnd, UINT message,
 
 		default:
 		{
+			/*********************************************************************
+			 * 根据窗口句柄获取Notepad_plus_Window对象的地址                     *
+			 * 由于该址可能为0(为空)，所以在之后的调用时，先作this是否为空的判断 *
+			 * 因为message的值有可能不是默认值，所以在被调用的类中进行判断       *
+			 *********************************************************************/
 			LONG_PTR lptr = ::GetWindowLongPtr(hwnd, GWLP_USERDATA);
 			return (reinterpret_cast<Notepad_plus_Window *>(lptr)->runProc(hwnd, message, wParam, lParam));
 		}
@@ -111,6 +162,10 @@ LRESULT Notepad_plus_Window::runProc(HWND hwnd, UINT message, WPARAM wParam, LPA
 		{
 			try
 			{
+				/**********************************************************************************************
+				 * 把当前对象的地址赋值给当前对象的_notepad_plus_plus_core成员变量的_pPublicInterface成员变量 *
+				 * 初始化_notepad_plus_plus_core成员变量                                                      *
+				 **********************************************************************************************/
 				_notepad_plus_plus_core._pPublicInterface = this;
 				return _notepad_plus_plus_core.init(hwnd);
 			}

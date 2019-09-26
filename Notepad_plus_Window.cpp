@@ -83,9 +83,11 @@ void Notepad_plus_Window::init(HINSTANCE hInst, HWND parent, const TCHAR *cmdLin
 
 	nppClass.style = CS_BYTEALIGNWINDOW | CS_DBLCLKS;
 
-	/********************
-	 * 主窗口的系统回调 *
-	 ********************/
+	/****************************************
+	 * 主窗口的系统回调，通过窗口回调函数， *
+	 * 实现主窗口中的所有子窗口的初始化，   *
+	 * 当前窗口句柄和当前对象地址的绑定     *
+	 ****************************************/
 	nppClass.lpfnWndProc = Notepad_plus_Proc;
 	nppClass.cbClsExtra = 0;
 	nppClass.cbWndExtra = 0;

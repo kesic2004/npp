@@ -203,6 +203,9 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	NppGUI & nppGUI = const_cast<NppGUI &>(pNppParam->getNppGUI());
 
 	// Menu
+	/********************************
+	 * 根据实际情况去除重复的菜单项 *
+	 ********************************/
 	_mainMenuHandle = ::GetMenu(hwnd);
 	int langPos2BeRemoved = MENUINDEX_LANGUAGE+1;
 	if (nppGUI._isLangMenuCompact)
@@ -210,15 +213,39 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	::RemoveMenu(_mainMenuHandle, langPos2BeRemoved, MF_BYPOSITION);
 
 	//Views
-    _pDocTab = &_mainDocTab;
-    _pEditView = &_mainEditView;
-	_pNonDocTab = &_subDocTab;
+	/******************************************************************************************
+	 *                                                                                        *
+	 ******************************************************************************************/
+	_pDocTab      = &_mainDocTab;
+	/******************************************************************************************
+	 *                                                                                        *
+	 ******************************************************************************************/
+	_pEditView    = &_mainEditView;
+	/******************************************************************************************
+	 *                                                                                        *
+	 ******************************************************************************************/
+	_pNonDocTab   = &_subDocTab;
+	/******************************************************************************************
+	 *                                                                                        *
+	 ******************************************************************************************/
 	_pNonEditView = &_subEditView;
 
+	/******************************************************************************************
+	 * 初始化主编辑窗口                                                                       *
+	 ******************************************************************************************/
 	_mainEditView.init(_pPublicInterface->getHinst(), hwnd);
+	/******************************************************************************************
+	 *                                                                                        *
+	 ******************************************************************************************/
 	_subEditView.init(_pPublicInterface->getHinst(), hwnd);
 
+	/******************************************************************************************
+	 *                                                                                        *
+	 ******************************************************************************************/
 	_fileEditView.init(_pPublicInterface->getHinst(), hwnd);
+	/******************************************************************************************
+	 *                                                                                        *
+	 ******************************************************************************************/
 	MainFileManager.init(this, &_fileEditView); //get it up and running asap.
 
 	pNppParam->setFontList(hwnd);
@@ -529,12 +556,17 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	_nativeLangSpeaker.changeMenuLang(_mainMenuHandle, pluginsTrans, windowTrans);
 	::DrawMenuBar(hwnd);
 
-
+	/****************
+	 * 处理插件菜单 *
+	 ****************/
 	if (pluginsTrans != TEXT(""))
 	{
 		::ModifyMenu(_mainMenuHandle, MENUINDEX_PLUGINS, MF_BYPOSITION, 0, pluginsTrans.c_str());
 	}
 	//Windows menu
+	/****************
+	 * 处理窗口菜单 *
+	 ****************/
 	_windowsMenu.init(_pPublicInterface->getHinst(), _mainMenuHandle, windowTrans.c_str());
 
 	// Update context menu strings (translated)
@@ -554,7 +586,7 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	//This will automatically do all translations, since menu translation has been done already
 	vector<CommandShortcut> & shortcuts = pNppParam->getUserShortcuts();
 	len = shortcuts.size();
-
+	/* 处理菜单中的文字 */
 	for (size_t i = 0; i < len; ++i)
 	{
 		CommandShortcut & csc = shortcuts[i];
@@ -590,7 +622,7 @@ LRESULT Notepad_plus::init(HWND hwnd)
 
 	pNppParam->setScintillaAccelerator(&_scintaccelerator);
 	_scintaccelerator.updateKeys();
-
+	// 画菜单
 	::DrawMenuBar(hwnd);
 
 
