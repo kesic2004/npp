@@ -31,25 +31,41 @@
 #include "Parameters.h"
 #include <deque>
 
-struct RecentItem {
+/**************************
+ * 单个最近打开的文件结构 *
+ **************************/
+struct RecentItem
+{
 	int _id = 0;
+
 	generic_string _name;
-	explicit RecentItem(const TCHAR * name) : _name(name) {};
+
+	explicit RecentItem(const TCHAR * name) : _name(name)
+	{
+	}
 };
 
 typedef std::deque<RecentItem> recentList;
 
+/************************
+ * 最近打开文件的列表类 *
+ ************************/
 class LastRecentFileList
 {
 public:
-	LastRecentFileList() {
+	LastRecentFileList()
+	{
 		_userMax = (NppParameters::getInstance())->getNbMaxRecentFile();
 		for (int i = 0; i < NB_MAX_LRF_FILE; i++)
+		{
 			_idFreeArray[i] = false;
-	};
+		}
+	}
 
 	void initMenu(HMENU hMenu, int idBase, int posBase, Accelerator *accelerator, bool doSubMenu = false);
+
 	void switchMode();
+
 	void updateMenu();
 
 	void add(const TCHAR *fn);
@@ -57,63 +73,89 @@ public:
 	void remove(size_t index);
 	void clear();
 
-	int getSize() {
+	int getSize()
+	{
 		return _size;
 	};
 
 
-	int getMaxNbLRF() const {
+	int getMaxNbLRF() const
+	{
 		return NB_MAX_LRF_FILE;
 	};
 
-	int getUserMaxNbLRF() const {
+	int getUserMaxNbLRF() const
+	{
 		return _userMax;
 	};
 
-	generic_string & getItem(int id);	//use menu id
-	generic_string & getIndex(int index);	//use menu id
+	//use menu id
+	generic_string & getItem(int id);
 
-	generic_string getFirstItem() const {
+	//use menu id
+	generic_string & getIndex(int index);
+
+	generic_string getFirstItem() const
+	{
 		if (_lrfl.size() == 0)
+		{
 			return TEXT("");
+		}
 		return _lrfl.front()._name;
-	};
+	}
 
 	void setUserMaxNbLRF(int size);
 
 	void saveLRFL();
 
-	void setLock(bool lock) {
+	void setLock(bool lock)
+	{
 		_locked = lock;
-	};
+	}
 
-	void setLangEncoding(int nativeLangEncoding) {
+	void setLangEncoding(int nativeLangEncoding)
+	{
 		_nativeLangEncoding = nativeLangEncoding;
-	};
+	}
 
-	bool isSubMenuMode() const {
+	bool isSubMenuMode() const
+	{
 		return (_hParentMenu != NULL);
-	};
+	}
 
 private:
+	/**************************
+	 * 最近打开的文件列表队列 *
+	 **************************/
 	recentList _lrfl;
-	Accelerator *_pAccelerator = nullptr;
+
+	Accelerator * _pAccelerator = nullptr;
 	int _userMax = 0;
 	int _size = 0;
 	int _nativeLangEncoding = -1;
 
 	// For the menu
+	/****************************************
+	 * 是否以子菜单的方式展式最近打开的文件 *
+	 ****************************************/
 	HMENU _hParentMenu = nullptr;
-	HMENU _hMenu = nullptr;
-	int _posBase = -1;
-	int _idBase = -1;
+
+	HMENU _hMenu       = nullptr;
+
+	int _posBase       = -1;
+
+	int _idBase        = -1;
+
 	bool _idFreeArray[NB_MAX_LRF_FILE];
+
 	bool _hasSeparators = false;
-	bool _locked = false;
+
+	bool _locked        = false;
 
 	int find(const TCHAR *fn);
 
 	int popFirstAvailableID();
+
 	void setAvailable(int id);
 };
 

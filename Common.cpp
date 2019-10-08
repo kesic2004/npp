@@ -380,11 +380,15 @@ generic_string purgeMenuItemString(const TCHAR * menuItemStr, bool keepAmpersand
 			if (menuItemStr[k] == '&')
 			{
 				if (keepAmpersand)
+				{
 					cleanedName[j++] = menuItemStr[k];
+				}
 				//else skip
 			}
 			else
+			{
 				cleanedName[j++] = menuItemStr[k];
+			}
 		}
 	}
 
@@ -397,7 +401,9 @@ const wchar_t * WcharMbcsConvertor::char2wchar(const char * mbcs2Convert, UINT c
 {
 	// Do not process NULL pointer
 	if (!mbcs2Convert)
+	{
 		return nullptr;
+	}
 
 	// Do not process empty strings
 	if (lenMbcs == 0 || lenMbcs == -1 && mbcs2Convert[0] == 0)

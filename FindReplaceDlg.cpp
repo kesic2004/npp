@@ -3647,6 +3647,12 @@ void FindIncrementDlg::addToRebar(ReBar * rebar)
 	RECT client;
 	getClientRect(client);
 
+	/************************************************************************************************************************
+	 * macro
+	 * Fills a block of memory with zeros.																					*
+	 * To avoid any undesired effects of optimizing compilers, use the SecureZeroMemory function.							*
+	 * SecureZeroMemory : https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa366877%28v%3dvs.85%29	*
+	 ************************************************************************************************************************/
 	ZeroMemory(&_rbBand, REBARBAND_SIZE);
 	_rbBand.cbSize  = REBARBAND_SIZE;
 

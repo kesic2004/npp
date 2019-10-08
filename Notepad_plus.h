@@ -1,29 +1,31 @@
-// This file is part of Notepad++ project
-// Copyright (C)2003 Don HO <don.h@free.fr>
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either
-// version 2 of the License, or (at your option) any later version.
-//
-// Note that the GPL places important restrictions on "derived works", yet
-// it does not provide a detailed definition of that term.  To avoid
-// misunderstandings, we consider an application to constitute a
-// "derivative work" for the purpose of this license if it does any of the
-// following:
-// 1. Integrates source code from Notepad++.
-// 2. Integrates/includes/aggregates Notepad++ into a proprietary executable
-//    installer, such as those produced by InstallShield.
-// 3. Links to a library or executes a program that does any of the above.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+/*****************************************************************************
+ * This file is part of Notepad++ project                                    *
+ * Copyright (C)2003 Don HO <don.h@free.fr>                                  *
+ *                                                                           *
+ * This program is free software; you can redistribute it and/or             *
+ * modify it under the terms of the GNU General Public License               *
+ * as published by the Free Software Foundation; either                      *
+ * version 2 of the License, or (at your option) any later version.          *
+ *                                                                           *
+ * Note that the GPL places important restrictions on "derived works", yet   *
+ * it does not provide a detailed definition of that term.  To avoid         *
+ * misunderstandings, we consider an application to constitute a             *
+ * "derivative work" for the purpose of this license if it does any of the   *
+ * following:                                                                *
+ * 1. Integrates source code from Notepad++.                                 *
+ * 2. Integrates/includes/aggregates Notepad++ into a proprietary executable *
+ *    installer, such as those produced by InstallShield.                    *
+ * 3. Links to a library or executes a program that does any of the above.   *
+ *                                                                           *
+ * This program is distributed in the hope that it will be useful,           *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of            *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             *
+ * GNU General Public License for more details.                              *
+ *                                                                           *
+ * You should have received a copy of the GNU General Public License         *
+ * along with this program; if not, write to the Free Software               *
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.                 *
+ *****************************************************************************/
 
 #pragma once
 
@@ -58,34 +60,40 @@
 #include <iso646.h>
 
 
-#define MENU 0x01
+#define MENU    0x01
 #define TOOLBAR 0x02
 
 #define URL_REG_EXPR "[A-Za-z]+://[A-Za-z0-9_\\-\\+~.:?&@=/%#,;\\{\\}\\(\\)\\[\\]\\|\\*\\!\\\\]+"
 
-enum FileTransferMode {
+enum FileTransferMode
+{
 	TransferClone		= 0x01,
 	TransferMove		= 0x02
 };
 
-enum WindowStatus {	//bitwise mask
+//bitwise mask
+enum WindowStatus
+{
 	WindowMainActive	= 0x01,
 	WindowSubActive		= 0x02,
-	WindowBothActive	= 0x03,	//little helper shortcut
+	//little helper shortcut
+	WindowBothActive	= 0x03,
 	WindowUserActive	= 0x04,
 	WindowMask			= 0x07
 };
 
-enum trimOp {
+enum trimOp
+{
 	lineHeader = 0,
-	lineTail = 1,
-	lineEol = 2
+	lineTail   = 1,
+	lineEol    = 2
 };
 
-enum spaceTab {
-	tab2Space = 0,
+enum spaceTab
+{
+	tab2Space        = 0,
 	space2TabLeading = 1,
-	space2TabAll = 2
+	space2TabAll     = 2
 };
 
 struct TaskListInfo;
@@ -93,21 +101,22 @@ struct TaskListInfo;
 
 struct VisibleGUIConf final
 {
+	//bool isToolbarShown;	//toolbar forcefully hidden by hiding rebar
+	DWORD_PTR preStyle = (WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN);
+
+	//used by fullscreen only
+	WINDOWPLACEMENT _winPlace;
+
 	bool isPostIt = false;
 	bool isFullScreen = false;
 
 	//Used by both views
 	bool isMenuShown = true;
-	//bool isToolbarShown;	//toolbar forcefully hidden by hiding rebar
-	DWORD_PTR preStyle = (WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN);
 
 	//used by postit only
 	bool isTabbarShown = true;
 	bool isAlwaysOnTop = false;
 	bool isStatusbarShown = true;
-
-	//used by fullscreen only
-	WINDOWPLACEMENT _winPlace;
 
 	VisibleGUIConf()
 	{
@@ -125,7 +134,8 @@ struct QuoteParams
 	QuoteParams(const wchar_t* quoter, Speed speed, bool shouldBeTrolling, int encoding, LangType lang, const wchar_t* quote) :
 		_quoter(quoter), _speed(speed), _shouldBeTrolling(shouldBeTrolling), _encoding(encoding), _lang(lang), _quote(quote) {}
 
-	void reset() {
+	void reset()
+	{
 		_quoter = nullptr;
 		_speed = rapid;
 		_shouldBeTrolling = false;
@@ -185,7 +195,8 @@ public:
 	void fileOpen();
 	void fileNew();
     bool fileReload();
-	bool fileClose(BufferID id = BUFFER_INVALID, int curView = -1);	//use curView to override view to close from
+	//use curView to override view to close from
+	bool fileClose(BufferID id = BUFFER_INVALID, int curView = -1);
 	bool fileCloseAll(bool doDeleteBackup, bool isSnapshotMode = false);
 	bool fileCloseAllButCurrent();
 	bool fileCloseAllGiven(const std::vector<int>& krvecBufferIndexes);
@@ -199,7 +210,8 @@ public:
 	bool fileDelete(BufferID id = BUFFER_INVALID);
 	bool fileRename(BufferID id = BUFFER_INVALID);
 
-	bool switchToFile(BufferID buffer);			//find buffer in active view then in other view.
+	//find buffer in active view then in other view.
+	bool switchToFile(BufferID buffer);
 	//@}
 
 	bool isFileSession(const TCHAR * filename);
@@ -243,11 +255,13 @@ public:
 	std::vector<generic_string> addNppComponents(const TCHAR *destDir, const TCHAR *extFilterName, const TCHAR *extFilter);
 	std::vector<generic_string> addNppPlugins(const TCHAR *extFilterName, const TCHAR *extFilter);
     int getHtmlXmlEncoding(const TCHAR *fileName) const;
-	HACCEL getAccTable() const{
+	HACCEL getAccTable() const
+	{
 		return _accelerator.getAccTable();
 	}
 	bool emergency(const generic_string& emergencySavedDir);
-	Buffer* getCurrentBuffer()	{
+	Buffer* getCurrentBuffer()
+	{
 		return _pEditView->getCurrentBuffer();
 	}
 	void launchDocumentBackupTask();
@@ -257,6 +271,7 @@ public:
 
 
 private:
+	/*******************************************************************************************/
 	/***********************************************************
 	 * 指向包含Notepad_plus对象的Notepad_plus_Window对象的地址 *
 	 ***********************************************************/
@@ -264,11 +279,18 @@ private:
     Window              *_pMainWindow      = nullptr;
 	DockingManager   _dockingManager;
 	std::vector<int> _internalFuncIDs;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	AutoCompletion _autoCompleteMain;
-	AutoCompletion _autoCompleteSub; // each Scintilla has its own autoComplete
+	/******************************************************************************************* 
+	 * each Scintilla has its own autoComplete                                                 *
+	 *******************************************************************************************/
+	AutoCompletion _autoCompleteSub;
+	/*******************************************************************************************/
 
 	SmartHighlighter   _smartHighlighter;
+	/*******************************************************************************************/
 	/***********************
 	 *                     *
 	 ***********************/
@@ -277,29 +299,46 @@ private:
     DocTabView         _subDocTab;
     DocTabView       * _pDocTab = nullptr;
 	DocTabView       * _pNonDocTab = nullptr;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
     ScintillaEditView   _subEditView;
     ScintillaEditView   _mainEditView;
 	ScintillaEditView   _invisibleEditView; // for searches
 	ScintillaEditView   _fileEditView;      // for FileManager
-    ScintillaEditView * _pEditView         = nullptr;
+
+	ScintillaEditView * _pEditView         = nullptr;
 	ScintillaEditView * _pNonEditView      = nullptr;
+	/*******************************************************************************************/
 
-    SplitterContainer * _pMainSplitter = nullptr;
-    SplitterContainer   _subSplitter;
+	/*******************************************************************************************/
+	SplitterContainer * _pMainSplitter = nullptr;
 
-    ContextMenu _tabPopupMenu;
+	SplitterContainer   _subSplitter;
+	/*******************************************************************************************/
+
+	/*******************************************************************************************/
+	ContextMenu _tabPopupMenu;
 	ContextMenu _tabPopupDropMenu;
 	ContextMenu _fileSwitcherMultiFilePopupMenu;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	ToolBar  _toolBar;
 	IconList _docTabIconList;
+	/*******************************************************************************************/
 
-    StatusBar _statusBar;
+	/*******************************************************************************************/
+	/*******************************************************************************************
+	 * 主窗口状态栏                                                                            *
+	 *******************************************************************************************/
+	StatusBar _statusBar;
 	bool      _toReduceTabBar = false;
 	ReBar _rebarTop;
 	ReBar _rebarBottom;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	// Dialog
 	FindReplaceDlg  _findReplaceDlg;
 	FindInFinderDlg _findInFinderDlg;
@@ -319,44 +358,57 @@ private:
 	FindCharsInRangeDlg _findCharsInRangeDlg;
 	PluginsAdminDlg     _pluginsAdminDlg;
 	DocumentPeeker      _documentPeeker;
+	/*******************************************************************************************/
 
-	// a handle list of all the Notepad++ dialogs
+	/*******************************************************************************************/
+	/******************************************************************************************* 
+	 * a handle list of all the Notepad++ dialogs                                              *
+	 *******************************************************************************************/
 	std::vector<HWND> _hModelessDlgs;
+	/*******************************************************************************************/
 
+	/****************************
+	 * 最近打开的文件的列表对象 *
+	 ****************************/
 	LastRecentFileList _lastRecentFileList;
 
 	//vector<iconLocator> _customIconVect;
 
+	/*******************************************************************************************/
 	WindowsMenu _windowsMenu;
+	/*******************************************************************************************
+	 * 主窗口的主菜单                                                                          *
+	 *******************************************************************************************/
 	HMENU _mainMenuHandle = NULL;
+	/*******************************************************************************************/
 
-	bool _sysMenuEntering = false;
-
-	// make sure we don't recursively call doClose when closing the last file with -quitOnEmpty
-	bool _isAttemptingCloseOnQuit = false;
-
+	/*******************************************************************************************/
 	// For FullScreen/PostIt features
 	VisibleGUIConf	_beforeSpecialView;
 	void fullScreenToggle();
 	void postItToggle();
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	// Keystroke macro recording and playback
 	Macro       _macro;
 	bool        _recordingMacro = false;
 	bool        _playingBackMacro = false;
 	bool        _recordingSaved = false;
 	RunMacroDlg _runMacroDlg;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	// For conflict detection when saving Macros or RunCommands
 	ShortcutMapper * _pShortcutMapper = nullptr;
+	/*******************************************************************************************/
 
-	// For hotspot
-	bool _linkTriggered = true;
-	bool _isFolding = false;
-
+	/*******************************************************************************************/
 	//For Dynamic selection highlight
 	Sci_CharacterRange _prevSelectedRange;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	//Synchronized Scolling
 	struct SyncInfo final
 	{
@@ -368,44 +420,84 @@ private:
 		bool doSync() const {return (_isSynScollV || _isSynScollH); }
 	}
 	_syncInfo;
+	/*******************************************************************************************/
 
-	bool _isUDDocked = false;
-
+	/*******************************************************************************************/
 	trayIconControler * _pTrayIco          = nullptr;
 	int                 _zoomOriginalValue = 0;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	Accelerator          _accelerator;
 	ScintillaAccelerator _scintaccelerator;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	PluginsManager _pluginsManager;
     ButtonDlg      _restoreButton;
+	/*******************************************************************************************/
 
-	bool _isFileOpening   = false;
-	bool _isAdministrator = false;
-
+	/*******************************************************************************************/
 	ScintillaCtrls _scintillaCtrls4Plugins;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	std::vector<std::pair<int, int> > _hideLinesMarks;
 	StyleArray _hotspotStyles;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	AnsiCharPanel         * _pAnsiCharPanel         = nullptr;
 	ClipboardHistoryPanel * _pClipboardHistoryPanel = nullptr;
 	VerticalFileSwitcher  * _pFileSwitcherPanel     = nullptr;
 	ProjectPanel          * _pProjectPanel_1        = nullptr;
 	ProjectPanel          * _pProjectPanel_2        = nullptr;
 	ProjectPanel          * _pProjectPanel_3        = nullptr;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	FileBrowser* _pFileBrowser = nullptr;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	DocumentMap       * _pDocMap   = nullptr;
 	FunctionListPanel * _pFuncList = nullptr;
+	/*******************************************************************************************/
 
+	/*******************************************************************************************/
 	BOOL notify(SCNotification *notification);
 	void command(int id);
+	/*******************************************************************************************/
 
-//Document management
+	/*******************************************************************************************/
+	//Document management
 	UCHAR _mainWindowStatus = 0; //For 2 views and user dialog if docked
 	int   _activeView       = MAIN_VIEW;
+	/*******************************************************************************************/
+
+	/*******************************************************************************************/
+	bool _sysMenuEntering = false;
+	/*******************************************************************************************/
+
+	/*******************************************************************************************/
+	// make sure we don't recursively call doClose when closing the last file with -quitOnEmpty
+	bool _isAttemptingCloseOnQuit = false;
+	/*******************************************************************************************/
+
+	/*******************************************************************************************/
+	// For hotspot
+	bool _linkTriggered = true;
+	bool _isFolding = false;
+	/*******************************************************************************************/
+
+	/*******************************************************************************************/
+	bool _isUDDocked = false;
+	/*******************************************************************************************/
+
+	/*******************************************************************************************/
+	bool _isFileOpening = false;
+	bool _isAdministrator = false;
+	/*******************************************************************************************/
 
 	//User dialog docking
 	void dockUserDlg();
@@ -644,6 +736,8 @@ private:
 	static DWORD WINAPI backupDocument(void *params);
 
 	static DWORD WINAPI monitorFileOnChange(void * params);
+
+	/*******************************************************************************************/
 	struct MonitorInfo final
 	{
 		Buffer * _buffer    = nullptr;
@@ -652,8 +746,43 @@ private:
 		{
 		}
 	};
+	/*******************************************************************************************/
 
 	void monitoringStartOrStopAndUpdateUI(Buffer* pBuf, bool isStarting);
+
+/***************************************
+ * myTestGetMenuString函数是否可被使用 *
+ ***************************************/
+#define __MY_TEST_GET_MENU_STRING_FUNCTION_A__ 0
+
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_A__ == 1
+
+/*****************************************************
+ * myTestGetMenuString中用户自定义的部分是否可被使用 *
+ *****************************************************/
+#define __MY_TEST_GET_MENU_STRING_FUNCTION_B__ 0
+
+/*********************************
+ * myTestGetMenuString是否被调用 *
+ *********************************/
+#define __MY_TEST_GET_MENU_STRING_FUNCTION_C__ 0
+/*******************************
+ * 测试myTestGetMenuString函数 *
+ *******************************/
+private:
+	static void myTestGetMenuString(HMENU mainMenuHandle);
+#else
+/*****************************************************
+ * myTestGetMenuString中用户自定义的部分是否可被使用 *
+ *****************************************************/
+#define __MY_TEST_GET_MENU_STRING_FUNCTION_B__ 0
+
+/*********************************
+ * myTestGetMenuString是否被调用 *
+ *********************************/
+#define __MY_TEST_GET_MENU_STRING_FUNCTION_C__ 0
+#endif
+
 };
 
 

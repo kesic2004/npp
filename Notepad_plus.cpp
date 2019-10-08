@@ -104,39 +104,47 @@ ToolBarButtonUnit toolBarIcons[] = {
 	//-------------------------------------------------------------------------------------//
 	{0,					IDI_SEPARATOR_ICON,		IDI_SEPARATOR_ICON,		IDI_SEPARATOR_ICON, IDI_SEPARATOR_ICON},
 	//-------------------------------------------------------------------------------------//
-	{IDM_VIEW_WRAP,     IDI_VIEW_WRAP_OFF_ICON, IDI_VIEW_WRAP_ON_ICON,  IDI_VIEW_WRAP_OFF_ICON, IDR_WRAP},
-	{IDM_VIEW_ALL_CHARACTERS,  IDI_VIEW_ALL_CHAR_OFF_ICON,	IDI_VIEW_ALL_CHAR_ON_ICON,	IDI_VIEW_ALL_CHAR_OFF_ICON, IDR_INVISIBLECHAR},
-	{IDM_VIEW_INDENT_GUIDE,  IDI_VIEW_INDENT_OFF_ICON,	IDI_VIEW_INDENT_ON_ICON,	IDI_VIEW_INDENT_OFF_ICON, IDR_INDENTGUIDE},
-	{IDM_LANG_USER_DLG,  IDI_VIEW_UD_DLG_OFF_ICON,	IDI_VIEW_UD_DLG_ON_ICON,	IDI_VIEW_UD_DLG_OFF_ICON, IDR_SHOWPANNEL},
-	{IDM_VIEW_DOC_MAP,  IDI_VIEW_DOC_MAP_OFF_ICON, IDI_VIEW_DOC_MAP_ON_ICON, IDI_VIEW_DOC_MAP_OFF_ICON, IDR_DOCMAP},
-	//{IDM_VIEW_FUNC_LIST,  IDI_VIEW_UD_DLG_OFF_ICON, IDI_VIEW_UD_DLG_ON_ICON, IDI_VIEW_UD_DLG_OFF_ICON, IDR_FUNC_LIST},
-	{IDM_VIEW_FUNC_LIST,  IDI_VIEW_FUNCLIST_OFF_ICON, IDI_VIEW_FUNCLIST_ON_ICON, IDI_VIEW_FUNCLIST_OFF_ICON, IDR_FUNC_LIST},
-	{IDM_VIEW_FILEBROWSER, IDI_VIEW_FILEBROWSER_OFF_ICON, IDI_VIEW_FILEBROWSER_ON_ICON, IDI_VIEW_FILEBROWSER_OFF_ICON, IDR_FILEBROWSER},
-	{IDM_VIEW_MONITORING, IDI_VIEW_MONITORING_OFF_ICON, IDI_VIEW_MONITORING_ON_ICON, IDI_VIEW_MONITORING_OFF_ICON, IDR_FILEMONITORING},
+	{IDM_VIEW_WRAP,           IDI_VIEW_WRAP_OFF_ICON,        IDI_VIEW_WRAP_ON_ICON,        IDI_VIEW_WRAP_OFF_ICON,        IDR_WRAP},
+	{IDM_VIEW_ALL_CHARACTERS, IDI_VIEW_ALL_CHAR_OFF_ICON,	 IDI_VIEW_ALL_CHAR_ON_ICON,	   IDI_VIEW_ALL_CHAR_OFF_ICON,    IDR_INVISIBLECHAR},
+	{IDM_VIEW_INDENT_GUIDE,   IDI_VIEW_INDENT_OFF_ICON,	     IDI_VIEW_INDENT_ON_ICON,	   IDI_VIEW_INDENT_OFF_ICON,      IDR_INDENTGUIDE},
+	{IDM_LANG_USER_DLG,       IDI_VIEW_UD_DLG_OFF_ICON,	     IDI_VIEW_UD_DLG_ON_ICON,	   IDI_VIEW_UD_DLG_OFF_ICON,      IDR_SHOWPANNEL},
+	{IDM_VIEW_DOC_MAP,        IDI_VIEW_DOC_MAP_OFF_ICON,     IDI_VIEW_DOC_MAP_ON_ICON,     IDI_VIEW_DOC_MAP_OFF_ICON,     IDR_DOCMAP},
+//	{IDM_VIEW_FUNC_LIST,      IDI_VIEW_UD_DLG_OFF_ICON,      IDI_VIEW_UD_DLG_ON_ICON,      IDI_VIEW_UD_DLG_OFF_ICON,      IDR_FUNC_LIST},
+	{IDM_VIEW_FUNC_LIST,      IDI_VIEW_FUNCLIST_OFF_ICON,    IDI_VIEW_FUNCLIST_ON_ICON,    IDI_VIEW_FUNCLIST_OFF_ICON,    IDR_FUNC_LIST},
+	{IDM_VIEW_FILEBROWSER,    IDI_VIEW_FILEBROWSER_OFF_ICON, IDI_VIEW_FILEBROWSER_ON_ICON, IDI_VIEW_FILEBROWSER_OFF_ICON, IDR_FILEBROWSER},
+	{IDM_VIEW_MONITORING,     IDI_VIEW_MONITORING_OFF_ICON,  IDI_VIEW_MONITORING_ON_ICON,  IDI_VIEW_MONITORING_OFF_ICON,  IDR_FILEMONITORING},
 
 	//-------------------------------------------------------------------------------------//
 	{0,					IDI_SEPARATOR_ICON,		IDI_SEPARATOR_ICON,		IDI_SEPARATOR_ICON, IDI_SEPARATOR_ICON},
 	//-------------------------------------------------------------------------------------//
+	{IDM_MACRO_STARTRECORDINGMACRO,   IDI_STARTRECORD_OFF_ICON, IDI_STARTRECORD_ON_ICON, IDI_STARTRECORD_DISABLE_ICON, IDR_STARTRECORD},
+	{IDM_MACRO_STOPRECORDINGMACRO,    IDI_STOPRECORD_OFF_ICON,  IDI_STOPRECORD_ON_ICON,  IDI_STOPRECORD_DISABLE_ICON,  IDR_STOPRECORD},
+	{IDM_MACRO_PLAYBACKRECORDEDMACRO, IDI_PLAYRECORD_OFF_ICON,  IDI_PLAYRECORD_ON_ICON,  IDI_PLAYRECORD_DISABLE_ICON,  IDR_PLAYRECORD},
+	{IDM_MACRO_RUNMULTIMACRODLG,      IDI_MMPLAY_OFF_ICON,      IDI_MMPLAY_ON_ICON,      IDI_MMPLAY_DIS_ICON,          IDR_M_PLAYRECORD},
+	{IDM_MACRO_SAVECURRENTMACRO,      IDI_SAVERECORD_OFF_ICON,  IDI_SAVERECORD_ON_ICON,  IDI_SAVERECORD_DISABLE_ICON,  IDR_SAVERECORD}
 
-	{IDM_MACRO_STARTRECORDINGMACRO,		IDI_STARTRECORD_OFF_ICON,	IDI_STARTRECORD_ON_ICON,	IDI_STARTRECORD_DISABLE_ICON, IDR_STARTRECORD},
-	{IDM_MACRO_STOPRECORDINGMACRO,		IDI_STOPRECORD_OFF_ICON,	IDI_STOPRECORD_ON_ICON,		IDI_STOPRECORD_DISABLE_ICON, IDR_STOPRECORD},
-	{IDM_MACRO_PLAYBACKRECORDEDMACRO,	IDI_PLAYRECORD_OFF_ICON,	IDI_PLAYRECORD_ON_ICON,		IDI_PLAYRECORD_DISABLE_ICON, IDR_PLAYRECORD},
-	{IDM_MACRO_RUNMULTIMACRODLG,			IDI_MMPLAY_OFF_ICON,		IDI_MMPLAY_ON_ICON,			IDI_MMPLAY_DIS_ICON, IDR_M_PLAYRECORD},
-	{IDM_MACRO_SAVECURRENTMACRO,			IDI_SAVERECORD_OFF_ICON,	IDI_SAVERECORD_ON_ICON,		IDI_SAVERECORD_DISABLE_ICON, IDR_SAVERECORD}
 };
 
 
 
 
 Notepad_plus::Notepad_plus()
-	: _autoCompleteMain(&_mainEditView)
-	, _autoCompleteSub(&_subEditView)
-	, _smartHighlighter(&_findReplaceDlg)
+	:
+	_autoCompleteMain(&_mainEditView),
+	_autoCompleteSub(&_subEditView),
+	_smartHighlighter(&_findReplaceDlg)
 {
-	ZeroMemory(&_prevSelectedRange, sizeof(_prevSelectedRange));
+	/***************************************************************************************************************************
+	 * from https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa366920(v=vs.85)?redirectedfrom=MSDN    *
+	 * macro                                                                                                                   *
+	 * Fills a block of memory with zeros.                                                                                     *
+	 * To avoid any undesired effects of optimizing compilers, use the SecureZeroMemory(1) function.                           *
+	 * SecureZeroMemory(1) : https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa366877%28v%3dvs.85%29 *
+	 ***************************************************************************************************************************/
+	::ZeroMemory(&_prevSelectedRange, sizeof(_prevSelectedRange));
 
 
-	TiXmlDocumentA *nativeLangDocRootA = (NppParameters::getInstance())->getNativeLangA();
+	TiXmlDocumentA * nativeLangDocRootA = (NppParameters::getInstance())->getNativeLangA();
     _nativeLangSpeaker.init(nativeLangDocRootA);
 
 	LocalizationSwitcher & localizationSwitcher = (NppParameters::getInstance())->getLocalizationSwitcher();
@@ -166,16 +174,23 @@ Notepad_plus::Notepad_plus()
 		if (is_admin)
 		{
 			if (!CheckTokenMembership(NULL, AdministratorsGroup, &is_admin))
+			{
 				is_admin = FALSE;
-			FreeSid(AdministratorsGroup);
+			}
+			::FreeSid(AdministratorsGroup);
 		}
 	}
 	else
+	{
 		is_admin = false;
+	}
 
 	_isAdministrator = is_admin ? true : false;
 }
 
+/************
+ * 析构函数 *
+ ************/
 Notepad_plus::~Notepad_plus()
 {
 	// ATTENTION : the order of the destruction is very important
@@ -197,20 +212,111 @@ Notepad_plus::~Notepad_plus()
 	delete _pFileBrowser;
 }
 
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_A__ == 1
+/*******************************
+ * 测试myTestGetMenuString函数 *
+ *******************************/
+void Notepad_plus::myTestGetMenuString(HMENU mainMenuHandle)
+{
+	static NppParameters * pNppParam = NppParameters::getInstance();
+	static NppGUI        & nppGUI    = const_cast<NppGUI &>(pNppParam->getNppGUI());
+	static int             times     = 1;
+
+	TCHAR         myTestmenuName[64];
+	HMENU         myTestHLangMenu = ::GetSubMenu(mainMenuHandle, MENUINDEX_LANGUAGE);
+	unsigned long myTestCscId     = 0UL;
+
+	// GetMenuString 1 V
+	// Add external languages to menu
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	for (int i = 0, len = pNppParam->getNbExternalLang(); i < len; ++i)
+	{
+		ExternalLangContainer & externalLangContainer = pNppParam->getELCFromIndex(i);
+
+		int numLangs = ::GetMenuItemCount(myTestHLangMenu);
+		const int bufferSize = 100;
+		TCHAR buffer[bufferSize];
+
+		int x;
+		for (x = 0; (x == 0 || lstrcmp(externalLangContainer._name, buffer) > 0) && x < numLangs; ++x)
+		{
+			::GetMenuString(myTestHLangMenu, x, buffer, bufferSize, MF_BYPOSITION);
+		}
+	}
+
+	// GetMenuString 2
+	if (nppGUI._excludedLangList.size() > 0)
+	{
+		for (size_t i = 0, len = nppGUI._excludedLangList.size(); i < len; ++i)
+		{
+			int cmdID = pNppParam->langTypeToCommandID(nppGUI._excludedLangList[i]._langType);
+			const int itemSize = 256;
+			TCHAR itemName[itemSize];
+			::GetMenuString(myTestHLangMenu, cmdID, itemName, itemSize, MF_BYCOMMAND);
+			nppGUI._excludedLangList[i]._cmdID = cmdID;
+			nppGUI._excludedLangList[i]._langName = itemName;
+		}
+	}
+#endif
+	// GetMenuString 3
+	std::vector<MenuItemUnit> myTestTmp = pNppParam->getContextMenuItems();
+	size_t myTestLen = myTestTmp.size();
+	for (size_t i = 0; i < myTestLen; ++i)
+	{
+		myTestCscId = myTestTmp[i]._cmdID;
+		::GetMenuString(mainMenuHandle, myTestCscId, myTestmenuName, 64, MF_BYCOMMAND);
+	}
+
+	// GetMenuString 4
+	vector<CommandShortcut> & myTestShortcuts = pNppParam->getUserShortcuts();
+	myTestLen = myTestShortcuts.size();
+	// 处理菜单中的文字
+	for (size_t i = 0; i < myTestLen; ++i)
+	{
+		CommandShortcut & csc = myTestShortcuts[i];
+		myTestCscId = csc.getID();
+		::GetMenuString(mainMenuHandle, myTestCscId, myTestmenuName, 64, MF_BYCOMMAND);
+	}
+	++times;
+	/***********************************************************************************************************************************/
+	return;
+}
+#endif
+
+/******************************************************************************************
+ * 当前对象的初始化                                                                       *
+ * 初始化主窗口的主菜单、状态栏、工具栏、标签栏、对话框                                   *
+ ******************************************************************************************/
 LRESULT Notepad_plus::init(HWND hwnd)
 {
 	NppParameters *pNppParam = NppParameters::getInstance();
 	NppGUI & nppGUI = const_cast<NppGUI &>(pNppParam->getNppGUI());
 
 	// Menu
-	/********************************
-	 * 根据实际情况去除重复的菜单项 *
-	 ********************************/
+	/********************
+	 * 主窗口中的主菜单 *
+	 ********************/
 	_mainMenuHandle = ::GetMenu(hwnd);
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 1
+#endif
+/*
 	int langPos2BeRemoved = MENUINDEX_LANGUAGE+1;
 	if (nppGUI._isLangMenuCompact)
+	{
 		langPos2BeRemoved = MENUINDEX_LANGUAGE;
-	::RemoveMenu(_mainMenuHandle, langPos2BeRemoved, MF_BYPOSITION);
+	}
+*/
+	/*****************************************************************************************
+	 * 1、主窗口中的语言菜单是否分类进行展示，根据是否进行展示的参数的值，移除不被展示的菜单 *
+	 *****************************************************************************************/
+	::RemoveMenu
+	(
+		_mainMenuHandle,
+		nppGUI._isLangMenuCompact ? MENUINDEX_LANGUAGE : MENUINDEX_LANGUAGE_TREE,
+		MF_BYPOSITION
+	);
+
 
 	//Views
 	/******************************************************************************************
@@ -260,6 +366,9 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	_toReduceTabBar = ((tabBarStatus & TAB_REDUCE) != 0);
 	int iconDpiDynamicalSize = pNppParam->_dpiManager.scaleY(_toReduceTabBar?13:20);
 	_docTabIconList.create(iconDpiDynamicalSize, _pPublicInterface->getHinst(), docTabIconIDs, sizeof(docTabIconIDs)/sizeof(int));
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 2
+#endif
 
 	_mainDocTab.init(_pPublicInterface->getHinst(), hwnd, &_mainEditView, &_docTabIconList);
 	_subDocTab.init(_pPublicInterface->getHinst(), hwnd, &_subEditView, &_docTabIconList);
@@ -269,7 +378,8 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	_invisibleEditView.init(_pPublicInterface->getHinst(), hwnd);
 	_invisibleEditView.execute(SCI_SETUNDOCOLLECTION);
 	_invisibleEditView.execute(SCI_EMPTYUNDOBUFFER);
-	_invisibleEditView.wrap(false); // Make sure no slow down
+	// Make sure no slow down
+	_invisibleEditView.wrap(false);
 
 	// Configuration of 2 scintilla views
     _mainEditView.showMargin(ScintillaEditView::_SC_MARGE_LINENUMBER, svp1._lineNumberMarginShow);
@@ -279,9 +389,52 @@ LRESULT Notepad_plus::init(HWND hwnd)
 
     _mainEditView.showIndentGuideLine(svp1._indentGuideLineShow);
     _subEditView.showIndentGuideLine(svp1._indentGuideLineShow);
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 3
+#endif
 
-	::SendMessage(hwnd, NPPM_INTERNAL_SETCARETWIDTH, 0, 0);
+	/********************************************************************************************************************
+	 * from https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-sendmessage?redirectedfrom=MSDN       *
+	 * function                                                                                                         *
+	 * Sends the specified message to a window or windows. The SendMessage function calls the                           *
+	 * window procedure for the specified window and does not return until the window procedure has                     *
+	 * processed the message.                                                                                           *
+	 * To send a message and return immediately, use the SendMessageCallback(1) or SendNotifyMessage(2)                 *
+	 * function. To post a message to a thread's message queue and return immediately, use the                          *
+	 * PostMessage(3) or PostThreadMessage(4) function.                                                                 *
+	 * SendMessageCallback(1) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-sendmessagecallbacka  *
+	 * SendNotifyMessage(2) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-sendnotifymessagea      *
+	 * PostMessage(3) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-postmessagea                  *
+	 * PostThreadMessage(4) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-postthreadmessagea      *
+	 * LRESULT SendMessage(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);                                          *
+	 * hWnd                                                                                                             *
+	 * Type: HWND                                                                                                       *
+	 * A handle to the window whose window procedure will receive the message. If this parameter is                     *
+	 * HWND_BROADCAST ((HWND)0xffff), the message is sent to all top-level windows in the system,                       *
+	 * including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but                     *
+	 * the message is not sent to child windows.                                                                        *
+	 * Message sending is subject to UIPI. The thread of a process can send messages only to message                    *
+	 * queues of threads in processes of lesser or equal integrity level.                                               *
+	 * Msg                                                                                                              *
+	 * Type: UINT                                                                                                       *
+	 * The message to be sent.                                                                                          *
+	 * For lists of the system-provided messages, see System-Defined Messages(5).                                       *
+	 * System-Defined Messages(5) : https://docs.microsoft.com/windows/desktop/winmsg/about-messages-and-message-queues *
+	 * wParam                                                                                                           *
+	 * Type: WPARAM                                                                                                     *
+	 * Additional message-specific information.                                                                         *
+	 * lParam                                                                                                           *
+	 * Type: LPARAM                                                                                                     *
+	 * Additional message-specific information.                                                                         *
+	 * Return Value                                                                                                   *
+	 * Type: Type: LRESULT                                                                                              *
+	 * The return value specifies the result of the message processing; it depends on the message sent.                 *
+	 *****************************PostThreadMessage(4)******************************************************************/
+	::SendMessage(hwnd, NPPM_INTERNAL_SETCARETWIDTH,     0, 0);
 	::SendMessage(hwnd, NPPM_INTERNAL_SETCARETBLINKRATE, 0, 0);
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 4
+#endif
 
 	_configStyleDlg.init(_pPublicInterface->getHinst(), hwnd);
 	_preference.init(_pPublicInterface->getHinst(), hwnd);
@@ -338,8 +491,51 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	_zoomOriginalValue = static_cast<int32_t>(_pEditView->execute(SCI_GETZOOM));
 	_mainEditView.execute(SCI_SETZOOM, svp1._zoom);
 	_subEditView.execute(SCI_SETZOOM, svp1._zoom2);
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 5
+#endif
 
-    ::SendMessage(hwnd, NPPM_INTERNAL_SETMULTISELCTION, 0, 0);
+	/********************************************************************************************************************
+	 * from https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-sendmessage?redirectedfrom=MSDN       *
+	 * function                                                                                                         *
+	 * Sends the specified message to a window or windows. The SendMessage function calls the                           *
+	 * window procedure for the specified window and does not return until the window procedure has                     *
+	 * processed the message.                                                                                           *
+	 * To send a message and return immediately, use the SendMessageCallback(1) or SendNotifyMessage(2)                 *
+	 * function. To post a message to a thread's message queue and return immediately, use the                          *
+	 * PostMessage(3) or PostThreadMessage(4) function.                                                                 *
+	 * SendMessageCallback(1) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-sendmessagecallbacka  *
+	 * SendNotifyMessage(2) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-sendnotifymessagea      *
+	 * PostMessage(3) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-postmessagea                  *
+	 * PostThreadMessage(4) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-postthreadmessagea      *
+	 * LRESULT SendMessage(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);                                          *
+	 * hWnd                                                                                                             *
+	 * Type: HWND                                                                                                       *
+	 * A handle to the window whose window procedure will receive the message. If this parameter is                     *
+	 * HWND_BROADCAST ((HWND)0xffff), the message is sent to all top-level windows in the system,                       *
+	 * including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but                     *
+	 * the message is not sent to child windows.                                                                        *
+	 * Message sending is subject to UIPI. The thread of a process can send messages only to message                    *
+	 * queues of threads in processes of lesser or equal integrity level.                                               *
+	 * Msg                                                                                                              *
+	 * Type: UINT                                                                                                       *
+	 * The message to be sent.                                                                                          *
+	 * For lists of the system-provided messages, see System-Defined Messages(5).                                       *
+	 * System-Defined Messages(5) : https://docs.microsoft.com/windows/desktop/winmsg/about-messages-and-message-queues *
+	 * wParam                                                                                                           *
+	 * Type: WPARAM                                                                                                     *
+	 * Additional message-specific information.                                                                         *
+	 * lParam                                                                                                           *
+	 * Type: LPARAM                                                                                                     *
+	 * Additional message-specific information.                                                                         *
+	 * Return Value                                                                                                   *
+	 * Type: Type: LRESULT                                                                                              *
+	 * The return value specifies the result of the message processing; it depends on the message sent.                 *
+	 *****************************PostThreadMessage(4)******************************************************************/
+	::SendMessage(hwnd, NPPM_INTERNAL_SETMULTISELCTION, 0, 0);
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 6
+#endif
 
 	// Make backspace or delete work with multiple selections
 	_mainEditView.execute(SCI_SETADDITIONALSELECTIONTYPING, true);
@@ -356,6 +552,9 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	// Let Scintilla deal with some of the folding functionality
 	_mainEditView.execute(SCI_SETAUTOMATICFOLD, SC_AUTOMATICFOLD_SHOW);
 	_subEditView.execute(SCI_SETAUTOMATICFOLD, SC_AUTOMATICFOLD_SHOW);
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 7
+#endif
 
 	TabBarPlus::doDragNDrop(true);
 
@@ -365,11 +564,71 @@ LRESULT Notepad_plus::init(HWND hwnd)
 
 		if (hf)
 		{
+			/********************************************************************************************************************
+			 * from https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-sendmessage?redirectedfrom=MSDN       *
+			 * function                                                                                                         *
+			 * Sends the specified message to a window or windows. The SendMessage function calls the                           *
+			 * window procedure for the specified window and does not return until the window procedure has                     *
+			 * processed the message.                                                                                           *
+			 * To send a message and return immediately, use the SendMessageCallback(1) or SendNotifyMessage(2)                 *
+			 * function. To post a message to a thread's message queue and return immediately, use the                          *
+			 * PostMessage(3) or PostThreadMessage(4) function.                                                                 *
+			 * SendMessageCallback(1) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-sendmessagecallbacka  *
+			 * SendNotifyMessage(2) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-sendnotifymessagea      *
+			 * PostMessage(3) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-postmessagea                  *
+			 * PostThreadMessage(4) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-postthreadmessagea      *
+			 * LRESULT SendMessage(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);                                          *
+			 * hWnd                                                                                                             *
+			 * Type: HWND                                                                                                       *
+			 * A handle to the window whose window procedure will receive the message. If this parameter is                     *
+			 * HWND_BROADCAST ((HWND)0xffff), the message is sent to all top-level windows in the system,                       *
+			 * including disabled or invisible unowned windows, overlapped windows, and pop-up windows; but                     *
+			 * the message is not sent to child windows.                                                                        *
+			 * Message sending is subject to UIPI. The thread of a process can send messages only to message                    *
+			 * queues of threads in processes of lesser or equal integrity level.                                               *
+			 * Msg                                                                                                              *
+			 * Type: UINT                                                                                                       *
+			 * The message to be sent.                                                                                          *
+			 * For lists of the system-provided messages, see System-Defined Messages(5).                                       *
+			 * System-Defined Messages(5) : https://docs.microsoft.com/windows/desktop/winmsg/about-messages-and-message-queues *
+			 * wParam                                                                                                           *
+			 * Type: WPARAM                                                                                                     *
+			 * Additional message-specific information.                                                                         *
+			 * lParam                                                                                                           *
+			 * Type: LPARAM                                                                                                     *
+			 * Additional message-specific information.                                                                         *
+			 * Return Value                                                                                                   *
+			 * Type: Type: LRESULT                                                                                              *
+			 * The return value specifies the result of the message processing; it depends on the message sent.                 *
+			 *****************************PostThreadMessage(4)******************************************************************/
 			::SendMessage(_mainDocTab.getHSelf(), WM_SETFONT, reinterpret_cast<WPARAM>(hf), MAKELPARAM(TRUE, 0));
 			::SendMessage(_subDocTab.getHSelf(), WM_SETFONT, reinterpret_cast<WPARAM>(hf), MAKELPARAM(TRUE, 0));
 		}
 		int tabDpiDynamicalHeight = pNppParam->_dpiManager.scaleY(22);
 		int tabDpiDynamicalWidth = pNppParam->_dpiManager.scaleX(45);
+	/************************************************************************************************************************
+	 * from https://docs.microsoft.com/zh-cn/windows/win32/api/commctrl/nf-commctrl-tabctrl_setitemsize?redirectedfrom=MSDN *
+	 * macro                                                                                                                *
+	 * Sets the width and height of tabs in a fixed-width or owner-drawn tab control. You can use this                      *
+	 * macro or send the TCM_SETITEMSIZE(1) message explicitly.                                                             *
+	 * TCM_SETITEMSIZE(1) : https://docs.microsoft.com/windows/desktop/Controls/tcm-setitemsize                             *
+	 * void TabCtrl_SetItemSize(HWND hwnd, int x, int y);                                                                   *
+	 * 等同于 ::SendMessage(hwnd, TCM_SETITEMSIZE, 0, ((LPARAM)(DWORD)MAKELONG(x, y)))                                      *
+	 * #define TCM_SETITEMSIZE         (TCM_FIRST + 41)                                                                     *
+	 * #define TCM_FIRST               0x1300      // Tab control messages                                                  *
+	 * hwnd                                                                                                                 *
+	 * Type: HWND(3)                                                                                                        *
+	 * Handle to the tab control.                                                                                           *
+	 * HWND(3) : https://docs.microsoft.com/windows/desktop/WinProg/windows-data-types                                      *
+	 * x                                                                                                                    *
+	 * Type: int                                                                                                            *
+	 * New width, in pixels.                                                                                                *
+	 * y                                                                                                                    *
+	 * Type: int                                                                                                            *
+	 * New height, in pixels.                                                                                               *
+	 * Return Value                                                                                                       *
+	 * None                                                                                                                 *
+	 ************************************************************************************************************************/
 		TabCtrl_SetItemSize(_mainDocTab.getHSelf(), tabDpiDynamicalWidth, tabDpiDynamicalHeight);
 		TabCtrl_SetItemSize(_subDocTab.getHSelf(), tabDpiDynamicalWidth, tabDpiDynamicalHeight);
 	}
@@ -389,16 +648,22 @@ LRESULT Notepad_plus::init(HWND hwnd)
 
     _subSplitter.init(_pPublicInterface->getHinst(), hwnd);
     _subSplitter.create(&_mainDocTab, &_subDocTab, 8, SplitterMode::DYNAMIC, 50, isVertical);
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 8
+#endif
 
     //--Status Bar Section--//
-	bool willBeShown = nppGUI._statusBarShow;
+	/*bool willBeShown = nppGUI._statusBarShow;*/
+	/******************************************************************************************
+	 * 状态栏初始化                                                                           *
+	 ******************************************************************************************/
     _statusBar.init(_pPublicInterface->getHinst(), hwnd, 6);
-	_statusBar.setPartWidth(STATUSBAR_DOC_SIZE, pNppParam->_dpiManager.scaleX(200));
-	_statusBar.setPartWidth(STATUSBAR_CUR_POS, pNppParam->_dpiManager.scaleX(260));
-	_statusBar.setPartWidth(STATUSBAR_EOF_FORMAT, pNppParam->_dpiManager.scaleX(110));
+	_statusBar.setPartWidth(STATUSBAR_DOC_SIZE,     pNppParam->_dpiManager.scaleX(200));
+	_statusBar.setPartWidth(STATUSBAR_CUR_POS,      pNppParam->_dpiManager.scaleX(260));
+	_statusBar.setPartWidth(STATUSBAR_EOF_FORMAT,   pNppParam->_dpiManager.scaleX(110));
 	_statusBar.setPartWidth(STATUSBAR_UNICODE_TYPE, pNppParam->_dpiManager.scaleX(120));
-	_statusBar.setPartWidth(STATUSBAR_TYPING_MODE, pNppParam->_dpiManager.scaleX(30));
-    _statusBar.display(willBeShown);
+	_statusBar.setPartWidth(STATUSBAR_TYPING_MODE,  pNppParam->_dpiManager.scaleX(30));
+    _statusBar.display(nppGUI._statusBarShow);
 
     _pMainWindow = &_mainDocTab;
 
@@ -423,35 +688,186 @@ LRESULT Notepad_plus::init(HWND hwnd)
 
 	_pluginsManager.loadPluginsV2(pNppParam->getPluginRootDir());
     _restoreButton.init(_pPublicInterface->getHinst(), hwnd);
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 9
+#endif
 
 	// ------------ //
 	// Menu Section //
 	// ------------ //
 
+	/******************************************************************************************
+	 * 宏录制菜单                                                                             *
+	 ******************************************************************************************/
 	// Macro Menu
 	std::vector<MacroShortcut> & macros  = pNppParam->getMacroList();
 	HMENU hMacroMenu = ::GetSubMenu(_mainMenuHandle, MENUINDEX_MACRO);
 	size_t const posBase = 6;
 	size_t nbMacro = macros.size();
 	if (nbMacro >= 1)
+	{
+		/******************************************************************************************************************
+		 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-insertmenuw                       *
+		 * function                                                                                                       *
+		 * Inserts a new menu item into a menu, moving other items down the menu.                                         *
+		 * Note  The InsertMenu function has been superseded by the InsertMenuItem function. You                          *
+		 * can still use InsertMenu, however, if you do not need any of the extended features of                          *
+		 * InsertMenuItem.                                                                                                *
+		 * BOOL InsertMenu(HMENU hMenu, UINT uPosition, UINT uFlags, UINT_PTR uIDNewItem, LPCWSTR lpNewItem);             *
+		 *                                                                                                                *
+		 * hMenu                                                                                                          *
+		 * Type: HMENU                                                                                                    *
+		 * A handle to the menu to be changed.                                                                            *
+		 *                                                                                                                *
+		 * uPosition                                                                                                      *
+		 * Type: UINT                                                                                                     *
+		 * The menu item before which the new menu item is to be inserted, as determined by the uFlags parameter.         *
+		 *                                                                                                                *
+		 * uFlags                                                                                                         *
+		 * Type: UINT                                                                                                     *
+		 * Controls the interpretation of the uPosition parameter and the content, appearance, and behavior               *
+		 * of the new menu item. This parameter must include one of the following required values.                        *
+		 * +---------------------------+-------------------------------------------------------------------+              *
+		 * | Value                     | Meaning                                                           |              *
+		 * +---------------------------+-------------------------------------------------------------------+              *
+		 * | MF_BYCOMMAND 0x00000000L  | Indicates that the uPosition parameter gives the identifier of    |              *
+		 * |                           | the menu item. The MF_BYCOMMAND flag is the default if            |              *
+		 * |                           | neither the MF_BYCOMMAND nor MF_BYPOSITION flag is specified.     |              *
+		 * +---------------------------+-------------------------------------------------------------------+              *
+		 * | MF_BYPOSITION 0x00000400L | Indicates that the uPosition parameter gives the zero-based       |              *
+		 * |                           | relative position of the new menu item. If uPosition is -1, the   |              *
+		 * |                           | new menu item is appended to the end of the menu.                 |              *
+		 * +---------------------------+-------------------------------------------------------------------+              *
+		 * The parameter must also include at least one of the following values.                                          *
+		 * Value Meaning                                                                                                  *
+		 *                                                                                                                *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * | MF_BITMAP 0x00000004L       | Uses a bitmap as the menu item. The lpNewItem parameter         |              *
+		 * |                             | contains a handle to the bitmap.                                |              *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * | MF_CHECKED 0x00000008L      | Places a check mark next to the menu item. If the application   |              *
+		 * |                             | provides check-mark bitmaps (see SetMenuItemBitmaps(1)), this   |              *
+		 * |                             | flag displays the check-mark bitmap next to the menu item.      |              *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * | MF_DISABLED 0x00000002L     | Disables the menu item so that it cannot be selected, but does  |              *
+		 * |                             | not gray it.                                                    |              *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * | MF_ENABLED 0x00000000L      | Enables the menu item so that it can be selected and restores   |              *
+		 * |                             | it from its grayed state.                                       |              *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * | MF_GRAYED 0x00000001L       | Disables the menu item and grays it so it cannot be selected.   |              *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * | MF_MENUBARBREAK 0x00000020L | Functions the same as the MF_MENUBREAK flag for a menu          |              *
+		 * |                             | bar. For a drop-down menu, submenu, or shortcut menu, the       |              *
+		 * |                             | new column is separated from the old column by a vertical       |              *
+		 * |                             | line.                                                           |              *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * | MF_MENUBREAK 0x00000040L    | Places the item on a new line (for menu bars) or in a new       |              *
+		 * |                             | column (for a drop-down menu, submenu, or shortcut menu)        |              *
+		 * |                             | without separating columns.                                     |              *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * | MF_OWNERDRAW 0x00000100L    | Specifies that the item is an owner-drawn item. Before the      |              *
+		 * |                             | menu is displayed for the first time, the window that owns the  |              *
+		 * |                             | menu receives a WM_MEASUREITEM(2) message to retrieve the       |              *
+		 * |                             | width and height of the menu item. The WM_DRAWITEM(3)           |              *
+		 * |                             | message is then sent to the window procedure of the owner       |              *
+		 * |                             | window whenever the appearance of the menu item must be         |              *
+		 * |                             | updated.                                                        |              *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * | MF_POPUP 0x00000010L        | Specifies that the menu item opens a drop-down menu or          |              *
+		 * |                             | submenu. The uIDNewItem parameter specifies a handle to the     |              *
+		 * |                             | drop-down menu or submenu. This flag is used to add a menu      |              *
+		 * |                             | name to a menu bar or a menu item that opens a submenu to       |              *
+		 * |                             | a drop-down menu, submenu, or shortcut menu.                    |              *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * | MF_SEPARATOR 0x00000800L    | Draws a horizontal dividing line. This flag is used only in a   |              *
+		 * |                             | drop-down menu, submenu, or shortcut menu. The line cannot      |              *
+		 * |                             | be grayed, disabled, or highlighted. The lpNewItem and          |              *
+		 * |                             | uIDNewItem parameters are ignored.                              |              *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * | MF_STRING 0x00000000L       | Specifies that the menu item is a text string; the lpNewItem    |              *
+		 * |                             | parameter is a pointer to the string.                           |              *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * | MF_UNCHECKED 0x00000000L    | Does not place a check mark next to the menu item (default). If |              *
+		 * |                             | the application supplies check-mark bitmaps (see the            |              *
+		 * |                             | SetMenuItemBitmaps(4) function), this flag displays the clear   |              *
+		 * |                             | bitmap next to the menu item.                                   |              *
+		 * +-----------------------------+-----------------------------------------------------------------+              *
+		 * SetMenuItemBitmaps(1) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-setmenuitembitmaps   *
+		 * WM_MEASUREITEM(2) : https://docs.microsoft.com/windows/desktop/Controls/wm-measureitem                         *
+		 * WM_DRAWITEM(3) : https://docs.microsoft.com/windows/desktop/Controls/wm-drawitem                               *
+		 * SetMenuItemBitmaps(4) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-setmenuitembitmaps   *
+		 *                                                                                                                *
+		 * uIDNewItem                                                                                                     *
+		 * Type: UINT_PTR                                                                                                 *
+		 * The identifier of the new menu item or, if the uFlags parameter has the MF_POPUP flag set, a                   *
+		 * handle to the drop-down menu or submenu.                                                                       *
+		 *                                                                                                                *
+		 * lpNewItem                                                                                                      *
+		 * Type: LPCTSTR                                                                                                  *
+		 * The content of the new menu item. The interpretation of lpNewItem depends on whether the                       *
+		 * uFlags parameter includes the MF_BITMAP, MF_OWNERDRAW, or MF_STRING flag, as follows.                          *
+		 * Value Meaning                                                                                                  *
+		 * +--------------------------+--------------------------------------------------------------------+              *
+		 * | MF_BITMAP 0x00000004L    | Contains a bitmap handle.                                          |              *
+		 * +--------------------------+--------------------------------------------------------------------+              *
+		 * | MF_OWNERDRAW 0x00000100L | Contains an application-supplied value that can be used to         |              *
+		 * |                          | maintain additional data related to the menu item. The value is    |              *
+		 * |                          | in the itemData member of the structure pointed to by the          |              *
+		 * |                          | lParam parameter of the WM_MEASUREITEM(2) or                       |              *
+		 * |                          | WM_DRAWITEM(3) message sent when the menu item is created          |              *
+		 * |                          | or its appearance is updated.                                      |              *
+		 * | MF_STRIN G0x00000000L    | Contains a pointer to a null-terminated string (the default).      |              *
+		 * +--------------------------+--------------------------------------------------------------------+              *
+		 * WM_MEASUREITEM(2) : https://docs.microsoft.com/windows/desktop/Controls/wm-measureitem                         *
+		 * WM_DRAWITEM(3) : https://docs.microsoft.com/windows/desktop/Controls/wm-drawitem                               *
+		 *                                                                                                                *
+		 * Return Value                                                                                                 *
+		 * Type: BOOL                                                                                                     *
+		 * If the function succeeds, the return value is nonzero.                                                         *
+		 * If the function fails, the return value is zero. To get extended error information, call GetLastError(5).      *
+		 * GetLastError(5) : https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror *
+		 *                                                                                                                *
+		 * Remarks                                                                                                      *
+		 *                                                                                                                *
+		 * The application must call the DrawMenuBar(6) function whenever a menu changes, whether the menu                *
+		 * is in a displayed window.                                                                                      *
+		 * The following groups of flags cannot be used together:                                                         *
+		 *     • MF_BYCOMMAND and MF_BYPOSITION                                                                           *
+		 *     • MF_DISABLED, MF_ENABLED, and MF_GRAYED                                                                   *
+		 *     • MF_BITMAP, MF_STRING, MF_OWNERDRAW, and MF_SEPARATOR                                                     *
+		 *     • MF_MENUBARBREAK and MF_MENUBREAK                                                                         *
+		 *     • MF_CHECKED and MF_UNCHECKED                                                                              *
+		 * DrawMenuBar(6) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-drawmenubar                 *
+		 ******************************************************************************************************************/
 		::InsertMenu(hMacroMenu, posBase - 1, MF_BYPOSITION, static_cast<UINT>(-1), 0);
+	}
 
-	for (size_t i = 0 ; i < nbMacro ; ++i)
+	for (size_t i = 0; i < nbMacro; ++i)
+	{
 		::InsertMenu(hMacroMenu, static_cast<UINT>(posBase + i), MF_BYPOSITION, ID_MACRO + i, macros[i].toMenuItemString().c_str());
+	}
 
     if (nbMacro >= 1)
     {
         ::InsertMenu(hMacroMenu, static_cast<UINT>(posBase + nbMacro + 1), MF_BYPOSITION, static_cast<UINT>(-1), 0);
         ::InsertMenu(hMacroMenu, static_cast<UINT>(posBase + nbMacro + 2), MF_BYCOMMAND, IDM_SETTING_SHORTCUT_MAPPER_MACRO, TEXT("Modify Shortcut/Delete Macro..."));
     }
-
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 10
+#endif
 	// Run Menu
+	/******************************************************************************************
+	 * 运行菜单                                                                               *
+	 ******************************************************************************************/
 	std::vector<UserCommand> & userCommands = pNppParam->getUserCommandList();
 	HMENU hRunMenu = ::GetSubMenu(_mainMenuHandle, MENUINDEX_RUN);
 	int const runPosBase = 2;
 	size_t nbUserCommand = userCommands.size();
 	if (nbUserCommand >= 1)
+	{
 		::InsertMenu(hRunMenu, runPosBase - 1, MF_BYPOSITION, static_cast<UINT>(-1), 0);
+	}
 
 	for (size_t i = 0 ; i < nbUserCommand ; ++i)
 	{
@@ -463,7 +879,9 @@ LRESULT Notepad_plus::init(HWND hwnd)
 		::InsertMenu(hRunMenu, static_cast<UINT>(runPosBase + nbUserCommand + 1), MF_BYPOSITION,  static_cast<UINT>(-1), 0);
         ::InsertMenu(hRunMenu, static_cast<UINT>(runPosBase + nbUserCommand + 2), MF_BYCOMMAND, IDM_SETTING_SHORTCUT_MAPPER_RUN, TEXT("Modify Shortcut/Delete Command..."));
     }
-
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 11
+#endif
 	// Updater menu item
 	if (!nppGUI._doesExistUpdater)
 	{
@@ -471,15 +889,30 @@ LRESULT Notepad_plus::init(HWND hwnd)
 		::DeleteMenu(_mainMenuHandle, IDM_CONFUPDATERPROXY, MF_BYCOMMAND);
 		HMENU hHelpMenu = ::GetSubMenu(_mainMenuHandle, MENUINDEX_PLUGINS + 1);
 		if (!hHelpMenu)
+		{
 			hHelpMenu = ::GetSubMenu(_mainMenuHandle, MENUINDEX_PLUGINS);
+		}
 		if (hHelpMenu)
-			::DeleteMenu(hHelpMenu, 7, MF_BYPOSITION); // SEPARATOR
+		{
+			// SEPARATOR
+			::DeleteMenu(hHelpMenu, 7, MF_BYPOSITION);
+		}
 		::DrawMenuBar(hwnd);
 	}
-	//Languages Menu
-	HMENU hLangMenu = ::GetSubMenu(_mainMenuHandle, MENUINDEX_LANGUAGE);
 
+	//Languages Menu
+	/******************************************************************************************
+	 * 语言菜单                                                                               *
+	 ******************************************************************************************/
+	HMENU hLangMenu = ::GetSubMenu(_mainMenuHandle, MENUINDEX_LANGUAGE);
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 12
+#endif
 	// Add external languages to menu
+
+	/*
+	 * 用户自定义语言格式 *
+	 */
 	for (int i = 0 ; i < pNppParam->getNbExternalLang() ; ++i)
 	{
 		ExternalLangContainer & externalLangContainer = pNppParam->getELCFromIndex(i);
@@ -491,7 +924,70 @@ LRESULT Notepad_plus::init(HWND hwnd)
 		int x;
 		for (x = 0; (x == 0 || lstrcmp(externalLangContainer._name, buffer) > 0) && x < numLangs; ++x)
 		{
-			::GetMenuString(hLangMenu, x, buffer, bufferSize, MF_BYPOSITION);
+			/***********************************************************************************************************
+			 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-getmenustringw             *
+			 * function                                                                                                *
+			 * Copies the text string of the specified menu item into the specified buffer.                            *
+			 *                                                                                                         *
+			 * Note  The GetMenuString function has been superseded. Use the GetMenuItemInfo                           *
+			 * function to retrieve the menu item text.                                                                *
+			 * int GetMenuString(HMENU hMenu, UINT uIDItem, LPWSTR lpString, int cchMax, UINT flags);                  *
+			 *                                                                                                         *
+			 * hMenu                                                                                                   *
+			 * Type: HMENU                                                                                             *
+			 * A handle to the menu.                                                                                   *
+			 *                                                                                                         *
+			 * uIDItem                                                                                                 *
+			 * Type: UINT                                                                                              *
+			 * The menu item to be changed, as determined by the uFlag parameter.                                      *
+			 *                                                                                                         *
+			 * lpString                                                                                                *
+			 * Type: LPTSTR                                                                                            *
+			 * The buffer that receives the null-terminated string. If the string is as long or longer than lpString,  *
+			 * the string is truncated and the terminating null character is added. If lpString is NULL, the function  *
+			 * returns the length of the menu string.                                                                  *
+			 *                                                                                                         *
+			 * cchMax                                                                                                  *
+			 * Type: int                                                                                               *
+			 * The maximum length, in characters, of the string to be copied. If the string is longer than the         *
+			 * maximum specified in the nMaxCount parameter, the extra characters are truncated. If nMaxCount          *
+			 * is 0, the function returns the length of the menu string.                                               *
+			 *                                                                                                         *
+			 * flags                                                                                                   *
+			 * Type: UINT                                                                                              *
+			 * Indicates how the uIDItem parameter is interpreted. This parameter must be one of the following values. *
+			 * Value Meaning                                                                                           *
+			 * +---------------------------+------------------------------------------------------------------+        *
+			 * | MF_BYCOMMAND 0x00000000L  | Indicates that uIDItem gives the identifier of the menu item. If |        *
+			 * |                           | neither the MF_BYCOMMAND nor MF_BYPOSITION flag is               |        *
+			 * |                           | specified, the MF_BYCOMMAND flag is the default flag.            |        *
+			 * +---------------------------+------------------------------------------------------------------+        *
+			 * | MF_BYPOSITION 0x00000400L | Indicates that uIDItem gives the zero-based relative position of |        *
+			 * |                           | the menu item.                                                   |        *
+			 * +---------------------------+------------------------------------------------------------------+        *
+			 *                                                                                                         *
+			 * Return Value                                                                                          *
+			 * Type: int                                                                                               *
+			 * If the function succeeds, the return value specifies the number of characters copied to the buffer,     *
+			 * not including the terminating null character.                                                           *
+			 *                                                                                                         *
+			 * If the function fails, the return value is zero.                                                        *
+			 *                                                                                                         *
+			 * If the specified item is not of type MIIM_STRING or MFT_STRING, then the return value is zero.          *
+			 *                                                                                                         *
+			 * Remarks                                                                                               *
+			 *                                                                                                         *
+			 * The nMaxCount parameter must be one larger than the number of characters in the text string to          *
+			 * accommodate the terminating null character.                                                             *
+			 *                                                                                                         *
+			 * If nMaxCount is 0, the function returns the length of the menu string.                                  *
+			 *                                                                                                         *
+			 * Security Warning                                                                                      *
+			 * The lpString parameter is a TCHAR buffer, and nMaxCount is the length of the menu string in             *
+			 * characters. Sizing these parameters incorrectly can cause truncation of the string, leading to          *
+			 * possible loss of data.                                                                                  *
+			 ***********************************************************************************************************/
+			::GetMenuString(hLangMenu, x, buffer, bufferSize, MF_BYPOSITION);/* GetMenuString 1 */
 		}
 
 		::InsertMenu(hLangMenu, x-1, MF_BYPOSITION, IDM_LANG_EXTERNAL + i, externalLangContainer._name);
@@ -504,14 +1000,16 @@ LRESULT Notepad_plus::init(HWND hwnd)
 			int cmdID = pNppParam->langTypeToCommandID(nppGUI._excludedLangList[i]._langType);
 			const int itemSize = 256;
 			TCHAR itemName[itemSize];
-			::GetMenuString(hLangMenu, cmdID, itemName, itemSize, MF_BYCOMMAND);
+			::GetMenuString(hLangMenu, cmdID, itemName, itemSize, MF_BYCOMMAND);/* GetMenuString 2 */
 			nppGUI._excludedLangList[i]._cmdID = cmdID;
 			nppGUI._excludedLangList[i]._langName = itemName;
 			::DeleteMenu(hLangMenu, cmdID, MF_BYCOMMAND);
 			DrawMenuBar(hwnd);
 		}
 	}
-
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 13
+#endif
 	// Add User Defined Languages Entry
 	int udlpos = ::GetMenuItemCount(hLangMenu) - 1;
 
@@ -522,12 +1020,19 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	}
 
 	//Add recent files
+	/*********************************************
+	 * 从当前主菜单中获取第0个子菜单(File子菜单) *
+	 * 文件子菜单                                *
+	 *********************************************/
 	HMENU hFileMenu = ::GetSubMenu(_mainMenuHandle, MENUINDEX_FILE);
 	int nbLRFile = pNppParam->getNbLRFile();
 	//int pos = IDM_FILEMENU_LASTONE - IDM_FILE + 1 /* +1 : because of  IDM_FILE_PRINTNOW */;
 
 	_lastRecentFileList.initMenu(hFileMenu, IDM_FILEMENU_LASTONE + 1, IDM_FILEMENU_EXISTCMDPOSITION, &_accelerator, pNppParam->putRecentFileInSubMenu());
 	_lastRecentFileList.setLangEncoding(_nativeLangSpeaker.getLangEncoding());
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_C__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 13.5
+#endif
 	for (int i = 0 ; i < nbLRFile ; ++i)
 	{
 		generic_string * stdStr = pNppParam->getLRFile(i);
@@ -536,14 +1041,21 @@ LRESULT Notepad_plus::init(HWND hwnd)
 			_lastRecentFileList.add(stdStr->c_str());
 		}
 	}
-
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_C__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 14
+#endif
 	//Plugin menu
 	bool enablePluginAdmin = _pluginsAdminDlg.isValide();
 	_pluginsAdminDlg.setPluginsManager(&_pluginsManager);
 	_pluginsManager.setMenu(_mainMenuHandle, NULL, enablePluginAdmin);
 
-
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_C__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 15
+#endif
 	//Main menu is loaded, now load context menu items
+	/******************
+	 * 加载上下文菜单 *
+	 ******************/
 	pNppParam->getContextMenuFromXmlTree(_mainMenuHandle, _pluginsManager.getMenuHandle());
 
 	if (pNppParam->hasCustomContextMenu())
@@ -551,11 +1063,18 @@ LRESULT Notepad_plus::init(HWND hwnd)
 		_mainEditView.execute(SCI_USEPOPUP, FALSE);
 		_subEditView.execute(SCI_USEPOPUP, FALSE);
 	}
-
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_C__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 16
+#endif
 	generic_string pluginsTrans, windowTrans;
+	/*
+	 * 修改上下文菜单和主窗口的主菜单的语言文字
+	 */
 	_nativeLangSpeaker.changeMenuLang(_mainMenuHandle, pluginsTrans, windowTrans);
+#if __MY_TEST_GET_MENU_STRING_FUNCTION_C__ == 1
+	myTestGetMenuString(_mainMenuHandle); // 17
+#endif
 	::DrawMenuBar(hwnd);
-
 	/****************
 	 * 处理插件菜单 *
 	 ****************/
@@ -564,12 +1083,15 @@ LRESULT Notepad_plus::init(HWND hwnd)
 		::ModifyMenu(_mainMenuHandle, MENUINDEX_PLUGINS, MF_BYPOSITION, 0, pluginsTrans.c_str());
 	}
 	//Windows menu
-	/****************
-	 * 处理窗口菜单 *
-	 ****************/
+	/********************
+	 * 处理标签窗口菜单 *
+	 ********************/
 	_windowsMenu.init(_pPublicInterface->getHinst(), _mainMenuHandle, windowTrans.c_str());
 
 	// Update context menu strings (translated)
+	/***********************************************
+	 * 替换NppParameters对象中的上下文菜单中的文字 *
+	 ***********************************************/
 	vector<MenuItemUnit> & tmp = pNppParam->getContextMenuItems();
 	size_t len = tmp.size();
 	TCHAR menuName[64];
@@ -577,7 +1099,7 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	{
 		if (tmp[i]._itemName.empty())
 		{
-			::GetMenuString(_mainMenuHandle, tmp[i]._cmdID, menuName, 64, MF_BYCOMMAND);
+			::GetMenuString(_mainMenuHandle, tmp[i]._cmdID, menuName, 64, MF_BYCOMMAND); /* GetMenuString 3 */
 			tmp[i]._itemName = purgeMenuItemString(menuName);
 		}
 	}
@@ -586,13 +1108,13 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	//This will automatically do all translations, since menu translation has been done already
 	vector<CommandShortcut> & shortcuts = pNppParam->getUserShortcuts();
 	len = shortcuts.size();
-	/* 处理菜单中的文字 */
+	/* 处理NppParameters对象中的菜单中的文字 */
 	for (size_t i = 0; i < len; ++i)
 	{
 		CommandShortcut & csc = shortcuts[i];
 		if (!csc.getName()[0])
 		{	//no predefined name, get name from menu and use that
-			::GetMenuString(_mainMenuHandle, csc.getID(), menuName, 64, MF_BYCOMMAND);
+			::GetMenuString(_mainMenuHandle, csc.getID(), menuName, 64, MF_BYCOMMAND); /* GetMenuString 4*/
 			csc.setName(purgeMenuItemString(menuName, true).c_str());
 		}
 		else
@@ -600,8 +1122,10 @@ LRESULT Notepad_plus::init(HWND hwnd)
 			// The menu name is already present (e.g. "Restore recent close file")
 			// Now get the localized name if possible
 			generic_string localizedMenuName = _nativeLangSpeaker.getNativeLangMenuString(csc.getID());
-			if(!localizedMenuName.empty())
+			if (!localizedMenuName.empty())
+			{
 				csc.setName(purgeMenuItemString(localizedMenuName.c_str(), true).c_str());
+			}
 		}
 	}
 	//Translate non-menu shortcuts
@@ -628,7 +1152,7 @@ LRESULT Notepad_plus::init(HWND hwnd)
 
     //-- Tool Bar Section --//
 	toolBarStatusType tbStatus = nppGUI._toolBarStatus;
-	willBeShown = nppGUI._toolbarShow;
+	/*willBeShown = nppGUI._toolbarShow;*/
 
 	// To notify plugins that toolbar icons can be registered
 	SCNotification scnN;
@@ -644,7 +1168,7 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	_rebarTop.init(_pPublicInterface->getHinst(), hwnd);
 	_rebarBottom.init(_pPublicInterface->getHinst(), hwnd);
 	_toolBar.addToRebar(&_rebarTop);
-	_rebarTop.setIDVisible(REBAR_BAR_TOOLBAR, willBeShown);
+	_rebarTop.setIDVisible(REBAR_BAR_TOOLBAR, nppGUI._toolbarShow);
 
 	checkMacroState();
 
@@ -701,7 +1225,9 @@ LRESULT Notepad_plus::init(HWND hwnd)
 		}
 
 		default: // hide & undocked
+		{
 			break;
+		}
     }
 
 	//
@@ -791,8 +1317,8 @@ void Notepad_plus::killAllChildren()
 
 bool Notepad_plus::saveGUIParams()
 {
-	NppGUI & nppGUI = const_cast<NppGUI &>((NppParameters::getInstance())->getNppGUI());
-	nppGUI._toolbarShow = _rebarTop.getIDVisible(REBAR_BAR_TOOLBAR);
+	NppGUI & nppGUI       = const_cast<NppGUI &>((NppParameters::getInstance())->getNppGUI());
+	nppGUI._toolbarShow   = _rebarTop.getIDVisible(REBAR_BAR_TOOLBAR);
 	nppGUI._toolBarStatus = _toolBar.getState();
 
 	nppGUI._tabStatus = (TabBarPlus::doDragNDropOrNot()?TAB_DRAWTOPBAR:0) | \
@@ -805,7 +1331,7 @@ bool Notepad_plus::saveGUIParams()
 						(TabBarPlus::isMultiLine() ? TAB_MULTILINE:0) |\
 						(nppGUI._tabStatus & TAB_HIDE) | \
 						(nppGUI._tabStatus & TAB_QUITONEMPTY);
-	nppGUI._splitterPos = _subSplitter.isVertical()?POS_VERTICAL:POS_HORIZOTAL;
+	nppGUI._splitterPos   = _subSplitter.isVertical()?POS_VERTICAL:POS_HORIZOTAL;
 	UserDefineDialog *udd = _pEditView->getUserDefineDlg();
 	bool b = udd->isDocked();
 	nppGUI._userDefineDlgStatus = (b?UDD_DOCKED:0) | (udd->isVisible()?UDD_SHOW:0);
@@ -1105,7 +1631,11 @@ bool Notepad_plus::replaceInOpenedFiles() {
 	ScintillaEditView *pOldView = _pEditView;
 	_pEditView = &_invisibleEditView;
 	Document oldDoc = _invisibleEditView.execute(SCI_GETDOCPOINTER);
-	Buffer * oldBuf = _invisibleEditView.getCurrentBuffer();	//for manually setting the buffer, so notifications can be handled properly
+
+	/*****************************************************************************
+	 * for manually setting the buffer, so notifications can be handled properly *
+	 *****************************************************************************/
+	Buffer * oldBuf = _invisibleEditView.getCurrentBuffer();
 
 	Buffer * pBuf = NULL;
 
@@ -1159,7 +1689,9 @@ bool Notepad_plus::replaceInOpenedFiles() {
 	else
 	{
 		if (nbTotal)
+		{
 			enableCommand(IDM_FILE_SAVEALL, true, MENU | TOOLBAR);
+		}
 
 		generic_string result;
 		if (nbTotal == 1)
@@ -1183,8 +1715,10 @@ void Notepad_plus::wsTabConvert(spaceTab whichWay)
 	int currentPos = static_cast<int32_t>(_pEditView->execute(SCI_GETCURRENTPOS));
     int lastLine = _pEditView->lastZeroBasedLineNumber();
 	int docLength = static_cast<int32_t>(_pEditView->execute(SCI_GETLENGTH) + 1);
-    if (docLength < 2)
-        return;
+	if (docLength < 2)
+	{
+		return;
+	}
 
     int count = 0;
     int column = 0;
@@ -1196,17 +1730,25 @@ void Notepad_plus::wsTabConvert(spaceTab whichWay)
 
     for (int i=0; i<lastLine; ++i)
     {
-        if (bookmarkPresent(i))
-            bookmarks.push_back(i);
+		if (bookmarkPresent(i))
+		{
+			bookmarks.push_back(i);
+		}
 
-        if ((_pEditView->execute(SCI_GETFOLDLEVEL, i) & SC_FOLDLEVELHEADERFLAG))
-            if (_pEditView->execute(SCI_GETFOLDEXPANDED, i) == 0)
-                folding.push_back(i);
+		if ((_pEditView->execute(SCI_GETFOLDLEVEL, i) & SC_FOLDLEVELHEADERFLAG))
+		{
+			if (_pEditView->execute(SCI_GETFOLDEXPANDED, i) == 0)
+			{
+				folding.push_back(i);
+			}
+		}
     }
 
     char * source = new char[docLength];
-    if (source == NULL)
-        return;
+	if (source == NULL)
+	{
+		return;
+	}
 	_pEditView->execute(SCI_GETTEXT, docLength, reinterpret_cast<LPARAM>(source));
 
     if (whichWay == tab2Space)
@@ -1246,20 +1788,28 @@ void Notepad_plus::wsTabConvert(spaceTab whichWay)
                     for (int j = 0; j < insertTabs; ++j)
                     {
                         *dest++ = ' ';
-                        if (i <= currentPos)
-                            ++newCurrentPos;
+						if (i <= currentPos)
+						{
+							++newCurrentPos;
+						}
                     }
                     column += insertTabs;
                 }
                 else
                 {
                     *dest++ = source[i];
-                    if (i <= currentPos)
-                        ++newCurrentPos;
-                    if ((source[i] == '\n') || (source[i] == '\r'))
-                        column = 0;
-                    else if ((source[i] & 0xC0) != 0x80)  // UTF_8 support: count only bytes that don't start with 10......
-                        ++column;
+					if (i <= currentPos)
+					{
+						++newCurrentPos;
+					}
+					if ((source[i] == '\n') || (source[i] == '\r'))
+					{
+						column = 0;
+					}
+					else if ((source[i] & 0xC0) != 0x80)  // UTF_8 support: count only bytes that don't start with 10......
+					{
+						++column;
+					}
                 }
             }
             *dest = '\0';
@@ -1314,8 +1864,10 @@ void Notepad_plus::wsTabConvert(spaceTab whichWay)
                                 break;
                             }
                         }
-                        else
-                            ++counter;
+						else
+						{
+							++counter;
+						}
                     }
 
                     if (nextChar == true)
@@ -1331,14 +1883,18 @@ void Notepad_plus::wsTabConvert(spaceTab whichWay)
                         column = tabStop + 1;
                         tabStop += tabWidth;
                         counter = 0;
-                        if (i <= currentPos)
-                            ++newCurrentPos;
+						if (i <= currentPos)
+						{
+							++newCurrentPos;
+						}
                         continue;
                     }
                 }
 
-                if (onlyLeading == true && nonSpaceFound == false)
-                    nonSpaceFound = true;
+				if (onlyLeading == true && nonSpaceFound == false)
+				{
+					nonSpaceFound = true;
+				}
 
                 if (source[i] == '\n' || source[i] == '\r')
                 {
@@ -1405,7 +1961,9 @@ void Notepad_plus::doTrim(trimOp whichPart)
 		env._str2Search = TEXT("[	 ]+$");
 	}
 	else
+	{
 		return;
+	}
 	env._str4Replace = TEXT("");
     env._searchType = FindRegex;
 	_findReplaceDlg.processAll(ProcessReplaceAll, &env, true);
@@ -1565,13 +2123,18 @@ bool Notepad_plus::replaceInFiles()
 	if (filesCount > 1)
 	{
 		if (filesCount >= 200)
+		{
 			filesPerPercent = filesCount / 100;
+		}
 		progress.open(_findReplaceDlg.getHSelf(), TEXT("Replace In Files progress..."));
 	}
 
 	for (size_t i = 0, updateOnCount = filesPerPercent; i < filesCount; ++i)
 	{
-		if (progress.isCancelled()) break;
+		if (progress.isCancelled())
+		{
+			break;
+		}
 
 		bool closeBuf = false;
 
@@ -1600,7 +2163,9 @@ bool Notepad_plus::replaceInFiles()
 			}
 
 			if (closeBuf)
+			{
 				MainFileManager.closeBuffer(id, _pEditView);
+			}
 		}
 		if (i == updateOnCount)
 		{
@@ -1662,7 +2227,9 @@ bool Notepad_plus::findInFinderFiles(FindersInfo *findInFolderInfo)
 	if (filesCount > 1)
 	{
 		if (filesCount >= 200)
+		{
 			filesPerPercent = filesCount / 100;
+		}
 		progress.open(_findReplaceDlg.getHSelf(), TEXT("Find In Files progress..."));
 	}
 
@@ -1688,7 +2255,9 @@ bool Notepad_plus::findInFinderFiles(FindersInfo *findInFolderInfo)
 			findInFolderInfo->_pFileName = fileNames.at(i).c_str();
 			nbTotal += _findReplaceDlg.processAll(ProcessFindInFinder, &(findInFolderInfo->_findOption), true, findInFolderInfo);
 			if (closeBuf)
+			{
 				MainFileManager.closeBuffer(id, _pEditView);
+			}
 		}
 		if (i == updateOnCount)
 		{
@@ -1747,13 +2316,18 @@ bool Notepad_plus::findInFiles()
 	if (filesCount > 1)
 	{
 		if (filesCount >= 200)
+		{
 			filesPerPercent = filesCount / 100;
+		}
 		progress.open(_findReplaceDlg.getHSelf(), TEXT("Find In Files progress..."));
 	}
 
 	for (size_t i = 0, updateOnCount = filesPerPercent; i < filesCount; ++i)
 	{
-		if (progress.isCancelled()) break;
+		if (progress.isCancelled())
+		{
+			break;
+		}
 
 		bool closeBuf = false;
 		BufferID id = MainFileManager.getBufferFromName(fileNames.at(i).c_str());
@@ -1797,7 +2371,9 @@ bool Notepad_plus::findInFiles()
 
 	FindHistory & findHistory = (NppParameters::getInstance())->getFindHistory();
 	if (nbTotal && !findHistory._isDlgAlwaysVisible)
+	{
 		_findReplaceDlg.display(false);
+	}
 	return true;
 }
 
@@ -1852,7 +2428,9 @@ bool Notepad_plus::findInOpenedFiles()
 
 	FindHistory & findHistory = (NppParameters::getInstance())->getFindHistory();
 	if (nbTotal && !findHistory._isDlgAlwaysVisible)
+	{
 		_findReplaceDlg.display(false);
+	}
 	return true;
 }
 
@@ -1885,7 +2463,9 @@ bool Notepad_plus::findInCurrentFile()
 
 	FindHistory & findHistory = (NppParameters::getInstance())->getFindHistory();
 	if (nbTotal && !findHistory._isDlgAlwaysVisible)
+	{
 		_findReplaceDlg.display(false);
+	}
 	return true;
 }
 
@@ -1914,43 +2494,59 @@ int Notepad_plus::doSaveOrNot(const TCHAR* fn, bool isMulti)
 int Notepad_plus::doReloadOrNot(const TCHAR *fn, bool dirty)
 {
 	if (dirty)
-		return _nativeLangSpeaker.messageBox("DoReloadOrNotAndLooseChange",
+	{
+		return _nativeLangSpeaker.messageBox
+		(
+			"DoReloadOrNotAndLooseChange",
 			_pPublicInterface->getHSelf(),
 			TEXT("\"$STR_REPLACE$\"\r\rThis file has been modified by another program.\rDo you want to reload it and lose the changes made in Notepad++?"),
 			TEXT("Reload"),
 			MB_YESNO | MB_APPLMODAL | MB_ICONEXCLAMATION,
 			0, // not used
-			fn);
+			fn
+		);
+	}
 	else
-		return _nativeLangSpeaker.messageBox("DoReloadOrNot",
+	{
+		return _nativeLangSpeaker.messageBox
+		(
+			"DoReloadOrNot",
 			_pPublicInterface->getHSelf(),
 			TEXT("\"$STR_REPLACE$\"\r\rThis file has been modified by another program.\rDo you want to reload it?"),
 			TEXT("Reload"),
 			MB_YESNO | MB_APPLMODAL | MB_ICONQUESTION,
 			0, // not used
-			fn);
+			fn
+		);
+	}
 }
 
 int Notepad_plus::doCloseOrNot(const TCHAR *fn)
 {
-	return _nativeLangSpeaker.messageBox("DoCloseOrNot",
+	return _nativeLangSpeaker.messageBox
+	(
+		"DoCloseOrNot",
 		_pPublicInterface->getHSelf(),
 		TEXT("The file \"$STR_REPLACE$\" doesn't exist anymore.\rKeep this file in editor?"),
 		TEXT("Keep non existing file"),
 		MB_YESNO | MB_ICONQUESTION | MB_APPLMODAL,
 		0, // not used
-		fn);
+		fn
+	);
 }
 
 int Notepad_plus::doDeleteOrNot(const TCHAR *fn)
 {
-	return _nativeLangSpeaker.messageBox("DoDeleteOrNot",
+	return _nativeLangSpeaker.messageBox
+	(
+		"DoDeleteOrNot",
 		_pPublicInterface->getHSelf(),
 		TEXT("The file \"$STR_REPLACE$\"\rwill be moved to your Recycle Bin and this document will be closed.\rContinue?"),
 		TEXT("Delete file"),
 		MB_YESNO | MB_ICONQUESTION | MB_APPLMODAL,
 		0, // not used
-		fn);
+		fn
+	);
 }
 
 void Notepad_plus::enableMenu(int cmdID, bool doEnable) const
@@ -2042,7 +2638,9 @@ void Notepad_plus::checkDocState()
 	checkLangsMenu(-1);
 
 	if (_pAnsiCharPanel)
+	{
 		_pAnsiCharPanel->switchEncoding();
+	}
 
 	enableCommand(IDM_VIEW_MONITORING, not curBuf->isUntitled(), MENU | TOOLBAR);
 	checkMenuItem(IDM_VIEW_MONITORING, curBuf->isMonitoringOn());
@@ -2152,19 +2750,29 @@ generic_string Notepad_plus::getLangDesc(LangType langType, bool getName)
 	{
 		ExternalLangContainer & elc = NppParameters::getInstance()->getELCFromIndex(langType - L_EXTERNAL);
 		if (getName)
+		{
 			return generic_string(elc._name);
+		}
 		else
+		{
 			return generic_string(elc._desc);
+		}
 	}
 
 	if (langType > L_EXTERNAL)
-        langType = L_TEXT;
+	{
+		langType = L_TEXT;
+	}
 
 	generic_string str2Show;
 	if (getName)
+	{
 		str2Show = ScintillaEditView::langNames[langType].shortName;
+	}
 	else
+	{
 		str2Show = ScintillaEditView::langNames[langType].longName;
+	}
 
 	if (langType == L_USER)
 	{
@@ -2225,7 +2833,9 @@ void Notepad_plus::deleteMarkedLines(bool isMarked)
 	for (int i = lastLine ; i >= 0 ; i--)
 	{
 		if (bookmarkPresent(i) == isMarked)
+		{
 			deleteMarkedline(i);
+		}
 	}
 	_pEditView->execute(SCI_ENDUNDOACTION);
 }
@@ -2239,7 +2849,9 @@ void Notepad_plus::pasteToMarkedLines()
 
 	BOOL canPaste = ::IsClipboardFormatAvailable(clipFormat);
 	if (!canPaste)
+	{
 		return;
+	}
 	int lastLine = _pEditView->lastZeroBasedLineNumber();
 
 	::OpenClipboard(_pPublicInterface->getHSelf());
@@ -2406,19 +3018,40 @@ void Notepad_plus::setUniModeText()
 		switch (um)
 		{
 			case uniUTF8:
-				uniModeTextString = TEXT("UTF-8-BOM"); break;
+			{
+				uniModeTextString = TEXT("UTF-8-BOM");
+				break;
+			}
 			case uni16BE:
-				uniModeTextString = TEXT("UCS-2 BE BOM"); break;
+			{
+				uniModeTextString = TEXT("UCS-2 BE BOM");
+				break;
+			}
 			case uni16LE:
-				uniModeTextString = TEXT("UCS-2 LE BOM"); break;
+			{
+				uniModeTextString = TEXT("UCS-2 LE BOM"); 
+				break;
+			}
 			case uni16BE_NoBOM:
-				uniModeTextString = TEXT("UCS-2 Big Endian"); break;
+			{
+				uniModeTextString = TEXT("UCS-2 Big Endian");
+				break;
+			}
 			case uni16LE_NoBOM:
-				uniModeTextString = TEXT("UCS-2 Little Endian"); break;
+			{
+				uniModeTextString = TEXT("UCS-2 Little Endian");
+				break;
+			}
 			case uniCookie:
-				uniModeTextString = TEXT("UTF-8"); break;
+			{
+				uniModeTextString = TEXT("UTF-8");
+				break;
+			}
 			default :
+			{
 				uniModeTextString = TEXT("ANSI");
+				break;
+			}
 		}
 	}
 	else
@@ -2472,9 +3105,14 @@ void Notepad_plus::addHotSpot()
 	LangType type = _pEditView->getCurrentBuffer()->getLangType();
 
 	if (type == L_HTML || type == L_PHP || type == L_ASP || type == L_JSP)
-		mask = 0x80; // INDIC2_MASK;
+	{
+		// INDIC2_MASK;
+		mask = 0x80;
+	}
 	else if (type == L_PS)
+	{
 		mask = 16;
+	}
 
 	int posFound = static_cast<int32_t>(_pEditView->execute(SCI_SEARCHINTARGET, strlen(URL_REG_EXPR), reinterpret_cast<LPARAM>(URL_REG_EXPR)));
 
@@ -2494,7 +3132,7 @@ void Notepad_plus::addHotSpot()
 			{
 				fs = hotspotPairs[i];
 				_pEditView->execute(SCI_STYLEGETFORE, fs);
-					break;
+				break;
 			}
 		}
 
@@ -2534,7 +3172,9 @@ void Notepad_plus::addHotSpot()
 
 			int urlAction = (NppParameters::getInstance())->getNppGUI()._styleURL;
 			if (urlAction == 2)
+			{
 				hotspotStyle._fontStyle |= FONTSTYLE_UNDERLINE;
+			}
 
 			_pEditView->setHotspotStyle(hotspotStyle);
 
@@ -2542,7 +3182,9 @@ void Notepad_plus::addHotSpot()
 			int activeFG = 0xFF0000;
 			Style *urlHovered = getStyleFromName(TEXT("URL hovered"));
 			if (urlHovered)
+			{
 				activeFG = urlHovered->_fgColor;
+			}
 			_pEditView->execute(SCI_SETHOTSPOTACTIVEFORE, TRUE, activeFG);
 			_pEditView->execute(SCI_SETHOTSPOTSINGLELINE, style_hotspot, 0);
 
@@ -2563,7 +3205,9 @@ void Notepad_plus::addHotSpot()
 bool Notepad_plus::isConditionExprLine(int lineNumber)
 {
 	if (lineNumber < 0 || lineNumber > _pEditView->execute(SCI_GETLINECOUNT))
+	{
 		return false;
+	}
 
 	auto startPos = _pEditView->execute(SCI_POSITIONFROMLINE, lineNumber);
 	auto endPos = _pEditView->execute(SCI_GETLINEENDPOSITION, lineNumber);
@@ -2577,7 +3221,9 @@ bool Notepad_plus::isConditionExprLine(int lineNumber)
 	{
 		auto end = _pEditView->execute(SCI_GETTARGETEND);
 		if (end == endPos)
+		{
 			return true;
+		}
 	}
 
 	return false;
@@ -2586,7 +3232,9 @@ bool Notepad_plus::isConditionExprLine(int lineNumber)
 int Notepad_plus::findMachedBracePos(size_t startPos, size_t endPos, char targetSymbol, char matchedSymbol)
 {
 	if (startPos == endPos)
+	{
 		return -1;
+	}
 
 	if (startPos > endPos) // backward
 	{
@@ -2606,28 +3254,109 @@ int Notepad_plus::findMachedBracePos(size_t startPos, size_t endPos, char target
 			}
 		}
 	}
-	else // forward
-	{
-	}
+//	else // forward
+//	{
+//	}
 	return -1;
 }
 
+/************
+ * 处理缩进 *
+ ************/
 void Notepad_plus::maintainIndentation(TCHAR ch)
 {
+	/********************
+	 * 文档格式         *
+	 ********************/
 	int eolMode = static_cast<int32_t>((_pEditView->execute(SCI_GETEOLMODE)));
+	/********************
+	 * 当前行           *
+	 ********************/
 	int curLine = static_cast<int32_t>((_pEditView->getCurrentLineNumber()));
+	/********************
+	 * 当前行的前面一行 *
+	 ********************/
 	int prevLine = curLine - 1;
+	/********************
+	 * 前面一行的缩进数 *
+	 ********************/
 	int indentAmountPrevLine = 0;
+	/********************
+	 * 制表符的宽度     *
+	 ********************/
 	int tabWidth = static_cast<int32_t>(_pEditView->execute(SCI_GETTABWIDTH));
-
+	/********************
+	 * 当前的语言       *
+	 ********************/
 	LangType type = _pEditView->getCurrentBuffer()->getLangType();
 
-	// Do not alter indentation if we were at the beginning of the line and we pressed Enter
-	if ((((eolMode == SC_EOL_CRLF || eolMode == SC_EOL_LF) && ch == '\n') ||
-		(eolMode == SC_EOL_CR && ch == '\r')) && prevLine >= 0 && _pEditView->getLineLength(prevLine) == 0)
-		return;
+	int switchMode = -1;
 
-	if (type == L_C || type == L_CPP || type == L_JAVA || type == L_CS || type == L_OBJC ||
+	/*
+	// Do not alter indentation if we were at the beginning of the line and we pressed Enter
+	if
+	(
+		(
+			(
+				(
+					( eolMode == SC_EOL_CRLF )
+					||
+					( eolMode == SC_EOL_LF )
+				)
+				&&
+				( ch == '\n' )
+			)
+			||
+			(
+				( eolMode == SC_EOL_CR )
+				&&
+				( ch == '\r' )
+			)
+		)
+		&&
+		( prevLine >= 0 )
+		&&
+		( _pEditView->getLineLength(prevLine) == 0 )
+	)
+	{
+		return;
+	}
+	*/
+
+	/*****************************************************************************************
+	 * Do not alter indentation if we were at the beginning of the line and we pressed Enter *
+	 *****************************************************************************************/
+	switch (eolMode)
+	{
+		/********************
+		 * MS-DOS & Windows *
+		 ********************/
+		case SC_EOL_CRLF:
+		/****************
+		 * UNIX & LINUX *
+		 ****************/
+		case SC_EOL_LF:
+		{
+			if ( ( ch == '\n' ) && ( prevLine >= 0 ) && ( _pEditView->getLineLength(prevLine) == 0 ) )
+			{
+				return;
+			}
+			break;
+		}
+		/*******
+		 * MAC *
+		 *******/
+		case SC_EOL_CR:
+		{
+			if ( ( ch == '\r' ) && ( prevLine >= 0 ) && ( _pEditView->getLineLength(prevLine) == 0 ) )
+			{
+				return;
+			}
+			break;
+		}
+	}
+/*
+	if ( type == L_C || type == L_CPP || type == L_JAVA || type == L_CS || type == L_OBJC ||
 		type == L_PHP || type == L_JS || type == L_JAVASCRIPT || type == L_JSP || type == L_CSS)
 	{
 		if (((eolMode == SC_EOL_CRLF || eolMode == SC_EOL_LF) && ch == '\n') ||
@@ -2749,11 +3478,9 @@ void Notepad_plus::maintainIndentation(TCHAR ch)
 			// aligned } indent with {
 			_pEditView->setLineIndent(curLine, indentAmountPrevLine);
 
-			/*
 			// indent lines from { to }
-			for (int i = matchedPairLine + 1; i < curLine; ++i)
-				_pEditView->setLineIndent(i, indentAmountPrevLine + tabWidth);
-			*/
+			//for (int i = matchedPairLine + 1; i < curLine; ++i)
+			//	_pEditView->setLineIndent(i, indentAmountPrevLine + tabWidth);
 		}
 	}
 	else // Basic indentation mode
@@ -2776,19 +3503,310 @@ void Notepad_plus::maintainIndentation(TCHAR ch)
 			}
 		}
 	}
+*/
+	switch (type)
+	{
+		/***************
+		 * C           *
+		 ***************/
+		case L_C:
+		/***************
+		 * C++         *
+		 ***************/
+		case L_CPP:
+		/***************
+		 * JAVA        *
+		 ***************/
+		case L_JAVA:
+		/***************
+		 * C SHARP     *
+		 ***************/
+		case L_CS:
+		/***************
+		 * OBJECT C    *
+		 ***************/
+		case L_OBJC:
+		/***************
+		 * PHP         *
+		 ***************/
+		case L_PHP:
+		/***************
+		 * JS          *
+		 ***************/
+		case L_JS:
+		/***************
+		 * JAVA SCRIPT *
+		 ***************/
+		case L_JAVASCRIPT:
+		/***************
+		 * JSP         *
+		 ***************/
+		case L_JSP:
+		/***************
+		 * CSS         *
+		 ***************/
+		case L_CSS:
+		{
+			switch (ch)
+			{
+				case '\n':
+				{
+					switchMode = ( (eolMode == SC_EOL_CRLF || eolMode == SC_EOL_LF) ? 0 : 10);
+					break;
+				}
+				case '\r':
+				{
+					switchMode = ((eolMode == SC_EOL_CR) ? 1 : 10);
+					break;
+				}
+				case '{':
+				{
+					switchMode = 2;
+					break;
+				}
+				case '}':
+				{
+					switchMode = 3;
+				}
+			}
+			switch (switchMode)
+			{
+				case 0:
+				case 1:
+				{
+					/**************************************
+					 * Search the non-empty previous line *
+					 **************************************/
+					while (prevLine >= 0 && _pEditView->getLineLength(prevLine) == 0)
+					{
+						prevLine--;
+					}
+
+					/******************************
+					 * Get previous line's Indent *
+					 ******************************/
+					if (prevLine >= 0)
+					{
+						indentAmountPrevLine = _pEditView->getLineIndent(prevLine);
+					}
+
+					/***************************************
+					 * get previous char from current line *
+					 ***************************************/
+					int prevPos = static_cast<int32_t>(_pEditView->execute(SCI_GETCURRENTPOS)) - (eolMode == SC_EOL_CRLF ? 3 : 2);
+					UCHAR prevChar = (UCHAR)_pEditView->execute(SCI_GETCHARAT, prevPos);
+					auto curPos = _pEditView->execute(SCI_GETCURRENTPOS);
+					UCHAR nextChar = (UCHAR)_pEditView->execute(SCI_GETCHARAT, curPos);
+
+					if (prevChar == '{')
+					{
+						if (nextChar == '}')
+						{
+							const char *eolChars;
+							if (eolMode == SC_EOL_CRLF)
+							{
+								eolChars = "\r\n";
+							}
+							else if (eolMode == SC_EOL_LF)
+							{
+								eolChars = "\n";
+							}
+							else
+							{
+								eolChars = "\r";
+							}
+
+							_pEditView->execute(SCI_INSERTTEXT, _pEditView->execute(SCI_GETCURRENTPOS), reinterpret_cast<LPARAM>(eolChars));
+							_pEditView->setLineIndent(curLine + 1, indentAmountPrevLine);
+						}
+						_pEditView->setLineIndent(curLine, indentAmountPrevLine + tabWidth);
+					}
+					else if (nextChar == '{')
+					{
+						_pEditView->setLineIndent(curLine, indentAmountPrevLine);
+					}
+					else if (isConditionExprLine(prevLine))
+					{
+						_pEditView->setLineIndent(curLine, indentAmountPrevLine + tabWidth);
+					}
+					else
+					{
+						if (indentAmountPrevLine > 0)
+						{
+							if (prevLine > 0 && isConditionExprLine(prevLine - 1))
+							{
+								_pEditView->setLineIndent(curLine, indentAmountPrevLine - tabWidth);
+							}
+							else
+							{
+								_pEditView->setLineIndent(curLine, indentAmountPrevLine);
+							}
+						}
+					}
+					break;
+				} /* END OF case 0 & 1 */
+				case 2:
+				{
+					/***********************************************************************
+					 * if no character in front of {, aligned with prev line's indentation *
+					 ***********************************************************************/
+					auto startPos = _pEditView->execute(SCI_POSITIONFROMLINE, curLine);
+					LRESULT endPos = _pEditView->execute(SCI_GETCURRENTPOS);
+
+					for (LRESULT i = endPos - 2; i > 0 && i > startPos; --i)
+					{
+						UCHAR aChar = (UCHAR)_pEditView->execute(SCI_GETCHARAT, i);
+						if (aChar != ' ' && aChar != '\t')
+						{
+							return;
+						}
+					}
+
+					/**************************************
+					 * Search the non-empty previous line *
+					 **************************************/
+					while (prevLine >= 0 && _pEditView->getLineLength(prevLine) == 0)
+					{
+						prevLine--;
+					}
+
+					/******************************
+					 * Get previous line's Indent *
+					 ******************************/
+					if (prevLine >= 0)
+					{
+						indentAmountPrevLine = _pEditView->getLineIndent(prevLine);
+
+						auto startPos2 = _pEditView->execute(SCI_POSITIONFROMLINE, prevLine);
+						auto endPos2 = _pEditView->execute(SCI_GETLINEENDPOSITION, prevLine);
+						_pEditView->execute(SCI_SETSEARCHFLAGS, SCFIND_REGEXP | SCFIND_POSIX);
+						_pEditView->execute(SCI_SETTARGETRANGE, startPos2, endPos2);
+
+						const char braceExpr[] = "[ \t]*\\{.*";
+
+						int posFound = static_cast<int32_t>(_pEditView->execute(SCI_SEARCHINTARGET, strlen(braceExpr), reinterpret_cast<LPARAM>(braceExpr)));
+						if (posFound != -1 && posFound != -2)
+						{
+							int end = int(_pEditView->execute(SCI_GETTARGETEND));
+							if (end == endPos2)
+							{
+								indentAmountPrevLine += tabWidth;
+							}
+						}
+					}
+
+					_pEditView->setLineIndent(curLine, indentAmountPrevLine);
+
+					break;
+				} /* END OF case 2 */
+				case 3:
+				{
+					/********************************
+					 * Look backward for the pair { *
+					 ********************************/
+					int startPos = static_cast<int32_t>(_pEditView->execute(SCI_GETCURRENTPOS));
+					if (startPos != 0)
+					{
+						startPos -= 1;
+					}
+					int posFound = findMachedBracePos(startPos - 1, 0, '{', '}');
+
+					/*****************************
+					 * if no { found, do nothing *
+					 *****************************/
+					if (posFound == -1)
+					{
+						return;
+					}
+
+					/****************************************
+					 * if { is in the same line, do nothing *
+					 ****************************************/
+					int matchedPairLine = static_cast<int32_t>(_pEditView->execute(SCI_LINEFROMPOSITION, posFound));
+					if (matchedPairLine == curLine)
+					{
+						return;
+					}
+
+					/*********************************************
+					 * { is in another line, get its indentation *
+					 *********************************************/
+					indentAmountPrevLine = _pEditView->getLineIndent(matchedPairLine);
+
+					/***************************
+					 * aligned } indent with { *
+					 ***************************/
+					_pEditView->setLineIndent(curLine, indentAmountPrevLine);
+
+					break;
+				} /* END OF case 3 */
+			}
+			break;
+		} /* END OF LANG */
+		/*
+		 * Basic indentation mode
+		 */
+		default:
+		{
+			switch (eolMode)
+			{
+				case SC_EOL_CRLF:
+				case SC_EOL_LF:
+				{
+					switchMode =  ( ( ch == '\n' ) ? 0 : 1);
+					break;
+				}
+				case SC_EOL_CR:
+				{
+					switchMode = ( (ch == '\r') ? 0 : 1);
+					break;
+				}
+			}
+			switch(switchMode)
+			{
+				case 0:
+				{
+					/**************************************
+					 * Search the non-empty previous line *
+					 **************************************/
+					while ( ( prevLine >= 0 ) && ( _pEditView->getLineLength(prevLine) == 0 ) )
+					{
+						--prevLine;
+					}
+
+					if (prevLine >= 0)
+					{
+						indentAmountPrevLine = _pEditView->getLineIndent(prevLine);
+					}
+
+					if (indentAmountPrevLine > 0)
+					{
+						_pEditView->setLineIndent(curLine, indentAmountPrevLine);
+					}
+					break;
+				}
+				break;
+			}
+			break;
+		} /* END OF default */
+	}
 }
 
 BOOL Notepad_plus::processFindAccel(MSG *msg) const
 {
 	if (not ::IsChild(_findReplaceDlg.getHSelf(), ::GetFocus()))
+	{
 		return FALSE;
-	return ::TranslateAccelerator(_findReplaceDlg.getHSelf(), _accelerator.getFindAccTable(), msg);
+	}
+	return ::TranslateAccelerator( _findReplaceDlg.getHSelf(), _accelerator.getFindAccTable(), msg );
 }
 
 BOOL Notepad_plus::processIncrFindAccel(MSG *msg) const
 {
-	if (not ::IsChild(_incrementFindDlg.getHSelf(), ::GetFocus()))
+	if ( not ::IsChild(_incrementFindDlg.getHSelf(), ::GetFocus() ) )
+	{
 		return FALSE;
+	}
 	return ::TranslateAccelerator(_incrementFindDlg.getHSelf(), _accelerator.getIncrFindAccTable(), msg);
 }
 
@@ -2796,15 +3814,15 @@ void Notepad_plus::setLanguage(LangType langType)
 {
 	//Add logic to prevent changing a language when a document is shared between two views
 	//If so, release one document
-	bool reset = false;
-	Document prev = 0;
+	bool     reset = false;
+	Document prev  = 0;
 	if (bothActive())
 	{
 		if (_mainEditView.getCurrentBufferID() == _subEditView.getCurrentBufferID())
 		{
 			reset = true;
 			_subEditView.saveCurrentPos();
-			prev = _subEditView.execute(SCI_GETDOCPOINTER);
+			prev  = _subEditView.execute(SCI_GETDOCPOINTER);
 			_subEditView.execute(SCI_SETDOCPOINTER, 0, 0);
 		}
 	}
@@ -2995,16 +4013,21 @@ LangType Notepad_plus::menuID2LangType(int cmdID)
             return L_VISUALPROLOG;
 		case IDM_LANG_USER :
             return L_USER;
-		default: {
-			if (cmdID >= IDM_LANG_USER && cmdID <= IDM_LANG_USER_LIMIT) {
+		default:
+		{
+			if ( ( cmdID >= IDM_LANG_USER ) && ( cmdID <= IDM_LANG_USER_LIMIT ) )
+			{
 				return L_USER;
 			}
-			break; }
+			break;
+		}
 	}
 	return L_EXTERNAL;
 }
 
-
+/************************
+ * 设置或者刷新窗口标题 *
+ ************************/
 void Notepad_plus::setTitle()
 {
 	const NppGUI & nppGUI = NppParameters::getInstance()->getNppGUI();
@@ -3029,7 +4052,9 @@ void Notepad_plus::setTitle()
 	result += _pPublicInterface->getClassName();
 
 	if (_isAdministrator)
+	{
 		result += TEXT(" [Administrator]");
+	}
 
 	::SendMessage(_pPublicInterface->getHSelf(), WM_SETTEXT, 0, reinterpret_cast<LPARAM>(result.c_str()));
 }
@@ -3044,7 +4069,9 @@ void Notepad_plus::activateNextDoc(bool direction)
 	if (curIndex >= nbDoc)
 	{
 		if (viewVisible(otherView()))
+		{
 			switchEditViewTo(otherView());
+		}
 		curIndex = 0;
 	}
 	else if (curIndex < 0)
@@ -3085,7 +4112,7 @@ size_t Notepad_plus::getSelectedCharNumber(UniMode u)
 {
 	size_t result = 0;
 	int numSel = static_cast<int32_t>(_pEditView->execute(SCI_GETSELECTIONS));
-	if (u == uniUTF8 || u == uniCookie)
+	if ( ( u == uniUTF8 ) || ( u == uniCookie ) )
 	{
 		for (int i=0; i < numSel; ++i)
 		{
@@ -3101,7 +4128,9 @@ size_t Notepad_plus::getSelectedCharNumber(UniMode u)
 					{
 						unsigned char c = 0xf0 & static_cast<unsigned char>(_pEditView->execute(SCI_GETCHARAT, pos));
 						if (c >= 0xc0)
-							pos += utflen[(c & 0x30) >>  4];
+						{
+							pos += utflen[(c & 0x30) >> 4];
+						}
 						++result;
 					}
 				}
@@ -3121,7 +4150,10 @@ size_t Notepad_plus::getSelectedCharNumber(UniMode u)
 			if (_pEditView->execute(SCI_GETEOLMODE) == SC_EOL_CRLF) line2 *= 2;
 			result -= line2;
 		}
-		if (u != uni8Bit && u != uni7Bit) result *= 2;
+		if ( ( u != uni8Bit ) && ( u != uni7Bit ) )
+		{
+			result *= 2;
+		}
 	}
 	return result;
 }
@@ -3130,16 +4162,29 @@ size_t Notepad_plus::getSelectedCharNumber(UniMode u)
 #ifdef _OPENMP
 #include <omp.h>
 #endif
+/*********************
+ * 统计UTF-8的字符数 *
+ *********************/
 static inline size_t countUtf8Characters(unsigned char *buf, size_t pos, size_t endpos)
 {
 	size_t result = 0;
 	while (pos < endpos)
 	{
 		unsigned char c = buf[pos++];
-		if ((c&0xc0) == 0x80 // do not count unexpected continuation bytes (this handles the case where an UTF-8 character is split in the middle)
-			|| c == '\n' || c == '\r') continue; // do not count end of lines
-		if (c >= 0xc0) 
-			pos += utflen[(c & 0x30) >>  4];
+		/*********************************************************************************************************************************************
+		 * ( c & 0xc0 ) == 0x80 : do not count unexpected continuation bytes (this handles the case where an UTF-8 character is split in the middle) *
+		 *********************************************************************************************************************************************/
+		if ( ( ( c & 0xc0 ) == 0x80 ) || ( c == '\n' ) || ( c == '\r' ) )
+		{
+			/*****************************
+			 * do not count end of lines *
+			 *****************************/
+			continue;
+		}
+		if (c >= 0xc0)
+		{
+			pos += utflen[(c & 0x30) >> 4];
+		}
 		++result;
 	}
 	return result;
@@ -3165,10 +4210,16 @@ size_t Notepad_plus::getCurrentDocCharCount(UniMode u)
 		size_t result = 0;
 
 		size_t endpos = _pEditView->execute(SCI_GETLENGTH);
-		unsigned char* buf = (unsigned char*)_pEditView->execute(SCI_GETCHARACTERPOINTER); // Scintilla doc said the pointer can be invalidated by any other "execute"
+		/****************************************************************************
+		 * Scintilla doc said the pointer can be invalidated by any other "execute" *
+		 ****************************************************************************/
+		unsigned char * buf = (unsigned char*)_pEditView->execute(SCI_GETCHARACTERPOINTER);
 
 #ifdef _OPENMP // parallel counting of characters with OpenMP
-		if (endpos > 50000) // starting threads takes time; for small files it is better to simply count in one thread
+		/*******************************************************************************************
+		 * starting threads takes time; for small files it is better to simply count in one thread *
+		 *******************************************************************************************/
+		if (endpos > 50000)
 		{
 			#pragma omp parallel reduction(+: result)
 			{
@@ -3193,7 +4244,7 @@ size_t Notepad_plus::getCurrentDocCharCount(UniMode u)
 
 bool Notepad_plus::isFormatUnicode(UniMode u)
 {
-	return (u != uni8Bit && u != uni7Bit && u != uniUTF8 && u != uniCookie);
+	return ( ( u != uni8Bit ) && ( u != uni7Bit ) && ( u != uniUTF8 ) && ( u != uniCookie ) );
 }
 
 int Notepad_plus::getBOMSize(UniMode u)
@@ -3213,8 +4264,11 @@ int Notepad_plus::getBOMSize(UniMode u)
 size_t Notepad_plus::getSelectedAreas()
 {
 	size_t numSel = _pEditView->execute(SCI_GETSELECTIONS);
-	if (numSel == 1) // either 0 or 1 selection
+	// either 0 or 1 selection
+	if (numSel == 1)
+	{
 		return (_pEditView->execute(SCI_GETSELECTIONNSTART, 0) == _pEditView->execute(SCI_GETSELECTIONNEND, 0)) ? 0 : 1;
+	}
 	return (_pEditView->execute(SCI_SELECTIONISRECTANGLE)) ? 1 : numSel;
 }
 
@@ -3223,7 +4277,9 @@ size_t Notepad_plus::getSelectedBytes()
 	size_t numSel = _pEditView->execute(SCI_GETSELECTIONS);
 	size_t result = 0;
 	for (size_t i = 0; i < numSel; ++i)
+	{
 		result += (_pEditView->execute(SCI_GETSELECTIONNEND, i) - _pEditView->execute(SCI_GETSELECTIONNSTART, i));
+	}
 	return result;
 }
 
@@ -3235,7 +4291,9 @@ int Notepad_plus::wordCount()
     return _findReplaceDlg.processAll(ProcessCountAll, &env, true);
 }
 
-
+/**************
+ * 刷新状态栏 *
+ **************/
 void Notepad_plus::updateStatusBar()
 {
     TCHAR strLnCol[128];
@@ -3247,9 +4305,13 @@ void Notepad_plus::updateStatusBar()
 
 	long selected_length = _pEditView->getUnicodeSelectedLength();
 	if (selected_length != -1)
+	{
 		wsprintf(strSel, TEXT("Sel : %s | %s"), commafyInt(selected_length).c_str(), commafyInt(selLine).c_str());
+	}
 	else
+	{
 		wsprintf(strSel, TEXT("Sel : %s"), TEXT("N/A"));
+	}
 
 	wsprintf(strLnCol, TEXT("Ln : %s    Col : %s    %s"),
 		commafyInt(_pEditView->getCurrentLineNumber() + 1).c_str(),
@@ -3275,12 +4337,19 @@ void Notepad_plus::dropFiles(HDROP hdrop)
 		POINT p;
 		::DragQueryPoint(hdrop, &p);
 		HWND hWin = ::RealChildWindowFromPoint(_pPublicInterface->getHSelf(), p);
-		if (!hWin) return;
+		if (!hWin)
+		{
+			return;
+		}
 
 		if ((_subEditView.getHSelf() == hWin) || (_subDocTab.getHSelf() == hWin))
+		{
 			switchEditViewTo(SUB_VIEW);
+		}
 		else
+		{
 			switchEditViewTo(MAIN_VIEW);
+		}
 
 		int filesDropped = ::DragQueryFile(hdrop, 0xffffffff, NULL, 0);
 
@@ -3370,19 +4439,27 @@ void Notepad_plus::getMainClientRect(RECT &rc) const
 void Notepad_plus::showView(int whichOne)
 {
 	if (viewVisible(whichOne))	//no use making visible view visible
+	{
 		return;
+	}
 
-	if (_mainWindowStatus & WindowUserActive) {
+	if (_mainWindowStatus & WindowUserActive)
+	{
 		 _pMainSplitter->setWin0(&_subSplitter);
 		 _pMainWindow = _pMainSplitter;
-	} else {
+	}
+	else
+	{
 		_pMainWindow = &_subSplitter;
 	}
 
-	if (whichOne == MAIN_VIEW) {
+	if (whichOne == MAIN_VIEW)
+	{
 		_mainEditView.display(true);
 		_mainDocTab.display(true);
-	} else if (whichOne == SUB_VIEW) {
+	}
+	else if (whichOne == SUB_VIEW)
+	{
 		_subEditView.display(true);
 		_subDocTab.display(true);
 	}
@@ -3394,8 +4471,9 @@ void Notepad_plus::showView(int whichOne)
 	::SendMessage(_pPublicInterface->getHSelf(), WM_SIZE, 0, 0);
 }
 
-bool Notepad_plus::viewVisible(int whichOne) {
-	int viewToCheck = (whichOne == SUB_VIEW?WindowSubActive:WindowMainActive);
+bool Notepad_plus::viewVisible(int whichOne)
+{
+	int viewToCheck = ( ( whichOne == SUB_VIEW ) ? WindowSubActive : WindowMainActive);
 	return (_mainWindowStatus & viewToCheck) != 0;
 }
 
@@ -3407,7 +4485,9 @@ void Notepad_plus::hideCurrentView()
 void Notepad_plus::hideView(int whichOne)
 {
 	if (!(bothActive()))	//cannot close if not both views visible
+	{
 		return;
+	}
 
 	Window * windowToSet = (whichOne == MAIN_VIEW)?&_subDocTab:&_mainDocTab;
 	if (_mainWindowStatus & WindowUserActive)
@@ -3422,10 +4502,13 @@ void Notepad_plus::hideView(int whichOne)
 
 	_subSplitter.display(false);	//hide splitter
 	//hide scintilla and doctab
-	if (whichOne == MAIN_VIEW) {
+	if (whichOne == MAIN_VIEW)
+	{
 		_mainEditView.display(false);
 		_mainDocTab.display(false);
-	} else if (whichOne == SUB_VIEW) {
+	}
+	else if (whichOne == SUB_VIEW)
+	{
 		_subEditView.display(false);
 		_subDocTab.display(false);
 	}
@@ -3447,9 +4530,15 @@ bool Notepad_plus::loadStyles()
 bool Notepad_plus::canHideView(int whichOne)
 {
 	if (!viewVisible(whichOne))
-		return false;	//cannot hide hidden view
+	{
+		//cannot hide hidden view
+		return false;
+	}
 	if (!bothActive())
-		return false;	//cannot hide only window
+	{
+		//cannot hide only window
+		return false;
+	}
 	DocTabView * tabToCheck = (whichOne == MAIN_VIEW)?&_mainDocTab:&_subDocTab;
 	Buffer * buf = MainFileManager.getBufferByID(tabToCheck->getBufferByIndex(0));
 	bool canHide = ((tabToCheck->nbItem() == 1) && !buf->isDirty() && buf->isUntitled());
@@ -3458,7 +4547,10 @@ bool Notepad_plus::canHideView(int whichOne)
 
 bool Notepad_plus::isEmpty()
 {
-	if (bothActive()) return false;
+	if (bothActive())
+	{
+		return false;
+	}
 
 	DocTabView * tabToCheck = (_mainWindowStatus & WindowMainActive) ? &_mainDocTab : &_subDocTab;
 	
@@ -3474,8 +4566,11 @@ void Notepad_plus::loadBufferIntoView(BufferID id, int whichOne, bool dontClose)
 
 	//check if buffer exists
 	int index = tabToOpen->getIndexByBuffer(id);
-	if (index != -1)	//already open, done
+	//already open, done
+	if (index != -1)
+	{
 		return;
+	}
 
 	BufferID idToClose = BUFFER_INVALID;
 	//Check if the tab has a single clean buffer. Close it if so
@@ -3498,7 +4593,9 @@ void Notepad_plus::loadBufferIntoView(BufferID id, int whichOne, bool dontClose)
 		activateBuffer(id, whichOne);	//activate. DocTab already activated but not a problem
 		MainFileManager.closeBuffer(idToClose, viewToOpen);	//delete the buffer
 		if (_pFileSwitcherPanel)
+		{
 			_pFileSwitcherPanel->closeItem(idToClose, whichOne);
+		}
 	}
 	else
 	{
@@ -3513,8 +4610,11 @@ bool Notepad_plus::removeBufferFromView(BufferID id, int whichOne)
 
 	//check if buffer exists
 	int index = tabToClose->getIndexByBuffer(id);
-	if (index == -1)        //doesn't exist, done
+	//doesn't exist, done
+	if (index == -1)
+	{
 		return false;
+	}
 
 	Buffer * buf = MainFileManager.getBufferByID(id);
 
@@ -3566,12 +4666,18 @@ bool Notepad_plus::removeBufferFromView(BufferID id, int whichOne)
 
 int Notepad_plus::switchEditViewTo(int gid)
 {
-	if (currentView() == gid) {	//make sure focus is ok, then leave
-		_pEditView->getFocus();	//set the focus
+	//make sure focus is ok, then leave
+	if (currentView() == gid)
+	{
+		//set the focus
+		_pEditView->getFocus();
 		return gid;
 	}
 	if (!viewVisible(gid))
-		return currentView();	//cannot activate invisible view
+	{
+		//cannot activate invisible view
+		return currentView();
+	}
 
 	int oldView = currentView();
 	int newView = otherView();
@@ -3582,7 +4688,8 @@ int Notepad_plus::switchEditViewTo(int gid)
 	std::swap(_pEditView, _pNonEditView);
 
 	_pEditView->beSwitched();
-    _pEditView->getFocus();	//set the focus
+	//set the focus
+    _pEditView->getFocus();
 
 	if (_pDocMap)
 	{
@@ -3608,17 +4715,25 @@ void Notepad_plus::dockUserDlg()
 
         Window *pWindow;
 		if (_mainWindowStatus & (WindowMainActive | WindowSubActive))
-            pWindow = &_subSplitter;
-        else
-            pWindow = _pDocTab;
+		{
+			pWindow = &_subSplitter;
+		}
+		else
+		{
+			pWindow = _pDocTab;
+		}
 
         _pMainSplitter->create(pWindow, ScintillaEditView::getUserDefineDlg(), 8, SplitterMode::RIGHT_FIX, 45);
     }
 
-    if (bothActive())
-        _pMainSplitter->setWin0(&_subSplitter);
-    else
-        _pMainSplitter->setWin0(_pDocTab);
+	if (bothActive())
+	{
+		_pMainSplitter->setWin0(&_subSplitter);
+	}
+	else
+	{
+		_pMainSplitter->setWin0(_pDocTab);
+	}
 
     _pMainSplitter->display();
 
@@ -3633,10 +4748,14 @@ void Notepad_plus::undockUserDlg()
     // a cause de surchargement de "display"
     ::ShowWindow(_pMainSplitter->getHSelf(), SW_HIDE);
 
-    if (bothActive())
-        _pMainWindow = &_subSplitter;
-    else
-        _pMainWindow = _pDocTab;
+	if (bothActive())
+	{
+		_pMainWindow = &_subSplitter;
+	}
+	else
+	{
+		_pMainWindow = _pDocTab;
+	}
 
     ::SendMessage(_pPublicInterface->getHSelf(), WM_SIZE, 0, 0);
 
@@ -3649,7 +4768,9 @@ void Notepad_plus::docOpenInNewInstance(FileTransferMode mode, int x, int y)
 	BufferID bufferID = _pEditView->getCurrentBufferID();
 	Buffer * buf = MainFileManager.getBufferByID(bufferID);
 	if (buf->isUntitled() || buf->isDirty())
+	{
 		return;
+	}
 
 	TCHAR nppName[MAX_PATH];
 	::GetModuleFileName(NULL, nppName, MAX_PATH);
@@ -3658,13 +4779,15 @@ void Notepad_plus::docOpenInNewInstance(FileTransferMode mode, int x, int y)
 	command += TEXT("\"");
 	command += TEXT(" \"$(FULL_CURRENT_PATH)\" -multiInst -nosession");
 
-	if (x) {
+	if (x)
+	{
 		TCHAR pX[10];
 		generic_itoa(x, pX, 10);
 		command += TEXT(" -x");
 		command += pX;
 	}
-	if (y) {
+	if (y)
+	{
 		TCHAR pY[10];
 		generic_itoa(y, pY, 10);
 		command += TEXT(" -y");
@@ -3684,7 +4807,9 @@ void Notepad_plus::docOpenInNewInstance(FileTransferMode mode, int x, int y)
 	{
 		doClose(bufferID, currentView());
 		if (noOpenedDoc())
+		{
 			::SendMessage(_pPublicInterface->getHSelf(), WM_CLOSE, 0, 0);
+		}
 	}
 }
 
@@ -3706,10 +4831,14 @@ void Notepad_plus::docGotoAnotherEditView(FileTransferMode mode)
 				pOtherView = &_mainEditView;
 			}
 			else
+			{
 				return;
+			}
 
 			if (!pOtherView->isVisible())
+			{
 				return;
+			}
 		}
 	}
 
@@ -3722,7 +4851,8 @@ void Notepad_plus::docGotoAnotherEditView(FileTransferMode mode)
 	{
 		activateBuffer(current, otherView());
 	}
-	else	//open the document, also copying the position
+	//open the document, also copying the position
+	else
 	{
 		// If both the views are visible then first save the position of non-edit view
 		// So that moving document between views does not lose caret position
@@ -3795,7 +4925,9 @@ bool Notepad_plus::activateBuffer(BufferID id, int whichOne)
 			_isFolding = false;
 		}
 		else
+		{
 			return false;
+		}
 	}
 	else
 	{
@@ -3806,7 +4938,9 @@ bool Notepad_plus::activateBuffer(BufferID id, int whichOne)
 			_isFolding = false;
 		}
 		else
+		{
 			return false;
+		}
 	}
 
 	if (reload)
@@ -3831,10 +4965,15 @@ void Notepad_plus::performPostReload(int whichOne) {
 	const NppGUI & nppGUI = pNppParam->getNppGUI();
 	bool toEnd = (nppGUI._fileAutoDetection & cdGo2end) ? true : false;
 	if (!toEnd)
+	{
 		return;
-	if (whichOne == MAIN_VIEW) {
+	}
+	if (whichOne == MAIN_VIEW)
+	{
 		_mainEditView.execute(SCI_GOTOLINE, _mainEditView.execute(SCI_GETLINECOUNT) -1);
-	} else {
+	}
+	else
+	{
 		_subEditView.execute(SCI_GOTOLINE, _subEditView.execute(SCI_GETLINECOUNT) -1);
 	}
 }
@@ -3853,10 +4992,14 @@ void Notepad_plus::bookmarkNext(bool forwardScan)
 	}
 	int nextLine = int(_pEditView->execute(sci_marker, lineStart, 1 << MARK_BOOKMARK));
 	if (nextLine < 0)
+	{
 		nextLine = int(_pEditView->execute(sci_marker, lineRetry, 1 << MARK_BOOKMARK));
+	}
 
 	if (nextLine < 0)
+	{
 		return;
+	}
 
     _pEditView->execute(SCI_ENSUREVISIBLEENFORCEPOLICY, nextLine);
 	_pEditView->execute(SCI_GOTOLINE, nextLine);
@@ -4025,7 +5168,9 @@ static generic_string extractSymbol(TCHAR firstChar, TCHAR secondChar, const TCH
 		else
 		{
 			if (!str2extract[i])
+			{
 				return TEXT("");
+			}
 
 			if (str2extract[i] == firstChar && str2extract[i+1] == secondChar)
 			{
@@ -4042,7 +5187,9 @@ bool Notepad_plus::doBlockComment(comment_mode currCommentMode)
 	Buffer * buf = _pEditView->getCurrentBuffer();
 	// Avoid side-effects (e.g. cursor moves number of comment-characters) when file is read-only.
 	if (buf->isReadOnly())
+	{
 		return false;
+	}
 
 	//-- BlockToStreamComment:
 	const TCHAR *commentStart;
@@ -4066,7 +5213,9 @@ bool Notepad_plus::doBlockComment(comment_mode currCommentMode)
 	{
 		UserLangContainer * userLangContainer = NppParameters::getInstance()->getULCFromName(buf->getUserDefineLangName());
 		if (!userLangContainer)
+		{
 			return false;
+		}
 
 		symbol = extractSymbol('0', '0', userLangContainer->_keywordLists[SCE_USER_KWLIST_COMMENTS]);
 		commentLineSymbol = symbol.c_str();
@@ -4109,10 +5258,14 @@ bool Notepad_plus::doBlockComment(comment_mode currCommentMode)
 				isSingleLineAdvancedMode = true;
 			}
 			else
+			{
 				return false;
+			}
 		}
 		else
+		{
 			return false;
+		}
 	}
 
 	//For Single Line NORMAL MODE
@@ -4133,7 +5286,9 @@ bool Notepad_plus::doBlockComment(comment_mode currCommentMode)
 		comment = commentLineSymbol;
 
 		if (!(buf->getLangType() == L_BAANC)) // BaanC standardization - no space.
+		{
 			comment += aSpace;
+		}
 
 		comment_length = comment.length();
 	}
@@ -4157,8 +5312,10 @@ bool Notepad_plus::doBlockComment(comment_mode currCommentMode)
 	int selEndLine = static_cast<int32_t>(_pEditView->execute(SCI_LINEFROMPOSITION, selectionEnd));
     int lines = selEndLine - selStartLine;
     // "caret return" is part of the last selected line
-    if ((lines > 0) && (selectionEnd == static_cast<size_t>(_pEditView->execute(SCI_POSITIONFROMLINE, selEndLine))))
+	if ((lines > 0) && (selectionEnd == static_cast<size_t>(_pEditView->execute(SCI_POSITIONFROMLINE, selEndLine))))
+	{
 		selEndLine--;
+	}
 	// count lines which were un-commented to decide if undoStreamComment() shall be called.
 	int nUncomments = 0;
 	//Some Lexers need line-comments at the beginning of a line.
@@ -4176,10 +5333,14 @@ bool Notepad_plus::doBlockComment(comment_mode currCommentMode)
 
 		// empty lines are not commented, unless required by the language.
 		if (lineIndent == lineEnd && !commentEmptyLines)
+		{
 			continue;
+		}
 
 		if (avoidIndent)
+		{
 			lineIndent = lineStart;
+		}
 
 		size_t linebufferSize = lineEnd - lineIndent + 1;
 		TCHAR* linebuf = new TCHAR[linebufferSize];
@@ -4206,14 +5367,20 @@ bool Notepad_plus::doBlockComment(comment_mode currCommentMode)
 					if (i == selStartLine) // first selected line
 					{
 						if (selectionStart > lineIndent + len)
+						{
 							selectionStart -= len;
+						}
 						else if (selectionStart > lineIndent)
+						{
 							selectionStart = lineIndent;
+						}
 					} // ................................................
 					if (i == selEndLine) // last selected line
 					{
 						if (selectionEnd > lineIndent + len)
+						{
 							selectionEnd -= len;
+						}
 						else if (selectionEnd > lineIndent)
 						{
 							selectionEnd = lineIndent;
@@ -4222,7 +5389,9 @@ bool Notepad_plus::doBlockComment(comment_mode currCommentMode)
 						}
 					} // ................................................
 					else // every iteration except the last selected line
+					{
 						selectionEnd -= len;
+					}
 					// ..................................................
 
 					++nUncomments;
@@ -4246,29 +5415,46 @@ bool Notepad_plus::doBlockComment(comment_mode currCommentMode)
 					if (i == selStartLine) // first selected line
 					{
 						if (selectionStart > lineEnd - endLen)
+						{
 							selectionStart = lineEnd - startLen - endLen;
+						}
 						else if (selectionStart > lineIndent + startLen)
+						{
 							selectionStart -= startLen;
+						}
 						else if (selectionStart > lineIndent)
+						{
 							selectionStart = lineIndent;
+						}
 					} // ................................................
 					if (i == selEndLine) // last selected line
 					{
 						if (selectionEnd > lineEnd)
+						{
 							selectionEnd -= (startLen + endLen);
+						}
 						else if (selectionEnd > lineEnd - endLen)
+						{
 							selectionEnd = lineEnd - startLen - endLen;
+						}
 						else if (selectionEnd > lineIndent + startLen)
+						{
 							selectionEnd -= startLen;
+						}
 						else if (selectionEnd > lineIndent)
 						{
 							selectionEnd = lineIndent;
 							if (lineIndent == lineStart && i != selStartLine)
-								++selectionEnd; // avoid caret return in this case
+							{
+								// avoid caret return in this case
+								++selectionEnd;
+							}
 						}
 					} // ................................................
 					else // every iteration except the last selected line
+					{
 						selectionEnd -= (startLen + endLen);
+					}
 					// ..................................................
 
 					++nUncomments;
@@ -4287,15 +5473,21 @@ bool Notepad_plus::doBlockComment(comment_mode currCommentMode)
 				if (i == selStartLine) // first selected line
 				{
 					if (selectionStart >= lineIndent)
+					{
 						selectionStart += comment_length;
+					}
 				} // ................................................
 				if (i == selEndLine) // last selected line
 				{
 					if (selectionEnd >= lineIndent)
+					{
 						selectionEnd += comment_length;
+					}
 				} // ................................................
 				else // every iteration except the last selected line
+				{
 					selectionEnd += comment_length;
+				}
 				// ..................................................
 			}
 			else // isSingleLineAdvancedMode
@@ -4307,17 +5499,25 @@ bool Notepad_plus::doBlockComment(comment_mode currCommentMode)
 				if (i == selStartLine) // first selected line
 				{
 					if (selectionStart >= lineIndent)
+					{
 						selectionStart += advCommentStart_length;
+					}
 				} // ................................................
 				if (i == selEndLine) // last selected line
 				{
 					if (selectionEnd > lineEnd)
+					{
 						selectionEnd += (advCommentStart_length + advCommentEnd_length);
+					}
 					else if (selectionEnd >= lineIndent)
+					{
 						selectionEnd += advCommentStart_length;
+					}
 				} // ................................................
 				else // every iteration except the last selected line
+				{
 					selectionEnd += (advCommentStart_length + advCommentEnd_length);
+				}
 				// ..................................................
 			}
 		} // comment/toggle
@@ -4357,14 +5557,18 @@ bool Notepad_plus::doStreamComment()
 	Buffer * buf = _pEditView->getCurrentBuffer();
 	// Avoid side-effects (e.g. cursor moves number of comment-characters) when file is read-only.
 	if (buf->isReadOnly())
+	{
 		return false;
+	}
 
 	if (buf->getLangType() == L_USER)
 	{
 		UserLangContainer * userLangContainer = NppParameters::getInstance()->getULCFromName(buf->getUserDefineLangName());
 
 		if (!userLangContainer)
+		{
 			return false;
+		}
 
 		// BlockToStreamComment: Next two lines needed to decide, if block-comment can be called below!
 		symbol = extractSymbol('0', '0', userLangContainer->_keywordLists[SCE_USER_KWLIST_COMMENTS]);
@@ -4386,9 +5590,13 @@ bool Notepad_plus::doStreamComment()
 	// BlockToStreamComment: If there is no stream-comment symbol, try the block comment:
 	if ((!commentStart) || (!commentStart[0]) || (commentStart == NULL) || (!commentEnd) || (!commentEnd[0]) || (commentEnd == NULL)) {
 		if (!(!commentLineSymbol || !commentLineSymbol[0] || commentLineSymbol == NULL))
+		{
 			return doBlockComment(cm_comment);
+		}
 		else
-		return false;
+		{
+			return false;
+		}
 	}
 
 	generic_string start_comment(commentStart);
@@ -4464,7 +5672,9 @@ bool Notepad_plus::addCurrentMacro()
 			NativeLangSpeaker *pNativeLangSpeaker = nppParams->getNativeLangSpeaker();
 			generic_string nativeLangShortcutMapperMacro = pNativeLangSpeaker->getNativeLangMenuString(IDM_SETTING_SHORTCUT_MAPPER_MACRO);
 			if (nativeLangShortcutMapperMacro == TEXT(""))
+			{
 				nativeLangShortcutMapperMacro = TEXT("Modify Shortcut/Delete Macro...");
+			}
 
 			::InsertMenu(hMacroMenu, posBase + nbMacro + 2, MF_BYCOMMAND, IDM_SETTING_SHORTCUT_MAPPER_MACRO, nativeLangShortcutMapperMacro.c_str());
         }
@@ -4487,7 +5697,9 @@ bool Notepad_plus::switchToFile(BufferID id)
 	int i = 0;
 	int iView = currentView();
 	if (id == BUFFER_INVALID)
+	{
 		return false;
+	}
 
 	if ((i = _pDocTab->getIndexByBuffer(id)) != -1)
 	{
@@ -4515,7 +5727,9 @@ void Notepad_plus::getTaskListInfo(TaskListInfo *tli)
 	tli->_currentIndex = 0;
 
 	if (!viewVisible(otherView()))
+	{
 		nonCurrentNbDoc = 0;
+	}
 
 	for (int i = 0 ; i < currentNbDoc ; ++i)
 	{
@@ -4545,12 +5759,16 @@ bool Notepad_plus::goToPreviousIndicator(int indicID2Search, bool isWrap) const
 
 	// pre-condition
 	if ((posStart == 0) && (posEnd == docLen - 1))
+	{
 		return false;
+	}
 
     if (posStart <= 0)
 	{
 		if (!isWrap)
+		{
 			return false;
+		}
 
 		isInIndicator = _pEditView->execute(SCI_INDICATORVALUEAT, indicID2Search,  docLen - 1) != 0;
 		posStart = _pEditView->execute(SCI_INDICATORSTART, indicID2Search,  docLen - 1);
@@ -4562,7 +5780,9 @@ bool Notepad_plus::goToPreviousIndicator(int indicID2Search, bool isWrap) const
         if (posStart <= 0)
 		{
 			if (!isWrap)
+			{
 				return false;
+			}
 			posStart = _pEditView->execute(SCI_INDICATORSTART, indicID2Search,  docLen - 1);
 		}
 	}
@@ -4598,12 +5818,16 @@ bool Notepad_plus::goToNextIndicator(int indicID2Search, bool isWrap) const
 
 	// pre-condition
 	if ((posStart == 0) && (posEnd == docLen - 1))
+	{
 		return false;
+	}
 
     if (posEnd >= docLen)
 	{
 		if (!isWrap)
+		{
 			return false;
+		}
 
 		isInIndicator = _pEditView->execute(SCI_INDICATORVALUEAT, indicID2Search,  0) != 0;
 		posEnd = _pEditView->execute(SCI_INDICATOREND, indicID2Search, 0);
@@ -4616,7 +5840,9 @@ bool Notepad_plus::goToNextIndicator(int indicID2Search, bool isWrap) const
         if (posEnd >= docLen)
 		{
 			if (!isWrap)
+			{
 				return false;
+			}
 			posEnd = _pEditView->execute(SCI_INDICATOREND, indicID2Search, 0);
 		}
     }
@@ -4655,19 +5881,21 @@ void Notepad_plus::fullScreenToggle()
 		fullscreenArea.bottom = GetSystemMetrics(SM_CYSCREEN);
 
 		//if (_winVersion != WV_NT)
+//		{
+		//Handle to monitor where fullscreen should go
+		HMONITOR currentMonitor;
+		//Info of that monitor
+		MONITORINFO mi;
+		//Caution, this will not work on windows 95, so probably add some checking of some sorts like Unicode checks, IF 95 were to be supported
+		currentMonitor = ::MonitorFromWindow(_pPublicInterface->getHSelf(), MONITOR_DEFAULTTONEAREST);	//should always be valid monitor handle
+		mi.cbSize = sizeof(MONITORINFO);
+		if (::GetMonitorInfo(currentMonitor, &mi) != FALSE)
 		{
-			HMONITOR currentMonitor;	//Handle to monitor where fullscreen should go
-			MONITORINFO mi;				//Info of that monitor
-			//Caution, this will not work on windows 95, so probably add some checking of some sorts like Unicode checks, IF 95 were to be supported
-			currentMonitor = ::MonitorFromWindow(_pPublicInterface->getHSelf(), MONITOR_DEFAULTTONEAREST);	//should always be valid monitor handle
-			mi.cbSize = sizeof(MONITORINFO);
-			if (::GetMonitorInfo(currentMonitor, &mi) != FALSE)
-			{
-				fullscreenArea = mi.rcMonitor;
-				fullscreenArea.right -= fullscreenArea.left;
-				fullscreenArea.bottom -= fullscreenArea.top;
-			}
+			fullscreenArea = mi.rcMonitor;
+			fullscreenArea.right -= fullscreenArea.left;
+			fullscreenArea.bottom -= fullscreenArea.top;
 		}
+//		}
 
 		//Setup GUI
         int bs = buttonStatus_fullscreen;
@@ -4680,7 +5908,9 @@ void Notepad_plus::fullScreenToggle()
 			//only change the GUI if not already done by postit
 			_beforeSpecialView.isMenuShown = ::SendMessage(_pPublicInterface->getHSelf(), NPPM_ISMENUHIDDEN, 0, 0) != TRUE;
 			if (_beforeSpecialView.isMenuShown)
+			{
 				::SendMessage(_pPublicInterface->getHSelf(), NPPM_HIDEMENU, 0, TRUE);
+			}
 
 			//Hide rebar
 			_rebarTop.display(false);
@@ -4695,7 +5925,9 @@ void Notepad_plus::fullScreenToggle()
 		if (!_beforeSpecialView.isPostIt)
 		{
 			_beforeSpecialView.preStyle = ::SetWindowLongPtr(_pPublicInterface->getHSelf(), GWL_STYLE, WS_POPUP);
-			if (!_beforeSpecialView.preStyle) {	//something went wrong, use default settings
+			//something went wrong, use default settings
+			if (!_beforeSpecialView.preStyle)
+			{
 				_beforeSpecialView.preStyle = WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN;
 			}
 		}
@@ -4734,7 +5966,9 @@ void Notepad_plus::fullScreenToggle()
 		{
 			//only change the GUI if postit isnt active
 			if (_beforeSpecialView.isMenuShown)
+			{
 				::SendMessage(_pPublicInterface->getHSelf(), NPPM_HIDEMENU, 0, FALSE);
+			}
 
 			//Show rebar
 			_rebarTop.display(true);
@@ -4798,11 +6032,17 @@ void Notepad_plus::postItToggle()
 			_beforeSpecialView.isTabbarShown = ::SendMessage(_pPublicInterface->getHSelf(), NPPM_ISTABBARHIDDEN, 0, 0) != TRUE;
 			_beforeSpecialView.isStatusbarShown = nppGUI._statusBarShow;
 			if (nppGUI._statusBarShow)
+			{
 				::SendMessage(_pPublicInterface->getHSelf(), NPPM_HIDESTATUSBAR, 0, TRUE);
+			}
 			if (_beforeSpecialView.isTabbarShown)
+			{
 				::SendMessage(_pPublicInterface->getHSelf(), NPPM_HIDETABBAR, 0, TRUE);
+			}
 			if (!_beforeSpecialView.isAlwaysOnTop)
+			{
 				::SendMessage(_pPublicInterface->getHSelf(), WM_COMMAND, IDM_VIEW_ALWAYSONTOP, 0);
+			}
 		}
 		//Only check these if not fullscreen
         int bs = buttonStatus_postit;
@@ -4814,7 +6054,9 @@ void Notepad_plus::postItToggle()
 		{
 			_beforeSpecialView.isMenuShown = ::SendMessage(_pPublicInterface->getHSelf(), NPPM_ISMENUHIDDEN, 0, 0) != TRUE;
 			if (_beforeSpecialView.isMenuShown)
+			{
 				::SendMessage(_pPublicInterface->getHSelf(), NPPM_HIDEMENU, 0, TRUE);
+			}
 
 			//Hide rebar
 			_rebarTop.display(false);
@@ -4830,7 +6072,9 @@ void Notepad_plus::postItToggle()
 			//Hide window so windows can properly update it
 			::ShowWindow(_pPublicInterface->getHSelf(), SW_HIDE);
 			_beforeSpecialView.preStyle = ::SetWindowLongPtr( _pPublicInterface->getHSelf(), GWL_STYLE, WS_POPUP );
-			if (!_beforeSpecialView.preStyle) {	//something went wrong, use default settings
+			//something went wrong, use default settings
+			if (!_beforeSpecialView.preStyle)
+			{
 				_beforeSpecialView.preStyle = WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN;
 			}
 			//Redraw the window and refresh windowmanager cache, dont do anything else, sizing is done later on
@@ -4864,7 +6108,9 @@ void Notepad_plus::postItToggle()
 		{
 			//only change the these parts of GUI if not already done by fullscreen
 			if (_beforeSpecialView.isMenuShown)
+			{
 				::SendMessage(_pPublicInterface->getHSelf(), NPPM_HIDEMENU, 0, FALSE);
+			}
 
 			//Show rebar
 			_rebarTop.display(true);
@@ -4872,11 +6118,17 @@ void Notepad_plus::postItToggle()
 		}
 		//Do this GUI config always
 		if (_beforeSpecialView.isStatusbarShown)
+		{
 			::SendMessage(_pPublicInterface->getHSelf(), NPPM_HIDESTATUSBAR, 0, FALSE);
+		}
 		if (_beforeSpecialView.isTabbarShown)
+		{
 			::SendMessage(_pPublicInterface->getHSelf(), NPPM_HIDETABBAR, 0, FALSE);
+		}
 		if (!_beforeSpecialView.isAlwaysOnTop)
+		{
 			::SendMessage(_pPublicInterface->getHSelf(), WM_COMMAND, IDM_VIEW_ALWAYSONTOP, 0);
+		}
 
 		//restore window style if not fullscreen
 		if (!_beforeSpecialView.isFullScreen)
@@ -4955,8 +6207,10 @@ void Notepad_plus::doSynScorll(HWND whichView)
 		}
 		pView = &_mainEditView;
     }
-    else
-        return;
+	else
+	{
+		return;
+	}
 
 	pView->scroll(column, line);
 }
@@ -5015,11 +6269,17 @@ void Notepad_plus::getCurrentOpenedFiles(Session & session, bool includUntitledD
 			Buffer * buf = MainFileManager.getBufferByID(bufID);
 
 			if (buf->isUntitled() && buf->docLength() == 0)
+			{
 				continue;
+			}
 
 			if (!includUntitledDoc)
+			{
 				if (!PathFileExists(buf->getFullPathName()))
+				{
 					continue;
+				}
+			}
 
 
 			generic_string	languageName = getLangFromMenu(buf);
@@ -5077,9 +6337,13 @@ bool Notepad_plus::dumpFiles(const TCHAR * outdir, const TCHAR * fileprefix) {
 	{
 		Buffer * docbuf = MainFileManager.getBufferByIndex(i);
 		if (!docbuf->isDirty())	//skip saved documents
+		{
 			continue;
+		}
 		else
+		{
 			somedirty = true;
+		}
 
 		const TCHAR * unitext = (docbuf->getUnicodeMode() != uni8Bit)?TEXT("_utf8"):TEXT("");
 		wsprintf(savePath, TEXT("%s\\%s%03d%s.dump"), outdir, fileprefix, i, unitext);
@@ -5096,34 +6360,48 @@ void Notepad_plus::drawTabbarColoursFromStylerArray()
 {
 	Style *stActText = getStyleFromName(TABBAR_ACTIVETEXT);
 	if (stActText && stActText->_fgColor != -1)
+	{
 		TabBarPlus::setColour(stActText->_fgColor, TabBarPlus::activeText);
+	}
 
 	Style *stActfocusTop = getStyleFromName(TABBAR_ACTIVEFOCUSEDINDCATOR);
 	if (stActfocusTop && stActfocusTop->_fgColor != -1)
+	{
 		TabBarPlus::setColour(stActfocusTop->_fgColor, TabBarPlus::activeFocusedTop);
+	}
 
 	Style *stActunfocusTop = getStyleFromName(TABBAR_ACTIVEUNFOCUSEDINDCATOR);
 	if (stActunfocusTop && stActunfocusTop->_fgColor != -1)
+	{
 		TabBarPlus::setColour(stActunfocusTop->_fgColor, TabBarPlus::activeUnfocusedTop);
+	}
 
 	Style *stInact = getStyleFromName(TABBAR_INACTIVETEXT);
 	if (stInact && stInact->_fgColor != -1)
+	{
 		TabBarPlus::setColour(stInact->_fgColor, TabBarPlus::inactiveText);
+	}
 	if (stInact && stInact->_bgColor != -1)
+	{
 		TabBarPlus::setColour(stInact->_bgColor, TabBarPlus::inactiveBg);
+	}
 }
 
 void Notepad_plus::prepareBufferChangedDialog(Buffer * buffer)
 {
 	// immediately show window if it was minimized before
 	if (::IsIconic(_pPublicInterface->getHSelf()))
+	{
 		::ShowWindow(_pPublicInterface->getHSelf(), SW_RESTORE);
+	}
 
 	// switch to the file that changed
 	int index = _pDocTab->getIndexByBuffer(buffer->getID());
 	int iView = currentView();
 	if (index == -1)
+	{
 		iView = otherView();
+	}
 	activateBuffer(buffer->getID(), iView);	//activate the buffer in the first view possible
 
 	// prevent flickering issue by "manually" clicking and activating the _pEditView
@@ -5138,7 +6416,10 @@ void Notepad_plus::notifyBufferChanged(Buffer * buffer, int mask)
 {
 	// To avoid to crash while MS-DOS style is set as default language,
 	// Checking the validity of current instance is necessary.
-	if (!this) return;
+	if (!this)
+	{
+		return;
+	}
 
 	NppParameters *pNppParam = NppParameters::getInstance();
 	const NppGUI & nppGUI = pNppParam->getNppGUI();
@@ -5165,7 +6446,9 @@ void Notepad_plus::notifyBufferChanged(Buffer * buffer, int mask)
 			{
 				// Since it is being monitored DOC_NEEDRELOAD is going to handle the change.
 				if (buffer->isMonitoringOn())
+				{
 					break;
+				}
 
 				bool autoUpdate = (nppGUI._fileAutoDetection & cdAutoUpdate) ? true : false;
 				if (!autoUpdate || buffer->isDirty())
@@ -5249,7 +6532,9 @@ void Notepad_plus::notifyBufferChanged(Buffer * buffer, int mask)
 	}
 
 	if (_pFileSwitcherPanel)
+	{
 		_pFileSwitcherPanel->setItemIconStatus(buffer);
+	}
 
 	if (!mainActive && !subActive)
 	{
@@ -5259,21 +6544,31 @@ void Notepad_plus::notifyBufferChanged(Buffer * buffer, int mask)
 	if (mask & (BufferChangeLanguage))
 	{
 		if (mainActive)
+		{
 			_autoCompleteMain.setLanguage(buffer->getLangType());
+		}
 		if (subActive)
+		{
 			_autoCompleteSub.setLanguage(buffer->getLangType());
+		}
 	}
 
 	if ((currentView() == MAIN_VIEW) && !mainActive)
+	{
 		return;
+	}
 
 	if ((currentView() == SUB_VIEW) && !subActive)
+	{
 		return;
+	}
 
 	if (mask & (BufferChangeDirty|BufferChangeFilename))
 	{
 		if (mask & BufferChangeFilename)
+		{
 			command(IDM_VIEW_REFRESHTABAR);
+		}
 		checkDocState();
 		setTitle();
 		generic_string dir(buffer->getFullPathName());
@@ -5286,9 +6581,13 @@ void Notepad_plus::notifyBufferChanged(Buffer * buffer, int mask)
 		checkLangsMenu(-1);	//let N++ do search for the item
 		setLangStatus(buffer->getLangType());
 		if (_mainEditView.getCurrentBuffer() == buffer)
+		{
 			_autoCompleteMain.setLanguage(buffer->getLangType());
+		}
 		else if (_subEditView.getCurrentBuffer() == buffer)
+		{
 			_autoCompleteSub.setLanguage(buffer->getLangType());
+		}
 
 		SCNotification scnN;
 		scnN.nmhdr.code = NPPN_LANGCHANGED;
@@ -5322,7 +6621,10 @@ void Notepad_plus::notifyBufferActivated(BufferID bufid, int view)
 	}
 
 	if (view != currentView())
-		return;	//dont care if another view did something
+	{
+		//dont care if another view did something
+		return;
+	}
 
 
 	checkDocState();
@@ -5404,11 +6706,17 @@ std::vector<generic_string> Notepad_plus::loadCommandlineParams(const TCHAR * co
 	for (int i = 0, len = fnss.size(); i < len ; ++i)
 	{
 		const TCHAR *pFn = fnss.getFileName(i);
-		if (!pFn) return std::vector<generic_string>();
+		if (!pFn)
+		{
+			return std::vector<generic_string>();
+		}
 
 		BufferID bufID = doOpen(pFn, recursive, readOnly);
-		if (bufID == BUFFER_INVALID)	//cannot open file
+		//cannot open file
+		if (bufID == BUFFER_INVALID)
+		{
 			continue;
+		}
 
 		lastOpened = bufID;
 
@@ -5476,7 +6784,9 @@ void Notepad_plus::setFindReplaceFolderFilter(const TCHAR *dir, const TCHAR *fil
 			Buffer * buf = _pEditView->getCurrentBuffer();
 			UserLangContainer * userLangContainer = pNppParam->getULCFromName(buf->getUserDefineLangName());
 			if (userLangContainer)
+			{
 				ext = userLangContainer->getExtention();
+			}
 		}
 		else
 		{
@@ -5531,8 +6841,10 @@ vector<generic_string> Notepad_plus::addNppComponents(const TCHAR *destDir, cons
                 // copy to plugins directory
                 generic_string destName = destDirName;
                 destName += ::PathFindFileName(pfns->at(i).c_str());
-                if (::CopyFile(pfns->at(i).c_str(), destName.c_str(), FALSE))
-                    copiedFiles.push_back(destName.c_str());
+				if (::CopyFile(pfns->at(i).c_str(), destName.c_str(), FALSE))
+				{
+					copiedFiles.push_back(destName.c_str());
+				}
             }
         }
     }
@@ -5577,8 +6889,10 @@ vector<generic_string> Notepad_plus::addNppPlugins(const TCHAR *extFilterName, c
 				}
 				PathAppend(destName, nameExt);
 
-                if (::CopyFile(pfns->at(i).c_str(), destName.c_str(), FALSE))
-                    copiedFiles.push_back(destName.c_str());
+				if (::CopyFile(pfns->at(i).c_str(), destName.c_str(), FALSE))
+				{
+					copiedFiles.push_back(destName.c_str());
+				}
             }
         }
     }
@@ -5589,7 +6903,9 @@ void Notepad_plus::setWorkingDir(const TCHAR *dir)
 {
 	NppParameters * params = NppParameters::getInstance();
 	if (params->getNppGUI()._openSaveDir == dir_last)
+	{
 		return;
+	}
 	if (params->getNppGUI()._openSaveDir == dir_userDef)
 	{
 		params->setWorkingDir(NULL);
@@ -5607,22 +6923,28 @@ int Notepad_plus::getLangFromMenuName(const TCHAR * langName)
 	TCHAR menuLangName[menuSize];
 
 	for ( int i = IDM_LANG_C; i <= IDM_LANG_USER; ++i )
-		if ( ::GetMenuString( _mainMenuHandle, i, menuLangName, menuSize, MF_BYCOMMAND ) )
-			if ( !lstrcmp( langName, menuLangName ) )
+		if (::GetMenuString(_mainMenuHandle, i, menuLangName, menuSize, MF_BYCOMMAND))
+		{
+			if (!lstrcmp(langName, menuLangName))
 			{
-				id	= i;
+				id = i;
 				break;
 			}
+		}
 
 	if ( id == 0 )
 	{
-		for ( int i = IDM_LANG_USER + 1; i <= IDM_LANG_USER_LIMIT; ++i )
-			if ( ::GetMenuString( _mainMenuHandle, i, menuLangName, menuSize, MF_BYCOMMAND ) )
-				if ( !lstrcmp( langName, menuLangName ) )
+		for (int i = IDM_LANG_USER + 1; i <= IDM_LANG_USER_LIMIT; ++i)
+		{
+			if (::GetMenuString(_mainMenuHandle, i, menuLangName, menuSize, MF_BYCOMMAND))
+			{
+				if (!lstrcmp(langName, menuLangName))
 				{
-					id	= i;
+					id = i;
 					break;
 				}
+			}
+		}
 	}
 
 	return id;
@@ -5666,13 +6988,17 @@ Style * Notepad_plus::getStyleFromName(const TCHAR *styleName)
 bool Notepad_plus::noOpenedDoc() const
 {
 	if (_mainDocTab.isVisible() && _subDocTab.isVisible())
+	{
 		return false;
+	}
 	if (_pDocTab->nbItem() == 1)
 	{
 		BufferID buffer = _pDocTab->getBufferByIndex(0);
 		Buffer * buf = MainFileManager.getBufferByID(buffer);
 		if (!buf->isDirty() && buf->isUntitled())
+		{
 			return true;
+		}
 	}
 	return false;
 }
@@ -5742,7 +7068,9 @@ bool Notepad_plus::reloadLang()
 		{
 			generic_string localizedMenuName = _nativeLangSpeaker.getNativeLangMenuString(csc.getID());
 			if (!localizedMenuName.empty())
+			{
 				csc.setName(purgeMenuItemString(localizedMenuName.c_str(), true).c_str());
+			}
 		}
 	}
 	_accelerator.updateFullMenu();
@@ -5758,10 +7086,10 @@ bool Notepad_plus::reloadLang()
 	{
 		_nativeLangSpeaker.changeLangTabDrapContextMenu(_tabPopupDropMenu.getMenuHandle());
 	}
-	if (_fileSwitcherMultiFilePopupMenu.isCreated())
-	{
+//	if (_fileSwitcherMultiFilePopupMenu.isCreated())
+//	{
 		//_nativeLangSpeaker.changeLangTabDrapContextMenu(_fileSwitcherMultiFilePopupMenu.getMenuHandle());
-	}
+//	}
 	if (_preference.isCreated())
 	{
 		_nativeLangSpeaker.changePrefereceDlgLang(_preference);
@@ -6440,7 +7768,9 @@ bool isInList(int elem, vector<int> elemList)
 	for (size_t i = 0, len = elemList.size(); i < len; ++i)
 	{
 		if (elem == elemList[i])
+		{
 			return true;
+		}
 	}
 	return false;
 }
@@ -6462,9 +7792,13 @@ DWORD WINAPI Notepad_plus::threadTextPlayer(void *params)
     ::SendMessage(hNpp, NPPM_MENUCOMMAND, 0, IDM_FILE_NEW);
 
 	if (qParams->_encoding == SC_CP_UTF8)
+	{
 		::SendMessage(hNpp, NPPM_MENUCOMMAND, 0, IDM_FORMAT_AS_UTF_8);
+	}
 	else if (qParams->_encoding >= 0)
+	{
 		pCurrentView->execute(SCI_SETCODEPAGE, qParams->_encoding);
+	}
 
 	int langMenuId = (NppParameters::getInstance())->langTypeToCommandID(qParams->_lang);
 	::SendMessage(hNpp, NPPM_MENUCOMMAND, 0, langMenuId);
@@ -6551,7 +7885,9 @@ DWORD WINAPI Notepad_plus::threadTextPlayer(void *params)
 
 		BufferID currentBufID = pCurrentView->getCurrentBufferID();
 		if (currentBufID != targetBufID)
+		{
 			return TRUE;
+		}
 
 		char charToShow[4] = { '\0' };
 		::WideCharToMultiByte(CP_UTF8, 0, text2display + i, 1, charToShow, sizeof(charToShow), NULL, NULL);
@@ -6583,7 +7919,9 @@ DWORD WINAPI Notepad_plus::threadTextPlayer(void *params)
 
 			BufferID currentBufID = pCurrentView->getCurrentBufferID();
 			if (currentBufID != targetBufID)
+			{
 				return TRUE;
+			}
 
 			char charToShow[4] = { '\0' };
 			::WideCharToMultiByte(CP_UTF8, 0, quoter + i, 1, charToShow, sizeof(charToShow), NULL, NULL);
@@ -6615,9 +7953,13 @@ DWORD WINAPI Notepad_plus::threadTextTroller(void *params)
     {
         int ranNum = getRandomNumber(maxRange);
 		if (text2display[i] == ' ' || text2display[i] == '.')
+		{
 			Sleep(ranNum + pauseTimeArray[ranNum%nbPauseTime]);
+		}
 		else
+		{
 			Sleep(ranNum + intervalTimeArray[ranNum%nbIntervalTime]);
+		}
 
 		BufferID currentBufID = pCurrentView->getCurrentBufferID();
 		if (currentBufID != targetBufID)
@@ -6640,7 +7982,9 @@ DWORD WINAPI Notepad_plus::threadTextTroller(void *params)
 		for (size_t j = 0; j < len; ++j)
 		{
 			if (!deleteBack(pCurrentView, targetBufID))
+			{
 				break;
+			}
 		}
 	}
 	else if (delMethod == 1)
@@ -6650,7 +7994,9 @@ DWORD WINAPI Notepad_plus::threadTextTroller(void *params)
 		for (size_t j = 0; j < len; ++j)
 		{
 			if (!deleteForward(pCurrentView, targetBufID))
+			{
 				break;
+			}
 		}
 	}
 	else if (delMethod == 2)
@@ -6658,7 +8004,9 @@ DWORD WINAPI Notepad_plus::threadTextTroller(void *params)
 		for (size_t j = 0, len = lstrlen(text2display); j < len; ++j)
 		{
 			if (!selectBack(pCurrentView, targetBufID))
+			{
 				break;
+			}
 		}
 		int ranNum = getRandomNumber(maxRange);
 		::Sleep(ranNum + pauseTimeArray[ranNum%nbPauseTime]);
@@ -6670,7 +8018,9 @@ DWORD WINAPI Notepad_plus::threadTextTroller(void *params)
 		::SendMessage(pCurrentView->getHSelf(), SCI_SETSELECTION, currentPos, currentPos - lstrlen(text2display));
 		BufferID currentBufID = pCurrentView->getCurrentBufferID();
 		if (currentBufID != targetBufID)
+		{
 			return TRUE;
+		}
 		int ranNum = getRandomNumber(maxRange);
 		::Sleep(ranNum + pauseTimeArray[ranNum%nbPauseTime]);
 		::SendMessage(pCurrentView->getHSelf(), SCI_DELETEBACK, 0, 0);
@@ -6699,7 +8049,9 @@ bool Notepad_plus::deleteForward(ScintillaEditView *pCurrentView, BufferID targe
 	BufferID currentBufID = pCurrentView->getCurrentBufferID();
 	Sleep(ranNum);
 	if (currentBufID != targetBufID)
+	{
 		return false;
+	}
 	::SendMessage(pCurrentView->getHSelf(), SCI_GOTOPOS, ::SendMessage(pCurrentView->getHSelf(), SCI_GETCURRENTPOS, 0, 0) + 1, 0);
 	::SendMessage(pCurrentView->getHSelf(), SCI_DELETEBACK, 0, 0);
 	return true;
@@ -6714,7 +8066,9 @@ bool Notepad_plus::selectBack(ScintillaEditView *pCurrentView, BufferID targetBu
 	auto currentAnchor = ::SendMessage(pCurrentView->getHSelf(), SCI_GETSELECTIONEND, 0, 0);
 	Sleep(ranNum + intervalTimeArray[ranNum%nbIntervalTime]);
 	if (currentBufID != targetBufID)
+	{
 		return false;
+	}
 
 	::SendMessage(pCurrentView->getHSelf(), SCI_SETSELECTION, currentAnchor, --currentPos);
 	return true;
@@ -6724,10 +8078,14 @@ bool Notepad_plus::selectBack(ScintillaEditView *pCurrentView, BufferID targetBu
 int Notepad_plus::getQuoteIndexFrom(const wchar_t* quoter) const
 {
 	if (!quoter)
+	{
 		return -1;
+	}
 
 	if (wcsicmp(quoter, TEXT("Get them all!!!")) == 0)
+	{
 		return -2;
+	}
 
 	int nbQuote = sizeof(quotes) / sizeof(QuoteParams);
 	if (wcsicmp(quoter, TEXT("random")) == 0)
@@ -6739,7 +8097,9 @@ int Notepad_plus::getQuoteIndexFrom(const wchar_t* quoter) const
 	for (int i = 0; i < nbQuote; ++i)
 	{
 		if (wcsicmp(quotes[i]._quoter, quoter) == 0)
+		{
 			return i;
+		}
 	}
 	return -1;
 }
@@ -6772,7 +8132,9 @@ void Notepad_plus::launchDocumentBackupTask()
 {
 	HANDLE hThread = ::CreateThread(NULL, 0, backupDocument, NULL, 0, NULL);
 	if (hThread)
+	{
 		::CloseHandle(hThread);
+	}
 }
 
 
@@ -6783,21 +8145,29 @@ DWORD WINAPI Notepad_plus::backupDocument(void * /*param*/)
 	{
 		NppParameters *nppParam = NppParameters::getInstance();
 		if (!nppParam)
+		{
 			return FALSE;
+		}
 
 		size_t timer = nppParam->getNppGUI()._snapshotBackupTiming;
 		if (timer < 1000)
+		{
 			timer = 1000;
+		}
 
 		::Sleep(DWORD(timer));
 
 		nppParam = NppParameters::getInstance();
 		if (!nppParam)
+		{
 			return FALSE;
+		}
 
 		isSnapshotMode = nppParam->getNppGUI().isSnapshotMode();
 		if (!isSnapshotMode)
+		{
 			break;
+		}
 
 		::PostMessage(Notepad_plus_Window::gNppHWND, NPPM_INTERNAL_SAVEBACKUP, 0, 0);
 	}
@@ -6826,12 +8196,16 @@ bool Notepad_plus::undoStreamComment(bool tryBlockComment)
 	Buffer * buf = _pEditView->getCurrentBuffer();
 	//-- Avoid side-effects (e.g. cursor moves number of comment-characters) when file is read-only.
 	if (buf->isReadOnly())
+	{
 		return false;
+	}
 	if (buf->getLangType() == L_USER)
 	{
 		UserLangContainer * userLangContainer = NppParameters::getInstance()->getULCFromName(buf->getUserDefineLangName());
 		if (!userLangContainer)
+		{
 			return false;
+		}
 
 		symbol = extractSymbol('0', '0', userLangContainer->_keywordLists[SCE_USER_KWLIST_COMMENTS]);
 		commentLineSymbol = symbol.c_str();
@@ -6851,9 +8225,13 @@ bool Notepad_plus::undoStreamComment(bool tryBlockComment)
 	// BlockToStreamComment: If there is no stream-comment symbol and we came not from doBlockComment, try the block comment:
 	if ((!commentStart) || (!commentStart[0]) || (commentStart == NULL) || (!commentEnd) || (!commentEnd[0]) || (commentEnd == NULL)) {
 		if (!(!commentLineSymbol || !commentLineSymbol[0] || commentLineSymbol == NULL) && tryBlockComment)
+		{
 			return doBlockComment(cm_uncomment);
+		}
 		else
+		{
 			return false;
+		}
 	}
 
 	generic_string start_comment(commentStart);
@@ -6944,7 +8322,9 @@ bool Notepad_plus::undoStreamComment(bool tryBlockComment)
 			}
 			//-- Finally, if there is no stream-comment, return
 			else
+			{
 				return retVal;
+			}
 		}
 
 		//-- Ok, there are valid start-comment and valid end-comment around the caret-position.
@@ -6969,7 +8349,9 @@ bool Notepad_plus::undoStreamComment(bool tryBlockComment)
 		//-- Get character after start-comment to decide, if there is a white character after the start-comment, which will be removed too!
 		_pEditView->getGenericText(charbuf, charbufLen, posStartComment+startCommentLength, posStartComment+startCommentLength+1);
 		if (generic_strncmp(charbuf, white_space.c_str(), white_space.length()) == 0)
-			startCommentLength +=1;
+		{
+			startCommentLength += 1;
+		}
 
 		//-- Delete starting stream-comment string ---------
 		_pEditView->execute(SCI_SETSEL, posStartComment, posStartComment + startCommentLength);
@@ -6981,21 +8363,33 @@ bool Notepad_plus::undoStreamComment(bool tryBlockComment)
 		//   selectionStart
 		if (selectionStart > posStartComment)
 		{
-			if (selectionStart >= posStartComment+startCommentLength)
+			if (selectionStart >= posStartComment + startCommentLength)
+			{
 				selectionStartMove = -static_cast<int>(startCommentLength);
+			}
 			else
+			{
 				selectionStartMove = -static_cast<int>(selectionStart - posStartComment);
+			}
 		}
 		else
+		{
 			selectionStartMove = 0;
+		}
 
 		//   selectionEnd
-		if (selectionEnd >= posEndComment+endCommentLength)
-			selectionEndMove = -static_cast<int>(startCommentLength+endCommentLength);
+		if (selectionEnd >= posEndComment + endCommentLength)
+		{
+			selectionEndMove = -static_cast<int>(startCommentLength + endCommentLength);
+		}
 		else if (selectionEnd <= posEndComment)
+		{
 			selectionEndMove = -static_cast<int>(startCommentLength);
+		}
 		else
+		{
 			selectionEndMove = -static_cast<int>(startCommentLength + (selectionEnd - posEndComment));
+		}
 
 		//-- Reset selection of text without deleted stream-comment-string
 		if (move_caret)
@@ -7017,9 +8411,13 @@ void Notepad_plus::monitoringStartOrStopAndUpdateUI(Buffer* pBuf, bool isStartin
 	if (pBuf)
 	{
 		if (isStarting)
+		{
 			pBuf->startMonitoring();
+		}
 		else
+		{
 			pBuf->stopMonitoring();
+		}
 
 		checkMenuItem(IDM_VIEW_MONITORING, isStarting);
 		_toolBar.setCheck(IDM_VIEW_MONITORING, isStarting);

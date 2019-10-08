@@ -76,16 +76,22 @@ void StatusBar::init(HINSTANCE hInst, HWND hPere, int nbParts)
 		_hParent, nullptr, _hInst, 0);
 
 	if (!_hSelf)
+	{
 		throw std::runtime_error("StatusBar::init : CreateWindowEx() function return null");
+	}
 
 
 	_partWidthArray.clear();
 	if (nbParts > 0)
+	{
 		_partWidthArray.resize(nbParts, defaultPartWidth);
+	}
 
     // Allocate an array for holding the right edge coordinates.
 	if (_partWidthArray.size())
+	{
 		_lpParts = new int[_partWidthArray.size()];
+	}
 
 	RECT rc;
 	::GetClientRect(_hParent, &rc);

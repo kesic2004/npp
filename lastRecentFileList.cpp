@@ -102,25 +102,74 @@ void LastRecentFileList::updateMenu()
 		NativeLangSpeaker *pNativeLangSpeaker = pNppParam->getNativeLangSpeaker();
 
 		generic_string recentFileList = pNativeLangSpeaker->getSpecialMenuEntryName("RecentFiles");
+
+		/***************************************************************
+		 * #define    IDM                              40000           *
+		 * #define    IDM_FILE                         (IDM + 1000)    *
+		 * #define    IDM_FILE_RESTORELASTCLOSEDFILE   (IDM_FILE + 21) *
+		 ***************************************************************/
 		generic_string openRecentClosedFile = pNativeLangSpeaker->getNativeLangMenuString(IDM_FILE_RESTORELASTCLOSEDFILE);
+
+		/*******************************************************************
+		 * #define    IDM                                  40000           *
+		 * #define    IDM_EDIT                             (IDM + 2000)    *
+		 * #define    IDM_OPEN_ALL_RECENT_FILE             (IDM_EDIT + 40) *
+		 *******************************************************************/
 		generic_string openAllFiles = pNativeLangSpeaker->getNativeLangMenuString(IDM_OPEN_ALL_RECENT_FILE);
+
+		/*******************************************************************
+		 * #define    IDM                                  40000           *
+		 * #define    IDM_EDIT                             (IDM + 2000)    *
+		 * #define    IDM_CLEAN_RECENT_FILE_LIST           (IDM_EDIT + 41) *
+		 *******************************************************************/
 		generic_string cleanFileList = pNativeLangSpeaker->getNativeLangMenuString(IDM_CLEAN_RECENT_FILE_LIST);
 
 		if (recentFileList == TEXT(""))
+		{
 			recentFileList = TEXT("&Recent Files");
+		}
 		if (openRecentClosedFile == TEXT(""))
+		{
 			openRecentClosedFile = TEXT("Restore Recent Closed File");
+		}
 		if (openAllFiles == TEXT(""))
+		{
 			openAllFiles = TEXT("Open All Recent Files");
+		}
 		if (cleanFileList == TEXT(""))
+		{
 			cleanFileList = TEXT("Empty Recent Files List");
+		}
 
 		if (!isSubMenuMode())
+		{
 			::InsertMenu(_hMenu, _posBase + 0, MF_BYPOSITION, static_cast<UINT_PTR>(-1), 0);
+		}
 
+		/***************************************************************
+		 * #define    IDM                              40000           *
+		 * #define    IDM_FILE                         (IDM + 1000)    *
+		 * #define    IDM_FILE_RESTORELASTCLOSEDFILE   (IDM_FILE + 21) *
+		 ***************************************************************/
 		::InsertMenu(_hMenu, _posBase + 1, MF_BYPOSITION, IDM_FILE_RESTORELASTCLOSEDFILE, openRecentClosedFile.c_str());
+
+		/*******************************************************************
+		 * #define    IDM                                  40000           *
+		 * #define    IDM_EDIT                             (IDM + 2000)    *
+		 * #define    IDM_OPEN_ALL_RECENT_FILE             (IDM_EDIT + 40) *
+		 *******************************************************************/
 		::InsertMenu(_hMenu, _posBase + 2, MF_BYPOSITION, IDM_OPEN_ALL_RECENT_FILE, openAllFiles.c_str());
+
+		/*******************************************************************
+		 * #define    IDM                                  40000           *
+		 * #define    IDM_EDIT                             (IDM + 2000)    *
+		 * #define    IDM_CLEAN_RECENT_FILE_LIST           (IDM_EDIT + 41) *
+		 *******************************************************************/
 		::InsertMenu(_hMenu, _posBase + 3, MF_BYPOSITION, IDM_CLEAN_RECENT_FILE_LIST, cleanFileList.c_str());
+
+		/****************************************
+		 * static_cast<UINT_PTR>(-1) == 2^64 -1 *
+		 ****************************************/
 		::InsertMenu(_hMenu, _posBase + 4, MF_BYPOSITION, static_cast<UINT_PTR>(-1), 0);
 		_hasSeparators = true;
 
@@ -132,11 +181,11 @@ void LastRecentFileList::updateMenu()
 	}
 	else if (_hasSeparators && _size == 0) 	//remove separators
 	{
-		::RemoveMenu(_hMenu, _posBase + 4, MF_BYPOSITION);
-		::RemoveMenu(_hMenu, IDM_CLEAN_RECENT_FILE_LIST, MF_BYCOMMAND);
-		::RemoveMenu(_hMenu, IDM_OPEN_ALL_RECENT_FILE, MF_BYCOMMAND);
+		::RemoveMenu(_hMenu, _posBase + 4,                   MF_BYPOSITION);
+		::RemoveMenu(_hMenu, IDM_CLEAN_RECENT_FILE_LIST,     MF_BYCOMMAND);
+		::RemoveMenu(_hMenu, IDM_OPEN_ALL_RECENT_FILE,       MF_BYCOMMAND);
 		::RemoveMenu(_hMenu, IDM_FILE_RESTORELASTCLOSEDFILE, MF_BYCOMMAND);
-		::RemoveMenu(_hMenu, _posBase + 0, MF_BYPOSITION);
+		::RemoveMenu(_hMenu, _posBase + 0,                   MF_BYPOSITION);
 		_hasSeparators = false;
 
 		if (isSubMenuMode())
@@ -157,6 +206,7 @@ void LastRecentFileList::updateMenu()
 	{
 		::RemoveMenu(_hMenu, _lrfl.at(i)._id, MF_BYCOMMAND);
 	}
+
 	//Then readd them, so everything stays in sync
 	for (int j = 0; j < _size; ++j)
 	{
@@ -169,19 +219,28 @@ void LastRecentFileList::updateMenu()
 void LastRecentFileList::add(const TCHAR *fn) 
 {
 	if (_userMax == 0 || _locked)
+	{
 		return;
+	}
 
 	RecentItem itemToAdd(fn);
 
 	int index = find(fn);
-	if (index != -1) {	//already in list, bump upwards
+
+	//already in list, bump upwards
+	if (index != -1)
+	{
 		remove(index);
 	}
 
-	if (_size == _userMax) {
+	if (_size == _userMax)
+	{
 		itemToAdd._id = _lrfl.back()._id;
-		_lrfl.pop_back();	//remove oldest
-	} else {
+		//remove oldest
+		_lrfl.pop_back();
+	}
+	else
+	{
 		itemToAdd._id = popFirstAvailableID();
 		++_size;
 	}
@@ -193,13 +252,17 @@ void LastRecentFileList::remove(const TCHAR *fn)
 { 
 	int index = find(fn);
 	if (index != -1)
+	{
 		remove(index);
+	}
 };
 
 void LastRecentFileList::remove(size_t index) 
 {
 	if (_size == 0 || _locked)
+	{
 		return;
+	}
 	if (index < _lrfl.size())
 	{
 		::RemoveMenu(_hMenu, _lrfl.at(index)._id, MF_BYCOMMAND);
@@ -214,7 +277,9 @@ void LastRecentFileList::remove(size_t index)
 void LastRecentFileList::clear() 
 {
 	if (_size == 0)
+	{
 		return;
+	}
 
 	for (int i = (_size-1); i >= 0; i--) 
 	{
@@ -236,7 +301,9 @@ generic_string & LastRecentFileList::getItem(int id)
 			break;
 	}
 	if (i == _size)
+	{
 		i = 0;
+	}
 	return _lrfl.at(i)._name;	//if not found, return first
 };
 

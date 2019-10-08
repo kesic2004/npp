@@ -44,11 +44,10 @@ namespace // anonymous
 
 	struct PaintLocker final
 	{
-		explicit PaintLocker(HWND handle)
-			: handle(handle)
+		explicit PaintLocker(HWND handle) : handle(handle)
 		{
 			// disallow drawing on the window
-			LockWindowUpdate(handle);
+			::LockWindowUpdate(handle);
 		}
 
 		~PaintLocker()
@@ -57,8 +56,8 @@ namespace // anonymous
 			LockWindowUpdate(NULL);
 
 			// force re-draw
-			InvalidateRect(handle, nullptr, TRUE);
-			RedrawWindow(handle, nullptr, NULL, RDW_ERASE | RDW_ALLCHILDREN | RDW_FRAME | RDW_INVALIDATE);
+			::InvalidateRect(handle, nullptr, TRUE);
+			::RedrawWindow(handle, nullptr, NULL, RDW_ERASE | RDW_ALLCHILDREN | RDW_FRAME | RDW_INVALIDATE);
 		}
 
 		HWND handle;
@@ -74,11 +73,17 @@ void Notepad_plus_Window::init(HINSTANCE hInst, HWND parent, const TCHAR *cmdLin
 {
 	time_t timestampBegin = 0;
 	if (cmdLineParams->_showLoadingTime)
+	{
 		timestampBegin = time(NULL);
+	}
+
 	/****************************************
 	 * 设置当前实例句柄和父窗口(实际是空值) *
 	 ****************************************/
 	Window::init(hInst, parent);
+	/*
+	 * 主窗口类
+	 */
 	WNDCLASS nppClass;
 
 	nppClass.style = CS_BYTEALIGNWINDOW | CS_DBLCLKS;
@@ -88,14 +93,14 @@ void Notepad_plus_Window::init(HINSTANCE hInst, HWND parent, const TCHAR *cmdLin
 	 * 实现主窗口中的所有子窗口的初始化，   *
 	 * 当前窗口句柄和当前对象地址的绑定     *
 	 ****************************************/
-	nppClass.lpfnWndProc = Notepad_plus_Proc;
-	nppClass.cbClsExtra = 0;
-	nppClass.cbWndExtra = 0;
-	nppClass.hInstance = _hInst;
-	nppClass.hIcon = ::LoadIcon(hInst, MAKEINTRESOURCE(IDI_M30ICON));
-	nppClass.hCursor = ::LoadCursor(NULL, IDC_ARROW);
+	nppClass.lpfnWndProc   = Notepad_plus_Proc;
+	nppClass.cbClsExtra    = 0;
+	nppClass.cbWndExtra    = 0;
+	nppClass.hInstance     = _hInst;
+	nppClass.hIcon         = ::LoadIcon(hInst, MAKEINTRESOURCE(IDI_M30ICON));
+	nppClass.hCursor       = ::LoadCursor(NULL, IDC_ARROW);
 	nppClass.hbrBackground = ::CreateSolidBrush(::GetSysColor(COLOR_MENU));
-	nppClass.lpszMenuName = MAKEINTRESOURCE(IDR_M30_MENU);
+	nppClass.lpszMenuName  = MAKEINTRESOURCE(IDR_M30_MENU);
 	nppClass.lpszClassName = _className;
 
 	_isPrelaunch = cmdLineParams->_isPreLaunch;
@@ -109,22 +114,34 @@ void Notepad_plus_Window::init(HINSTANCE hInst, HWND parent, const TCHAR *cmdLin
 	NppGUI & nppGUI = const_cast<NppGUI &>(pNppParams->getNppGUI());
 
 	if (cmdLineParams->_isNoPlugin)
+	{
 		_notepad_plus_plus_core._pluginsManager.disable();
+	}
 
 	/****************************************************************
 	 * 初始化当前窗口实例句柄，并把当前对象的指针传递给窗口类的对象 *
 	 ****************************************************************/
-	_hSelf = ::CreateWindowEx(
+	_hSelf = ::CreateWindowEx
+	(
 		WS_EX_ACCEPTFILES | (_notepad_plus_plus_core._nativeLangSpeaker.isRTL()?WS_EX_LAYOUTRTL:0),
 		_className,
-		TEXT("Notepad++"),/*默认窗口的标题*/
+		/*默认窗口的标题*/
+		TEXT("Notepad++"),
 		(WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN),
-		// CreateWindowEx bug : set all 0 to walk around the pb
+		/********************************************************
+		 * CreateWindowEx bug : set all 0 to walk around the pb *
+		 ********************************************************/
 		0, 0, 0, 0,
-		_hParent, nullptr, _hInst,
-		(LPVOID) this);		// pass the ptr of this instantiated object
-							// for retrieve it in Notepad_plus_Proc from
-							// the CREATESTRUCT.lpCreateParams afterward.
+		_hParent,
+		nullptr,
+		_hInst,
+		/**********************************************
+		 * pass the ptr of this instantiated object	  *
+		 * for retrieve it in Notepad_plus_Proc from  *
+		 * the CREATESTRUCT.lpCreateParams afterward. *
+		 **********************************************/
+		(LPVOID) this
+	);
 
 	if (NULL == _hSelf)
 		throw std::runtime_error("Notepad_plus_Window::init : CreateWindowEx() function return null");

@@ -105,11 +105,11 @@ enum UniMode
 
 enum ChangeDetect
 {
-	cdDisabled = 0x0,
+	cdDisabled   = 0x0,
 	cdEnabledOld = 0x01,
 	cdEnabledNew = 0x02,
 	cdAutoUpdate = 0x04,
-	cdGo2end = 0x08
+	cdGo2end     = 0x08
 };
 
 enum BackupFeature
@@ -304,39 +304,101 @@ struct Session
 };
 
 
+/*
+ * 存储Shell参数
+ */
 struct CmdLineParams
 {
+	/*
+	 * 主窗口的坐标
+	 */
 	POINT _point;
 
+	/*
+	 * 所编辑文件的内容所对应的Lang，默认是L_EXTERNAL
+	 */
 	LangType _langType = L_EXTERNAL;
 
-	int _line2go = -1;
+	/*
+	 * 启动后将光标移动到所打开文件的某个具体的行
+	 */
+	int _line2go   = -1;
+	/*
+	 * 启动后将光标移动到所打开文件的某个具体的列
+	 */
 	int _column2go = -1;
-	int _pos2go = -1;
+	/*
+	 * 启动后将光标移动到所打开文件的某个具体的字节的位置(如第3个字节)
+	 */
+	int _pos2go    = -1;
 
 	/**********************************************************
-	* -1: initial value  1: slow  2: fast  3: speed of light *
-	**********************************************************/
+	 * -1: initial value  1: slow  2: fast  3: speed of light *
+	 * 打字速度                                               *
+	 **********************************************************/
 	int _ghostTypingSpeed = -1;
 
+	/*
+	 * 国际化文件的文件名
+	 */
 	generic_string _localizationPath;
+	/*
+	 * qt qn qh
+	 */
 	generic_string _easterEggName;
 
 	unsigned char _quoteType = '\0';
 
-	bool _isNoPlugin = false;
-	bool _isReadOnly = false;
-	bool _isNoSession = false;
-	bool _isNoTab = false;
-	bool _isPreLaunch = false;
+	/*
+	 * 是否禁用plugin，true : 禁用，默认false
+	 */
+	bool _isNoPlugin      = false;
+	/*
+	 * 是否进入不可编辑模式，true : 进入不可编辑模式，默认false
+	 */
+	bool _isReadOnly      = false;
+	/*
+	 * 是否加载上一次的会话，true : 不加载上一次的会话，默认false
+	 */
+	bool _isNoSession     = false;
+	/*
+	 * 是否允许制表符，true : 不允许，默认false
+	 */
+	bool _isNoTab         = false;
+	/*
+	 * 是否以沙盒模式启动，true : 以沙盒模式启动，默认false
+	 */
+	bool _isPreLaunch     = false;
+	/*
+	 * 是否显示启动时间，true : 显示启动时间，默认false
+	 */
 	bool _showLoadingTime = false;
-	bool _alwaysOnTop = false;
+	/*
+	 * 窗口是最前显示，true : 窗口最前显示，默认false
+	 */
+	bool _alwaysOnTop     = false;
 
+	/*
+	 * 窗口的x坐标是否有效，true : 有效，默认false
+	 */
 	bool _isPointXValid = false;
+	/*
+	 * 窗口的y坐标是否有效，true : 有效，默认false
+	 */
 	bool _isPointYValid = false;
 
+	/*
+	 * 是否指定会话文件，true : 指定会话文件，默认false
+	 */
 	bool _isSessionFile = false;
+
+	/*
+	 * -r
+	 */
 	bool _isRecursive = false;
+	/*
+	 * -openFoldersAsWorkspace
+	 */
 	bool _openFoldersAsWorkspace = false;
 
 
@@ -355,33 +417,34 @@ struct CmdLineParams
 
 /****************************************************************************************************
  * A POD class to send CmdLineParams through WM_COPYDATA and to Notepad_plus::loadCommandlineParams *
+ * 具体参见：CmdLineParams                                                                          *
  ****************************************************************************************************/
 struct CmdLineParamsDTO
 {
-	bool _isReadOnly = false;
-	bool _isNoSession = false;
-	bool _isSessionFile = false;
-	bool _isRecursive = false;
-	bool _openFoldersAsWorkspace = false;
+	LangType _langType = L_EXTERNAL;
 
 	int _line2go = 0;
 	int _column2go = 0;
 	int _pos2go = 0;
 
-	LangType _langType = L_EXTERNAL;
+	bool _isReadOnly             = false;
+	bool _isNoSession            = false;
+	bool _isSessionFile          = false;
+	bool _isRecursive            = false;
+	bool _openFoldersAsWorkspace = false;
 
 	static CmdLineParamsDTO FromCmdLineParams(const CmdLineParams & params)
 	{
 		CmdLineParamsDTO dto;
-		dto._isReadOnly = params._isReadOnly;
-		dto._isNoSession = params._isNoSession;
-		dto._isSessionFile = params._isSessionFile;
-		dto._isRecursive = params._isRecursive;
+		dto._isReadOnly             = params._isReadOnly;
+		dto._isNoSession            = params._isNoSession;
+		dto._isSessionFile          = params._isSessionFile;
+		dto._isRecursive            = params._isRecursive;
 		dto._openFoldersAsWorkspace = params._openFoldersAsWorkspace;
 
-		dto._line2go = params._line2go;
+		dto._line2go   = params._line2go;
 		dto._column2go = params._column2go;
-		dto._pos2go = params._pos2go;
+		dto._pos2go    = params._pos2go;
 		
 		dto._langType = params._langType;
 
@@ -797,12 +860,12 @@ private :
 
 struct NewDocDefaultSettings final
 {
-	EolType  _format         = EolType::osdefault;
-	UniMode  _unicodeMode    = uniCookie;
-	bool     _openAnsiAsUtf8 = true;
-	LangType _lang           = L_TEXT;
 	// -1 when not using
 	int      _codepage       = -1;
+	EolType  _format         = EolType::osdefault;
+	UniMode  _unicodeMode    = uniCookie;
+	LangType _lang           = L_TEXT;
+	bool     _openAnsiAsUtf8 = true;
 };
 
 
@@ -1013,56 +1076,85 @@ public:
 };
 
 
+/********************
+ * 界面显示相关参数 *
+ ********************/
 struct NppGUI final
 {
 public:
 	NppGUI()
 	{
-		_appPos.left = 0;
-		_appPos.top = 0;
-		_appPos.right = 1100;
+		_appPos.left   = 0;
+		_appPos.top    = 0;
+		_appPos.right  = 1100;
 		_appPos.bottom = 700;
 
-		_defaultDir[0] = 0;
+		_defaultDir[0]    = 0;
 		_defaultDirExp[0] = 0;
 	}
 
 public:
-	RECT _appPos;
-
-public:
+	/*
+	 * 新文档的默认设置
+	 */
 	NewDocDefaultSettings _newDocDefaultSettings;
 
-public:
-	toolBarStatusType _toolBarStatus = TB_STANDARD;
+	RECT _appPos;
+
+	size_t _snapshotBackupTiming = 7000;
+
+	enum AutocStatus { autoc_none, autoc_func, autoc_word, autoc_both };
+	size_t             _autocFromLen   = 1;
+	PrintSettings      _printSettings;
+	BackupFeature      _backup         = bak_none;
+	DockingManagerData _dockingData;
+	GlobalOverride     _globalOverride;
+	AutocStatus        _autocStatus    = autoc_both;
+	MatchedPairConf    _matchedPairConf;
 
 public:
+	struct AutoUpdateOptions
+	{
+		Date _nextUpdateDate;
+		int _intervalDays = 15;
+		bool _doAutoUpdate = true;
+		AutoUpdateOptions() : _nextUpdateDate(Date())
+		{
+		}
+	}
+	_autoUpdateOpt;
+
+	toolBarStatusType _toolBarStatus = TB_STANDARD;
+
 	std::vector<LangMenuItem> _excludedLangList;
 
 public:
 	/********************************
-	 * 1st bit : draw top bar;		*
-	 * 2nd bit : draw inactive tabs	*
-	 * 3rd bit : enable drag & drop	*
-	 * 4th bit : reduce the height	*
-	 * 5th bit : enable vertical	*
-	 * 6th bit : enable multiline	*
-	 * 								*
-	 * 0:don't draw;				*
-	 * 1:draw top bar				*
-	 * 2:draw inactive tabs			*
-	 * 3:draw both					*
-	 * 7:draw both+drag&drop		*
+	 * 显示状态栏的方式             *
+	 ********************************/
+	/********************************
+	 * 1st bit : draw top bar;       *
+	 * 2nd bit : draw inactive tabs  *
+	 * 3rd bit : enable drag & drop  *
+	 * 4th bit : reduce the height   *
+	 * 5th bit : enable vertical     *
+	 * 6th bit : enable multiline    *
+	 *                               *
+	 * 0:don't draw;                 *
+	 * 1:draw top bar                *
+	 * 2:draw inactive tabs          *
+	 * 3:draw both                   *
+	 * 7:draw both + drag&drop       *
 	 ********************************/
 	int _tabStatus = (TAB_DRAWTOPBAR | TAB_DRAWINACTIVETAB | TAB_DRAGNDROP | TAB_REDUCE | TAB_CLOSEBUTTON);
 
-public:
 	int _userDefineDlgStatus = UDD_DOCKED;
 
-public:
+	/********************************
+	 * TAB的长度                    *
+	 ********************************/
 	int _tabSize             = 4;
 
-public:
 	int _fileAutoDetection = cdEnabledNew;
 
 public:
@@ -1073,20 +1165,60 @@ public:
 	 ****************************/
 	int _styleURL = 2;
 
+	MultiInstSetting _multiInstSetting = monoInst;
+
+	OpenSaveDirSetting _openSaveDir    = dir_followCurrent;
+
+	enum SearchEngineChoice { se_custom = 0, se_duckDuckGo = 1, se_google = 2, se_bing = 3, se_yahoo = 4, se_stackoverflow = 5 };
+	SearchEngineChoice _searchEngineChoice = se_google;
+
+	int _caretBlinkRate = 600;
+	int _caretWidth     = 1;
+
 public:
 	std::string _customWordChars;
 
+	generic_string _definedSessionExt;
+	generic_string _definedWorkspaceExt;
+
+	generic_string _themeName;
+
+	// this option will never be read/written from/to config.xml
+	generic_string _cloudPath;
+
+	generic_string _searchEngineCustom;
+
+	generic_string     _backupDir;
+
 public:
-	char _leftmostDelimiter  = '(';
+	TCHAR _defaultDir[MAX_PATH];
+
+	//expanded environment variables
+	TCHAR _defaultDirExp[MAX_PATH];
+
+	// this option will never be read/written from/to config.xml
+	unsigned char _availableClouds = '\0';
+
+public:
+	char _leftmostDelimiter = '(';
 	char _rightmostDelimiter = ')';
 
 public:
-	bool _toolbarShow   = true;
+	/******************
+	* 是否显示工具栏 *
+	******************/
+	bool _toolbarShow = true;
+	/******************
+	* 是否显示状态栏 *
+	******************/
 	bool _statusBarShow = true;
-	bool _menuBarShow   = true;
+	/******************
+	* 是否显示菜单栏 *
+	******************/
+	bool _menuBarShow = true;
 
 public:
-	bool _splitterPos        = POS_VERTICAL;
+	bool _splitterPos = POS_VERTICAL;
 
 public:
 	bool _tabReplacedBySpace = false;
@@ -1095,45 +1227,49 @@ public:
 	bool _checkHistoryFiles = false;
 
 public:
-	bool _isMaximized                 = false;
-	bool _isMinimizedToTray           = false;
+	bool _isMaximized       = false;
+	bool _isMinimizedToTray = false;
 
 public:
 	/*****************************************************************
 	 * remember next session boolean will be written in the settings *
 	 *****************************************************************/
-	bool _rememberLastSession         = true;
+	bool _rememberLastSession = true;
 
 	/**********************************************************
 	 * used for if -nosession is indicated on the launch time *
 	 **********************************************************/
 	bool _isCmdlineNosessionActivated = false;
-	bool _detectEncoding              = true;
-	bool _doTaskList                  = true;
-	bool _maitainIndent               = true;
-	bool _enableSmartHilite           = true;
+	bool _detectEncoding = true;
+	bool _doTaskList = true;
+	bool _maitainIndent = true;
+	bool _enableSmartHilite = true;
 
 public:
-	bool _smartHiliteCaseSensitive   = false;
-	bool _smartHiliteWordOnly        = true;
+	bool _smartHiliteCaseSensitive = false;
+	bool _smartHiliteWordOnly = true;
 	bool _smartHiliteUseFindSettings = false;
-	bool _smartHiliteOnAnotherView   = false;
+	bool _smartHiliteOnAnotherView = false;
 
 public:
-	bool _disableSmartHiliteTmp   = false;
-	bool _enableTagsMatchHilite   = true;
-	bool _enableTagAttrsHilite    = true;
+	bool _disableSmartHiliteTmp = false;
+	bool _enableTagsMatchHilite = true;
+	bool _enableTagAttrsHilite = true;
 	bool _enableHiliteNonHTMLZone = false;
 	bool _styleMRU = true;
 
 public:
 	bool _delimiterSelectionOnEntireDocument = false;
-	bool _backSlashIsEscapeCharacterForSql   = true;
+	bool _backSlashIsEscapeCharacterForSql = true;
 
 public:
 	bool _isWordCharDefault = true;
 
 public:
+	/**************************************
+	 * 主菜单中的语言菜单是否分类进行展示 *
+	 * 值为真：分类进行展式               *
+	**************************************/
 	bool _isLangMenuCompact = true;
 
 public:
@@ -1143,90 +1279,7 @@ public:
 	bool _autocIgnoreNumbers = true;
 
 public:
-	bool _funcParams         = true;
-
-public:
-	void setTabReplacedBySpace(bool b)
-	{
-		_tabReplacedBySpace = b;
-	}
-
-public:
-	const NewDocDefaultSettings & getNewDocDefaultSettings() const
-	{
-		return _newDocDefaultSettings;
-	}
-
-public:
-	enum AutocStatus{autoc_none, autoc_func, autoc_word, autoc_both};
-
-public:
-	PrintSettings      _printSettings;
-	BackupFeature      _backup           = bak_none;
-	generic_string     _backupDir;
-	DockingManagerData _dockingData;
-	GlobalOverride     _globalOverride;
-	AutocStatus        _autocStatus      = autoc_both;
-	MatchedPairConf    _matchedPairConf;
-	size_t             _autocFromLen     = 1;
-
-public:
-	generic_string _definedSessionExt;
-	generic_string _definedWorkspaceExt;
-
-	struct AutoUpdateOptions
-	{
-		bool _doAutoUpdate = true;
-		int _intervalDays  = 15;
-		Date _nextUpdateDate;
-		AutoUpdateOptions(): _nextUpdateDate(Date())
-		{
-		}
-	}
-	_autoUpdateOpt;
-
-	bool isSnapshotMode() const
-	{
-		return _isSnapshotMode && _rememberLastSession && !_isCmdlineNosessionActivated;
-	}
-
-public:
-	MultiInstSetting _multiInstSetting = monoInst;
-
-public:
-	size_t _snapshotBackupTiming = 7000;
-
-public:
-	OpenSaveDirSetting _openSaveDir = dir_followCurrent;
-
-public:
-	enum SearchEngineChoice { se_custom = 0, se_duckDuckGo = 1, se_google = 2, se_bing = 3, se_yahoo = 4, se_stackoverflow = 5 };
-	SearchEngineChoice _searchEngineChoice = se_google;
-
-public:
-	int _caretBlinkRate = 600;
-	int _caretWidth     = 1;
-
-public:
-	generic_string _themeName;
-
-public:
-	// this option will never be read/written from/to config.xml
-	generic_string _cloudPath;
-
-public:
-	generic_string _searchEngineCustom;
-
-public:
-	// this option will never be read/written from/to config.xml
-	unsigned char _availableClouds = '\0';
-
-public:
-	TCHAR _defaultDir[MAX_PATH];
-
-public:
-	//expanded environment variables
-	TCHAR _defaultDirExp[MAX_PATH];
+	bool _funcParams = true;
 
 public:
 	bool _doesExistUpdater = false;
@@ -1252,6 +1305,23 @@ public:
 public:
 	bool _isDocPeekOnTab = false;
 	bool _isDocPeekOnMap = false;
+
+public:
+	bool isSnapshotMode() const
+	{
+		return _isSnapshotMode && _rememberLastSession && !_isCmdlineNosessionActivated;
+	}
+
+	void setTabReplacedBySpace(bool b)
+	{
+		_tabReplacedBySpace = b;
+	}
+
+	const NewDocDefaultSettings & getNewDocDefaultSettings() const
+	{
+		return _newDocDefaultSettings;
+	}
+
 };
 
 
@@ -1726,6 +1796,9 @@ public:
 
 	static generic_string getLocPathFromStr(const generic_string & localizationCode);
 
+	/*******************
+	 * 加载XML配置文件 *
+	 *******************/
 	bool load();
 
 	bool reloadLang();

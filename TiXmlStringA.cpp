@@ -27,7 +27,7 @@ TiXmlStringA::TiXmlStringA(const char* instring)
 	newlen = strlen(instring) + 1;
 	newstring = new char[newlen];
 
-	memset(newstring, 0, newlen);
+//	memset(newstring, 0, newlen);
 	memcpy(newstring, instring, newlen);
 	// strcpy (newstring, instring);
 	allocated = newlen;
@@ -54,7 +54,7 @@ TiXmlStringA::TiXmlStringA(const TiXmlStringA& copy)
 	}
 	newlen = copy.length() + 1;
 	newstring = new char[newlen];
-	memset(newstring, 0, newlen);
+//	memset(newstring, 0, newlen);
 	// strcpy (newstring, copy . cstring);
 	memcpy(newstring, copy.cstring, newlen);
 	allocated = newlen;
@@ -75,7 +75,7 @@ void TiXmlStringA ::operator = (const char * content)
 	}
 	newlen = strlen(content) + 1;
 	newstring = new char[newlen];
-	memset(newstring, 0, newlen);
+//	memset(newstring, 0, newlen);
 	// strcpy (newstring, content);
 	memcpy(newstring, content, newlen);
 	empty_it();
@@ -97,7 +97,7 @@ void TiXmlStringA ::operator = (const TiXmlStringA & copy)
 	}
 	newlen = copy.length() + 1;
 	newstring = new char[newlen];
-	memset(newstring, 0, newlen);
+//	memset(newstring, 0, newlen);
 	// strcpy (newstring, copy . c_str ());
 	memcpy(newstring, copy.c_str(), newlen);
 	empty_it();
@@ -138,7 +138,7 @@ void TiXmlStringA::append(const char* str, int len)
 
 		// allocate new buffer
 		new_string = new char[new_alloc];
-		memset(new_string, 0, new_alloc);
+//		memset(new_string, 0, new_alloc);
 		new_string[0] = 0;
 
 		// copy the previous allocated buffer into this one
@@ -188,7 +188,7 @@ void TiXmlStringA::append(const char * suffix)
 
 		// allocate new buffer
 		new_string = new char[new_alloc];
-		memset(new_string, 0, new_alloc);
+//		memset(new_string, 0, new_alloc);
 		new_string[0] = 0;
 
 		// copy the previous allocated buffer into this one

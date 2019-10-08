@@ -679,7 +679,11 @@ TiXmlNodeA* TiXmlElementA::Clone() const
 	return clone;
 }
 
-
+/********************************************************************
+ * 由于不允许TEXT("...")转换为wchar_t const *，所以加这两个静态常量 *
+ ********************************************************************/
+const wchar_t TiXmlDocumentA::W[2] = { 'w', '\0' };
+const wchar_t TiXmlDocumentA::R[2] = { 'r', '\0' };
 TiXmlDocumentA::TiXmlDocumentA() : TiXmlNodeA( TiXmlNodeA::DOCUMENT )
 {
 	tabsize = 4;
@@ -790,7 +794,7 @@ bool TiXmlDocumentA::LoadUnicodeFilePath( const TCHAR* filename )
 	// See STL_STRING_BUG above.
 	// Fixed with the StringToBuffer class.
 
-	FILE* file = generic_fopen(filename, TEXT("r"));
+	FILE* file = generic_fopen(filename, /*TEXT("r")*/TiXmlDocumentA::R);
 
 	if ( file )
 	{
@@ -847,7 +851,7 @@ bool TiXmlDocumentA::SaveFile( const char * filename ) const
 bool TiXmlDocumentA::SaveUnicodeFilePath( const TCHAR* filename ) const
 {
 	// The old c stuff lives on...
-	FILE* fp = generic_fopen( filename, TEXT("w") );
+	FILE* fp = generic_fopen( filename, /*TEXT("w")*/ TiXmlDocumentA::W);
 	if ( fp )
 	{
 		Print( fp, 0 );

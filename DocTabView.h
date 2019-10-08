@@ -38,8 +38,8 @@ const int MONITORING_IMG_INDEX = 3;
 class DocTabView : public TabBarPlus
 {
 public :
-	DocTabView():TabBarPlus(), _pView(NULL) {};
-	virtual ~DocTabView(){};
+	DocTabView():TabBarPlus(), _pView(NULL) {}
+	virtual ~DocTabView(){}
 	
 	virtual void destroy() {
 		TabBarPlus::destroy();

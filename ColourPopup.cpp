@@ -192,6 +192,12 @@ INT_PTR CALLBACK ColourPopup::run_dlgProc(UINT message, WPARAM wParam, LPARAM lP
 					}; // array of custom colors 
 
 					// Initialize CHOOSECOLOR 
+					/************************************************************************************************************************
+					 * macro
+					 * Fills a block of memory with zeros.																					*
+					 * To avoid any undesired effects of optimizing compilers, use the SecureZeroMemory function.							*
+					 * SecureZeroMemory : https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa366877%28v%3dvs.85%29	*
+					 ************************************************************************************************************************/
 					::ZeroMemory(&cc, sizeof(cc));
 					cc.lStructSize = sizeof(cc);
 					cc.hwndOwner = _hParent;

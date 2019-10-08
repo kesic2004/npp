@@ -1138,6 +1138,8 @@ private:
 	TIXMLA_STRING errorDesc;
 	int tabsize;
 	TiXmlCursorA errorLocation;
+	static const wchar_t W[2]; // Ö»Ð´
+	static const wchar_t R[2]; // Ö»¶Á
 };
 
 

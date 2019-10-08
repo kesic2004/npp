@@ -70,9 +70,14 @@ filePath : file or folder name to open (absolute or relative path name)\r\
 class Notepad_plus_Window : public Window
 {
 public:
+
+	/**********************
+	 * 无参构造函数(唯一) *
+	 **********************/
 	Notepad_plus_Window() : Window()
 	{
 	}
+
 	void init(HINSTANCE, HWND, const TCHAR * cmdLine, CmdLineParams * cmdLineParams);
 
 	bool isDlgsMsg(MSG *msg) const;
@@ -82,7 +87,7 @@ public:
 		return _notepad_plus_plus_core.getAccTable();
 	}
 
-	bool emergency(const generic_string& emergencySavedDir)
+	bool emergency(const generic_string & emergencySavedDir)
 	{
 		return _notepad_plus_plus_core.emergency(emergencySavedDir);
 	}
@@ -107,8 +112,10 @@ public:
 		return _className;
 	}
 
-	static HWND gNppHWND;	//static handle to Notepad++ window, NULL if non-existant
-
+	/***********************************************************
+	 * static handle to Notepad++ window, NULL if non-existant *
+	 ***********************************************************/
+	static HWND gNppHWND;
 
 private:
 	Notepad_plus _notepad_plus_plus_core;
@@ -117,15 +124,17 @@ private:
 	 * 主窗口回调函数 *
 	 ******************/
 	static LRESULT CALLBACK Notepad_plus_Proc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
-	
-	//static std::map<HWND, Notepad_plus_Window *> pM30ideMap;
 
-	static const TCHAR _className[32];
+	static const TCHAR const _className[32];
 
-	// keep the availability of quote parameters for thread using
+	/**************************************************************
+	 * keep the availability of quote parameters for thread using *
+	 **************************************************************/
 	QuoteParams  _quoteParams;
 
-	// keep the availability of this string for thread using
+	/*********************************************************
+	 * keep the availability of this string for thread using *
+	 *********************************************************/
 	std::wstring _userQuote;
 
 	bool               _isPrelaunch           = false;
@@ -133,5 +142,4 @@ private:
 
 	LRESULT runProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
 
-	
 };

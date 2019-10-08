@@ -403,6 +403,12 @@ void ToolBar::addToRebar(ReBar * rebar)
 	if (_pRebar)
 		return;
 	_pRebar = rebar;
+	/************************************************************************************************************************
+	 * macro
+	 * Fills a block of memory with zeros.																					*
+	 * To avoid any undesired effects of optimizing compilers, use the SecureZeroMemory function.							*
+	 * SecureZeroMemory : https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa366877%28v%3dvs.85%29	*
+	 ************************************************************************************************************************/
 	ZeroMemory(&_rbBand, REBARBAND_SIZE);
 	_rbBand.cbSize  = REBARBAND_SIZE;
 
@@ -435,6 +441,12 @@ void ReBar::init(HINSTANCE hInst, HWND hPere)
 							0,0,0,0, _hParent, NULL, _hInst, NULL);
 
 	REBARINFO rbi;
+	/************************************************************************************************************************
+	 * macro
+	 * Fills a block of memory with zeros.																					*
+	 * To avoid any undesired effects of optimizing compilers, use the SecureZeroMemory function.							*
+	 * SecureZeroMemory : https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa366877%28v%3dvs.85%29	*
+	 ************************************************************************************************************************/
 	ZeroMemory(&rbi, sizeof(REBARINFO));
 	rbi.cbSize = sizeof(REBARINFO);
 	rbi.fMask  = 0;
@@ -484,6 +496,12 @@ void ReBar::setIDVisible(int id, bool show)
 		return;	//error
 
 	REBARBANDINFO rbBand;
+	/************************************************************************************************************************
+	 * macro
+	 * Fills a block of memory with zeros.																					*
+	 * To avoid any undesired effects of optimizing compilers, use the SecureZeroMemory function.							*
+	 * SecureZeroMemory : https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa366877%28v%3dvs.85%29	*
+	 ************************************************************************************************************************/
 	ZeroMemory(&rbBand, REBARBAND_SIZE);
 	rbBand.cbSize  = REBARBAND_SIZE;
 
@@ -503,6 +521,12 @@ bool ReBar::getIDVisible(int id)
 	if (index == -1 )
 		return false;	//error
 	REBARBANDINFO rbBand;
+	/************************************************************************************************************************
+	 * macro
+	 * Fills a block of memory with zeros.																					*
+	 * To avoid any undesired effects of optimizing compilers, use the SecureZeroMemory function.							*
+	 * SecureZeroMemory : https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa366877%28v%3dvs.85%29	*
+	 ************************************************************************************************************************/
 	ZeroMemory(&rbBand, REBARBAND_SIZE);
 	rbBand.cbSize  = REBARBAND_SIZE;
 
@@ -518,6 +542,12 @@ void ReBar::setGrayBackground(int id)
 	if (index == -1 )
 		return;	//error
 	REBARBANDINFO rbBand;
+	/************************************************************************************************************************
+	 * macro
+	 * Fills a block of memory with zeros.																					*
+	 * To avoid any undesired effects of optimizing compilers, use the SecureZeroMemory function.							*
+	 * SecureZeroMemory : https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa366877%28v%3dvs.85%29	*
+	 ************************************************************************************************************************/
 	ZeroMemory(&rbBand, REBARBAND_SIZE);
 	rbBand.cbSize  = REBARBAND_SIZE;
 	rbBand.fMask = RBBIM_BACKGROUND;

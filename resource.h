@@ -492,7 +492,14 @@
 #define MENUINDEX_SEARCH   2
 #define MENUINDEX_VIEW     3
 #define MENUINDEX_FORMAT   4
+
+/*************************************************************
+ * MENUINDEX_LANGUAGE_TREE = MENUINDEX_LANGUAGE + 1          *
+ * 修改MENUINDEX_LANGUAGE时，同时修改MENUINDEX_LANGUAGE_TREE *
+ *************************************************************/
 #define MENUINDEX_LANGUAGE 5
+#define MENUINDEX_LANGUAGE_TREE 6
+
 #define MENUINDEX_SETTINGS 6
 #define MENUINDEX_TOOLS    7
 #define MENUINDEX_MACRO    8

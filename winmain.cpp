@@ -45,6 +45,8 @@
  ****************************************************/
 #include "Real_Kesic_Lee_Dynamic_Link_Library_Load_And_Proc_Address.h"
 
+#define WindowsApi
+
 // typedef std::vector<generic_string> ParamVector;
 
 
@@ -66,7 +68,7 @@ namespace
         // This allows opening new files to already opened elevated Notepad++ process via explorer context menu.
         if (ver >= WV_VISTA || ver == WV_UNKNOWN)
         {
-            HMODULE hDll = GetModuleHandle(TEXT("user32.dll"));
+            HMODULE hDll = WindowsApi::GetModuleHandle(TEXT("user32.dll"));
             if (hDll)
             {
                 // According to MSDN ChangeWindowMessageFilter may not be supported in future versions of Windows,
@@ -99,18 +101,42 @@ namespace
 
     /*************************************************************
      * commandLine should contain path to n++ executable running *
+	 * 把控制台或Shell传递的参数进行拆解，具体可参见argc和argv   *
      *************************************************************/
     std::vector<generic_string> parseCommandLine(const TCHAR* commandLine)
     {
+		/*
+		 * 存放参数的容器
+		 */
         std::vector<generic_string> result;
         if ( commandLine[0] != '\0' )
         {
             int numArgs;
-            LPWSTR* tokenizedCmdLine = CommandLineToArgvW( commandLine, &numArgs );
+			/*************************************************************************************************************************
+			 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/shellapi/nf-shellapi-commandlinetoargvw?redirectedfrom=MSDN *
+			 * function                                                                                                              *
+			 * Parses a Unicode command line string and returns an array of pointers to the command line                             *
+			 * arguments, along with a count of such arguments, in a way that is similar to the standard C run-time                  *
+			 * argv and argc values.                                                                                                 *
+			 * LPWSTR * CommandLineToArgvW(LPCWSTR lpCmdLine, int * pNumArgs);                                                       *
+			 * lpCmdLine                                                                                                             *
+			 * Type: LPCWSTR                                                                                                         *
+			 * Pointer to a null-terminated Unicode string that contains the full command line. If this parameter is                 *
+			 * an empty string the function returns the path to the current executable file.                                         *
+			 * pNumArgs                                                                                                              *
+			 * Type: int *                                                                                                           *
+			 * Pointer to an int that receives the number of array elements returned, similar to argc.                               *
+			 * Return Value                                                                                                          *
+			 * Type: LPWSTR *                                                                                                        *
+			 * A pointer to an array of LPWSTR values, similar to argv.                                                              *
+			 * If the function fails, the return value is NULL. To get extended error information, call GetLastError(1).             *
+			 * GetLastError(1) : https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror        *
+			 *************************************************************************************************************************/
+			LPWSTR * tokenizedCmdLine = WindowsApi::CommandLineToArgvW( commandLine, &numArgs );
             if ( tokenizedCmdLine != nullptr )
             {
-                result.assign( tokenizedCmdLine, tokenizedCmdLine+numArgs );
-                LocalFree( tokenizedCmdLine );
+                result.assign( tokenizedCmdLine, tokenizedCmdLine + numArgs );
+				WindowsApi::LocalFree( tokenizedCmdLine );
             }
         }
         return result;
@@ -126,7 +152,7 @@ namespace
         std::vector<generic_string> params;
 
         // Notepad accepts both /p and /P, so compare case insensitively
-        if ( _tcsnicmp(TEXT("/p"), pCmdLine, 2) == 0 )
+        if (WindowsApi::_tcsnicmp(TEXT("/p"), pCmdLine, 2) == 0 )
         {
             params.emplace_back(TEXT("-quickPrint"));
             pCmdLine += 2; // Length of "/p"
@@ -152,19 +178,32 @@ namespace
         return params;
     }
 
-    bool isInList(const TCHAR *token2Find, std::vector<generic_string> & params, bool eraseArg = true)
+	/********************************************************************************************************
+	 * 判断参数列表中是否存在指定的参数，如果存在，具需要从列表中移除该参数时，从列表中移除该参数，返回true *
+	 * @param token2Find 指定的参数                                                                         *
+	 * @param params     参数列表                                                                           *
+	 * @param eraseArg   是否移除指定的参数(true : 表示需要从列表中移除指定的参数，参数重复只移除第一个)    *                          *
+	 ********************************************************************************************************/
+    bool isInList(const TCHAR * token2Find, std::vector<generic_string> & params, bool eraseArg = true)
     {
         for (auto it = params.begin(); it != params.end(); ++it)
         {
-            if (lstrcmp(token2Find, it->c_str()) == 0)
+            if (WindowsApi::lstrcmp(token2Find, it->c_str()) == 0)
             {
-                if (eraseArg) params.erase(it);
+				if (eraseArg)
+				{
+					params.erase(it);
+				}
                 return true;
             }
         }
         return false;
-    };
+    }
 
+	/*
+	 * 查找指定参数
+	 * 如果找到指定的参数，那么获取指定参数的值，同时从参数列表中移除对应的参数
+	 */
     bool getParamVal(TCHAR c, std::vector<generic_string> & params, generic_string & value)
     {
         value = TEXT("");
@@ -174,7 +213,7 @@ namespace
         {
             const TCHAR * token = params.at(i).c_str();
             //dash, and enough chars
-            if (token[0] == '-' && lstrlen(token) >= 2 && token[1] == c)
+            if (lstrlen(token) >= 2 && token[0] == '-' && token[1] == c)
             {
                 value = (token+2);
                 params.erase(params.begin() + i);
@@ -184,7 +223,10 @@ namespace
         return false;
     }
 
-    bool getParamValFromString(const TCHAR *str, std::vector<generic_string> & params, generic_string & value)
+	/*
+	 * 查找参数中以指定参数str开头的字符串，如果找到，从参数列表中移除指定的字符串，然后返回true
+	 */
+	bool getParamValFromString(const TCHAR *str, std::vector<generic_string> & params, generic_string & value)
     {
         value = TEXT("");
         size_t nbItems = params.size();
@@ -204,6 +246,9 @@ namespace
         return false;
     }
 
+	/*
+	 * 查找参数中的语言，如果没有找到返回L_EXTERNAL
+	 */
     LangType getLangTypeFromParam(std::vector<generic_string> & params)
     {
         generic_string langStr;
@@ -214,7 +259,10 @@ namespace
         return NppParameters::getLangIDFromStr(langStr.c_str());
     }
 
-    generic_string getLocalizationPathFromParam(std::vector<generic_string> & params)
+	/*
+	 * 国际化语言配置文件的文件名
+	 */
+	generic_string getLocalizationPathFromParam(std::vector<generic_string> & params)
     {
         generic_string locStr;
         if (!getParamVal('L', params, locStr))
@@ -224,7 +272,10 @@ namespace
         return NppParameters::getLocPathFromStr(locStr.c_str());
     }
 
-    int getNumberFromParam(char paramName, std::vector<generic_string> & params, bool & isParamePresent)
+	/*
+	 * 从参数列表中获取数值型的参数，如果参数列表中没有值，返回-1
+	 */
+	int getNumberFromParam(char paramName, std::vector<generic_string> & params, bool & isParamePresent)
     {
         generic_string numStr;
         if (!getParamVal(paramName, params, numStr))
@@ -234,9 +285,12 @@ namespace
         }
         isParamePresent = true;
         return generic_atoi(numStr.c_str());
-    };
+    }
 
-    generic_string getEasterEggNameFromParam(std::vector<generic_string> & params, unsigned char & type)
+	/*
+	 * qn qt qf
+	 */
+	generic_string getEasterEggNameFromParam(std::vector<generic_string> & params, unsigned char & type)
     {
         generic_string EasterEggName;
         if (!getParamValFromString(TEXT("-qn"), params, EasterEggName))  // get internal easter egg
@@ -276,7 +330,10 @@ namespace
         return EasterEggName;
     }
 
-    int getGhostTypingSpeedFromParam(std::vector<generic_string> & params)
+	/*
+	 * 从参数中获取打字速度
+	 */
+	int getGhostTypingSpeedFromParam(std::vector<generic_string> & params)
     {
         generic_string speedStr;
         if (!getParamValFromString(TEXT("-qSpeed"), params, speedStr))
@@ -293,30 +350,36 @@ namespace
         return speed;
     }
 
-    const TCHAR FLAG_MULTI_INSTANCE[] = TEXT("-multiInst");
-    const TCHAR FLAG_NO_PLUGIN[] = TEXT("-noPlugin");
-    const TCHAR FLAG_READONLY[] = TEXT("-ro");
-    const TCHAR FLAG_NOSESSION[] = TEXT("-nosession");
-    const TCHAR FLAG_NOTABBAR[] = TEXT("-notabbar");
-    const TCHAR FLAG_SYSTRAY[] = TEXT("-systemtray");
-    const TCHAR FLAG_LOADINGTIME[] = TEXT("-loadingTime");
-    const TCHAR FLAG_HELP[] = TEXT("--help");
-    const TCHAR FLAG_ALWAYS_ON_TOP[] = TEXT("-alwaysOnTop");
-    const TCHAR FLAG_OPENSESSIONFILE[] = TEXT("-openSession");
-    const TCHAR FLAG_RECURSIVE[] = TEXT("-r");
-    const TCHAR FLAG_FUNCLSTEXPORT[] = TEXT("-export=functionList");
-    const TCHAR FLAG_PRINTANDQUIT[] = TEXT("-quickPrint");
-    const TCHAR FLAG_NOTEPAD_COMPATIBILITY[] = TEXT("-notepadStyleCmdline");
+	/*
+	 * 解析用的参数名
+	 */
+	const TCHAR FLAG_MULTI_INSTANCE[]            = TEXT("-multiInst");
+    const TCHAR FLAG_NO_PLUGIN[]                 = TEXT("-noPlugin");
+    const TCHAR FLAG_READONLY[]                  = TEXT("-ro");
+    const TCHAR FLAG_NOSESSION[]                 = TEXT("-nosession");
+    const TCHAR FLAG_NOTABBAR[]                  = TEXT("-notabbar");
+    const TCHAR FLAG_SYSTRAY[]                   = TEXT("-systemtray");
+    const TCHAR FLAG_LOADINGTIME[]               = TEXT("-loadingTime");
+    const TCHAR FLAG_HELP[]                      = TEXT("--help");
+    const TCHAR FLAG_ALWAYS_ON_TOP[]             = TEXT("-alwaysOnTop");
+    const TCHAR FLAG_OPENSESSIONFILE[]           = TEXT("-openSession");
+    const TCHAR FLAG_RECURSIVE[]                 = TEXT("-r");
+    const TCHAR FLAG_FUNCLSTEXPORT[]             = TEXT("-export=functionList");
+    const TCHAR FLAG_PRINTANDQUIT[]              = TEXT("-quickPrint");
+    const TCHAR FLAG_NOTEPAD_COMPATIBILITY[]     = TEXT("-notepadStyleCmdline");
     const TCHAR FLAG_OPEN_FOLDERS_AS_WORKSPACE[] = TEXT("-openFoldersAsWorkspace");
 
+	/*
+	 * 异常处理
+	 */
     void doException(Notepad_plus_Window & notepad_plus_plus)
     {
         //disable exception handler after excpetion, we dont want corrupt data structurs to crash the exception handler
         Win32Exception::removeHandler();
-        ::MessageBox(Notepad_plus_Window::gNppHWND, TEXT("Notepad++ will attempt to save any unsaved data. However, dataloss is very likely."), TEXT("Recovery initiating"), MB_OK | MB_ICONINFORMATION);
+        WindowsApi::MessageBox(Notepad_plus_Window::gNppHWND, TEXT("Notepad++ will attempt to save any unsaved data. However, dataloss is very likely."), TEXT("Recovery initiating"), MB_OK | MB_ICONINFORMATION);
 
         TCHAR tmpDir[1024];
-        GetTempPath(1024, tmpDir);
+		WindowsApi::GetTempPath(1024, tmpDir);
         generic_string emergencySavedDir = tmpDir;
         emergencySavedDir += TEXT("\\N++RECOV");
 
@@ -333,12 +396,12 @@ namespace
         }
     }
 
-    PWSTR advanceCmdLine(PWSTR pCmdLine, const generic_string& string)
+    PWSTR advanceCmdLine(PWSTR pCmdLine, const generic_string & string)
     {
         const size_t len = string.length();
         while (true)
         {
-            PWSTR ignoredString = wcsstr(pCmdLine, string.c_str());
+            PWSTR ignoredString = WindowsApi::wcsstr(pCmdLine, string.c_str());
             if (ignoredString == nullptr)
             {
                 // Should never happen - tokenized parameters contain string somewhere, so it HAS to match
@@ -347,13 +410,13 @@ namespace
             }
     
             // Match the substring only if it matched an entire substring        
-            if ( (ignoredString == pCmdLine || iswspace(*(ignoredString-1)) ) && // Check start
-                 (iswspace(*(ignoredString+len)) || *(ignoredString+len) == '\0') )
+            if ( (ignoredString == pCmdLine || WindowsApi::iswspace(*(ignoredString-1)) ) && // Check start
+                 (WindowsApi::iswspace(*(ignoredString+len)) || *(ignoredString+len) == '\0') )
             {
                 ignoredString += len;
 
                 // Advance to the first non-whitespace and not quotation mark character
-                while ( iswspace( *ignoredString ) || *ignoredString == L'"' )
+                while (WindowsApi::iswspace( *ignoredString ) || *ignoredString == L'"' )
                 {
                     ++ignoredString;
                 }
@@ -371,13 +434,14 @@ namespace
     /*
      * Looks for -z arguments and strips command line arguments following those, if any
      * Also advances pCmdLine to point after the last ignored parameter
-     * -notepadStyleCmdline is also considered an ignored parameter here, as we don't want it to be part of the assembled file name
+     * -notepadStyleCmdline is also considered an ignored parameter here,
+	 * as we don't want it to be part of the assembled file name
      */
     PWSTR stripIgnoredParams(std::vector<generic_string> & params, PWSTR pCmdLine)
     {
         for ( auto it = params.begin(); it != params.end(); )
         {
-            if (lstrcmp(it->c_str(), TEXT("-z")) == 0)
+            if (WindowsApi::lstrcmp(it->c_str(), TEXT("-z")) == 0)
             {
                 pCmdLine = advanceCmdLine(pCmdLine, *it);
 
@@ -389,7 +453,7 @@ namespace
                 }
                 it = params.erase(it);
             }
-            else if (lstrcmp(it->c_str(), FLAG_NOTEPAD_COMPATIBILITY) == 0)
+            else if (WindowsApi::lstrcmp(it->c_str(), FLAG_NOTEPAD_COMPATIBILITY) == 0)
             {
                 pCmdLine = advanceCmdLine(pCmdLine, *it++);
             }
@@ -419,10 +483,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
     const RealKesicLeeDynamicLinkLibraryLoad & obj = getRealKesicLeeDynamicLinkLibraryLoad();
     initialRealKesicLeeDynamicLinkLibraryLoad(obj);
 
+	/*
+	 * 该实例是否是单独的实例
+	 * true  : 是单独的实例
+	 */
     bool TheFirstOne = true;
-    ::SetLastError(NO_ERROR);
-    ::CreateMutex(NULL, false, TEXT("nppInstance"));
-    if (::GetLastError() == ERROR_ALREADY_EXISTS)
+	WindowsApi::SetLastError(NO_ERROR);
+	WindowsApi::CreateMutex(NULL, false, TEXT("nppInstance"));
+    if (WindowsApi::GetLastError() == ERROR_ALREADY_EXISTS)
     {
         TheFirstOne = false;
     }
@@ -608,14 +676,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
     {
         Date today(0);
 
-        if (today < nppGui._autoUpdateOpt._nextUpdateDate)
-            doUpdateNpp = false;
+		if (today < nppGui._autoUpdateOpt._nextUpdateDate)
+		{
+			doUpdateNpp = false;
+		}
     }
 
-    if (doUpdatePluginList)
-    {
+//    if (doUpdatePluginList)
+//    {
         // TODO: detect update frequency
-    }
+//    }
 
     // wingup doesn't work with the obsolet security layer (API) under xp since downloadings are secured with SSL on notepad_plus_plus.org
     winVer ver = pNppParameters->getWinVersion();

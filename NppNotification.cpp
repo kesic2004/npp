@@ -1056,6 +1056,12 @@ BOOL Notepad_plus::notify(SCNotification *notification)
 
 			//Else forward notification to window of rebarband
 			REBARBANDINFO rbBand;
+			/************************************************************************************************************************
+			 * macro
+			 * Fills a block of memory with zeros.																					*
+			 * To avoid any undesired effects of optimizing compilers, use the SecureZeroMemory function.							*
+			 * SecureZeroMemory : https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa366877%28v%3dvs.85%29	*
+			 ************************************************************************************************************************/
 			ZeroMemory(&rbBand, REBARBAND_SIZE);
 			rbBand.cbSize = REBARBAND_SIZE;
 

@@ -2004,8 +2004,10 @@ LRESULT Notepad_plus::process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 					POINT p;
 					GetCursorPos(&p);
 
-					HMENU hmenu;            // menu template
-					HMENU hTrayIconMenu;  // shortcut menu
+					// menu template
+					HMENU hmenu;
+					// shortcut menu
+					HMENU hTrayIconMenu;
 					hmenu = ::LoadMenu(_pPublicInterface->getHinst(), MAKEINTRESOURCE(IDR_SYSTRAYPOPUP_MENU));
 					hTrayIconMenu = ::GetSubMenu(hmenu, 0);
 					SetForegroundWindow(hwnd);

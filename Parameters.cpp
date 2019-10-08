@@ -764,8 +764,20 @@ winVer NppParameters::getWindowsVersion()
     SYSTEM_INFO si;
     PGNSI pGNSI;
 
-    ZeroMemory(&si, sizeof(SYSTEM_INFO));
-    ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX));
+	/************************************************************************************************************************
+	 * macro
+	 * Fills a block of memory with zeros.																					*
+	 * To avoid any undesired effects of optimizing compilers, use the SecureZeroMemory function.							*
+	 * SecureZeroMemory : https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa366877%28v%3dvs.85%29	*
+	 ************************************************************************************************************************/
+	ZeroMemory(&si, sizeof(SYSTEM_INFO));
+	/************************************************************************************************************************
+	 * macro
+	 * Fills a block of memory with zeros.																					*
+	 * To avoid any undesired effects of optimizing compilers, use the SecureZeroMemory function.							*
+	 * SecureZeroMemory : https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa366877%28v%3dvs.85%29	*
+	 ************************************************************************************************************************/
+	ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX));
 
     osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
     BOOL bOsVersionInfoEx = GetVersionEx ((OSVERSIONINFO *)&osvi);
@@ -1025,20 +1037,23 @@ generic_string NppParameters::getSettingsFolder()
 }
 
 
+/*******************
+ * 加载XML配置文件 *
+ *******************/
 bool NppParameters::load()
 {
     L_END = L_EXTERNAL;
     bool isAllLaoded = true;
-    for (int i = 0 ; i < NB_LANG ; _langList[i] = NULL, ++i)
+    for (int i = 0 ; i < NB_LANG ; NppParameters::_langList[i] = NULL, ++i)
     {
 	}
 
     _isx64 = sizeof(void *) == 8;
 
     // Make localConf.xml path
-	/***************************************************
+	/*****************************************
 	 * %NPP_HOME%\\doLocalConf.xml的绝对路径 *
-	 ***************************************************/
+	 *****************************************/
 	generic_string localConfPath(_nppPath);
     PathAppend(localConfPath, localConfFile);
 
@@ -1170,7 +1185,10 @@ bool NppParameters::load()
 		_enableThemeDialogTextureFuncAddr = (WNDPROC)::GetProcAddress(_hUXTheme, "EnableThemeDialogTexture");
 	}
 
-    /****************************
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 处理langs.xml起                                                                                                      //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/****************************
      * langs.xml : for per user *
      ****************************/
     generic_string langs_xml_path(_userPath);
@@ -1215,8 +1233,8 @@ bool NppParameters::load()
     _pXmlDoc = new TiXmlDocument(langs_xml_path.data());
 
 
-    bool loadOkay = _pXmlDoc->LoadFile();
-    if (!loadOkay)
+	bool loadOkay;
+    if (!_pXmlDoc->LoadFile())
     {
         if (_pNativeLangSpeaker)
         {
@@ -1235,10 +1253,21 @@ bool NppParameters::load()
         _pXmlDoc = nullptr;
         isAllLaoded = false;
     }
-    else
-        getLangKeywordsFromXmlTree();
+	else
+	{
+		/*
+		 * 解析langs.xml
+		 */
+		getLangKeywordsFromXmlTree();
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 处理langs.xml止                                                                                                      //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*****************************
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 处理config.xml起                                                                                                     //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/*****************************
      * config.xml : for per user *
      *****************************/
     generic_string configPath(_userPath);
@@ -1253,17 +1282,22 @@ bool NppParameters::load()
 	}
 
     _pXmlUserDoc = new TiXmlDocument(configPath.data());
-    loadOkay = _pXmlUserDoc->LoadFile();
     
-    if (!loadOkay)
+    if (!_pXmlUserDoc->LoadFile())
     {
         TiXmlDeclaration* decl = new TiXmlDeclaration(TEXT("1.0"), TEXT("Windows-1252"), TEXT(""));
         _pXmlUserDoc->LinkEndChild(decl);
     }
     else
     {
+		/*
+		 * 解析config.xml
+		 */
         getUserParametersFromXmlTree();
     }
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 处理config.xml止                                                                                                     //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /******************************
      * stylers.xml : for per user *
@@ -1708,12 +1742,19 @@ bool NppParameters::isInFontList(const generic_string& fontName2Search) const
     return false;
 }
 
+/*
+ * 解析langs.xml
+ */
 void NppParameters::getLangKeywordsFromXmlTree()
 {
-    TiXmlNode *root =
-        _pXmlDoc->FirstChild(TEXT("NotepadPlus"));
-        if (!root) return;
-    feedKeyWordsParameters(root);
+	/*
+	 * 取根标签NotepadPlus
+	 */
+    TiXmlNode *root = _pXmlDoc->FirstChild(TEXT("NotepadPlus"));
+	if (root)
+	{
+		feedKeyWordsParameters(root);
+	}
 }
 
 
@@ -1743,6 +1784,9 @@ bool NppParameters::getUserStylersFromXmlTree()
 }
 
 
+/*
+ * 解析config.xml
+ */
 bool NppParameters::getUserParametersFromXmlTree()
 {
     if (!_pXmlUserDoc)
@@ -3834,19 +3878,31 @@ TiXmlNode * NppParameters::getChildElementByAttribut(TiXmlNode *pere, const TCHA
 }
 
 // 2 restes : L_H, L_USER
+/*
+ * 查找文本文件的语言
+ */
 LangType NppParameters::getLangIDFromStr(const TCHAR *langName)
 {
+	/*
+	 * 先查找默认语言
+	 */
     int lang = static_cast<int32_t>(L_TEXT);
     for (; lang < L_EXTERNAL; ++lang)
     {
         const TCHAR * name = ScintillaEditView::langNames[lang].lexerName;
-        if (!lstrcmp(name, langName)) //found lang?
+        if (!lstrcmp(name, langName)) //found lang?LangID
         {
-            return (LangType)lang;
+            /*return (LangType)lang;*/
+			return ScintillaEditView::langNames[lang].LangID;
         }
     }
 
-    //Cannot find language, check if its an external one
+
+	/*
+	 * 查找用户定义的语言
+	 */
+
+	//Cannot find language, check if its an external one
 
     LangType l = (LangType)lang;
     if (l == L_EXTERNAL) //try find external lexer
@@ -3855,9 +3911,18 @@ LangType NppParameters::getLangIDFromStr(const TCHAR *langName)
         if (id != -1) return (LangType)(id + L_EXTERNAL);
     }
 
-    return L_TEXT;
+
+	/*
+	 * 都没有找到，返回文本
+	 */
+
+	return L_TEXT;
 }
 
+/*
+ * 国际化
+ * 如：zh-cn --> chineseSimplified.xml
+ */
 generic_string NppParameters::getLocPathFromStr(const generic_string & localizationCode)
 {
     if (localizationCode == TEXT("af"))
@@ -4026,10 +4091,15 @@ generic_string NppParameters::getLocPathFromStr(const generic_string & localizat
     return generic_string();
 }
 
-
+/*
+ * 解析根标签\Languages一级子标签
+ */
 void NppParameters::feedKeyWordsParameters(TiXmlNode *node)
 {
-    TiXmlNode *langRoot = node->FirstChildElement(TEXT("Languages"));
+	/*
+	 * 取一级子标签Languages
+	 */
+    TiXmlNode * langRoot = node->FirstChildElement(TEXT("Languages"));
     if (!langRoot)
         return;
 
@@ -4078,6 +4148,9 @@ extern "C" {
 typedef DWORD (WINAPI * EESFUNC) (LPCTSTR, LPTSTR, DWORD);
 }
 
+/*
+ * 处理GUIConfigs子标签
+ */
 void NppParameters::feedGUIParameters(TiXmlNode *node)
 {
     TiXmlNode *GUIRoot = node->FirstChildElement(TEXT("GUIConfigs"));
