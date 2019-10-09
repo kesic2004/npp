@@ -68,7 +68,9 @@ namespace // anonymous
 
 
 
-
+/*
+ * 主窗口初始化
+ */
 void Notepad_plus_Window::init(HINSTANCE hInst, HWND parent, const TCHAR *cmdLine, CmdLineParams *cmdLineParams)
 {
 	time_t timestampBegin = 0;

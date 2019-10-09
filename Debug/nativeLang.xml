@@ -102,7 +102,7 @@
                     <Item id="42005" name="粘贴(&amp;P)"/>
                     <Item id="42006" name="删除(&amp;D)"/>
                     <Item id="42007" name="全选(&amp;L)"/>
-                    <Item id="42020" name="开始/结束 选择"/>
+                    <Item id="42020" name="开始/结束 选择_____"/>
                     <Item id="42008" name="插入制表符(缩进)"/>
                     <Item id="42009" name="删除制表符(退格)"/>
                     <Item id="42010" name="复制当前行"/>
@@ -280,6 +280,7 @@
                     <Item id="10004" name="在新窗口中打开"/>
 
                     <Item id="46001" name="语言格式设置..."/>
+                    <Item id="46002" name="C              &amp;1"/>
                     <Item id="46250" name="自定义语言格式..."/>
                     <Item id="46180" name="用户自定义"/>
                     <Item id="47000" name="关于 Notepad++"/>

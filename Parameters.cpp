@@ -1187,6 +1187,7 @@ bool NppParameters::load()
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// 处理langs.xml起                                                                                                      //
+	// 文本中语言的关键字等信息                                                                                             //
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/****************************
      * langs.xml : for per user *
@@ -1266,6 +1267,7 @@ bool NppParameters::load()
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// 处理config.xml起                                                                                                     //
+	// 图形界面(菜单、工具栏等)的展示方式                                                                                                   //
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/*****************************
      * config.xml : for per user *
@@ -1299,7 +1301,11 @@ bool NppParameters::load()
 	// 处理config.xml止                                                                                                     //
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /******************************
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 处理stylers.xml起                                                                                                    //
+	// 文件中的语言的显示风格                                                                                               //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/******************************
      * stylers.xml : for per user *
      ******************************/
     _stylerPath = _userPath;
@@ -1345,6 +1351,9 @@ bool NppParameters::load()
 	{
 		getUserStylersFromXmlTree();
 	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 处理stylers.xml止                                                                                                    //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     _themeSwitcher._stylesXmlPath = _stylerPath;
     // Firstly, add the default theme
@@ -1776,11 +1785,13 @@ int NppParameters::addExternalLangToEnd(ExternalLangContainer * externalLang)
 }
 
 
+/*
+ *解析stylers.xml
+ */
 bool NppParameters::getUserStylersFromXmlTree()
 {
-    TiXmlNode *root = _pXmlUserStylerDoc->FirstChild(TEXT("NotepadPlus"));
-        if (!root) return false;
-    return feedStylerArray(root);
+    TiXmlNode * root = _pXmlUserStylerDoc->FirstChild(TEXT("NotepadPlus"));
+    return root ? feedStylerArray(root) : false;
 }
 
 
@@ -3560,6 +3571,9 @@ void NppParameters::feedUserStyles(TiXmlNode *node)
     }
 }
 
+/*
+ * 1、解析stylers.xml的NotepadPlus根标签
+ */
 bool NppParameters::feedStylerArray(TiXmlNode *node)
 {
     TiXmlNode *styleRoot = node->FirstChildElement(TEXT("LexerStyles"));

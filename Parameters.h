@@ -1113,10 +1113,19 @@ public:
 	MatchedPairConf    _matchedPairConf;
 
 public:
+	/*
+	 * 自动更新对象
+	 */
 	struct AutoUpdateOptions
 	{
+		/*
+		 * 下次更新的日期
+		 */
 		Date _nextUpdateDate;
 		int _intervalDays = 15;
+		/*
+		 * 是否自动更新
+		 */
 		bool _doAutoUpdate = true;
 		AutoUpdateOptions() : _nextUpdateDate(Date())
 		{
@@ -1129,10 +1138,10 @@ public:
 	std::vector<LangMenuItem> _excludedLangList;
 
 public:
-	/********************************
-	 * 显示状态栏的方式             *
-	 ********************************/
-	/********************************
+	/*********************************
+	 * 显示状态栏的方式              *
+	 *********************************/
+	/*********************************
 	 * 1st bit : draw top bar;       *
 	 * 2nd bit : draw inactive tabs  *
 	 * 3rd bit : enable drag & drop  *
@@ -2554,6 +2563,8 @@ private:
 	/*
 	 * @member
 	 */
+	/*
+	 */
 	NppGUI               _nppGUI;
 	ScintillaViewParams  _svp;
 	Lang               * _langList[NB_LANG];
@@ -2594,9 +2605,9 @@ private:
 	// won't be exceeded to 255;
 	unsigned char          _nbUserLang                              = 0;
 
-	/**************************************
-	 * %NPP_HOME%\\userDefineLang.xml文件 *
-	 **************************************/
+	/******************************************************
+	 * %NPP_HOME%\\userDefineLang.xml文件(用户定义的lang) *
+	 ******************************************************/
 	generic_string         _userDefineLangPath;
 	ExternalLangContainer *_externalLangArray[NB_MAX_EXTERNAL_LANG];
 	int                    _nbExternalLang                          = 0;
@@ -2730,7 +2741,13 @@ private:
 	 */
 	LocalizationSwitcher _localizationSwitcher;
 	generic_string       _startWithLocFileName;
+	/*
+	 * 是否功能导出同时退出，true : 功能导出同时退出，默认false
+	 */
 	bool                 _doFunctionListExport = false;
+	/*
+	 * 是否打印后同时退出，true : 打印后同时退出，默认false
+	 */
 	bool                 _doPrintAndExit       = false;
 
 	/***********************************************************************************************************************/
@@ -2746,6 +2763,9 @@ private:
 	 * @member
 	 */
 	//vector<generic_string> _noMenuCmdNames;
+	/*
+	 * 主窗口中的上下文菜单
+	 */
 	std::vector<MenuItemUnit> _contextMenuItems;
 	Session                   _session;
 

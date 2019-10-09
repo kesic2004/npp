@@ -3794,6 +3794,18 @@ void Notepad_plus::maintainIndentation(TCHAR ch)
 
 BOOL Notepad_plus::processFindAccel(MSG *msg) const
 {
+	/*************************************************************************************************************
+	 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-getfocus?redirectedfrom=MSDN *
+	 * function                                                                                                  *
+	 * Retrieves the handle to the window that has the keyboard focus, if the window is attached to the calling  *
+	 * thread's message queue.                                                                                   *
+	 * HWND GetFocus();                                                                                          *
+	 * Return Value                                                                                            *
+	 * Type: HWND                                                                                                *
+	 * The return value is the handle to the window with the keyboard focus. If the calling                      *
+	 * thread's message queue does not have an associated window with the keyboard focus, the return value is    *
+	 * NULL.                                                                                                     *
+	 *************************************************************************************************************/
 	if (not ::IsChild(_findReplaceDlg.getHSelf(), ::GetFocus()))
 	{
 		return FALSE;
@@ -3803,6 +3815,28 @@ BOOL Notepad_plus::processFindAccel(MSG *msg) const
 
 BOOL Notepad_plus::processIncrFindAccel(MSG *msg) const
 {
+/************************************************************************************************************
+ * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-ischild?redirectedfrom=MSDN *
+ * function                                                                                                 *
+ * Determines whether a window is a child window or descendant window of a specified parent                 *
+ * window. A child window is the direct descendant of a specified parent window if that parent              *
+ * window is in the chain of parent windows; the chain of parent windows leads from the original            *
+ * overlapped or pop-up window to the child window.                                                         *
+ * BOOL IsChild(HWND hWndParent, HWND hWnd);                                                                *
+ * hWndParent                                                                                               *
+ * Type: HWND                                                                                               *
+ * A handle to the parent window.                                                                           *
+ * hWnd                                                                                                     *
+ * Type: HWND                                                                                               *
+ * A handle to the window to be tested.                                                                     *
+ * Return Value                                                                                           *
+ * Type: Type: BOOL                                                                                         *
+ * If the window is a child or descendant window of the specified parent window, the return value is        *
+ * nonzero.                                                                                                 *
+ * If the window is not a child or descendant window of the specified parent window, the return             *
+ * value is zero.                                                                                           *
+ * hWnd是否是hWndParent的子窗口                                                                             *
+ ************************************************************************************************************/
 	if ( not ::IsChild(_incrementFindDlg.getHSelf(), ::GetFocus() ) )
 	{
 		return FALSE;
