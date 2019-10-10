@@ -112,6 +112,11 @@ public:
 		return _className;
 	}
 
+	static const TCHAR * getTitleName()
+	{
+		return _titleName;
+	}
+
 	/***********************************************************
 	 * static handle to Notepad++ window, NULL if non-existant *
 	 ***********************************************************/
@@ -126,6 +131,7 @@ private:
 	static LRESULT CALLBACK Notepad_plus_Proc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
 
 	static const TCHAR const _className[32];
+	static const TCHAR const _titleName[32];
 
 	/**************************************************************
 	 * keep the availability of quote parameters for thread using *
@@ -137,6 +143,9 @@ private:
 	 *********************************************************/
 	std::wstring _userQuote;
 
+	/************************************
+	 * @See CmdLineParams::_isPreLaunch *
+	 ************************************/
 	bool               _isPrelaunch           = false;
 	bool               _disablePluginsManager = false;
 

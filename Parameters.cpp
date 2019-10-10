@@ -4655,7 +4655,9 @@ void NppParameters::feedGUIParameters(TiXmlNode *node)
                     _nppGUI._enableMultiSelection = false;
             }
         }
-
+		/*
+		 * 主窗口的位置和长宽
+		 */
         else if (!lstrcmp(nm, TEXT("AppPosition")))
         {
             RECT oldRect = _nppGUI._appPos;
@@ -4689,6 +4691,9 @@ void NppParameters::feedGUIParameters(TiXmlNode *node)
             if (val)
                 _nppGUI._isMaximized = (lstrcmp(val, TEXT("yes")) == 0);
         }
+		/*
+		 * 文档格式，字符集，
+		 */
         else if (!lstrcmp(nm, TEXT("NewDocDefaultSettings")))
         {
             int i;
@@ -4707,7 +4712,7 @@ void NppParameters::feedGUIParameters(TiXmlNode *node)
                         newFormat = EolType::unix;
                         break;
                     default:
-                        assert(false and "invalid buffer format - fallback to default");
+                        /*assert(false and "invalid buffer format - fallback to default");*/
                 }
                 _nppGUI._newDocDefaultSettings._format = newFormat;
             }

@@ -429,7 +429,7 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	 * Return Value                                                                                                   *
 	 * Type: Type: LRESULT                                                                                              *
 	 * The return value specifies the result of the message processing; it depends on the message sent.                 *
-	 *****************************PostThreadMessage(4)******************************************************************/
+	 *****************************PostThreadMessage(4)*******************************************************************/
 	::SendMessage(hwnd, NPPM_INTERNAL_SETCARETWIDTH,     0, 0);
 	::SendMessage(hwnd, NPPM_INTERNAL_SETCARETBLINKRATE, 0, 0);
 #if __MY_TEST_GET_MENU_STRING_FUNCTION_B__ == 1
@@ -1028,6 +1028,9 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	int nbLRFile = pNppParam->getNbLRFile();
 	//int pos = IDM_FILEMENU_LASTONE - IDM_FILE + 1 /* +1 : because of  IDM_FILE_PRINTNOW */;
 
+	/*
+	 * 把子菜单对象、菜单中的定位、快捷键、是否是子菜单传值给最近打开的文件的列表对象，
+	 */
 	_lastRecentFileList.initMenu(hFileMenu, IDM_FILEMENU_LASTONE + 1, IDM_FILEMENU_EXISTCMDPOSITION, &_accelerator, pNppParam->putRecentFileInSubMenu());
 	_lastRecentFileList.setLangEncoding(_nativeLangSpeaker.getLangEncoding());
 #if __MY_TEST_GET_MENU_STRING_FUNCTION_C__ == 1

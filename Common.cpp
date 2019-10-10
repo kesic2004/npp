@@ -635,18 +635,41 @@ generic_string BuildMenuFileName(int filenameLen, unsigned int pos, const generi
 {
 	generic_string strTemp;
 
-	if (pos < 9)
+//	if (pos < 9)
+//	{
+//		strTemp.push_back('&');
+//		strTemp.push_back('1' + static_cast<TCHAR>(pos));
+//	}
+//	else if (pos == 9)
+//	{
+//		strTemp.append(TEXT("1&0"));
+//	}
+//	else
+//	{
+//		strTemp.append(uintToString(pos + 1));
+//	}
+	switch (pos)
 	{
+	case 0:
+	case 1:
+	case 2:
+	case 3:
+	case 4:
+	case 5:
+	case 6:
+	case 7:
+	case 8:
 		strTemp.push_back('&');
 		strTemp.push_back('1' + static_cast<TCHAR>(pos));
-	}
-	else if (pos == 9)
-	{
-		strTemp.append(TEXT("1&0"));
-	}
-	else
-	{
+		break;
+	case 9:
+		strTemp.push_back('1');
+		strTemp.push_back('&');
+		strTemp.push_back('0');
+		break;
+	default:
 		strTemp.append(uintToString(pos + 1));
+		break;
 	}
 	strTemp.append(TEXT(": "));
 

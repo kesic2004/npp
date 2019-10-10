@@ -59,16 +59,16 @@ const int UDD_DOCKED = 2;
 // 2 : 0000 0010 hide & docked
 // 3 : 0000 0011 show & docked
 
-const int TAB_DRAWTOPBAR = 1;      //0000 0000 0001
-const int TAB_DRAWINACTIVETAB = 2; //0000 0000 0010
-const int TAB_DRAGNDROP = 4;       //0000 0000 0100
-const int TAB_REDUCE = 8;          //0000 0000 1000
-const int TAB_CLOSEBUTTON = 16;    //0000 0001 0000
-const int TAB_DBCLK2CLOSE = 32;    //0000 0010 0000
-const int TAB_VERTICAL = 64;       //0000 0100 0000
-const int TAB_MULTILINE = 128;     //0000 1000 0000
-const int TAB_HIDE = 256;          //0001 0000 0000
-const int TAB_QUITONEMPTY = 512;   //0010 0000 0000
+const int TAB_DRAWTOPBAR      = 1;    //0000 0000 0001
+const int TAB_DRAWINACTIVETAB = 2;    //0000 0000 0010
+const int TAB_DRAGNDROP       = 4;    //0000 0000 0100
+const int TAB_REDUCE          = 8;    //0000 0000 1000
+const int TAB_CLOSEBUTTON     = 16;   //0000 0001 0000
+const int TAB_DBCLK2CLOSE     = 32;   //0000 0010 0000
+const int TAB_VERTICAL        = 64;   //0000 0100 0000
+const int TAB_MULTILINE       = 128;  //0000 1000 0000
+const int TAB_HIDE            = 256;  //0001 0000 0000
+const int TAB_QUITONEMPTY     = 512;  //0010 0000 0000
 
 
 enum class EolType: std::uint8_t
@@ -92,14 +92,14 @@ EolType convertIntToFormatType(int value, EolType defvalue = EolType::osdefault)
 
 enum UniMode
 {
-	uni8Bit=0,
-	uniUTF8=1,
-	uni16BE=2,
-	uni16LE=3,
-	uniCookie=4,
-	uni7Bit=5,
-	uni16BE_NoBOM=6,
-	uni16LE_NoBOM=7,
+	uni8Bit       = 0,
+	uniUTF8       = 1,
+	uni16BE       = 2,
+	uni16LE       = 3,
+	uniCookie     = 4,
+	uni7Bit       = 5,
+	uni16BE_NoBOM = 6,
+	uni16LE_NoBOM = 7,
 	uniEnd
 };
 
@@ -114,16 +114,16 @@ enum ChangeDetect
 
 enum BackupFeature
 {
-	bak_none = 0,
-	bak_simple = 1,
+	bak_none    = 0,
+	bak_simple  = 1,
 	bak_verbose = 2
 };
 
 enum OpenSaveDirSetting
 {
 	dir_followCurrent = 0,
-	dir_last = 1,
-	dir_userDef = 2
+	dir_last          = 1,
+	dir_userDef       = 2
 };
 
 enum MultiInstSetting
@@ -402,12 +402,18 @@ struct CmdLineParams
 	bool _openFoldersAsWorkspace = false;
 
 
+	/********************
+	 * 默认唯一构造函数 *
+	 ********************/
 	CmdLineParams()
 	{
 		_point.x = 0;
 		_point.y = 0;
 	}
 
+	/*
+	 * 当前的x，y坐标是否有效
+	 */
 	bool isPointValid() const
 	{
 		return _isPointXValid && _isPointYValid;
@@ -417,7 +423,7 @@ struct CmdLineParams
 
 /****************************************************************************************************
  * A POD class to send CmdLineParams through WM_COPYDATA and to Notepad_plus::loadCommandlineParams *
- * 具体参见：CmdLineParams                                                                          *
+ * 唯一默认构造函数，具体参见：CmdLineParams                                                        *
  ****************************************************************************************************/
 struct CmdLineParamsDTO
 {
@@ -1082,6 +1088,9 @@ public:
 struct NppGUI final
 {
 public:
+	/********************
+	 * 默认唯一构造函数 *
+	 ********************/
 	NppGUI()
 	{
 		_appPos.left   = 0;
@@ -1099,6 +1108,9 @@ public:
 	 */
 	NewDocDefaultSettings _newDocDefaultSettings;
 
+	/*
+	 * 窗口位置
+	 */
 	RECT _appPos;
 
 	size_t _snapshotBackupTiming = 7000;

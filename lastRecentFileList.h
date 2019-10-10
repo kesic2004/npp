@@ -31,13 +31,18 @@
 #include "Parameters.h"
 #include <deque>
 
-/**************************
- * 单个最近打开的文件结构 *
- **************************/
+/******************************
+ * 单个最近打开的文件的结构体 *
+ ******************************/
 struct RecentItem
 {
+	/*
+	 * 文件的顺序编号
+	 */
 	int _id = 0;
-
+	/*
+	 * 文件的绝对路径
+	 */
 	generic_string _name;
 
 	explicit RecentItem(const TCHAR * name) : _name(name)
@@ -45,7 +50,7 @@ struct RecentItem
 	}
 };
 
-typedef std::deque<RecentItem> recentList;
+/** typedef std::deque<RecentItem> recentList; */
 
 /************************
  * 最近打开文件的列表类 *
@@ -62,7 +67,7 @@ public:
 		}
 	}
 
-	void initMenu(HMENU hMenu, int idBase, int posBase, Accelerator *accelerator, bool doSubMenu = false);
+	void initMenu(HMENU hMenu, int idBase, int posBase, Accelerator * accelerator, bool doSubMenu = false);
 
 	void switchMode();
 
@@ -76,18 +81,18 @@ public:
 	int getSize()
 	{
 		return _size;
-	};
+	}
 
 
 	int getMaxNbLRF() const
 	{
 		return NB_MAX_LRF_FILE;
-	};
+	}
 
 	int getUserMaxNbLRF() const
 	{
 		return _userMax;
-	};
+	}
 
 	//use menu id
 	generic_string & getItem(int id);
@@ -127,7 +132,7 @@ private:
 	/**************************
 	 * 最近打开的文件列表队列 *
 	 **************************/
-	recentList _lrfl;
+	std::deque<RecentItem> _lrfl;
 
 	Accelerator * _pAccelerator = nullptr;
 	int _userMax = 0;
@@ -146,6 +151,9 @@ private:
 
 	int _idBase        = -1;
 
+	/*
+	 * 相应的数组位置是否被占用，false已占用
+	 */
 	bool _idFreeArray[NB_MAX_LRF_FILE];
 
 	bool _hasSeparators = false;
@@ -158,4 +166,3 @@ private:
 
 	void setAvailable(int id);
 };
-

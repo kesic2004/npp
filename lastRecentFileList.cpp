@@ -49,14 +49,54 @@ void LastRecentFileList::initMenu(HMENU hMenu, int idBase, int posBase, Accelera
 	_pAccelerator = pAccelerator;
 	_nativeLangEncoding = NPP_CP_WIN_1252;
 
-	for (int i = 0 ; i < sizeof(_idFreeArray) ; ++i)
+	/*
+	 * 把数组占位设置为未占位
+	 */
+	for (int i = 0; i < sizeof(_idFreeArray); ++i)
+	{
 		_idFreeArray[i] = true;
+	}
 }
 
 
 void LastRecentFileList::switchMode()
 {
-	//Remove all menu items
+	// Remove all menu items
+	/***************************************************************************************************************
+	 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-removemenu?redirectedfrom=MSDN *
+	 * Deletes a menu item or detaches a submenu from the specified menu. If the menu item opens a drop-down menu  *
+	 * or submenu, RemoveMenu does not destroy the menu or its handle, allowing the menu to be reused. Before this *
+	 * function is called, the GetSubMenu(1) function should retrieve a handle to the drop-down menu or submenu.   *
+	 * 从指定下拉式菜单中移除指定的子菜单，移除的子菜单不会被销毁，还可以再被重新使用，在使用之前请先调用          *
+	 * GetSubMenu(1)函数                                                                                           *
+	 * GetSubMenu(1) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-getsubmenu                *
+	 * BOOL RemoveMenu(HMENU hMenu, UINT uPosition, UINT uFlags);                                                  *
+	 * hMenu                                                                                                       *
+	 * Type: HMENU                                                                                                 *
+	 * A handle to the menu to be changed.                                                                         *
+	 * uPosition                                                                                                   *
+	 * Type: UINT                                                                                                  *
+	 * The menu item to be deleted, as determined by the uFlags parameter.                                         *
+	 * uFlags                                                                                                      *
+	 * Type: UINT                                                                                                  *
+	 * Indicates how the uPosition parameter is interpreted. This parameter must be one of the following values.   *
+	 * +---------------+--------------------------------------------------------------------+                      *
+	 * | Value         | Meaning                                                            |                      *
+	 * | MF_BYCOMMAND  | Indicates that uPosition gives the identifier of the menu item. If |                      *
+	 * | 0x00000000L   | neither the MF_BYCOMMAND nor MF_BYPOSITION flag is specified,      |                      *
+	 * |               | the MF_BYCOMMAND flag is the default flag.                         |                      *
+	 * +---------------+--------------------------------------------------------------------+                      *
+	 * | MF_BYPOSITION | Indicates that uPosition gives the zero-based relative position    |                      *
+	 * | 0x00000400L   | of the menu item.                                                  |                      *
+	 * +---------------+--------------------------------------------------------------------+                      *
+	 * Return Value                                                                                                *
+	 * Type: BOOL                                                                                                  *
+	 * If the function succeeds, the return value is nonzero.                                                      *
+	 * If the function fails, the return value is zero. To get extended error information, call GetLastError.      *
+	 * Remarks                                                                                                     *
+	 * The application must call the DrawMenuBar function whenever a menu changes, whether the menu                *
+	 * is in a displayed window.                                                                                   *
+	 ***************************************************************************************************************/
 	::RemoveMenu(_hMenu, IDM_FILE_RESTORELASTCLOSEDFILE, MF_BYCOMMAND);
 	::RemoveMenu(_hMenu, IDM_OPEN_ALL_RECENT_FILE, MF_BYCOMMAND);
 	::RemoveMenu(_hMenu, IDM_CLEAN_RECENT_FILE_LIST, MF_BYCOMMAND);
@@ -66,7 +106,8 @@ void LastRecentFileList::switchMode()
 		::RemoveMenu(_hMenu, _lrfl.at(i)._id, MF_BYCOMMAND);
 	}
 
-	if (_hParentMenu == NULL) // mode main menu
+	// mode main menu
+	if (_hParentMenu == NULL)
 	{	if (_size > 0)
 		{
 			::RemoveMenu(_hMenu, _posBase, MF_BYPOSITION);

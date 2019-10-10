@@ -117,10 +117,10 @@ namespace
 						 * Return Value                                                                                                                                                                                     *
 						 * Type: Type: BOOL                                                                                                                                                                                   *
 						 * TRUE if successful; otherwise, FALSE. To get extended error information, call GetLastError(2).                                                                                                     *
+						 * GetLastError(2) : https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror                                                                                     *
 						 *                                                                                                                                                                                                    *
 						 *   Note  A message can be successfully removed from the filter, but that is not a guarantee that                                                                                                    *
 						 *   the message will be blocked. See the Remarks section for more details.                                                                                                                           *
-						 * GetLastError(2) : https://docs.microsoft.com/windows/desktop/api/errhandlingapi/nf-errhandlingapi-getlasterror                                                                                     *
 						 ******************************************************************************************************************************************************************************************************/
 						func(WM_COPYDATA, MSGFLT_ADD);
 					}
@@ -398,11 +398,10 @@ namespace
 		}
 		return false;
 	}
-
-	/*
-	 * 查找指定参数
-	 * 如果找到指定的参数，那么获取指定参数的值，同时从参数列表中移除对应的参数
-	 */
+	/****************************************************************************
+	 * 查找指定参数                                                             *
+	 * 如果找到指定的参数，那么获取指定参数的值，同时从参数列表中移除对应的参数 *
+	 ****************************************************************************/
 	bool getParamVal(TCHAR c, std::vector<generic_string> & params, generic_string & value)
 	{
 		value = TEXT("");
@@ -422,9 +421,9 @@ namespace
 		return false;
 	}
 
-	/*
-	 * 查找参数中以指定参数str开头的字符串，如果找到，从参数列表中移除指定的字符串，然后返回true
-	 */
+	/*********************************************************************************************
+	 * 查找参数中以指定参数str开头的字符串，如果找到，从参数列表中移除指定的字符串，然后返回true *
+	 *********************************************************************************************/
 	bool getParamValFromString(const TCHAR *str, std::vector<generic_string> & params, generic_string & value)
 	{
 		value = TEXT("");
@@ -1010,8 +1009,42 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
 	if ((!isMultiInst) && (!TheFirstOne))
 	{
 		/*
-		 * 查找指定的窗口
+		 * 根据指定的窗口类名查找指定的窗口
 		 */
+		/********************************************************************************************************************************
+		 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-findwindoww                                     *
+		 * function                                                                                                                     *
+		 * Retrieves a handle to the top-level window whose class name and window name match the                                        *
+		 * specified strings. This function does not search child windows. This function does not perform a                             *
+		 * case-sensitive search.                                                                                                       *
+		 * To search child windows, beginning with a specified child window, use the FindWindowEx(1) function.                          *
+		 * FindWindowEx(1) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-findwindowexa                            *
+		 * HWND FindWindowW(LPCWSTR lpClassName, LPCWSTR lpWindowName);                                                                 *
+		 * 根据指定的窗口类名和窗口名查找指定的窗口                                                                                     *
+		 * lpClassName                                                                                                                  *
+		 * Type: LPCTSTR                                                                                                                *
+		 * The class name or a class atom created by a previous call to the RegisterClass or RegisterClassEx                            *
+		 * function. The atom must be in the low-order word of lpClassName; the high-order word must be zero.                           *
+		 * If lpClassName points to a string, it specifies the window class name. The class name can be any                             *
+		 * name registered with RegisterClass or RegisterClassEx, or any of the predefined control-class names.                         *
+		 * If lpClassName is NULL, it finds any window whose title matches the lpWindowName parameter.                                  *
+		 * lpWindowName                                                                                                                 *
+		 * Type: LPCTSTR                                                                                                                *
+		 * The window name (the window's title). If this parameter is NULL, all window names match.                                     *
+		 * Return Value                                                                                                               *
+		 * Type: Type: HWND                                                                                                             *
+		 * If the function succeeds, the return value is a handle to the window that has the specified class                            *
+		 * name and window name.                                                                                                        *
+		 * If the function fails, the return value is NULL. To get extended error information, call GetLastError.                       *
+		 * Remarks                                                                                                                    *
+		 * If the lpWindowName parameter is not NULL, FindWindow calls the GetWindowText(2) function to retrieve                        *
+		 * the window name for comparison. For a description of a potential problem that can arise, see the                             *
+		 * Remarks for GetWindowText.                                                                                                   *
+		 * GetWindowText(2) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-getwindowtexta                          *
+		 * Examples                                                                                                                   *
+		 * For an example, see Retrieving the Number of Mouse Wheel Scroll Lines(3).                                                    *
+		 * Retrieving the Number of Mouse Wheel Scroll Lines(3) : https://docs.microsoft.com/windows/desktop/inputdev/using-mouse-input *
+		 ********************************************************************************************************************************/
 		HWND hNotepad_plus = ::FindWindow(Notepad_plus_Window::getClassName(), NULL);
 		for (int i = 0 ;!hNotepad_plus && i < 5 ; ++i)
 		{
@@ -1186,14 +1219,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
 		 * 初始化主窗口
 		 */
 		notepad_plus_plus.init(hInstance, NULL, quotFileName.c_str(), &cmdLineParams);
-		/*
-		 * 新增WM_COPYDATA消息过滤器
-		 */
+		/***********************************************************
+		 * 新增WM_COPYDATA消息过滤器，以接收来自其他实例传来的消息 *
+		 ***********************************************************/
 		allowWmCopydataMessages(notepad_plus_plus, pNppParameters, ver);
-//        bool going = true;
 		/************
 		 * 消息循环 *
 		 ************/
+//		bool going = true;
 //		while (going)
 //		{
 //			going = (::GetMessageW(&msg, NULL, 0, 0) != 0);

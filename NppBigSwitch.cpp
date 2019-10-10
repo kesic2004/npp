@@ -206,14 +206,14 @@ LRESULT Notepad_plus::process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 
 	switch (message)
 	{
-		case WM_NCACTIVATE:
+		case WM_NCACTIVATE:/* 0x0086(134) */
 		{
 			// Note: lParam is -1 to prevent endless loops of calls
 			::SendMessage(_dockingManager.getHSelf(), WM_NCACTIVATE, wParam, -1);
 			return ::DefWindowProc(hwnd, message, wParam, lParam);
 		}
 
-		case WM_DRAWITEM:
+		case WM_DRAWITEM:/* 0x002B(43) */
 		{
 			DRAWITEMSTRUCT *dis = reinterpret_cast<DRAWITEMSTRUCT *>(lParam);
 			if (dis->CtlType == ODT_TAB)
@@ -2339,11 +2339,12 @@ LRESULT Notepad_plus::process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 		}
 
 		case NPPM_GETEDITORDEFAULTFOREGROUNDCOLOR:
+		{
+			return (NppParameters::getInstance())->getCurrentDefaultFgColor();
+		}
 		case NPPM_GETEDITORDEFAULTBACKGROUNDCOLOR:
 		{
-			return (message == NPPM_GETEDITORDEFAULTFOREGROUNDCOLOR
-					?(NppParameters::getInstance())->getCurrentDefaultFgColor()
-					:(NppParameters::getInstance())->getCurrentDefaultBgColor());
+			return (NppParameters::getInstance())->getCurrentDefaultBgColor();
 		}
 
 		case NPPM_SHOWDOCSWITCHER:
@@ -2534,6 +2535,9 @@ LRESULT Notepad_plus::process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 		}
 	}
 
+	/*
+	 * switch中的break后的处理
+	 */
 	_pluginsManager.relayNppMessages(message, wParam, lParam);
 	return result;
 }
