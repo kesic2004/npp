@@ -852,6 +852,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
 	initialRealKesicLeeDynamicLinkLibraryLoad(obj);
 
 	/*
+	 * Mutex句柄
+	 */
+	HANDLE nppMutex = nullptr;
+
+	/*
 	 * 将要打开的文件字符串，以双引号 + 空格 + 双引号作为分隔
 	 */
 	generic_string quotFileName = TEXT("");
@@ -887,8 +892,106 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
 	bool doUpdatePluginList = nppGui._autoUpdateOpt._doAutoUpdate; /* 更新自新插件 */
 
 	WindowsApi::SetLastError(NO_ERROR);
-	WindowsApi::CreateMutex(NULL, false, TEXT("nppInstance"));
-	if (WindowsApi::GetLastError() == ERROR_ALREADY_EXISTS)
+	/************************************************************************************************************************************************************
+	 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/synchapi/nf-synchapi-createmutexw                                                              *
+	 * function                                                                                                                                                 *
+	 * Creates or opens a named or unnamed mutex object.                                                                                                        *
+	 * To specify an access mask for the object, use the CreateMutexEx(1) function.                                                                             *
+	 * HANDLE CreateMutexW(LPSECURITY_ATTRIBUTES lpMutexAttributes, BOOL bInitialOwner, LPCWSTR lpName);                                                        *
+	 * lpMutexAttributes                                                                                                                                        *
+	 * A pointer to a SECURITY_ATTRIBUTES(2) structure. If this parameter is NULL, the handle cannot be                                                         *
+	 * inherited by child processes.                                                                                                                            *
+	 * The lpSecurityDescriptor member of the structure specifies a security descriptor for the new mutex.                                                      *
+	 * If lpMutexAttributes is NULL, the mutex gets a default security descriptor.                                                                              *
+	 * The ACLs in the default security descriptor for a mutex come from the primary or impersonation token of the creator.                                     *
+	 * For more information, see Synchronization Object Security and Access Rights(3).                                                                          *
+	 * SECURITY_ATTRIBUTES(2) : https://docs.microsoft.com/previous-versions/windows/desktop/legacy/aa379560(v=vs.85)                                           *
+	 * Synchronization Object Security and Access Rights(3) : https://docs.microsoft.com/windows/desktop/Sync/synchronization-object-security-and-access-rights *
+	 * bInitialOwner                                                                                                                                            *
+	 * If this value is TRUE and the caller created the mutex, the calling thread obtains initial ownership of the mutex object.                                *
+	 * Otherwise, the calling thread does not obtain ownership of the mutex. To determine if the caller created the mutex,                                      *
+	 * see the Return Values section.                                                                                                                           *
+	 * lpName                                                                                                                                                   *
+	 * The name of the mutex object. The name is limited to MAX_PATH characters. Name comparison is case sensitive.                                             *
+	 * If lpName matches the name of an existing named mutex object, this function requests the MUTEX_ALL_ACCESS access right.                                  *
+	 * In this case, the bInitialOwner parameter is ignored because it has already been set by the creating process.                                            *
+	 * If the lpMutexAttributes parameter is not NULL, it determines whether the handle can be inherited,                                                       *
+	 * but its security-descriptor member is ignored.                                                                                                           *
+	 * If lpName is NULL, the mutex object is created without a name.                                                                                           *
+	 * If lpName matches the name of an existing event, semaphore, waitable timer, job, or file-mapping object,                                                 *
+	 * the function fails and the GetLastError function returns ERROR_INVALID_HANDLE.                                                                           *
+	 * This occurs because these objects share the same namespace.                                                                                              *
+	 * The name can have a "Global" or "Local" prefix to explicitly create the object in the global or session namespace.                                       *
+	 * The remainder of the name can contain any character except the backslash character ().                                                                   *
+	 * For more information, see Kernel Object Namespaces(3). Fast user switching is implemented using Terminal Services sessions.                              *
+	 * Kernel object names must follow the guidelines outlined for Terminal Services so that applications can support multiple users.                           *
+	 * Kernel Object Namespaces(3) : https://docs.microsoft.com/windows/desktop/TermServ/kernel-object-namespaces                                               *
+	 * The object can be created in a private namespace. For more information, see Object Namespaces(4).                                                        *
+	 * Object Namespaces(4) : https://docs.microsoft.com/windows/desktop/Sync/object-namespaces                                                                 *
+	 * Return Value                                                                                                                                           *
+	 * If the function succeeds, the return value is a handle to the newly created mutex object.                                                                *
+	 * If the function fails, the return value is NULL. To get extended error information, call GetLastError.                                                   *
+	 * If the mutex is a named mutex and the object existed before this function call, the return value is a handle to the existing object,                     *
+	 * GetLastError returns ERROR_ALREADY_EXISTS, bInitialOwner is ignored, and the calling thread is not granted ownership.                                    *
+	 * However, if the caller has limited access rights, the function will fail with ERROR_ACCESS_DENIED and the caller should use                              *
+	 * the OpenMutex(5) function.                                                                                                                               *
+	 * OpenMutex(5) : https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-openmutexa                                                              *
+	 * Remarks                                                                                                                                                *
+	 * The handle returned by CreateMutex has the MUTEX_ALL_ACCESS access right;                                                                                *
+	 * it can be used in any function that requires a handle to a mutex object,                                                                                 *
+	 * provided that the caller has been granted access.                                                                                                        *
+	 * If a mutex is created from a service or a thread that is impersonating a different user,                                                                 *
+	 * you can either apply a security descriptor to the mutex when you create it,                                                                              *
+	 * or change the default security descriptor for the creating process by changing its default DACL.                                                         *
+	 * For more information, see Synchronization Object Security and Access Rights(6).                                                                          *
+	 * Synchronization Object Security and Access Rights(6) : https://docs.microsoft.com/windows/desktop/Sync/synchronization-object-security-and-access-rights *
+	 * If you are using a named mutex to limit your application to a single instance,                                                                           *
+	 * a malicious user can create this mutex before you do and prevent your application from starting.                                                         *
+	 * To prevent this situation, create a randomly named mutex and store the name so that it can only be obtained by an                                        *
+	 * authorized user. Alternatively, you can use a file for this purpose. To limit your application to one instance per user,                                 *
+	 * create a locked file in the user's profile directory.                                                                                                    *
+	 * Any thread of the calling process can specify the mutex-object handle in a call to one of the wait functions(7).                                         *
+	 * The single-object wait functions return when the state of the specified object is signaled.                                                              *
+	 * The multiple-object wait functions can be instructed to return either when any one or when all of the specified objects                                  *
+	 * are signaled. When a wait function returns, the waiting thread is released to continue its execution.                                                    *
+	 * wait functions(7) : https://docs.microsoft.com/windows/desktop/Sync/wait-functions                                                                       *
+	 * The state of a mutex object is signaled when it is not owned by any thread.                                                                              *
+	 * The creating thread can use the bInitialOwner flag to request immediate ownership of the mutex.                                                          *
+	 * Otherwise, a thread must use one of the wait functions to request ownership. When the mutex's state is signaled,                                         *
+	 * one waiting thread is granted ownership, the mutex's state changes to nonsignaled, and the wait function returns.                                        *
+	 * Only one thread can own a mutex at any given time. The owning thread uses the ReleaseMutex function to release its ownership.                            *
+	 * The thread that owns a mutex can specify the same mutex in repeated wait function calls without blocking its execution.                                  *
+	 * Typically, you would not wait repeatedly for the same mutex, but this mechanism prevents a thread from deadlocking itself                                *
+	 * while waiting for a mutex that it already owns. However, to release its ownership, the thread must call ReleaseMutex(8) once                             *
+	 * for each time that the mutex satisfied a wait.                                                                                                           *
+	 * ReleaseMutex(8) : https://docs.microsoft.com/windows/desktop/api/synchapi/nf-synchapi-releasemutex                                                       *
+	 * Two or more processes can call CreateMutex to create the same named mutex. The first process actually creates the mutex,                                 *
+	 * and subsequent processes with sufficient access rights simply open a handle to the existing mutex.                                                       *
+	 * This enables multiple processes to get handles of the same mutex, while relieving the user of the responsibility of                                      *
+	 * ensuring that the creating process is started first. When using this technique, you should set the bInitialOwner flag to FALSE;                          *
+	 * otherwise, it can be difficult to be certain which process has initial ownership.                                                                        *
+	 * Multiple processes can have handles of the same mutex object, enabling use of the object for interprocess synchronization.                               *
+	 * The following object-sharing mechanisms are available:                                                                                                   *
+	 *     * A child process created by the CreateProcess(9) function can inherit a handle to a mutex object if the lpMutexAttributes                           *
+	 *       parameter of CreateMutex enabled inheritance. This mechanism works for both named and unnamed mutexes.                                             *
+	 *     * A process can specify the handle to a mutex object in a call to the DuplicateHandle(10) function to create a duplicate handle                      *
+	 *       that can be used by another process. This mechanism works for both named and unnamed mutexes.                                                      *
+	 *     * A process can specify a named mutex in a call to the OpenMutex(11) or CreateMutex function to retrieve a handle to the mutex object.               *
+	 * CreateProcess(9) : https://docs.microsoft.com/windows/desktop/api/processthreadsapi/nf-processthreadsapi-createprocessa                                  *
+	 * DuplicateHandle(10) : https://docs.microsoft.com/windows/desktop/api/handleapi/nf-handleapi-duplicatehandle                                              *
+	 * OpenMutex(11) : https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-openmutexa                                                             *
+	 * Use the CloseHandle(12) function to close the handle. The system closes the handle automatically when the process terminates.                            *
+	 * The mutex object is destroyed when its last handle has been closed.                                                                                      *
+	 * CloseHandle(12) : https://docs.microsoft.com/windows/desktop/api/handleapi/nf-handleapi-closehandle                                                      *
+	 * 新建一个互斥对象                                                                                                                                         *
+	 * 如果执行成功，将返回一下互斥象的句柄                                                                                                                     *
+	 * 如果执行失败，将返回空，同时可使用GetLastError函数查看失败原因                                                                                           *
+	 * Examples                                                                                                                                               *
+	 * For an example that uses CreateMutex, see Using Mutex Objects(13).                                                                                       *
+	 * Using Mutex Objects(13) : https://docs.microsoft.com/windows/desktop/Sync/using-mutex-objects                                                            *
+	 ************************************************************************************************************************************************************/
+	nppMutex = WindowsApi::CreateMutex(NULL, false, TEXT("nppInstance"));
+	if (!nppMutex || WindowsApi::GetLastError() == ERROR_ALREADY_EXISTS)
 	{
 		TheFirstOne = false;
 	}
@@ -1048,7 +1151,62 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
 		HWND hNotepad_plus = ::FindWindow(Notepad_plus_Window::getClassName(), NULL);
 		for (int i = 0 ;!hNotepad_plus && i < 5 ; ++i)
 		{
-			Sleep(100);
+			/***************************************************************************************************************************************
+			 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/synchapi/nf-synchapi-sleep?redirectedfrom=MSDN                            *
+			 * function                                                                                                                            *
+			 * Suspends the execution of the current thread until the time-out interval elapses.                                                   *
+			 * To enter an alertable wait state, use the SleepEx(1) function.                                                                      *
+			 * SleepEx(1) : https://docs.microsoft.com/windows/desktop/api/synchapi/nf-synchapi-sleepex                                            *
+			 * void Sleep(DWORD dwMilliseconds);                                                                                                   *
+			 * dwMilliseconds                                                                                                                      *
+			 * The time interval for which execution is to be suspended, in milliseconds.                                                          *
+			 * A value of zero causes the thread to relinquish the remainder of its time slice to any other thread that                            *
+			 * is ready to run. If there are no other threads ready to run, the function returns immediately,                                      *
+			 * and the thread continues execution.Windows XP:  A value of zero causes the thread to relinquish                                     *
+			 * the remainder of its time slice to any other thread of equal priority that is ready to run.                                         *
+			 * If there are no other threads of equal priority ready to run, the function returns immediately,                                     *
+			 * and the thread continues execution. This behavior changed starting with Windows Server 2003.                                        *
+			 * A value of INFINITE indicates that the suspension should not time out.                                                              *
+			 * Return Value                                                                                                                      *
+			 * This function does not return a value.                                                                                              *
+			 * Remarks                                                                                                                           *
+			 * This function causes a thread to relinquish the remainder of its time slice and become unrunnable                                   *
+			 * for an interval based on the value of dwMilliseconds. The system clock "ticks" at a constant rate.                                  *
+			 * If dwMilliseconds is less than the resolution of the system clock, the thread may sleep for less than the                           *
+			 * specified length of time. If dwMilliseconds is greater than one tick but less than two, the wait can be                             *
+			 * anywhere between one and two ticks, and so on. To increase the accuracy of the sleep interval,                                      *
+			 * call the timeGetDevCaps function to determine the supported minimum timer resolution and                                            *
+			 * the timeBeginPeriod function to set the timer resolution to its minimum.                                                            *
+			 * Use caution when calling timeBeginPeriod, as frequent calls can significantly affect the system clock,                              *
+			 * system power usage, and the scheduler. If you call timeBeginPeriod, call it one time early in                                       *
+			 * the application and be sure to call the timeEndPeriod function at the very end of the application.                                  *
+			 * After the sleep interval has passed, the thread is ready to run.                                                                    *
+			 * If you specify 0 milliseconds, the thread will relinquish the remainder of its time slice but remain ready.                         *
+			 * Note that a ready thread is not guaranteed to run immediately.                                                                      *
+			 * Consequently, the thread may not run until some time after the sleep interval elapses. For more information,                        *
+			 * see Scheduling Priorities(1).                                                                                                       *
+			 * Scheduling Priorities(1) : https://docs.microsoft.com/windows/desktop/ProcThread/scheduling-priorities                              *
+			 * Be careful when using Sleep in the following scenarios:                                                                             *
+			 *     * Code that directly or indirectly creates windows (for example, DDE and COM CoInitialize).                                     *
+			 *       If a thread creates any windows, it must process messages. Message broadcasts are sent to all windows in the system.          *
+			 *       If you have a thread that uses Sleep with infinite delay, the system will deadlock.                                           *
+			 *     * Threads that are under concurrency control. For example, an I/O completion port or thread pool limits the number of           *
+			 *       associated threads that can run. If the maximum number of threads is already running,                                         *
+			 *       no additional associated thread can run until a running thread finishes.                                                      *
+			 *       If a thread uses Sleep with an interval of zero to wait for one of the additional associated threads to accomplish some work, *
+			 *       the process might deadlock.                                                                                                   *
+			 * For these scenarios, use MsgWaitForMultipleObjects(2) or MsgWaitForMultipleObjectsEx(3), rather than Sleep.                         *
+			 * MsgWaitForMultipleObjects(2) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-msgwaitformultipleobjects          *
+			 * MsgWaitForMultipleObjectsEx(3) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-msgwaitformultipleobjectsex      *
+			 * Windows Phone 8.1: This function is supported for Windows Phone Store apps on Windows Phone 8.1 and later.                          *
+			 * Windows 8.1 and Windows Server 2012 R2: This function is supported for Windows Store apps on Windows 8.1,                           *
+			 * Windows Server 2012 R2, and later.                                                                                                  *
+			 * Examples                                                                                                                          *
+			 * For an example, see Using Thread Local Storage(4).                                                                                  *
+			 * Using Thread Local Storage(4) : https://docs.microsoft.com/windows/desktop/ProcThread/using-thread-local-storage                    *
+			 * 暂停当前的线程XXX毫秒，如果参数为0则放弃当前的时间片                                                                                *
+			 ***************************************************************************************************************************************/
+			::Sleep(100);
 			hNotepad_plus = ::FindWindow(Notepad_plus_Window::getClassName(), NULL);
 		}
 
@@ -1062,10 +1220,40 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
 
 			int sw = 0;
 
+			/*************************************************************************************************************
+			 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-iszoomed?redirectedfrom=MSDN *
+			 * function                                                                                                  *
+			 * Determines whether a window is maximized.                                                                 *
+			 * 将指定的窗口最大化                                                                                        *
+			 * 成功返回真，失败返回假                                                                                    *
+			 * BOOL IsZoomed(HWND hWnd);                                                                                 *
+			 * hWnd                                                                                                      *
+			 * Type: HWND                                                                                                *
+			 * A handle to the window to be tested.                                                                      *
+			 * Return Value                                                                                            *
+			 * Type: Type: BOOL                                                                                          *
+			 * If the window is zoomed, the return value is nonzero.                                                     *
+			 * If the window is not zoomed, the return value is zero.                                                    *
+			 *************************************************************************************************************/
 			if (::IsZoomed(hNotepad_plus))
 			{
 				sw = SW_MAXIMIZE;
 			}
+			/*************************************************************************************************************
+			 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-isiconic?redirectedfrom=MSDN *
+			 * function                                                                                                  *
+			 * Determines whether the specified window is minimized (iconic).                                            *
+			 * BOOL IsIconic(HWND hWnd);                                                                                 *
+			 * hWnd                                                                                                      *
+			 * Type: HWND                                                                                                *
+			 * A handle to the window to be tested.                                                                      *
+			 * Return Value                                                                                            *
+			 * Type: Type: BOOL                                                                                          *
+			 * If the window is iconic, the return value is nonzero.                                                     *
+			 * If the window is not iconic, the return value is zero.                                                    *
+			 * 将指定的窗口最大化                                                                                        *
+			 * 成功返回真，失败返回假                                                                                    *
+			 *************************************************************************************************************/
 			else if (::IsIconic(hNotepad_plus))
 			{
 				sw = SW_RESTORE;
@@ -1073,9 +1261,140 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
 
 			if (sw != 0)
 			{
+				/***************************************************************************************************************************
+				 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-showwindow?redirectedfrom=MSDN             *
+				 * function                                                                                                                *
+				 * Sets the specified window's show state.                                                                                 *
+				 * BOOL ShowWindow(HWND hWnd, int nCmdShow);                                                                               *
+				 * hWnd                                                                                                                    *
+				 * Type: HWND                                                                                                              *
+				 * A handle to the window.                                                                                                 *
+				 * nCmdShow                                                                                                                *
+				 * Type: int                                                                                                               *
+				 * Controls how the window is to be shown. This parameter is ignored the first time an application calls ShowWindow,       *
+				 * if the program that launched the application provides a STARTUPINFO(1) structure. Otherwise,                            *
+				 * the first time ShowWindow is called, the value should be the value obtained by the WinMain(2) function in its nCmdShow  *
+				 * parameter.                                                                                                              *
+				 * In subsequent calls, this parameter can be one of the following values.                                                 *
+				 * STARTUPINFO(1) : https://docs.microsoft.com/windows/desktop/api/processthreadsapi/ns-processthreadsapi-startupinfoa     *
+				 * WinMain(2) : https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-winmain                                  *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | Value              | Meaning                                                                                 |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_FORCEMINIMIZE   | Minimizes a window, even if the thread that owns the window is not responding.          |        *
+				 * | 11                 | This flag should only be used when minimizing windows from a different thread.          |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_HIDE            | Hides the window and activates another window.                                          |        *
+				 * | 0                  |                                                                                         |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_MAXIMIZE        | Maximizes the specified window.                                                         |        *
+				 * | 3                  |                                                                                         |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_MINIMIZE        | Minimizes the specified window and activates the next top-level window in the Z order.  |        *
+				 * | 6                  |                                                                                         |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_RESTORE         | Activates and displays the window. If the window is minimized or maximized,             |        *
+				 * | 9                  | the system restores it to its original size and position. An application should specify |        *
+				 * |                    | this flag when restoring a minimized window.                                            |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_SHOW            | Activates the window and displays it in its current size and position.                  |        *
+				 * | 5                  |                                                                                         |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_SHOWDEFAULT     | Sets the show state based on the SW_ value specified in the STARTUPINFO(1) structure    |        *
+				 * | 10                 | passed to the CreateProcess(3) function by the program that started the application.    |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_SHOWMAXIMIZED   | Activates the window and displays it as a maximized window.                             |        *
+				 * | 3                  |                                                                                         |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_SHOWMINIMIZED   | Activates the window and displays it as a minimized window.                             |        *
+				 * | 2                  |                                                                                         |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_SHOWMINNOACTIVE | Displays the window as a minimized window. This value is similar to SW_SHOWMINIMIZED,   |        *
+				 * | 7                  | except the window is not activated.                                                     |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_SHOWNA          | Displays the window in its current size and position. This value is similar to SW_SHOW, |        *
+				 * | 8                  | except that the window is not activated.                                                |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_SHOWNOACTIVATE  | Displays a window in its most recent size and position.                                 |        *
+				 * | 4                  | This value is similar to SW_SHOWNORMAL, except that the window is not activated.        |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * | SW_SHOWNORMAL      | Activates and displays a window. If the window is minimized or maximized,               |        *
+				 * | 1                  | the system restores it to its original size and position. An application should specify |        *
+				 * |                    | this flag when displaying the window for the first time.                                |        *
+				 * +--------------------+-----------------------------------------------------------------------------------------+        *
+				 * STARTUPINFO(1) : https://docs.microsoft.com/windows/desktop/api/processthreadsapi/ns-processthreadsapi-startupinfoa     *
+				 * CreateProcess(3) : https://docs.microsoft.com/windows/desktop/api/processthreadsapi/nf-processthreadsapi-createprocessa *
+				 * Return Value                                                                                                          *
+				 * Type: Type: BOOL                                                                                                        *
+				 * If the window was previously visible, the return value is nonzero.                                                      *
+				 * If the window was previously hidden, the return value is zero.                                                          *
+				 * 设置指定窗口的展示状态，成功返回真，失败返回假                                                                          *
+				 * Remarks                                                                                                               *
+				 *                                                                                                                         *
+				 * To perform certain special effects when showing or hiding a window, use AnimateWindow(4).                               *
+				 * AnimateWindow(4) :                                                                                                      *
+				 * The first time an application calls ShowWindow, it should use the WinMain(2) function's nCmdShow                        *
+				 * parameter as its nCmdShow parameter. Subsequent calls to ShowWindow must use one of                                     *
+				 * the values in the given list, instead of the one specified by the WinMain function's nCmdShow                           *
+				 * parameter.                                                                                                              *
+				 * WinMain(2) : https://docs.microsoft.com/windows/desktop/api/winbase/nf-winbase-winmain                                  *
+				 * As noted in the discussion of the nCmdShow parameter, the nCmdShow value is ignored in the first                        *
+				 * call to ShowWindow if the program that launched the application specifies startup information in                        *
+				 * the structure. In this case, ShowWindow uses the information specified in the STARTUPINFO(1)                            *
+				 * structure to show the window. On subsequent calls, the application must call ShowWindow with                            *
+				 * nCmdShow set to SW_SHOWDEFAULT to use the startup information provided by the program that                              *
+				 * launched the application. This behavior is designed for the following situations:                                       *
+				 * STARTUPINFO(1) : https://docs.microsoft.com/windows/desktop/api/processthreadsapi/ns-processthreadsapi-startupinfoa     *
+				 *     * Applications create their main window by calling CreateWindow(4) with the WS_VISIBLE flag set.                    *
+				 *     * Applications create their main window by calling CreateWindow(4) with the WS_VISIBLE flag cleared,                *
+				 *       and later call ShowWindow with the SW_SHOW flag set to make it visible.                                           *
+				 * CreateWindow(4) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-createwindowa                       *
+				 * Examples                                                                                                              *
+				 * For an example, see Creating a Main Window(5).                                                                          *
+				 * Creating a Main Window(5) : https://docs.microsoft.com/windows/desktop/winmsg/using-windows                             *
+				 ***************************************************************************************************************************/
 				::ShowWindow(hNotepad_plus, sw);
 			}
 
+			/*****************************************************************************************************************************      *
+			 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-setforegroundwindow?redirectedfrom=MSDN              *
+			 * function                                                                                                                          *
+			 * Brings the thread that created the specified window into the foreground and activates the window.                                  *
+			 * Keyboard input is directed to the window, and various visual cues are changed for the user.                                          *
+			 * The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads.     *
+			 * 设置指定的窗口为前置窗口，键盘的输入将直接进入到该窗口，同时系统将设置高优先级来执行该过程，成功返回真，失败返回假                  *
+			 * BOOL SetForegroundWindow(HWND hWnd);                                                                                              *
+			 * hWnd                                                                                                                              *
+			 * Type: HWND                                                                                                                          *
+			 * A handle to the window that should be activated and brought to the foreground.                                                      *
+			 * Return Value                                                                                                                      *
+			 * Type: Type: BOOL                                                                                                                  *
+			 * If the window was brought to the foreground, the return value is nonzero.                                                          *
+			 * If the window was not brought to the foreground, the return value is zero.                                                          *
+			 * Remarks                                                                                                                          *
+			 * The system restricts which processes can set the foreground window. A process can set the                                          *
+			 * foreground window only if one of the following conditions is true:                                                                  *
+			 *     * The process is the foreground process.                                                                                      *
+			 *     * The process was started by the foreground process.                                                                          *
+			 *     * The process received the last input event.                                                                                  *
+			 *     * There is no foreground process.                                                                                              *
+			 *     * The process is being debugged.                                                                                              *
+			 *     * The foreground process is not a Modern Application or the Start Screen.                                                      *
+			 *     * The foreground is not locked (see LockSetForegroundWindow(1)).                                                              *
+			 *     * The foreground lock time-out has expired (see SPI_GETFOREGROUNDLOCKTIMEOUT in SystemParametersInfo(2)).                      *
+			 *     * No menus are active.                                                                                                          *
+			 * LockSetForegroundWindow(1) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-locksetforegroundwindow              *
+			 * SystemParametersInfo(2) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-systemparametersinfoa                  *
+			 * An application cannot force a window to the foreground while the user is working with another window. Instead,                      *
+			 * Windows flashes the taskbar button of the window to notify the user.                                                              *
+			 * A process that can set the foreground window can enable another process to set the foreground window by calling                      *
+			 * the AllowSetForegroundWindow function(3). The process specified by dwProcessId loses the ability to set the foreground              *
+			 * window the next time the user generates input, unless the input is directed at that process, or the next time                      *
+			 * a process calls AllowSetForegroundWindow, unless that process is specified.                                                          *
+			 * AllowSetForegroundWindow function(3) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-allowsetforegroundwindow *
+			 * The foreground process can disable calls to SetForegroundWindow by calling the LockSetForegroundWindow(1) function.                  *
+			 * LockSetForegroundWindow(1) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-locksetforegroundwindow              *
+			 ******************************************************************************************************************************************/
 			::SetForegroundWindow(hNotepad_plus);
 			/*
 			 * 如果还存在需要打开的文件
@@ -1524,6 +1843,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
 		::MessageBoxA(Notepad_plus_Window::gNppHWND, "An exception that we did not yet found its name is just caught", "Unknown Exception", MB_OK);
 		doException(notepad_plus_plus);
 	}
-
+	WindowsApi::ReleaseMutex(nppMutex);
 	return static_cast<int>(msg.wParam);
 }

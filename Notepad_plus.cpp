@@ -701,6 +701,22 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	 ******************************************************************************************/
 	// Macro Menu
 	std::vector<MacroShortcut> & macros  = pNppParam->getMacroList();
+	/***********************************************************************************************************************
+	 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-getsubmenu?redirectedfrom=MSDN         *
+	 * Retrieves a handle to the drop-down menu or submenu activated by the specified menu item.                            *
+	 * 从指定的菜单中获取指定位置活动状态的子菜单，成功返回指定的菜单，失败返回空                                          *
+	 * HMENU GetSubMenu(HMENU hMenu, int nPos);                                                                            *
+	 * hMenu                                                                                                                *
+	 * Type: HMENU                                                                                                            *
+	 * A handle to the menu.                                                                                                *
+	 * nPos                                                                                                                *
+	 * Type: int                                                                                                            *
+	 * The zero-based relative position in the specified menu of an item that activates a drop-down menu or submenu.        *
+	 * Return Value                                                                                                           *
+	 * Type: HMENU                                                                                                            *
+	 * If the function succeeds, the return value is a handle to the drop-down menu or submenu activated by the menu item. *
+	 * If the menu item does not activate a drop-down menu or submenu, the return value is NULL.                            *
+	 ***********************************************************************************************************************/
 	HMENU hMacroMenu = ::GetSubMenu(_mainMenuHandle, MENUINDEX_MACRO);
 	size_t const posBase = 6;
 	size_t nbMacro = macros.size();
@@ -833,11 +849,11 @@ LRESULT Notepad_plus::init(HWND hwnd)
 		 * The application must call the DrawMenuBar(6) function whenever a menu changes, whether the menu                *
 		 * is in a displayed window.                                                                                      *
 		 * The following groups of flags cannot be used together:                                                         *
-		 *     • MF_BYCOMMAND and MF_BYPOSITION                                                                           *
-		 *     • MF_DISABLED, MF_ENABLED, and MF_GRAYED                                                                   *
-		 *     • MF_BITMAP, MF_STRING, MF_OWNERDRAW, and MF_SEPARATOR                                                     *
-		 *     • MF_MENUBARBREAK and MF_MENUBREAK                                                                         *
-		 *     • MF_CHECKED and MF_UNCHECKED                                                                              *
+		 *     * MF_BYCOMMAND and MF_BYPOSITION                                                                           *
+		 *     * MF_DISABLED, MF_ENABLED, and MF_GRAYED                                                                   *
+		 *     * MF_BITMAP, MF_STRING, MF_OWNERDRAW, and MF_SEPARATOR                                                     *
+		 *     * MF_MENUBARBREAK and MF_MENUBREAK                                                                         *
+		 *     * MF_CHECKED and MF_UNCHECKED                                                                              *
 		 * DrawMenuBar(6) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-drawmenubar                 *
 		 ******************************************************************************************************************/
 		::InsertMenu(hMacroMenu, posBase - 1, MF_BYPOSITION, static_cast<UINT>(-1), 0);
@@ -1083,6 +1099,145 @@ LRESULT Notepad_plus::init(HWND hwnd)
 	 ****************/
 	if (pluginsTrans != TEXT(""))
 	{
+	/********************************************************************************************************************
+	 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-modifymenuw                         *
+	 * function                                                                                                         *
+	 * Changes an existing menu item. This function is used to specify the content, appearance, and                     *
+	 * behavior of the menu item.                                                                                       *
+	 * Note  The ModifyMenu function has been superseded by the SetMenuItemInfo function.                               *
+	 * You can still use ModifyMenu, however, if you do not need any of the extended features of                        *
+	 * SetMenuItemInfo.                                                                                                 *
+	 * BOOL ModifyMenuW(HMENU hMnu, UINT uPosition, UINT uFlags, UINT_PTR uIDNewItem, LPCWSTR  lpNewItem);              *
+	 * hMnu                                                                                                             *
+	 * Type: HMENU                                                                                                      *
+	 * A handle to the menu to be changed.                                                                              *
+	 * uPosition                                                                                                        *
+	 * Type: UINT                                                                                                       *
+	 * The menu item to be changed, as determined by the uFlags parameter.                                              *
+	 * uFlags                                                                                                           *
+	 * Type: UINT                                                                                                       *
+	 * Controls the interpretation of the uPosition parameter and the content, appearance, and behavior of              *
+	 * the menu item. This parameter must include one of the following required values.                                 *
+	 * +---------------+---------------------------------------------------------------------+                          *
+	 * | Value         | Meaning                                                             |                          *
+	 * | MF_BYCOMMAND  | Indicates that the uPosition parameter gives the identifier         |                          *
+	 * | 0x00000000L   | of the menu item. The MF_BYCOMMAND flag is the default if           |                          *
+	 * |               | neither the MF_BYCOMMAND nor MF_BYPOSITION flag is specified.       |                          *
+	 * +---------------+---------------------------------------------------------------------+                          *
+	 * | MF_BYPOSITION | Indicates that the uPosition parameter gives the zero-based         |                          *
+	 * | 0x00000400L   | relative position of the menu item.                                 |                          *
+	 * +---------------+---------------------------------------------------------------------+                          *
+	 * The parameter must also include at least one of the following values.                 |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | Value           | Meaning                                                           |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | MF_BITMAP       | Uses a bitmap as the menu item. The lpNewItem parameter           |                          *
+	 * | 0x00000004L      | contains a handle to the bitmap.                                 |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | MF_CHECKED      | Places a check mark next to the item. If your application         |                          *
+	 * | 0x00000008L      | provides check-mark bitmaps (see the SetMenuItemBitmaps(1)       |                          *
+	 * |                 | function), this flag displays a selected bitmap next to the       |                          *
+	 * |                 | menu item.                                                        |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | MF_DISABLED     | Disables the menu item so that it cannot be selected, but this    |                          *
+	 * | 0x00000002L      | flag does not gray it.                                           |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | MF_ENABLED      | Enables the menu item so that it can be selected and restores     |                          *
+	 * | 0x00000000L      | it from its grayed state.                                        |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | MF_GRAYED       | Disables the menu item and grays it so that it cannot be          |                          *
+	 * | 0x00000001L      | selected.                                                        |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | MF_MENUBARBREAK | Functions the same as the MF_MENUBREAK flag for a menu bar.       |                          *
+	 * | 0x00000020L      | For a drop-down menu, submenu, or shortcut menu, the new column  |                          *
+	 * |                 | is separated from the old column by a vertical line.              |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | MF_MENUBREAK    | Places the item on a new line (for menu bars) or in a new column  |                          *
+	 * | 0x00000040L      | (for a drop-down menu, submenu, or shortcut menu) without        |                          *
+	 * |                 | separating columns.                                               |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | MF_OWNERDRAW    | Specifies that the item is an owner-drawn item. Before the menu   |                          *
+	 * | 0x00000100L      | is displayed for the first time, the window that owns the menu   |                          *
+	 * |                 | receives a WM_MEASUREITEM(2) message to retrieve the width and    |                          *
+	 * |                 | height of the menu item. The WM_DRAWITEM(3) message is then       |                          *
+	 * |                 | sent tothe window procedure of the owner window whenever          |                          *
+	 * |                 | the appearanceof the menu item must be updated.                   |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | MF_POPUP        | Specifies that the menu item opens a drop-down menu or submenu.   |                          *
+	 * | 0x00000010L     | The uIDNewItem parameter specifies a handle to the drop-down menu |                          *
+	 * |                 | or submenu. This flag is used to add a menu name to a menu bar or |                          *
+	 * |                 | a menu item that opens a submenu to a drop-down menu, submenu,    |                          *
+	 * |                 | or shortcut menu.                                                 |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | MF_SEPARATOR    | Draws a horizontal dividing line. This flag is used only in       |                          *
+	 * | 0x00000800L      | a drop-down menu, submenu, or shortcut menu. The line cannot be  |                          *
+	 * |                 | grayed, disabled, or highlighted. The lpNewItem and               |                          *
+	 * |                 | uIDNewItem parameters are ignored.                                |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | MF_STRING       | Specifies that the menu item is a text string; the lpNewItem      |                          *
+	 * | 0x00000000L      | parameter is a pointer to the string.                            |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * | MF_UNCHECKED    | Does not place a check mark next to the item (the default).       |                          *
+	 * | 0x00000000L      | If your application supplies check-mark bitmaps                  |                          *
+	 * |                 | (see the SetMenuItemBitmaps(4) function), this flag displays      |                          *
+	 * |                 | a clear bitmap next to the menu item.                             |                          *
+	 * +-----------------+-------------------------------------------------------------------+                          *
+	 * SetMenuItemBitmaps(1) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-setmenuitembitmaps     *
+	 * WM_MEASUREITEM(2) : https://docs.microsoft.com/windows/desktop/Controls/wm-measureitem                           *
+	 * WM_DRAWITEM(3) : https://docs.microsoft.com/windows/desktop/Controls/wm-drawitem                                 *
+	 * SetMenuItemBitmaps(4) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-setmenuitembitmaps     *
+	 * uIDNewItem                                                                                                       *
+	 * Type: UINT_PTR                                                                                                   *
+	 * The identifier of the modified menu item or, if the uFlags parameter has the MF_POPUP flag set,                  *
+	 * a handle to the drop-down menu or submenu.                                                                       *
+	 * lpNewItem                                                                                                        *
+	 * Type: LPCTSTR                                                                                                    *
+	 * The contents of the changed menu item. The interpretation of this parameter depends on whether                   *
+	 * the uFlags parameter includes the MF_BITMAP, MF_OWNERDRAW, or MF_STRING flag.                                    *
+	 * Value                                                                                                            *
+	 * Meaning                                                                                                          *
+	 * +--------------+----------------------------------------------------------------------+                          *
+	 * | MF_BITMAP    | A bitmap handle.                                                      |                         *
+	 * | 0x00000004L  |                                                                       |                         *
+	 * +--------------+----------------------------------------------------------------------+                          *
+	 * | MF_OWNERDRAW | A value supplied by an application that is used to maintain          |                          *
+	 * | 0x00000100L  | additional data related to the menu item. The value is in the          |                        *
+	 * |                | itemData member ofthe structure pointed to by the lParam parameter   |                        *
+	 * |                | of the WM_MEASUREITEM or WM_DRAWITEM messages sent when the menu      |                       *
+	 * |                | item is created or its appearance is updated.                          |                      *
+	 * +--------------+----------------------------------------------------------------------+                          *
+	 * | MF_STRING    | A pointer to a null-terminated string (the default).                  |                         *
+	 * | 0x00000000L  |                                                                      |                          *
+	 * +--------------+----------------------------------------------------------------------+                          *
+	 * Return Value                                                                                                   *
+	 * Type: BOOL                                                                                                       *
+	 * If the function succeeds, the return value is nonzero.                                                           *
+	 * If the function fails, the return value is zero. To get extended error information, call GetLastError.           *
+	 * Remarks                                                                                                        *
+	 * If ModifyMenu replaces a menu item that opens a drop-down menu or submenu, the function destroys                 *
+	 * the old drop-down menu or submenu and frees the memory used by it.                                               *
+	 * In order for keyboard accelerators to work with bitmap or owner-drawn menu items, the owner of                   *
+	 * the menu must process the WM_MENUCHAR(5) message. See Owner-Drawn Menus and the WM_MENUCHAR Message(6)           *
+	 * for more information.                                                                                            *
+	 * WM_MENUCHAR(5) : https://docs.microsoft.com/windows/desktop/menurc/wm-menuchar                                   *
+	 * Owner-Drawn Menus and the WM_MENUCHAR Message(6) : https://docs.microsoft.com/windows/desktop/menurc/using-menus *
+	 *                                                                                                                  *
+	 * The application must call the DrawMenuBar function whenever a menu changes, whether the menu                     *
+	 * is in a displayed window. To change the attributes of existing menu items, it is much faster to use              *
+	 * the CheckMenuItem(8) and EnableMenuItem(9) functions.                                                            *
+	 * DrawMenuBar(7) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-drawmenubar                   *
+	 * CheckMenuItem(8) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-checkmenuitem               *
+	 * EnableMenuItem(9) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-enablemenuitem             *
+	 * The following groups of flags cannot be used together:                                                           *
+	 *     * MF_BYCOMMAND and MF_BYPOSITION                                                                             *
+	 *     * MF_DISABLED, MF_ENABLED, and MF_GRAYED                                                                     *
+	 *     * MF_BITMAP, MF_STRING, MF_OWNERDRAW, and MF_SEPARATOR                                                       *
+	 *     * MF_MENUBARBREAK and MF_MENUBREAK                                                                           *
+	 *     * MF_CHECKED and MF_UNCHECKED                                                                                *
+	 * Examples                                                                                                       *
+	 * For an example, see Setting Fonts for Menu-Item Text Strings(10).                                                *
+	 * Setting Fonts for Menu-Item Text Strings(10) : https://docs.microsoft.com/windows/desktop/menurc/using-menus     *
+	 ********************************************************************************************************************/
 		::ModifyMenu(_mainMenuHandle, MENUINDEX_PLUGINS, MF_BYPOSITION, 0, pluginsTrans.c_str());
 	}
 	//Windows menu
@@ -2106,7 +2261,8 @@ bool Notepad_plus::replaceInFiles()
 	ScintillaEditView *pOldView = _pEditView;
 	_pEditView = &_invisibleEditView;
 	Document oldDoc = _invisibleEditView.execute(SCI_GETDOCPOINTER);
-	Buffer * oldBuf = _invisibleEditView.getCurrentBuffer();	//for manually setting the buffer, so notifications can be handled properly
+	/** for manually setting the buffer, so notifications can be handled properly **/
+	Buffer * oldBuf = _invisibleEditView.getCurrentBuffer();
 
 	vector<generic_string> patterns2Match;
 	_findReplaceDlg.getPatterns(patterns2Match);
@@ -4343,6 +4499,143 @@ void Notepad_plus::updateStatusBar()
 	long selected_length = _pEditView->getUnicodeSelectedLength();
 	if (selected_length != -1)
 	{
+		/**********************************************************************************************************************************
+		 * https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-wsprintfw                                                *
+		 * function                                                                                                                       *
+		 * Writes formatted data to the specified buffer. Any arguments are converted and copied to the                                   *
+		 * output buffer according to the corresponding format specification in the format string.                                        *
+		 * The function appends a terminating null character to the characters it writes, but                                             *
+		 * the return value does not include the terminating null character in its character count.                                       *
+		 * 类似于printf，和printf的区别在于printf输出到控制台，wsprintf输出到第一个参数指定的内存中                                       *
+		 * Note  Do not use. Consider using one of the following functions instead:                                                       *
+		 * StringCbPrintf(1),                                                                                                             *
+		 * StringCbPrintfEx(2),                                                                                                           *
+		 * StringCchPrintf(3),                                                                                                            *
+		 * or StringCchPrintfEx(4).                                                                                                       *
+		 * See Security Considerations.                                                                                                   *
+		 * StringCbPrintf(1) : https://docs.microsoft.com/windows/desktop/api/strsafe/nf-strsafe-stringcbprintfa                          *
+		 * StringCbPrintfEx(2) : https://docs.microsoft.com/windows/desktop/api/strsafe/nf-strsafe-stringcbprintfexa                      *
+		 * StringCchPrintf(3) : https://docs.microsoft.com/windows/desktop/api/strsafe/nf-strsafe-stringcchprintfa                        *
+		 * StringCchPrintfEx(4) : https://docs.microsoft.com/windows/desktop/api/strsafe/nf-strsafe-stringcchprintfexa                    *
+		 * int WINAPIV wsprintfW(LPWSTR arg1, LPCWSTR arg2, ...);                                                                         *
+		 * arg1                                                                                                                           *
+		 * Type: LPTSTR                                                                                                                   *
+		 * The buffer that is to receive the formatted output. The maximum size of the buffer is 1,024 bytes.                             *
+		 * arg2                                                                                                                           *
+		 * Type: LPCTSTR                                                                                                                  *
+		 * The format-control specifications. In addition to ordinary ASCII characters, a format specification                            *
+		 * for each argument appears in this string. For more information about the format specification,                                 *
+		 * see the Remarks section.                                                                                                       *
+		 * arg3                                                                                                                           *
+		 * One or more optional arguments. The number and type of argument parameters depend on                                           *
+		 * the corresponding format-control specifications in the lpFmt parameter.                                                        *
+		 * Return Value                                                                                                                 *
+		 * Type: int                                                                                                                      *
+		 * If the function succeeds, the return value is the number of characters stored in the output buffer,                            *
+		 * not counting the terminating null character.                                                                                   *
+		 * If the function fails, the return value is less than the length of the expected output.                                        *
+		 * To get extended error information, call GetLastError.                                                                          *
+		 * Remarks                                                                                                                      *
+		 * The format-control string contains format specifications that determine the output format for                                  *
+		 * the arguments following the lpFmt parameter. Format specifications, discussed below, always begin                              *
+		 * with a percent sign (%). If a percent sign is followed by a character that has no meaning as a format                          *
+		 * field, the character is not formatted (for example, %% produces a single percent-sign character).                              *
+		 * The format-control string is read from left to right. When the first format specification (if any)                             *
+		 * is encountered, it causes the value of the first argument after the format-control string to be                                *
+		 * converted and copied to the output buffer according to the format specification. The second format                             *
+		 * specification causes the second argument to be converted and copied, and so on. If there are more                              *
+		 * arguments than format specifications, the extra arguments are ignored.                                                         *
+		 * If there are not enough arguments for all of the format specifications, the results are undefined.                             *
+		 * 如果参数不够将返回undefined                                                                                                    *
+		 * A format specification has the following form:                                                                                 *
+		 * %[-][#][0][width][.precision]type                                                                                              *
+		 * Each field is a single character or a number signifying a particular format option.                                            *
+		 * The type characters that appear after the last optional format field determine whether                                         *
+		 * the associated argument is interpreted as a character, a string, or a number.                                                  *
+		 * The simplest format specification contains only the percent sign and a type character                                          *
+		 * (for example, %s). The optional fields control other aspects of the formatting.                                                *
+		 * Following are the optional and required fields and their meanings.                                                             *
+		 * +------------+------------------------------------------------------------------------------------------------------------+    *
+		 * | Field      | Meaning                                                                                                    |    *
+		 * +------------+------------------------------------------------------------------------------------------------------------+    *
+		 * | -          | Pad the output with blanks or zeros to the right to fill the field width, justifying output to the left.   |    *
+		 * |            | If this field is omitted, the output is padded to the left, justifying it to the right.                    |    *
+		 * +------------+------------------------------------------------------------------------------------------------------------+    *
+		 * | #          | Prefix hexadecimal values with 0x (lowercase) or 0X (uppercase).                                           |    *
+		 * +------------+------------------------------------------------------------------------------------------------------------+    *
+		 * | 0          | Pad the output value with zeros to fill the field width. If this field is omitted, the output value is     |    *
+		 * |            | padded with blank spaces.                                                                                  |    *
+		 * +------------+------------------------------------------------------------------------------------------------------------+    *
+		 * | width      | Copy the specified minimum number of characters to the output buffer. The width field is a                 |    *
+		 * |            | nonnegative integer. The width specification never causes a value to be truncated; if the                  |    *
+		 * |            | number of characters in the output value is greater than the specified width, or if the                    |    *
+		 * |            | width field is not present, all characters of the value are printed, subject to the precision              |    *
+		 * |            | specification.                                                                                             |    *
+		 * +------------+------------------------------------------------------------------------------------------------------------+    *
+		 * | .precision | For numbers, copy the specified minimum number of digits to the output buffer. If the number of digits     |    *
+		 * |            | in the argument is less than the specified precision, the output value is padded on the left with zeros.   |    *
+		 * |            | The value is not truncated when the number of digits exceeds the specified precision. If the specified     |    *
+		 * |            | precision is 0 or omitted entirely, or if the period (.) appears without a number following it,            |    *
+		 * |            | the precision is set to 1.                                                                                 |    *
+		 * |            | For strings, copy the specified maximum number of characters to the output buffer.                         |    *
+		 * +------------+------------------------------------------------------------------------------------------------------------+    *
+		 * | type       | Output the corresponding argument as a character, a string, or a number. This field can be any of          |    *
+		 * |            | the following values.                                                                                      |    *
+		 * |            | c                                                                                                          |    *
+		 * |            | Single character. This value is interpreted as type WCHAR if the calling application defines               |    *
+		 * |            | Unicode and as type __wchar_t otherwise.                                                                   |    *
+		 * |            | C                                                                                                          |    *
+		 * |            | Single character. This value is interpreted as type __wchar_t if the calling application defines           |    *
+		 * |            | Unicode and as type WCHAR otherwise.                                                                       |    *
+		 * |            | d                                                                                                          |    *
+		 * |            | Signed decimal integer. This value is equivalent to i.                                                     |    *
+		 * |            | hc, hC                                                                                                     |    *
+		 * |            | Single character. The wsprintf function ignores character arguments with a numeric value of zero.          |    *
+		 * |            | This value is always interpreted as type __wchar_t, even when the calling application defines Unicode.     |    *
+		 * |            | hd                                                                                                         |    *
+		 * |            | Signed short integer argument.                                                                             |    *
+		 * |            | hs, hS                                                                                                     |    *
+		 * |            | String. This value is always interpreted as type LPSTR, even when the calling application defines Unicode. |    *
+		 * |            | hu                                                                                                         |    *
+		 * |            | Unsigned short integer.                                                                                    |    *
+		 * |            | i                                                                                                          |    *
+		 * |            | Signed decimal integer. This value is equivalent to d.                                                     |    *
+		 * |            | Ix, IX                                                                                                     |    *
+		 * |            | 64-bit unsigned hexadecimal integer in lowercase or uppercase on 64-bit platforms,                         |    *
+		 * |            | 32-bit unsigned hexadecimal integer in lowercase or uppercase on 32-bit platforms.                         |    *
+		 * |            | lc, lC                                                                                                     |    *
+		 * |            | Single character. The wsprintf function ignores character arguments with a numeric value of zero.          |    *
+		 * |            | This value is always interpreted as type WCHAR, even when the calling application does not define Unicode. |    *
+		 * |            | ld                                                                                                         |    *
+		 * |            | Long signed integer. This value is equivalent to li.                                                       |    *
+		 * |            | li                                                                                                         |    *
+		 * |            | Long signed integer. This value is equivalent to ld.                                                       |    *
+		 * |            | ls, lS                                                                                                     |    *
+		 * |            | String. This value is always interpreted as type LPWSTR,                                                   |    *
+		 * |            | even when the calling application does not define Unicode. This value is equivalent to ws.                 |    *
+		 * |            | lu                                                                                                         |    *
+		 * |            | Long unsigned integer.                                                                                     |    *
+		 * |            | lx, lX                                                                                                     |    *
+		 * |            | Long unsigned hexadecimal integer in lowercase or uppercase.                                               |    *
+		 * |            | p                                                                                                          |    *
+		 * |            | Pointer. The address is printed using hexadecimal.                                                         |    *
+		 * |            | s                                                                                                          |    *
+		 * |            | String. This value is interpreted as type LPWSTR when the calling application defines Unicode              |    *
+		 * |            | and as type LPSTR otherwise.                                                                               |    *
+		 * |            | S                                                                                                          |    *
+		 * |            | String. This value is interpreted as type LPSTR when the calling application defines Unicode               |    *
+		 * |            | and as type LPWSTR otherwise.                                                                              |    *
+		 * |            | u                                                                                                          |    *
+		 * |            | Unsigned integer argument.                                                                                 |    *
+		 * |            | x, X                                                                                                       |    *
+		 * |            | Unsigned hexadecimal integer in lowercase or uppercase.                                                    |    *
+		 * +------------+------------------------------------------------------------------------------------------------------------+    *
+		 * Note  It is important to note that wsprintf uses the C calling convention (_cdecl), rather than the standard call (_stdcall)   *
+		 * calling convention. As a result, it is the responsibility of the calling process to pop arguments off the stack,               *
+		 * and arguments are pushed on the stack from right to left. In C-language modules, the C compiler performs this task.            *
+		 * To use buffers larger than 1024 bytes, use _snwprintf. For more information, see the documentation for the C run-time library. *
+		 * wsprintf函数只支持1024字节的空间                                                                                               *
+		 **********************************************************************************************************************************/
 		wsprintf(strSel, TEXT("Sel : %s | %s"), commafyInt(selected_length).c_str(), commafyInt(selLine).c_str());
 	}
 	else

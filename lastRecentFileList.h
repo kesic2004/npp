@@ -36,9 +36,9 @@
  ******************************/
 struct RecentItem
 {
-	/*
-	 * 文件的顺序编号
-	 */
+	/**************************
+	 * 文件在菜单中的顺序编号 *
+	 **************************/
 	int _id = 0;
 	/*
 	 * 文件的绝对路径
@@ -58,15 +58,22 @@ struct RecentItem
 class LastRecentFileList
 {
 public:
+	/*
+	 * 唯一无参构造函数
+	 */
 	LastRecentFileList()
 	{
-		_userMax = (NppParameters::getInstance())->getNbMaxRecentFile();
+		LastRecentFileList::_userMax = (NppParameters::getInstance())->getNbMaxRecentFile();
 		for (int i = 0; i < NB_MAX_LRF_FILE; i++)
 		{
-			_idFreeArray[i] = false;
+			LastRecentFileList::_idFreeArray[i] = false;
 		}
 	}
 
+	/*
+	 * 把当前对象与菜单进行对接
+	 * 
+	 */
 	void initMenu(HMENU hMenu, int idBase, int posBase, Accelerator * accelerator, bool doSubMenu = false);
 
 	void switchMode();
@@ -113,16 +120,25 @@ public:
 
 	void saveLRFL();
 
+	/*
+	 * 加锁或解锁
+	 */
 	void setLock(bool lock)
 	{
 		_locked = lock;
 	}
 
+	/*
+	 * 设置语言编码
+	 */
 	void setLangEncoding(int nativeLangEncoding)
 	{
 		_nativeLangEncoding = nativeLangEncoding;
 	}
 
+	/*
+	 * 是否是子菜单模式
+	 */
 	bool isSubMenuMode() const
 	{
 		return (_hParentMenu != NULL);
@@ -135,8 +151,16 @@ private:
 	std::deque<RecentItem> _lrfl;
 
 	Accelerator * _pAccelerator = nullptr;
+	/*
+	 * 当前允许的最大历史记录数
+	 */
 	int _userMax = 0;
+	/*
+	 * 当前数量
+	 */
 	int _size = 0;
+	/*
+	 */
 	int _nativeLangEncoding = -1;
 
 	// For the menu
@@ -145,10 +169,17 @@ private:
 	 ****************************************/
 	HMENU _hParentMenu = nullptr;
 
+	/*
+	 * 目标菜单
+	 */
 	HMENU _hMenu       = nullptr;
-
+	/*
+	 *菜单展示的位置
+	 */
 	int _posBase       = -1;
-
+	/*
+	 * 消息序号
+	 */
 	int _idBase        = -1;
 
 	/*
@@ -156,8 +187,14 @@ private:
 	 */
 	bool _idFreeArray[NB_MAX_LRF_FILE];
 
+	/*
+	 *是否向菜单中加上了分隔符，true表示已经加上，默认和初始值均为：false
+	 */
 	bool _hasSeparators = false;
 
+	/*
+	 * 是否更新的锁，true表示已加锁，默认和初始值均为：false
+	 */
 	bool _locked        = false;
 
 	int find(const TCHAR *fn);

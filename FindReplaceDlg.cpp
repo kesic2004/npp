@@ -3674,9 +3674,9 @@ void FindIncrementDlg::addToRebar(ReBar * rebar)
 const TCHAR Progress::cClassName[] = TEXT("NppProgressClass");
 const TCHAR Progress::cDefaultHeader[] = TEXT("Operation progress...");
 const int Progress::cBackgroundColor = COLOR_3DFACE;
-const int Progress::cPBwidth = 600;
-const int Progress::cPBheight = 10;
-const int Progress::cBTNwidth = 80;
+const int Progress::cPBwidth   = 600;
+const int Progress::cPBheight  = 10;
+const int Progress::cBTNwidth  = 80;
 const int Progress::cBTNheight = 25;
 
 
@@ -3700,6 +3700,66 @@ Progress::Progress(HINSTANCE hInst) : _hwnd(NULL), _hCallerWnd(NULL)
 
 		::RegisterClassEx(&wcex);
 
+		/***************************************************************************************************************************
+		 * form : https://docs.microsoft.com/zh-cn/windows/win32/api/commctrl/ns-commctrl-initcommoncontrolsex?redirectedfrom=MSDN *
+		 * Carries information used to load common control classes from the dynamic-link library (DLL).                            *
+		 * This structure is used with the InitCommonControlsEx function.                                                          *
+		 * 用于从动态链接库中加载公用控制类(common control classes)                                                                *
+		 * typedef struct tagINITCOMMONCONTROLSEX                                                                                  *
+		 * {                                                                                                                       *
+		 *     DWORD dwSize;                                                                                                       *
+		 *     DWORD dwICC;                                                                                                        *
+		 * } INITCOMMONCONTROLSEX, *LPINITCOMMONCONTROLSEX;                                                                        *
+		 * dwSize                                                                                                                  *
+		 * Type: DWORD(1)                                                                                                          *
+		 * The size of the structure, in bytes.                                                                                    *
+		 * dwICC                                                                                                                   *
+		 * Type: DWORD(1)                                                                                                          *
+		 * The set of bit flags that indicate which common control classes will be loaded from the DLL.                            *
+		 * This can be a combination of the following values.                                                                      *
+		 * DWORD(1) : https://docs.microsoft.com/windows/desktop/WinProg/windows-data-types                                        *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | Value                  | Meaning                                                          |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_ANIMATE_CLASS      | Load animate control class.                                      |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_BAR_CLASSES        | Load toolbar, status bar, trackbar, and tooltip control classes. |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_COOL_CLASSES       | Load rebar control class.                                        |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_DATE_CLASSES       | Load date and time picker control class.                         |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_HOTKEY_CLASS       | Load hot key control class.                                      |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_INTERNET_CLASSES   | Load IP address class.                                           |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_LINK_CLASS         | Load a hyperlink control class.                                  |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_LISTVIEW_CLASSES   | Load list-view and header control classes.                       |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_NATIVEFNTCTL_CLASS | Load a native font control class.                                |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_PAGESCROLLER_CLASS | Load pager control class.                                        |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_PROGRESS_CLASS     | Load progress bar control class.                                 |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_STANDARD_CLASSES   | Load one of the intrinsic User32 control classes.                |                           *
+		 * |                        | The user controls include button, edit, static, listbox,         |                           *
+		 * |                        | combobox, and scroll bar.                                        |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_TAB_CLASSES        | Load tab and tooltip control classes.                            |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_TREEVIEW_CLASSES   | Load tree-view and tooltip control classes.                      |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_UPDOWN_CLASS       | Load up-down control class.                                      |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_USEREX_CLASSES     | Load ComboBoxEx class.                                           |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 * | ICC_WIN95_CLASSES      | Load animate control, header, hot key, list-view,                |                           *
+		 * |                        | progress bar, status bar, tab, tooltip, toolbar,                 |                           *
+		 * |                        | trackbar, tree-view, and up-down control classes.                |                           *
+		 * +------------------------+------------------------------------------------------------------+                           *
+		 ***************************************************************************************************************************/
 		INITCOMMONCONTROLSEX icex = {0};
 		icex.dwSize = sizeof(icex);
 		icex.dwICC = ICC_STANDARD_CLASSES | ICC_PROGRESS_CLASS;

@@ -31,6 +31,12 @@
 #include "menuCmdID.h"
 #include "localization.h"
 
+/*
+ * @param hMenu        对接到的菜单句柄
+ * @param idBase       菜单消息序号
+ * @param pAccelerator 快捷键相关
+ * @param doSubMenu    是否子菜单展示(true : 以子菜单展示)
+ */
 void LastRecentFileList::initMenu(HMENU hMenu, int idBase, int posBase, Accelerator *pAccelerator, bool doSubMenu)
 {
 	if (doSubMenu)
@@ -44,9 +50,9 @@ void LastRecentFileList::initMenu(HMENU hMenu, int idBase, int posBase, Accelera
 		_hMenu = hMenu;
 	}
 
-	_idBase = idBase;
-	_posBase = posBase;
-	_pAccelerator = pAccelerator;
+	_idBase             = idBase;
+	_posBase            = posBase;
+	_pAccelerator       = pAccelerator;
 	_nativeLangEncoding = NPP_CP_WIN_1252;
 
 	/*
@@ -58,7 +64,9 @@ void LastRecentFileList::initMenu(HMENU hMenu, int idBase, int posBase, Accelera
 	}
 }
 
-
+/*
+ * 子菜单模式和非子菜单模式之间的转换，只清空菜单，和更新菜单数据
+ */
 void LastRecentFileList::switchMode()
 {
 	// Remove all menu items
@@ -108,13 +116,40 @@ void LastRecentFileList::switchMode()
 
 	// mode main menu
 	if (_hParentMenu == NULL)
-	{	if (_size > 0)
+	{
+		if (_size > 0)
 		{
 			::RemoveMenu(_hMenu, _posBase, MF_BYPOSITION);
 			::RemoveMenu(_hMenu, _posBase, MF_BYPOSITION);
 		}
 		// switch to sub-menu mode
 		_hParentMenu = _hMenu;
+		/**********************************************************************************************************************
+		 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-createpopupmenu?redirectedfrom=MSDN   *
+		 * function                                                                                                           *
+		 * Creates a drop-down menu, submenu, or shortcut menu. The menu is initially empty. You can insert or append menu    *
+		 * items by using the InsertMenuItem(1) function. You can also use the InsertMenu function to insert menu items       *
+		 * and the AppendMenu(2) function to append menu items.                                                               *
+		 * InsertMenuItem(1) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-insertmenuitema              *
+		 * AppendMenu(2) : https://docs.microsoft.com/windows/desktop/menurc/u                                                *
+		 * HMENU CreatePopupMenu();                                                                                           *
+		 * 新建一个下接式菜单、子菜单、快捷菜单                                                                               *
+		 * Return Value                                                                                                     *
+		 * Type: HMENU                                                                                                        *
+		 * If the function succeeds, the return value is a handle to the newly created menu.                                  *
+		 * If the function fails, the return value is NULL. To get extended error information, call GetLastError.             *
+		 * Remarks                                                                                                          *
+		 * The application can add the new menu to an existing menu, or it can display a shortcut menu by calling the         *
+		 * TrackPopupMenuEx(3) or TrackPopupMenu(4) functions.                                                                *
+		 * TrackPopupMenuEx(3) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-trackpopupmenuex           *
+		 * TrackPopupMenu(4) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-trackpopupmenu               *
+		 * Resources associated with a menu that is assigned to a window are freed automatically. If the menu is not          *
+		 * assigned to a window, an application must free system resources associated with the menu before closing.           *
+		 * An application frees menu resources by calling the DestroyMenu function.                                           *
+		 * Examples                                                                                                         *
+		 * For an example, see Adding Lines and Graphs to a Menu(5).                                                          *
+		 * Adding Lines and Graphs to a Menu(5) : https://docs.microsoft.com/windows/desktop/menurc/using-menus               *
+		 **********************************************************************************************************************/
 		_hMenu = ::CreatePopupMenu();
 		::RemoveMenu(_hMenu, _posBase+1, MF_BYPOSITION);
 	}
@@ -126,6 +161,27 @@ void LastRecentFileList::switchMode()
 			::RemoveMenu(_hParentMenu, _posBase, MF_BYPOSITION);
 		}
 		// switch to main menu mode
+		/****************************************************************************************************************
+		 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-destroymenu?redirectedfrom=MSDN *
+		 * function                                                                                                     *
+		 * Destroys the specified menu and frees any memory that the menu occupies.                                     *
+		 * 销毁指定的下拉菜单同时释放该菜单占用的内存空间                                                               *
+		 * BOOL DestroyMenu(HMENU hMenu);                                                                               *
+		 * hMenu                                                                                                        *
+		 * Type: HMENU                                                                                                  *
+		 * A handle to the menu to be destroyed.                                                                        *
+		 * Return Value                                                                                               *
+		 * Type: BOOL                                                                                                   *
+		 * If the function succeeds, the return value is nonzero.                                                       *
+		 * If the function fails, the return value is zero. To get extended error information, call GetLastError.       *
+		 * Remarks                                                                                                    *
+		 * Before closing, an application must use the DestroyMenu function to destroy a menu not assigned to a         *
+		 * window. A menu that is assigned to a window is automatically destroyed when the application closes.          *
+		 * DestroyMenu is recursive, that is, it will destroy the menu and all its submenus.                            *
+		 * Examples                                                                                                   *
+		 * For an example, see Displaying a Shortcut Menu(1).                                                           *
+		 * Displaying a Shortcut Menu(1) : https://docs.microsoft.com/windows/desktop/menurc/using-menus                *
+		 ****************************************************************************************************************/
 		::DestroyMenu(_hMenu);
 		_hMenu = _hParentMenu;
 		_hParentMenu = NULL;
@@ -142,28 +198,28 @@ void LastRecentFileList::updateMenu()
 		//add separators
 		NativeLangSpeaker *pNativeLangSpeaker = pNppParam->getNativeLangSpeaker();
 
-		generic_string recentFileList = pNativeLangSpeaker->getSpecialMenuEntryName("RecentFiles");
+		generic_string recentFileList = pNativeLangSpeaker->getSpecialMenuEntryName("RecentFiles"); /*  */
 
 		/***************************************************************
 		 * #define    IDM                              40000           *
 		 * #define    IDM_FILE                         (IDM + 1000)    *
 		 * #define    IDM_FILE_RESTORELASTCLOSEDFILE   (IDM_FILE + 21) *
 		 ***************************************************************/
-		generic_string openRecentClosedFile = pNativeLangSpeaker->getNativeLangMenuString(IDM_FILE_RESTORELASTCLOSEDFILE);
+		generic_string openRecentClosedFile = pNativeLangSpeaker->getNativeLangMenuString(IDM_FILE_RESTORELASTCLOSEDFILE); /* 恢复最近关闭的文件 */
 
 		/*******************************************************************
 		 * #define    IDM                                  40000           *
 		 * #define    IDM_EDIT                             (IDM + 2000)    *
 		 * #define    IDM_OPEN_ALL_RECENT_FILE             (IDM_EDIT + 40) *
 		 *******************************************************************/
-		generic_string openAllFiles = pNativeLangSpeaker->getNativeLangMenuString(IDM_OPEN_ALL_RECENT_FILE);
+		generic_string openAllFiles = pNativeLangSpeaker->getNativeLangMenuString(IDM_OPEN_ALL_RECENT_FILE);/* 打开文件列表 */
 
 		/*******************************************************************
 		 * #define    IDM                                  40000           *
 		 * #define    IDM_EDIT                             (IDM + 2000)    *
 		 * #define    IDM_CLEAN_RECENT_FILE_LIST           (IDM_EDIT + 41) *
 		 *******************************************************************/
-		generic_string cleanFileList = pNativeLangSpeaker->getNativeLangMenuString(IDM_CLEAN_RECENT_FILE_LIST);
+		generic_string cleanFileList = pNativeLangSpeaker->getNativeLangMenuString(IDM_CLEAN_RECENT_FILE_LIST);/* 清除文件列表 */
 
 		if (recentFileList == TEXT(""))
 		{
@@ -184,7 +240,7 @@ void LastRecentFileList::updateMenu()
 
 		if (!isSubMenuMode())
 		{
-			::InsertMenu(_hMenu, _posBase + 0, MF_BYPOSITION, static_cast<UINT_PTR>(-1), 0);
+			::InsertMenu(_hMenu, _posBase + 0, MF_BYPOSITION, static_cast<UINT_PTR>(-1), 0); /*菜单分隔符*/
 		}
 
 		/***************************************************************
@@ -211,7 +267,10 @@ void LastRecentFileList::updateMenu()
 		/****************************************
 		 * static_cast<UINT_PTR>(-1) == 2^64 -1 *
 		 ****************************************/
-		::InsertMenu(_hMenu, _posBase + 4, MF_BYPOSITION, static_cast<UINT_PTR>(-1), 0);
+		::InsertMenu(_hMenu, _posBase + 4, MF_BYPOSITION, static_cast<UINT_PTR>(-1), 0); /*菜单分隔符*/
+		/*
+		 * 设置为已经加上了分隔符
+		 */
 		_hasSeparators = true;
 
 		if (isSubMenuMode())
@@ -257,6 +316,9 @@ void LastRecentFileList::updateMenu()
 	
 }
 
+/*
+ * 把fn新加到队列中(如果发现重复的字符串，先移除该项)，同时更亲菜单
+ */
 void LastRecentFileList::add(const TCHAR *fn) 
 {
 	if (_userMax == 0 || _locked)
@@ -278,6 +340,40 @@ void LastRecentFileList::add(const TCHAR *fn)
 	{
 		itemToAdd._id = _lrfl.back()._id;
 		//remove oldest
+		/************************************************************************************************************
+		 * from : https://docs.microsoft.com/en-us/previous-versions/0x0e3528(v=vs.140)?redirectedfrom=MSDN         *
+		 * Deletes the element at the end of the deque.                                                             *
+		 * void pop_back();                                                                                         *
+		 * Remarks                                                                                                *
+		 * The last element must not be empty. pop_back never throws an exception.                                  *
+		 * Example                                                                                                  *
+		 * +------------------------------------------------------------------------------------------------------+ *
+		 * | // deque_pop_back.cpp                                                                                | *
+		 * | // compile with: /EHsc                                                                               | *
+		 * | #include <deque>                                                                                     | *
+		 * | #include <iostream>                                                                                  | *
+		 * |                                                                                                      | *
+		 * | int main( )                                                                                          | *
+		 * | {                                                                                                    | *
+		 * |     using namespace std;                                                                             | *
+		 * |     deque <int> c1;                                                                                  | *
+		 * |                                                                                                      | *
+		 * |     c1.push_back( 1 );                                                                               | *
+		 * |     c1.push_back( 2 );                                                                               | *
+		 * |     cout << "The first element is: " << c1.front( ) << endl;                                         | *
+		 * |     cout << "The last element is: " << c1.back( ) << endl;                                           | *
+		 * |                                                                                                      | *
+		 * |     c1.pop_back( );                                                                                  | *
+		 * |     cout << "After deleting the element at the end of the deque, the "                               | *
+		 * |             "last element is: " << c1.back( ) << endl;                                               | *
+		 * | }                                                                                                    | *
+		 * +------------------------------------------------------------------------------------------------------+ *
+		 * | The first element is: 1                                                                              | *
+		 * | The last element is: 2                                                                               | *
+		 * | After deleting the element at the end of the deque, the last element is: 1                           | *
+		 * +------------------------------------------------------------------------------------------------------+ *
+		 * 移除队列中最后的那个元素                                                                                 *
+		 ************************************************************************************************************/
 		_lrfl.pop_back();
 	}
 	else
@@ -287,7 +383,7 @@ void LastRecentFileList::add(const TCHAR *fn)
 	}
 	_lrfl.push_front(itemToAdd);
 	updateMenu();
-};
+}
 
 void LastRecentFileList::remove(const TCHAR *fn) 
 { 
@@ -296,8 +392,11 @@ void LastRecentFileList::remove(const TCHAR *fn)
 	{
 		remove(index);
 	}
-};
+}
 
+/*
+ * 从除列中移除相应的字符串，从菜单中移除相应的菜单，当前数量减1，同时跟新菜单
+ */
 void LastRecentFileList::remove(size_t index) 
 {
 	if (_size == 0 || _locked)
@@ -312,7 +411,7 @@ void LastRecentFileList::remove(size_t index)
 		--_size;
 		updateMenu();
 	}
-};
+}
 
 
 void LastRecentFileList::clear() 
@@ -354,6 +453,13 @@ generic_string & LastRecentFileList::getIndex(int index)
 }
 
 
+/*
+ * 设置当前的最大容量
+ * 如果当前容量已经超过设置的最大容量
+ *     从队列的最后移除多出的部分，清空占位，同时更新菜单
+ * 否则
+ *     只更新相应的值
+ */
 void LastRecentFileList::setUserMaxNbLRF(int size)
 {
 	_userMax = size;
@@ -380,7 +486,8 @@ void LastRecentFileList::saveLRFL()
 	NppParameters *pNppParams = NppParameters::getInstance();
 	if (pNppParams->writeRecentFileHistorySettings(_userMax))
 	{
-		for (int i = _size - 1; i >= 0; i--)	//reverse order: so loading goes in correct order
+		//reverse order: so loading goes in correct order
+		for (int i = _size - 1; i >= 0; i--)
 		{
 			pNppParams->writeHistory(_lrfl.at(i)._name.c_str());
 		}
@@ -388,6 +495,9 @@ void LastRecentFileList::saveLRFL()
 }
 
 
+/*
+ * 查找指定的定符串在队列的位置
+ */
 int LastRecentFileList::find(const TCHAR *fn)
 {
 	for (int i = 0; i < _size; ++i)
@@ -400,6 +510,9 @@ int LastRecentFileList::find(const TCHAR *fn)
 	return -1;
 }
 
+/*
+ * 获取占位的序号
+ */
 int LastRecentFileList::popFirstAvailableID() 
 {
 	for (int i = 0 ; i < NB_MAX_LRF_FILE ; ++i)
@@ -413,6 +526,9 @@ int LastRecentFileList::popFirstAvailableID()
 	return 0;
 }
 
+/*
+ * 清空相应的文件占位
+ */
 void LastRecentFileList::setAvailable(int id)
 {
 	int index = id - _idBase;

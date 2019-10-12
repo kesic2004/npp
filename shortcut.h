@@ -349,41 +349,89 @@ private :
 	int _internalID;
 };
 
-class Accelerator { //Handles accelerator keys for Notepad++ menu, including custom commands
+/*
+ * Handles accelerator keys for Notepad++ menu, including custom commands *
+ */
+class Accelerator
+{
 friend class ShortcutMapper;
 public:
-	Accelerator() {};
-	~Accelerator() {
+	Accelerator()
+	{
+	}
+
+	~Accelerator()
+	{
 		if (_hAccTable)
+		{
+			/****************************************************************************************************************************
+			 * from : https://docs.microsoft.com/zh-cn/windows/win32/api/winuser/nf-winuser-destroyacceleratortable?redirectedfrom=MSDN *
+			 * function                                                                                                                    *
+			 * Destroys an accelerator table.                                                                                            *
+			 * BOOL DestroyAcceleratorTable(HACCEL hAccel);                                                                                *
+			 * hAccel                                                                                                                    *
+			 * Type: HACCEL                                                                                                                *
+			 * A handle to the accelerator table to be destroyed. This handle must have been created by a call to the                    *
+			 * CreateAcceleratorTable(1) or LoadAccelerators(2) function.                                                                *
+			 * CreateAcceleratorTable(1) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-createacceleratortablea    *
+			 * LoadAccelerators(2) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-loadacceleratorsa                *
+			 * Return Value                                                                                                           *
+			 * Type: BOOL                                                                                                                *
+			 * If the function succeeds, the return value is nonzero. However, if the table has been loaded more                        *
+			 * than one call to LoadAccelerators(2), the function will return a nonzero value only when                                    *
+			 * DestroyAcceleratorTable has been called an equal number of times.                                                        *
+			 * If the function fails, the return value is zero.                                                                            *
+			 * LoadAccelerators(2) : https://docs.microsoft.com/windows/desktop/api/winuser/nf-winuser-loadacceleratorsa                *
+			 * 销毁HACCEL对象，成功返回真，失败返回假                                                                                    *
+			 ****************************************************************************************************************************/
 			::DestroyAcceleratorTable(_hAccTable);
+		}
 		if (_hIncFindAccTab)
+		{
 			::DestroyAcceleratorTable(_hIncFindAccTab);
+		}
 		if (_hFindAccTab)
+		{
 			::DestroyAcceleratorTable(_hFindAccTab);
+		}
 		delete [] _pAccelArray;
-	};
-	void init(HMENU hMenu, HWND menuParent) {
-		_hAccelMenu = hMenu;
+	}
+
+	void init(HMENU hMenu, HWND menuParent)
+	{
+		_hAccelMenu  = hMenu;
 		_hMenuParent = menuParent;
 		updateShortcuts();
-	};
-	HACCEL getAccTable() const {return _hAccTable;};
-	HACCEL getIncrFindAccTable() const { return _hIncFindAccTab; };
-	HACCEL getFindAccTable() const { return _hFindAccTab; };
+	}
+
+	HACCEL getAccTable() const
+	{
+		return _hAccTable;
+	}
+
+	HACCEL getIncrFindAccTable() const
+	{
+		return _hIncFindAccTab;
+	}
+
+	HACCEL getFindAccTable() const
+	{
+		return _hFindAccTab;
+	}
 
 	void updateShortcuts();
 	void updateFullMenu();
 
 private:
-	HMENU _hAccelMenu = nullptr;
-	HWND _hMenuParent = nullptr;
-	HACCEL _hAccTable = nullptr;
-	HACCEL _hIncFindAccTab = nullptr;
-	HACCEL _hFindAccTab = nullptr;
-	ACCEL *_pAccelArray = nullptr;
-	int _nbAccelItems = 0;
-
 	void updateMenuItemByCommand(const CommandShortcut& csc);
+
+	HMENU    _hAccelMenu     = nullptr;
+	HWND     _hMenuParent    = nullptr;
+	HACCEL   _hAccTable      = nullptr;
+	HACCEL   _hIncFindAccTab = nullptr;
+	HACCEL   _hFindAccTab    = nullptr;
+	ACCEL  * _pAccelArray    = nullptr;
+	int      _nbAccelItems   = 0;
 };
 
 class ScintillaAccelerator {	//Handles accelerator keys for scintilla

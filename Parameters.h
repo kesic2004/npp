@@ -2587,18 +2587,21 @@ private:
 	/*
 	 * @member
 	 */
-	// Recent File History
-	generic_string * _LRFileList[NB_MAX_LRF_FILE];
-	int              _nbRecentFile                 = 0;
-	int              _nbMaxRecentFile              = 10;
-	bool             _putRecentFileInSubMenu       = false;
+	/***********************
+	 * Recent File History *
+	 * 最近的文件记录      *
+	 ***********************/
+	generic_string * _LRFileList[NB_MAX_LRF_FILE];                             /* 最近打开的文件的绝对路径的数组 */
+	int              _nbRecentFile                 = 0;                        /* 当前的文件数量 */
+	int              _nbMaxRecentFile              = 10;                       /* 最多文件数量 */
 
 	/***************************
 	 * <0: Full File Path Name *
 	 * =0: Only File Name      *
 	 * >0: Custom Entry Length *
 	 ***************************/
-	int _recentFileCustomLength = RECENTFILES_SHOWFULLPATH;
+	int              _recentFileCustomLength       = RECENTFILES_SHOWFULLPATH; /* 文件绝对路径在菜单中的展式方式 */
+	bool             _putRecentFileInSubMenu       = false;                    /* 是否以子菜单的方式展示最近打开的文件数量 */
 
 	/***********************************************************************************************************************/
 

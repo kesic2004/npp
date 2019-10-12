@@ -497,9 +497,9 @@ void Accelerator::updateShortcuts()
 	vector<UserCommand> & userCommands = pNppParam->getUserCommandList();
 	vector<PluginCmdShortcut> & pluginCommands = pNppParam->getPluginCommandList();
 
-	size_t nbMenu = shortcuts.size();
-	size_t nbMacro = macros.size();
-	size_t nbUserCmd = userCommands.size();
+	size_t nbMenu      = shortcuts.size();
+	size_t nbMacro     = macros.size();
+	size_t nbUserCmd   = userCommands.size();
 	size_t nbPluginCmd = pluginCommands.size();
 
 	delete [] _pAccelArray;

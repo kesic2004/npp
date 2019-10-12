@@ -4713,6 +4713,7 @@ void NppParameters::feedGUIParameters(TiXmlNode *node)
                         break;
                     default:
                         /*assert(false and "invalid buffer format - fallback to default");*/
+						break;
                 }
                 _nppGUI._newDocDefaultSettings._format = newFormat;
             }
