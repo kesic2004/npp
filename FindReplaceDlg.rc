@@ -88,7 +88,7 @@ BEGIN
     CONTROL         "",IDC_PERCENTAGE_SLIDER,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | NOT WS_VISIBLE | WS_TABSTOP,265,166,85,10
 END
 
-IDB_INCREMENTAL_BG          BITMAP                  "../icons/incrementalBg.bmp"
+IDB_INCREMENTAL_BG          BITMAP                  "./icons/incrementalBg.bmp"
 
 IDD_INCREMENT_FIND DIALOGEX 0, 0, 400, 20
 STYLE DS_SYSMODAL | DS_CONTROL | DS_FIXEDSYS | WS_CHILD | WS_CLIPCHILDREN

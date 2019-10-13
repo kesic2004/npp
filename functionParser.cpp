@@ -49,7 +49,7 @@ bool FunctionParsersManager::init(const generic_string& xmlPath, ScintillaEditVi
 
 	if (PathFileExists(xmlPath.c_str()))
 	{
-        _pXmlFuncListDoc = new TiXmlDocument(xmlPath);
+        _pXmlFuncListDoc = new TiXmlDocument(xmlPath.data());
         loadOkay = _pXmlFuncListDoc->LoadFile();
         if (loadOkay)
         {

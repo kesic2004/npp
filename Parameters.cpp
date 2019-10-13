@@ -1127,7 +1127,7 @@ bool NppParameters::load()
 		::CopyFile(srcLangsPath.c_str(), langs_xml_path.c_str(), FALSE);
 	}
 
-	_pXmlDoc = new TiXmlDocument(langs_xml_path);
+	_pXmlDoc = new TiXmlDocument(langs_xml_path.data());
 
 
 	bool loadOkay = _pXmlDoc->LoadFile();
@@ -1165,7 +1165,7 @@ bool NppParameters::load()
 	if (!::PathFileExists(configPath.c_str()))
 		::CopyFile(srcConfigPath.c_str(), configPath.c_str(), FALSE);
 
-	_pXmlUserDoc = new TiXmlDocument(configPath);
+	_pXmlUserDoc = new TiXmlDocument(configPath.data());
 	loadOkay = _pXmlUserDoc->LoadFile();
 	
 	if (!loadOkay)
@@ -1236,7 +1236,7 @@ bool NppParameters::load()
 	std::vector<generic_string> udlFiles;
 	getFilesInFolder(udlFiles, TEXT("*.xml"), userDefineLangsFolderPath);
 
-	_pXmlUserLangDoc = new TiXmlDocument(_userDefineLangPath);
+	_pXmlUserLangDoc = new TiXmlDocument(_userDefineLangPath.data());
 	loadOkay = _pXmlUserLangDoc->LoadFile();
 	if (!loadOkay)
 	{
@@ -1253,7 +1253,7 @@ bool NppParameters::load()
 
 	for (const auto& i : udlFiles)
 	{
-		auto udlDoc = new TiXmlDocument(i);
+		auto udlDoc = new TiXmlDocument(i.data());
 		loadOkay = udlDoc->LoadFile();
 		if (!loadOkay)
 		{
@@ -1313,7 +1313,7 @@ bool NppParameters::load()
 	generic_string toolbarIconsPath(_userPath);
 	PathAppend(toolbarIconsPath, TEXT("toolbarIcons.xml"));
 
-	_pXmlToolIconsDoc = new TiXmlDocument(toolbarIconsPath);
+	_pXmlToolIconsDoc = new TiXmlDocument(toolbarIconsPath.data());
 	loadOkay = _pXmlToolIconsDoc->LoadFile();
 	if (!loadOkay)
 	{
@@ -1336,7 +1336,7 @@ bool NppParameters::load()
 		::CopyFile(srcShortcutsPath.c_str(), _shortcutsPath.c_str(), TRUE);
 	}
 
-	_pXmlShortcutDoc = new TiXmlDocument(_shortcutsPath);
+	_pXmlShortcutDoc = new TiXmlDocument(_shortcutsPath.data());
 	loadOkay = _pXmlShortcutDoc->LoadFile();
 	if (!loadOkay)
 	{
@@ -1388,7 +1388,7 @@ bool NppParameters::load()
 	const NppGUI & nppGUI = (NppParameters::getInstance()).getNppGUI();
 	if (nppGUI._rememberLastSession)
 	{
-		_pXmlSessionDoc = new TiXmlDocument(_sessionPath);
+		_pXmlSessionDoc = new TiXmlDocument(_sessionPath.data());
 
 		loadOkay = _pXmlSessionDoc->LoadFile();
 		if (!loadOkay)
@@ -1412,7 +1412,7 @@ bool NppParameters::load()
 
 	if (PathFileExists(_blacklistPath.c_str()))
 	{
-		_pXmlBlacklistDoc = new TiXmlDocument(_blacklistPath);
+		_pXmlBlacklistDoc = new TiXmlDocument(_blacklistPath.data());
 		loadOkay = _pXmlBlacklistDoc->LoadFile();
 		if (loadOkay)
 			getBlackListFromXmlTree();
@@ -2677,7 +2677,7 @@ std::pair<unsigned char, unsigned char> NppParameters::feedUserLang(TiXmlNode *n
 
 bool NppParameters::importUDLFromFile(const generic_string& sourceFile)
 {
-	TiXmlDocument *pXmlUserLangDoc = new TiXmlDocument(sourceFile);
+	TiXmlDocument *pXmlUserLangDoc = new TiXmlDocument(sourceFile.data());
 	bool loadOkay = pXmlUserLangDoc->LoadFile();
 	if (loadOkay)
 	{
@@ -2703,7 +2703,7 @@ bool NppParameters::exportUDLToFile(size_t langIndex2export, const generic_strin
 	if (static_cast<int32_t>(langIndex2export) >= _nbUserLang)
 		return false;
 
-	TiXmlDocument *pNewXmlUserLangDoc = new TiXmlDocument(fileName2save);
+	TiXmlDocument *pNewXmlUserLangDoc = new TiXmlDocument(fileName2save.data());
 	TiXmlNode *newRoot2export = pNewXmlUserLangDoc->InsertEndChild(TiXmlElement(TEXT("NotepadPlus")));
 
 	insertUserLang2Tree(newRoot2export, _userLangArray[langIndex2export]);
@@ -2891,7 +2891,7 @@ void NppParameters::writeDefaultUDL()
 	{
 		if (!_pXmlUserLangDoc)
 		{
-			_pXmlUserLangDoc = new TiXmlDocument(_userDefineLangPath);
+			_pXmlUserLangDoc = new TiXmlDocument(_userDefineLangPath.data());
 			_pXmlUserLangDoc->InsertEndChild(TiXmlElement(TEXT("NotepadPlus")));
 		}
 
@@ -3167,7 +3167,7 @@ void NppParameters::writeShortcuts()
 	if (not _pXmlShortcutDoc)
 	{
 		//do the treatment
-		_pXmlShortcutDoc = new TiXmlDocument(_shortcutsPath);
+		_pXmlShortcutDoc = new TiXmlDocument(_shortcutsPath.data());
 	}
 
 	TiXmlNode *root = _pXmlShortcutDoc->FirstChild(TEXT("NotepadPlus"));
@@ -3297,7 +3297,7 @@ void NppParameters::feedUserSettings(TiXmlNode *settingsRoot)
 		{
 			for (int i = 0 ; i < SCE_USER_TOTAL_KEYWORD_GROUPS ; ++i)
 			{
-				boolStr = (prefixNode->ToElement())->Attribute(globalMappper().keywordNameMapper[i+SCE_USER_KWLIST_KEYWORDS1]);
+				boolStr = (prefixNode->ToElement())->Attribute(globalMappper().keywordNameMapper[i+SCE_USER_KWLIST_KEYWORDS1].data());
 				if (boolStr)
 					_userLangArray[_nbUserLang - 1]->_isPrefix[i] = (lstrcmp(TEXT("yes"), boolStr) == 0);
 			}
@@ -3647,7 +3647,7 @@ bool NppParameters::writeProjectPanelsSettings() const
 	{
 		TiXmlElement projPanelNode{TEXT("ProjectPanel")};
 		(projPanelNode.ToElement())->SetAttribute(TEXT("id"), i);
-		(projPanelNode.ToElement())->SetAttribute(TEXT("workSpaceFile"), _workSpaceFilePathes[i]);
+		(projPanelNode.ToElement())->SetAttribute(TEXT("workSpaceFile"), _workSpaceFilePathes[i].data());
 
 		(projPanelRootNode.ToElement())->InsertEndChild(projPanelNode);
 	}
@@ -5843,7 +5843,7 @@ void NppParameters::createXmlTreeFromGUIParams()
 		TiXmlElement *GUIConfigElement = (newGUIRoot->InsertEndChild(TiXmlElement(TEXT("GUIConfig"))))->ToElement();
 		GUIConfigElement->SetAttribute(TEXT("name"), TEXT("searchEngine"));
 		GUIConfigElement->SetAttribute(TEXT("searchEngineChoice"), _nppGUI._searchEngineChoice);
-		GUIConfigElement->SetAttribute(TEXT("searchEngineCustom"), _nppGUI._searchEngineCustom);
+		GUIConfigElement->SetAttribute(TEXT("searchEngineCustom"), _nppGUI._searchEngineCustom.data());
 	}
 
 	// <GUIConfig name="SmartHighLight" matchCase="no" wholeWordOnly="yes" useFindSettings="no" onAnotherView="no">yes</GUIConfig>
@@ -5962,7 +5962,7 @@ void NppParameters::insertDockingParamNode(TiXmlNode *GUIRoot)
 	{
 		PluginDlgDockingInfo & pdi = _nppGUI._dockingData._pluginDockInfo[i];
 		TiXmlElement PDNode(TEXT("PluginDlg"));
-		PDNode.SetAttribute(TEXT("pluginName"), pdi._name);
+		PDNode.SetAttribute(TEXT("pluginName"), pdi._name.data());
 		PDNode.SetAttribute(TEXT("id"), pdi._internalID);
 		PDNode.SetAttribute(TEXT("curr"), pdi._currContainer);
 		PDNode.SetAttribute(TEXT("prev"), pdi._prevContainer);
@@ -6559,8 +6559,8 @@ void NppParameters::insertUserLang2Tree(TiXmlNode *node, UserLangContainer *user
 	udlVersion += TEXT(".");
 	udlVersion += generic_itoa(SCE_UDL_VERSION_MINOR, temp, 10);
 
-	rootElement->SetAttribute(TEXT("name"), userLang->_name);
-	rootElement->SetAttribute(TEXT("ext"), userLang->_ext);
+	rootElement->SetAttribute(TEXT("name"), userLang->_name.data());
+	rootElement->SetAttribute(TEXT("ext"), userLang->_ext.data());
 	rootElement->SetAttribute(TEXT("udlVersion"), udlVersion.c_str());
 
 	TiXmlElement *settingsElement = (rootElement->InsertEndChild(TiXmlElement(TEXT("Settings"))))->ToElement();
@@ -6574,7 +6574,7 @@ void NppParameters::insertUserLang2Tree(TiXmlNode *node, UserLangContainer *user
 
 		TiXmlElement *prefixElement = (settingsElement->InsertEndChild(TiXmlElement(TEXT("Prefix"))))->ToElement();
 		for (int i = 0 ; i < SCE_USER_TOTAL_KEYWORD_GROUPS ; ++i)
-			prefixElement->SetAttribute(globalMappper().keywordNameMapper[i+SCE_USER_KWLIST_KEYWORDS1], userLang->_isPrefix[i]?TEXT("yes"):TEXT("no"));
+			prefixElement->SetAttribute(globalMappper().keywordNameMapper[i+SCE_USER_KWLIST_KEYWORDS1].data(), userLang->_isPrefix[i]?TEXT("yes"):TEXT("no"));
 	}
 
 	TiXmlElement *kwlElement = (rootElement->InsertEndChild(TiXmlElement(TEXT("KeywordLists"))))->ToElement();
@@ -6582,7 +6582,7 @@ void NppParameters::insertUserLang2Tree(TiXmlNode *node, UserLangContainer *user
 	for (int i = 0 ; i < SCE_USER_KWLIST_TOTAL ; ++i)
 	{
 		TiXmlElement *kwElement = (kwlElement->InsertEndChild(TiXmlElement(TEXT("Keywords"))))->ToElement();
-		kwElement->SetAttribute(TEXT("name"), globalMappper().keywordNameMapper[i]);
+		kwElement->SetAttribute(TEXT("name"), globalMappper().keywordNameMapper[i].data());
 		kwElement->InsertEndChild(TiXmlText(userLang->_keywordLists[i]));
 	}
 

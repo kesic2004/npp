@@ -44,6 +44,6 @@ BEGIN
 END
 
 
-IDB_CLOSE_DOWN          BITMAP                  "CloseDown.bmp"
-IDB_CLOSE_UP            BITMAP                  "CloseUp.bmp"
+IDB_CLOSE_DOWN          BITMAP                  "icons/CloseDown.bmp"
+IDB_CLOSE_UP            BITMAP                  "icons/CloseUp.bmp"
 
