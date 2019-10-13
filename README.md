@@ -9,3 +9,6 @@ TinyXml 重构版本
 
 # branch3
 Notepad Plus Plus 基于 Visual Studio 2017 (15.9) 的版本
+
+# branch5
+基于PowerEditor\src\CMakeLists.txt进行的配置
