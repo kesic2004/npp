@@ -829,6 +829,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int)
 	/*******************************
 	 * Notepad ++ 启动时需要的参数 *
 	 *******************************/
+	NppParametersInitial aaa;
 	NppParameters * pNppParameters = NppParameters::getInstance();
 
 	/*********************************************

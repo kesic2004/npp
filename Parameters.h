@@ -35,7 +35,7 @@
 #include "Scintilla.h"
 #include "ScintillaRef.h"
 
-#include "ToolBar.h"
+//#include "ToolBar.h"
 #include "UserDefineLangReference.h"
 #include "colors.h"
 #include "shortcut.h"
@@ -43,6 +43,8 @@
 #include "dpiManager.h"
 #include <assert.h>
 #include <tchar.h>
+#include <functional>
+#include <unordered_map>
 
 class NativeLangSpeaker;
 
@@ -1797,12 +1799,19 @@ const bool FREE     = false;
 
 const int RECENTFILES_SHOWFULLPATH     = -1;
 const int RECENTFILES_SHOWONLYFILENAME = 0;
-
+class NppParametersInitial
+{
+public:
+	NppParametersInitial();
+	~NppParametersInitial();
+};
 /*************************************************************************
  * final 修饰符该类不允许有派生类，该类是单例模式，用于存储NPP的相关参数 *
  *************************************************************************/
 class NppParameters final
 {
+	friend class GuiConfigBaseClass;
+	friend class NppParametersInitial;
 public:
 	/**********************
 	 * 返回单例实例的地址 *
@@ -3081,8 +3090,592 @@ private:
 	int getPluginCmdIdFromMenuEntryItemName(HMENU pluginsMenu, const generic_string& pluginName, const generic_string& pluginCmdName);
 
 	winVer getWindowsVersion();
+	//int a()
+	//{
+	//	auto b = [this](TiXmlNode    * childNode)-> void {this->getNppGUI.doFunctionListExport(); };
+	//	function<void(TiXmlNode *)> a = [this](TiXmlNode * childNode) {};
+	//}
+	//function<void(TiXmlNode *, TiXmlElement *)> one;
+	static/* const*/ std::unordered_map<generic_string , GuiConfigBaseClass *> guiConfigMap;
+	//static const std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<wchar_t const * const, GuiConfigBaseClass> > > > endOfGuiConfigMap;
+	static void initialGuiConfigMap();
+	static void destroyGuiConfigMap();
+	static int n;
 
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * base class
+ */
+class GuiConfigBaseClass
+{
+public:
+	enum Mode{ unknow = 0, childNode = 1, element = 2, svpElement = 3,childNode_and_element = 4};
+	const Mode mode;
+	/*
+	 * 无参构造函数，只能构造无效的对象
+	 */
+	GuiConfigBaseClass() : mode(Mode::unknow) {}
+protected:
+	/*
+	 * 唯一有参构造函数，用于构造有效的对象
+	 */
+	GuiConfigBaseClass(Mode mode) : mode(mode)
+	{
+		if (GuiConfigBaseClass::mode == Mode::unknow)
+		{
+			::MessageBox(nullptr, TEXT("直接调用无参构造函数"), TEXT("构造函数调用"), MB_OK | MB_ICONINFORMATION);
+		}
+	}
+public:
+	virtual ~GuiConfigBaseClass() = default;
+public:
+	/*
+	 * 基类的虚函数不允许调用
+	 */
+	virtual void operator ()(NppGUI & _nppGUI,           TiXmlNode    * childNode) { throw std::exception(); } // one
+	virtual void operator ()(NppGUI & _nppGUI,           TiXmlElement * element)   { throw std::exception(); } // two
+	virtual void operator ()(ScintillaViewParams & _svp, TiXmlElement * element)   { throw std::exception(); } // three
+	virtual void operator ()(NppGUI & _nppGUI,           TiXmlNode    * childNode, TiXmlElement * element) { throw std::exception(); }
+};
+
+
+/*
+ * ToolBar
+ */
+class GuiConfigToolBar : public GuiConfigBaseClass
+{
+public:
+	GuiConfigToolBar() : GuiConfigBaseClass(Mode::childNode_and_element) {}
+	virtual void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode, TiXmlElement * element);
+};
+
+/*
+ * StatusBar
+ */
+class GuiConfigStatusBar : public GuiConfigBaseClass
+{
+public:
+	GuiConfigStatusBar() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * MenuBar
+ */
+class GuiConfigMenuBar : public GuiConfigBaseClass
+{
+public:
+	GuiConfigMenuBar() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * TabBar
+ */
+class GuiConfigTabBar : public GuiConfigBaseClass
+{
+public:
+	GuiConfigTabBar() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * Auto-detection
+ */
+class GuiConfigAutoDetection : public GuiConfigBaseClass
+{
+public:
+	GuiConfigAutoDetection() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * TrayIcon
+ */
+class GuiConfigTrayIcon : public GuiConfigBaseClass
+{
+public:
+	GuiConfigTrayIcon() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * RememberLastSession
+ */
+class GuiConfigRememberLastSession : public GuiConfigBaseClass
+{
+public:
+	GuiConfigRememberLastSession() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * DetectEncoding
+ */
+class GuiConfigDetectEncoding : public GuiConfigBaseClass
+{
+public:
+	GuiConfigDetectEncoding() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * MaitainIndent
+ */
+ class GuiConfigMaitainIndent : public GuiConfigBaseClass
+{
+public:
+	GuiConfigMaitainIndent() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * SmartHighLight
+ */
+class GuiConfigSmartHighLight : public GuiConfigBaseClass
+{
+public:
+	GuiConfigSmartHighLight() : GuiConfigBaseClass(Mode::childNode_and_element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode, TiXmlElement * element);
+};
+
+/*
+ * TagsMatchHighLight
+ */
+class GuiConfigTagsMatchHighLight : public GuiConfigBaseClass
+{
+public:
+	GuiConfigTagsMatchHighLight() : GuiConfigBaseClass(Mode::childNode_and_element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode, TiXmlElement * element);
+};
+
+/*
+ * TaskList
+ */
+class GuiConfigTaskList : public GuiConfigBaseClass
+{
+public:
+	GuiConfigTaskList() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * MRU
+ */
+class GuiConfigMru : public GuiConfigBaseClass
+{
+public:
+	GuiConfigMru() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * URL
+ */
+class GuiConfigUrl : public GuiConfigBaseClass
+{
+public:
+	GuiConfigUrl() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * CheckHistoryFiles
+ */
+class GuiConfigCheckHistoryFiles : public GuiConfigBaseClass
+{
+public:
+	GuiConfigCheckHistoryFiles() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * ScintillaViewsSplitter
+ */
+class GuiConfigScintillaViewsSplitter : public GuiConfigBaseClass
+{
+public:
+	GuiConfigScintillaViewsSplitter() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * UserDefineDlg
+ */
+class GuiConfigUserDefineDlg : public GuiConfigBaseClass
+{
+public:
+	GuiConfigUserDefineDlg() : GuiConfigBaseClass(Mode::childNode_and_element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode, TiXmlElement * element);
+};
+
+/*
+ * TabSetting
+ */
+class GuiConfigTabSetting : public GuiConfigBaseClass
+{
+public:
+	GuiConfigTabSetting() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * Caret
+ */
+class GuiConfigCaret : public GuiConfigBaseClass
+{
+public:
+	GuiConfigCaret() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * ScintillaGlobalSettings
+ */
+class GuiConfigScintillaGlobalSettings : public GuiConfigBaseClass
+{
+public:
+	GuiConfigScintillaGlobalSettings() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * AppPosition
+ */
+class GuiConfigAppPosition : public GuiConfigBaseClass
+{
+public:
+	GuiConfigAppPosition() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * NewDocDefaultSettings
+ */
+class GuiConfigNewDocDefaultSettings : public GuiConfigBaseClass
+{
+public:
+	GuiConfigNewDocDefaultSettings() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * langsExcluded
+ */
+class GuiConfigLangsExcluded : public GuiConfigBaseClass
+{
+public:
+	GuiConfigLangsExcluded() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * Print
+ */
+class GuiConfigPrint : public GuiConfigBaseClass
+{
+public:
+	GuiConfigPrint() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * ScintillaPrimaryView
+ */
+class GuiConfigScintillaPrimaryView : public GuiConfigBaseClass
+{
+public:
+	GuiConfigScintillaPrimaryView() : GuiConfigBaseClass(Mode::svpElement) {}
+	void operator ()(ScintillaViewParams & _svp,TiXmlElement * element);
+};
+
+/*
+ * Backup
+ */
+class GuiConfigBackup : public GuiConfigBaseClass
+{
+public:
+	GuiConfigBackup() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * DockingManager
+ */
+class GuiConfigDockingManager : public GuiConfigBaseClass
+{
+public:
+	GuiConfigDockingManager() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * globalOverride
+ */
+class GuiConfigGlobalOverride : public GuiConfigBaseClass
+{
+public:
+	GuiConfigGlobalOverride() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * auto-completion
+ */
+class GuiConfigAutoCompletion : public GuiConfigBaseClass
+{
+public:
+	GuiConfigAutoCompletion() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * auto-insert
+ */
+class GuiConfigAutoInsert : public GuiConfigBaseClass
+{
+public:
+	GuiConfigAutoInsert() : GuiConfigBaseClass(Mode::childNode_and_element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode, TiXmlElement * element);
+};
+
+/*
+ * sessionExt
+ */
+class GuiConfigSessionExt : public GuiConfigBaseClass
+{
+public:
+	GuiConfigSessionExt() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * workspaceExt
+ */
+class GuiConfigWorkspaceExt : public GuiConfigBaseClass
+{
+public:
+	GuiConfigWorkspaceExt() : GuiConfigBaseClass(Mode::childNode) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode);
+};
+
+/*
+ * noUpdate
+ */
+class GuiConfigNoUpdate : public GuiConfigBaseClass
+{
+public:
+	GuiConfigNoUpdate() : GuiConfigBaseClass(Mode::childNode_and_element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode, TiXmlElement * element);
+};
+
+/*
+ * openSaveDir
+ */
+class GuiConfigOpenSaveDir : public GuiConfigBaseClass
+{
+public:
+	GuiConfigOpenSaveDir() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * titleBar
+ */
+class GuiConfigTitleBar : public GuiConfigBaseClass
+{
+public:
+	GuiConfigTitleBar() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * stylerTheme
+ */
+class GuiConfigStylerTheme : public GuiConfigBaseClass
+{
+public:
+	GuiConfigStylerTheme() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * wordCharList
+ */
+class GuiConfigWordCharList : public GuiConfigBaseClass
+{
+public:
+	GuiConfigWordCharList() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * delimiterSelection
+ */
+class GuiConfigDelimiterSelection : public GuiConfigBaseClass
+{
+public:
+	GuiConfigDelimiterSelection() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * multiInst
+ */
+class GuiConfigMultiInst : public GuiConfigBaseClass
+{
+public:
+	GuiConfigMultiInst() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * searchEngine
+ */
+class GuiConfigSearchEngine : public GuiConfigBaseClass
+{
+public:
+	GuiConfigSearchEngine() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+
+/*
+ * MISC
+ */
+class GuiConfigMisc : public GuiConfigBaseClass
+{
+public:
+	GuiConfigMisc() : GuiConfigBaseClass(Mode::element) {}
+	void operator ()(NppGUI & _nppGUI, TiXmlElement * element);
+};
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

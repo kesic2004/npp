@@ -4176,7 +4176,155 @@ void NppParameters::feedGUIParameters(TiXmlNode *node)
         childNode = childNode->NextSibling(TEXT("GUIConfig")) )
     {
         TiXmlElement* element = childNode->ToElement();
-        const TCHAR* nm = element->Attribute(TEXT("name"));
+        const TCHAR * nm = element->Attribute(TEXT("name"));
+		//GuiConfigBaseClass gcbc = 
+		//std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<wchar_t const * const, GuiConfigBaseClass> > > > a = {}; // NppParameters::guiConfigMap.find(generic_string(nm));
+		// GuiConfigBaseClass gcbc = a->second;
+		// const TCHAR * b = a->first;
+//		const generic_string key(TEXT("AAA"));
+//		const generic_string & keyRef = key;
+//		auto a = NppParameters::guiConfigMap.find(generic_string(TEXT("AAA")));
+//		auto b = NppParameters::guiConfigMap.find(nm);
+//		auto c = a->first;
+//		auto d = a->second;
+//		auto e = b->first;
+//		auto f = b->second;
+//		auto g = NppParameters::guiConfigMap[key];
+//		auto A = NppParameters::guiConfigMap[generic_string(TEXT("BBB"))];
+//		auto B = NppParameters::guiConfigMap[TEXT("BBB")];
+//		auto C = A->first;
+//		auto D = A->second;
+//		auto E = B->first;
+//		auto F = B->second;
+//		std::unordered_map<generic_string, Date> hashmap =
+//		{
+//			{ std::make_pair(generic_string(TEXT("ToolBar")),                 Date(2019, 10,  1)) },
+//			{ std::make_pair(generic_string(TEXT("StatusBar")),               Date(2019, 10,  2)) },
+//			{ std::make_pair(generic_string(TEXT("MenuBar")),                 Date(2019, 10,  3)) },
+//			{ std::make_pair(generic_string(TEXT("TabBar")),                  Date(2019, 10,  4)) },
+//			{ std::make_pair(generic_string(TEXT("Auto-detection")),          Date(2019, 10,  5)) },
+//			{ std::make_pair(generic_string(TEXT("TrayIcon")),                Date(2019, 10,  6)) },
+//			{ std::make_pair(generic_string(TEXT("RememberLastSession")),     Date(2019, 10,  7)) },
+//			{ std::make_pair(generic_string(TEXT("DetectEncoding")),          Date(2019, 10,  8)) },
+//			{ std::make_pair(generic_string(TEXT("MaitainIndent")),           Date(2019, 10,  9)) },
+//			{ std::make_pair(generic_string(TEXT("SmartHighLight")),          Date(2019, 10, 10)) },
+//			{ std::make_pair(generic_string(TEXT("TagsMatchHighLight")),      Date(2019, 10, 11)) },
+//			{ std::make_pair(generic_string(TEXT("TaskList")),                Date(2019, 10, 12)) },
+//			{ std::make_pair(generic_string(TEXT("MRU")),                     Date(2019, 10, 13)) },
+//			{ std::make_pair(generic_string(TEXT("URL")),                     Date(2019, 10, 14)) },
+//			{ std::make_pair(generic_string(TEXT("CheckHistoryFiles")),       Date(2019, 10, 15)) },
+//			{ std::make_pair(generic_string(TEXT("ScintillaViewsSplitter")),  Date(2019, 10, 16)) },
+//			{ std::make_pair(generic_string(TEXT("UserDefineDlg")),           Date(2019, 10, 17)) },
+//			{ std::make_pair(generic_string(TEXT("TabSetting")),              Date(2019, 10, 18)) },
+//			{ std::make_pair(generic_string(TEXT("Caret")),                   Date(2019, 10, 19)) },
+//			{ std::make_pair(generic_string(TEXT("ScintillaGlobalSettings")), Date(2019, 10, 20)) },
+//			{ std::make_pair(generic_string(TEXT("AppPosition")),             Date(2019, 10, 21)) },
+//			{ std::make_pair(generic_string(TEXT("NewDocDefaultSettings")),   Date(2019, 10, 22)) },
+//			{ std::make_pair(generic_string(TEXT("langsExcluded")),           Date(2019, 10, 23)) },
+//			{ std::make_pair(generic_string(TEXT("Print")),                   Date(2019, 10, 24)) },
+//			{ std::make_pair(generic_string(TEXT("ScintillaPrimaryView")),    Date(2019, 10, 25)) },
+//			{ std::make_pair(generic_string(TEXT("Backup")),                  Date(2019, 10, 26)) },
+//			{ std::make_pair(generic_string(TEXT("DockingManager")),          Date(2019, 10, 27)) },
+//			{ std::make_pair(generic_string(TEXT("globalOverride")),          Date(2019, 10, 28)) },
+//			{ std::make_pair(generic_string(TEXT("auto-completion")),         Date(2019, 10, 29)) },
+//			{ std::make_pair(generic_string(TEXT("auto-insert")),             Date(2019, 10, 30)) },
+//			{ std::make_pair(generic_string(TEXT("sessionExt")),              Date(2019, 10, 31)) },
+//			{ std::make_pair(generic_string(TEXT("workspaceExt")),            Date(2019, 11,  1)) },
+//			{ std::make_pair(generic_string(TEXT("noUpdate")),                Date(2019, 11,  2)) },
+//			{ std::make_pair(generic_string(TEXT("openSaveDir")),             Date(2019, 11,  3)) },
+//			{ std::make_pair(generic_string(TEXT("titleBar")),                Date(2019, 11,  4)) },
+//			{ std::make_pair(generic_string(TEXT("stylerTheme")),             Date(2019, 11,  5)) },
+//			{ std::make_pair(generic_string(TEXT("wordCharList")),            Date(2019, 11,  6)) },
+//			{ std::make_pair(generic_string(TEXT("delimiterSelection")),      Date(2019, 11,  7)) },
+//			{ std::make_pair(generic_string(TEXT("multiInst")),               Date(2019, 11,  8)) },
+//			{ std::make_pair(generic_string(TEXT("searchEngine")),            Date(2019, 11,  9)) },
+//			{ std::make_pair(generic_string(TEXT("MISC")),                    Date(2019, 11, 10)) },
+//			{ std::make_pair(generic_string(TEXT("1111")),                    Date(2019, 11, 11)) }
+//		};
+//		static std::unordered_map<generic_string, GuiConfigBaseClass> configMap =
+//		{
+//			{ std::make_pair(generic_string(TEXT("ToolBar")),                 GuiConfigToolBar()) },
+//			{ std::make_pair(generic_string(TEXT("StatusBar")),               GuiConfigStatusBar()) },
+//			{ std::make_pair(generic_string(TEXT("MenuBar")),                 GuiConfigMenuBar()) },
+//			{ std::make_pair(generic_string(TEXT("TabBar")),                  GuiConfigTabBar()) },
+//			{ std::make_pair(generic_string(TEXT("Auto-detection")),          GuiConfigAutoDetection()) },
+//			{ std::make_pair(generic_string(TEXT("TrayIcon")),                GuiConfigTrayIcon()) },
+//			{ std::make_pair(generic_string(TEXT("RememberLastSession")),     GuiConfigRememberLastSession()) },
+//			{ std::make_pair(generic_string(TEXT("DetectEncoding")),          GuiConfigDetectEncoding()) },
+//			{ std::make_pair(generic_string(TEXT("MaitainIndent")),           GuiConfigMaitainIndent()) },
+//			{ std::make_pair(generic_string(TEXT("SmartHighLight")),          GuiConfigSmartHighLight()) },
+//			{ std::make_pair(generic_string(TEXT("TagsMatchHighLight")),      GuiConfigTagsMatchHighLight()) },
+//			{ std::make_pair(generic_string(TEXT("TaskList")),                GuiConfigTaskList()) },
+//			{ std::make_pair(generic_string(TEXT("MRU")),                     GuiConfigMru()) },
+//			{ std::make_pair(generic_string(TEXT("URL")),                     GuiConfigUrl()) },
+//			{ std::make_pair(generic_string(TEXT("CheckHistoryFiles")),       GuiConfigCheckHistoryFiles()) },
+//			{ std::make_pair(generic_string(TEXT("ScintillaViewsSplitter")),  GuiConfigScintillaViewsSplitter()) },
+//			{ std::make_pair(generic_string(TEXT("UserDefineDlg")),           GuiConfigUserDefineDlg()) },
+//			{ std::make_pair(generic_string(TEXT("TabSetting")),              GuiConfigTabSetting()) },
+//			{ std::make_pair(generic_string(TEXT("Caret")),                   GuiConfigCaret()) },
+//			{ std::make_pair(generic_string(TEXT("ScintillaGlobalSettings")), GuiConfigScintillaGlobalSettings()) },
+//			{ std::make_pair(generic_string(TEXT("AppPosition")),             GuiConfigAppPosition()) },
+//			{ std::make_pair(generic_string(TEXT("NewDocDefaultSettings")),   GuiConfigNewDocDefaultSettings()) },
+//			{ std::make_pair(generic_string(TEXT("langsExcluded")),           GuiConfigLangsExcluded()) },
+//			{ std::make_pair(generic_string(TEXT("Print")),                   GuiConfigPrint()) },
+//			{ std::make_pair(generic_string(TEXT("ScintillaPrimaryView")),    GuiConfigScintillaPrimaryView()) },
+//			{ std::make_pair(generic_string(TEXT("Backup")),                  GuiConfigBackup()) },
+//			{ std::make_pair(generic_string(TEXT("DockingManager")),          GuiConfigDockingManager()) },
+//			{ std::make_pair(generic_string(TEXT("globalOverride")),          GuiConfigGlobalOverride()) },
+//			{ std::make_pair(generic_string(TEXT("auto-completion")),         GuiConfigAutoCompletion()) },
+//			{ std::make_pair(generic_string(TEXT("auto-insert")),             GuiConfigAutoInsert()) },
+//			{ std::make_pair(generic_string(TEXT("sessionExt")),              GuiConfigSessionExt()) },
+//			{ std::make_pair(generic_string(TEXT("workspaceExt")),            GuiConfigWorkspaceExt()) },
+//			{ std::make_pair(generic_string(TEXT("noUpdate")),                GuiConfigNoUpdate()) },
+//			{ std::make_pair(generic_string(TEXT("openSaveDir")),             GuiConfigOpenSaveDir()) },
+//			{ std::make_pair(generic_string(TEXT("titleBar")),                GuiConfigTitleBar()) },
+//			{ std::make_pair(generic_string(TEXT("stylerTheme")),             GuiConfigStylerTheme()) },
+//			{ std::make_pair(generic_string(TEXT("wordCharList")),            GuiConfigWordCharList()) },
+//			{ std::make_pair(generic_string(TEXT("delimiterSelection")),      GuiConfigDelimiterSelection()) },
+//			{ std::make_pair(generic_string(TEXT("multiInst")),               GuiConfigMultiInst()) },
+//			{ std::make_pair(generic_string(TEXT("searchEngine")),            GuiConfigSearchEngine()) },
+//			{ std::make_pair(generic_string(TEXT("MISC")),                    GuiConfigMisc()) }
+//		};
+		GuiConfigBaseClass * gcbc = guiConfigMap[nm];
+		if(gcbc)
+		switch (gcbc->mode)
+		{
+			case GuiConfigBaseClass::Mode::childNode:
+			{
+				gcbc->operator()(_nppGUI, childNode);
+				break;
+			}
+			case GuiConfigBaseClass::Mode::element:
+			{
+				gcbc->operator()(_nppGUI, element);
+				break;
+			}
+			case GuiConfigBaseClass::Mode::svpElement:
+			{
+				gcbc->operator()(_svp, element);
+				break;
+			}
+			case GuiConfigBaseClass::Mode::childNode_and_element:
+			{
+				gcbc->operator()(_nppGUI, element, element);
+				break;
+			}
+			case GuiConfigBaseClass::Mode::unknow:
+			default:
+				break;
+		}
+//		auto end = NppParameters::guiConfigMap.operator[](); // std::end(NppParameters::guiConfigMap);
+//		int h = 0;
+//		auto g = NppParameters::guiConfigMap[generic_string(nm)]; // 
+//		auto h = NppParameters::guiConfigMap[nm];
+//		if()
+//		{
+//			switch (gcbc.mode)
+//			{
+//				case
+//			}
+//		}
+/*
         if (nullptr == nm)
             continue;
 
@@ -4655,9 +4803,9 @@ void NppParameters::feedGUIParameters(TiXmlNode *node)
                     _nppGUI._enableMultiSelection = false;
             }
         }
-		/*
-		 * 主窗口的位置和长宽
-		 */
+		//
+		// 主窗口的位置和长宽
+		//
         else if (!lstrcmp(nm, TEXT("AppPosition")))
         {
             RECT oldRect = _nppGUI._appPos;
@@ -4691,9 +4839,9 @@ void NppParameters::feedGUIParameters(TiXmlNode *node)
             if (val)
                 _nppGUI._isMaximized = (lstrcmp(val, TEXT("yes")) == 0);
         }
-		/*
-		 * 文档格式，字符集，
-		 */
+		//
+		// 文档格式，字符集，
+		//
         else if (!lstrcmp(nm, TEXT("NewDocDefaultSettings")))
         {
             int i;
@@ -4712,7 +4860,7 @@ void NppParameters::feedGUIParameters(TiXmlNode *node)
                         newFormat = EolType::unix;
                         break;
                     default:
-                        /*assert(false and "invalid buffer format - fallback to default");*/
+                        //assert(false and "invalid buffer format - fallback to default");
 						break;
                 }
                 _nppGUI._newDocDefaultSettings._format = newFormat;
@@ -5283,7 +5431,8 @@ void NppParameters::feedGUIParameters(TiXmlNode *node)
                 _nppGUI._isDocPeekOnMap = (lstrcmp(optDocPeekOnMap, TEXT("yes")) == 0);
 
         }
-    }
+*/
+	}
 }
 
 void NppParameters::feedScintillaParam(TiXmlNode *node)
@@ -7096,4 +7245,2289 @@ EolType convertIntToFormatType(int value, EolType defvalue)
         default:
             return defvalue;
     }
+}
+
+//const 
+std::unordered_map<generic_string, GuiConfigBaseClass *> NppParameters::guiConfigMap =
+{
+//	{ std::make_pair(generic_string(TEXT("ToolBar")),                 GuiConfigToolBar()) },
+//	{ std::make_pair(generic_string(TEXT("StatusBar")),               GuiConfigStatusBar()) },
+//	{ std::make_pair(generic_string(TEXT("MenuBar")),                 GuiConfigMenuBar()) },
+//	{ std::make_pair(generic_string(TEXT("TabBar")),                  GuiConfigTabBar()) },
+//	{ std::make_pair(generic_string(TEXT("Auto-detection")),          GuiConfigAutoDetection()) },
+//	{ std::make_pair(generic_string(TEXT("TrayIcon")),                GuiConfigTrayIcon()) },
+//	{ std::make_pair(generic_string(TEXT("RememberLastSession")),     GuiConfigRememberLastSession()) },
+//	{ std::make_pair(generic_string(TEXT("DetectEncoding")),          GuiConfigDetectEncoding()) },
+//	{ std::make_pair(generic_string(TEXT("MaitainIndent")),           GuiConfigMaitainIndent()) },
+//	{ std::make_pair(generic_string(TEXT("SmartHighLight")),          GuiConfigSmartHighLight()) },
+//	{ std::make_pair(generic_string(TEXT("TagsMatchHighLight")),      GuiConfigTagsMatchHighLight()) },
+//	{ std::make_pair(generic_string(TEXT("TaskList")),                GuiConfigTaskList()) },
+//	{ std::make_pair(generic_string(TEXT("MRU")),                     GuiConfigMru()) },
+//	{ std::make_pair(generic_string(TEXT("URL")),                     GuiConfigUrl()) },
+//	{ std::make_pair(generic_string(TEXT("CheckHistoryFiles")),       GuiConfigCheckHistoryFiles()) },
+//	{ std::make_pair(generic_string(TEXT("ScintillaViewsSplitter")),  GuiConfigScintillaViewsSplitter()) },
+//	{ std::make_pair(generic_string(TEXT("UserDefineDlg")),           GuiConfigUserDefineDlg()) },
+//	{ std::make_pair(generic_string(TEXT("TabSetting")),              GuiConfigTabSetting()) },
+//	{ std::make_pair(generic_string(TEXT("Caret")),                   GuiConfigCaret()) },
+//	{ std::make_pair(generic_string(TEXT("ScintillaGlobalSettings")), GuiConfigScintillaGlobalSettings()) },
+//	{ std::make_pair(generic_string(TEXT("AppPosition")),             GuiConfigAppPosition()) },
+//	{ std::make_pair(generic_string(TEXT("NewDocDefaultSettings")),   GuiConfigNewDocDefaultSettings()) },
+//	{ std::make_pair(generic_string(TEXT("langsExcluded")),           GuiConfigLangsExcluded()) },
+//	{ std::make_pair(generic_string(TEXT("Print")),                   GuiConfigPrint()) },
+//	{ std::make_pair(generic_string(TEXT("ScintillaPrimaryView")),    GuiConfigScintillaPrimaryView()) },
+//	{ std::make_pair(generic_string(TEXT("Backup")),                  GuiConfigBackup()) },
+//	{ std::make_pair(generic_string(TEXT("DockingManager")),          GuiConfigDockingManager()) },
+//	{ std::make_pair(generic_string(TEXT("globalOverride")),          GuiConfigGlobalOverride()) },
+//	{ std::make_pair(generic_string(TEXT("auto-completion")),         GuiConfigAutoCompletion()) },
+//	{ std::make_pair(generic_string(TEXT("auto-insert")),             GuiConfigAutoInsert()) },
+//	{ std::make_pair(generic_string(TEXT("sessionExt")),              GuiConfigSessionExt()) },
+//	{ std::make_pair(generic_string(TEXT("workspaceExt")),            GuiConfigWorkspaceExt()) },
+//	{ std::make_pair(generic_string(TEXT("noUpdate")),                GuiConfigNoUpdate()) },
+//	{ std::make_pair(generic_string(TEXT("openSaveDir")),             GuiConfigOpenSaveDir()) },
+//	{ std::make_pair(generic_string(TEXT("titleBar")),                GuiConfigTitleBar()) },
+//	{ std::make_pair(generic_string(TEXT("stylerTheme")),             GuiConfigStylerTheme()) },
+//	{ std::make_pair(generic_string(TEXT("wordCharList")),            GuiConfigWordCharList()) },
+//	{ std::make_pair(generic_string(TEXT("delimiterSelection")),      GuiConfigDelimiterSelection()) },
+//	{ std::make_pair(generic_string(TEXT("multiInst")),               GuiConfigMultiInst()) },
+//	{ std::make_pair(generic_string(TEXT("searchEngine")),            GuiConfigSearchEngine()) },
+//	{ std::make_pair(generic_string(TEXT("MISC")),                    GuiConfigMisc()) }
+//	{generic_string("ToolBar"),                 std::move<GuiConfigBaseClass>(GuiConfigToolBar())                },
+//	{generic_string("StatusBar"),               std::move<GuiConfigBaseClass>(GuiConfigStatusBar()               )},
+//	{generic_string("MenuBar"),                 std::move<GuiConfigBaseClass>( GuiConfigMenuBar()                )},
+//	{generic_string("TabBar"),                  std::move<GuiConfigBaseClass>( GuiConfigTabBar()                 )},
+//	{generic_string("Auto-detection"),          std::move<GuiConfigBaseClass>( GuiConfigAutoDetection()          )},
+//	{generic_string("TrayIcon"),                std::move<GuiConfigBaseClass>( GuiConfigTrayIcon()               )},
+//	{generic_string("RememberLastSession"),     std::move<GuiConfigBaseClass>( GuiConfigRememberLastSession()    )},
+//	{generic_string("DetectEncoding"),          std::move<GuiConfigBaseClass>( GuiConfigDetectEncoding()         )},
+//	{generic_string("MaitainIndent"),           std::move<GuiConfigBaseClass>( GuiConfigMaitainIndent()          )},
+//	{generic_string("SmartHighLight"),          std::move<GuiConfigBaseClass>( GuiConfigSmartHighLight()         )},
+//	{generic_string("TagsMatchHighLight"),      std::move<GuiConfigBaseClass>( GuiConfigTagsMatchHighLight()     )},
+//	{generic_string("TaskList"),                std::move<GuiConfigBaseClass>( GuiConfigTaskList()               )},
+//	{generic_string("MRU"),                     std::move<GuiConfigBaseClass>( GuiConfigMru()                    )},
+//	{generic_string("URL"),                     std::move<GuiConfigBaseClass>( GuiConfigUrl()                    )},
+//	{generic_string("CheckHistoryFiles"),       std::move<GuiConfigBaseClass>( GuiConfigCheckHistoryFiles()      )},
+//	{generic_string("ScintillaViewsSplitter"),  std::move<GuiConfigBaseClass>( GuiConfigScintillaViewsSplitter() )},
+//	{generic_string("UserDefineDlg"),           std::move<GuiConfigBaseClass>( GuiConfigUserDefineDlg()          )},
+//	{generic_string("TabSetting"),              std::move<GuiConfigBaseClass>( GuiConfigTabSetting()             )},
+//	{generic_string("Caret"),                   std::move<GuiConfigBaseClass>( GuiConfigCaret()                  )},
+//	{generic_string("ScintillaGlobalSettings"), std::move<GuiConfigBaseClass>( GuiConfigScintillaGlobalSettings())},
+//	{generic_string("AppPosition"),             std::move<GuiConfigBaseClass>( GuiConfigAppPosition()            )},
+//	{generic_string("NewDocDefaultSettings"),   std::move<GuiConfigBaseClass>( GuiConfigNewDocDefaultSettings()  )},
+//	{generic_string("langsExcluded"),           std::move<GuiConfigBaseClass>( GuiConfigLangsExcluded()          )},
+//	{generic_string("Print"),                   std::move<GuiConfigBaseClass>( GuiConfigPrint()                  )},
+//	{generic_string("ScintillaPrimaryView"),    std::move<GuiConfigBaseClass>( GuiConfigScintillaPrimaryView()   )},
+//	{generic_string("Backup"),                  std::move<GuiConfigBaseClass>( GuiConfigBackup()                 )},
+//	{generic_string("DockingManager"),          std::move<GuiConfigBaseClass>( GuiConfigDockingManager()         )},
+//	{generic_string("globalOverride"),          std::move<GuiConfigBaseClass>( GuiConfigGlobalOverride()         )},
+//	{generic_string("auto-completion"),         std::move<GuiConfigBaseClass>( GuiConfigAutoCompletion()         )},
+//	{generic_string("auto-insert"),             std::move<GuiConfigBaseClass>( GuiConfigAutoInsert()             )},
+//	{generic_string("sessionExt"),              std::move<GuiConfigBaseClass>( GuiConfigSessionExt()             )},
+//	{generic_string("workspaceExt"),            std::move<GuiConfigBaseClass>( GuiConfigWorkspaceExt()           )},
+//	{generic_string("noUpdate"),                std::move<GuiConfigBaseClass>( GuiConfigNoUpdate()               )},
+//	{generic_string("openSaveDir"),             std::move<GuiConfigBaseClass>( GuiConfigOpenSaveDir()            )},
+//	{generic_string("titleBar"),                std::move<GuiConfigBaseClass>( GuiConfigTitleBar()               )},
+//	{generic_string("stylerTheme"),             std::move<GuiConfigBaseClass>( GuiConfigStylerTheme()            )},
+//	{generic_string("wordCharList"),            std::move<GuiConfigBaseClass>( GuiConfigWordCharList()           )},
+//	{generic_string("delimiterSelection"),      std::move<GuiConfigBaseClass>( GuiConfigDelimiterSelection()     )},
+//	{generic_string("multiInst"),               std::move<GuiConfigBaseClass>( GuiConfigMultiInst()              )},
+//	{generic_string("searchEngine"),            std::move<GuiConfigBaseClass>( GuiConfigSearchEngine()           )},
+//	{generic_string("MISC"),                    std::move<GuiConfigBaseClass>( GuiConfigMisc()                   )}
+};
+
+//const std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<wchar_t const * const, GuiConfigBaseClass> > > > NppParameters::endOfGuiConfigMap = std::end(NppParameters::guiConfigMap);
+//GuiConfigBaseClassImplement::GuiConfigBaseClassImplement(std::unordered_map<generic_string, GuiConfigBaseClass *> & guiConfigMap)
+//{
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("ToolBar")),                 new GuiConfigToolBar()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("StatusBar")),               new GuiConfigStatusBar()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("MenuBar")),                 new GuiConfigMenuBar()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("TabBar")),                  new GuiConfigTabBar()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("Auto-detection")),          new GuiConfigAutoDetection()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("TrayIcon")),                new GuiConfigTrayIcon()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("RememberLastSession")),     new GuiConfigRememberLastSession()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("DetectEncoding")),          new GuiConfigDetectEncoding()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("MaitainIndent")),           new GuiConfigMaitainIndent()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("SmartHighLight")),          new GuiConfigSmartHighLight()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("TagsMatchHighLight")),      new GuiConfigTagsMatchHighLight()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("TaskList")),                new GuiConfigTaskList()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("MRU")),                     new GuiConfigMru()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("URL")),                     new GuiConfigUrl()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("CheckHistoryFiles")),       new GuiConfigCheckHistoryFiles()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("ScintillaViewsSplitter")),  new GuiConfigScintillaViewsSplitter()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("UserDefineDlg")),           new GuiConfigUserDefineDlg()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("TabSetting")),              new GuiConfigTabSetting()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("Caret")),                   new GuiConfigCaret()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("ScintillaGlobalSettings")), new GuiConfigScintillaGlobalSettings()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("AppPosition")),             new GuiConfigAppPosition()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("NewDocDefaultSettings")),   new GuiConfigNewDocDefaultSettings()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("langsExcluded")),           new GuiConfigLangsExcluded()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("Print")),                   new GuiConfigPrint()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("ScintillaPrimaryView")),    new GuiConfigScintillaPrimaryView()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("Backup")),                  new GuiConfigBackup()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("DockingManager")),          new GuiConfigDockingManager()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("globalOverride")),          new GuiConfigGlobalOverride()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("auto-completion")),         new GuiConfigAutoCompletion()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("auto-insert")),             new GuiConfigAutoInsert()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("sessionExt")),              new GuiConfigSessionExt()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("workspaceExt")),            new GuiConfigWorkspaceExt()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("noUpdate")),                new GuiConfigNoUpdate()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("openSaveDir")),             new GuiConfigOpenSaveDir()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("titleBar")),                new GuiConfigTitleBar()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("stylerTheme")),             new GuiConfigStylerTheme()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("wordCharList")),            new GuiConfigWordCharList()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("delimiterSelection")),      new GuiConfigDelimiterSelection()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("multiInst")),               new GuiConfigMultiInst()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("searchEngine")),            new GuiConfigSearchEngine()) );
+//	guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("MISC")),                    new GuiConfigMisc()) );
+//
+//}
+
+//GuiConfigBaseClassImplement::~GuiConfigBaseClassImplement()
+//{
+//
+//}
+
+NppParametersInitial::NppParametersInitial()
+{
+	NppParameters::initialGuiConfigMap();
+}
+
+NppParametersInitial::~NppParametersInitial()
+{
+	NppParameters::destroyGuiConfigMap();
+}
+
+void NppParameters::initialGuiConfigMap()
+{
+	if (NppParameters::n) return;
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("ToolBar")),                 new GuiConfigToolBar()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("StatusBar")),               new GuiConfigStatusBar()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("MenuBar")),                 new GuiConfigMenuBar()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("TabBar")),                  new GuiConfigTabBar()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("Auto-detection")),          new GuiConfigAutoDetection()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("TrayIcon")),                new GuiConfigTrayIcon()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("RememberLastSession")),     new GuiConfigRememberLastSession()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("DetectEncoding")),          new GuiConfigDetectEncoding()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("MaitainIndent")),           new GuiConfigMaitainIndent()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("SmartHighLight")),          new GuiConfigSmartHighLight()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("TagsMatchHighLight")),      new GuiConfigTagsMatchHighLight()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("TaskList")),                new GuiConfigTaskList()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("MRU")),                     new GuiConfigMru()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("URL")),                     new GuiConfigUrl()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("CheckHistoryFiles")),       new GuiConfigCheckHistoryFiles()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("ScintillaViewsSplitter")),  new GuiConfigScintillaViewsSplitter()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("UserDefineDlg")),           new GuiConfigUserDefineDlg()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("TabSetting")),              new GuiConfigTabSetting()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("Caret")),                   new GuiConfigCaret()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("ScintillaGlobalSettings")), new GuiConfigScintillaGlobalSettings()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("AppPosition")),             new GuiConfigAppPosition()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("NewDocDefaultSettings")),   new GuiConfigNewDocDefaultSettings()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("langsExcluded")),           new GuiConfigLangsExcluded()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("Print")),                   new GuiConfigPrint()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("ScintillaPrimaryView")),    new GuiConfigScintillaPrimaryView()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("Backup")),                  new GuiConfigBackup()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("DockingManager")),          new GuiConfigDockingManager()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("globalOverride")),          new GuiConfigGlobalOverride()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("auto-completion")),         new GuiConfigAutoCompletion()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("auto-insert")),             new GuiConfigAutoInsert()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("sessionExt")),              new GuiConfigSessionExt()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("workspaceExt")),            new GuiConfigWorkspaceExt()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("noUpdate")),                new GuiConfigNoUpdate()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("openSaveDir")),             new GuiConfigOpenSaveDir()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("titleBar")),                new GuiConfigTitleBar()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("stylerTheme")),             new GuiConfigStylerTheme()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("wordCharList")),            new GuiConfigWordCharList()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("delimiterSelection")),      new GuiConfigDelimiterSelection()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("multiInst")),               new GuiConfigMultiInst()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("searchEngine")),            new GuiConfigSearchEngine()) );
+	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("MISC")),                    new GuiConfigMisc()) );
+	NppParameters::n = 1;
+}
+
+void NppParameters::destroyGuiConfigMap()
+{
+	if (NppParameters::n)
+	{
+		for (auto kv : NppParameters::guiConfigMap)
+		{
+			delete kv.second;
+		}
+		NppParameters::n = 0;
+	}
+}
+
+int NppParameters::n = 0;
+
+////
+//// base class
+////
+//GuiConfigBaseClass::GuiConfigBaseClass(TiXmlNode * node, NppParameters * parameters) : node(node), parameters(parameters), nppGui( &(parameters->_nppGUI) )
+//{
+//}
+//
+//
+////
+//// ToolBar
+////
+//GuiConfigToolBar::GuiConfigToolBar(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigToolBar::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// StatusBar
+////
+//GuiConfigStatusBar::GuiConfigStatusBar(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigStatusBar::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// MenuBar
+////
+//GuiConfigMenuBar::GuiConfigMenuBar(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigMenuBar::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// TabBar
+////
+//GuiConfigTabBar::GuiConfigTabBar(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigTabBar::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// Auto-detection
+////
+//GuiConfigAutoDetection::GuiConfigAutoDetection(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigAutoDetection::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// TrayIcon
+////
+//GuiConfigTrayIcon::GuiConfigTrayIcon(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigTrayIcon::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// RememberLastSession
+////
+//GuiConfigRememberLastSession::GuiConfigRememberLastSession(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigRememberLastSession::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// DetectEncoding
+////
+//GuiConfigDetectEncoding::GuiConfigDetectEncoding(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigDetectEncoding::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// MaitainIndent
+////
+//GuiConfigMaitainIndent::GuiConfigMaitainIndent(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigMaitainIndent::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// SmartHighLight
+////
+//GuiConfigSmartHighLight::GuiConfigSmartHighLight(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigSmartHighLight::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// TagsMatchHighLight
+////
+//GuiConfigTagsMatchHighLight::GuiConfigTagsMatchHighLight(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigTagsMatchHighLight::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// TaskList
+////
+//GuiConfigTaskList::GuiConfigTaskList(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigTaskList::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// MRU
+////
+//GuiConfigMru::GuiConfigMru(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigMru::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// URL
+////
+//GuiConfigUrl::GuiConfigUrl(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigUrl::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// CheckHistoryFiles
+////
+//GuiConfigCheckHistoryFiles::GuiConfigCheckHistoryFiles(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigCheckHistoryFiles::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// ScintillaViewsSplitter
+////
+//GuiConfigScintillaViewsSplitter::GuiConfigScintillaViewsSplitter(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigScintillaViewsSplitter::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// UserDefineDlg
+////
+//GuiConfigUserDefineDlg::GuiConfigUserDefineDlg(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigUserDefineDlg::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// TabSetting
+////
+//GuiConfigTabSetting::GuiConfigTabSetting(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigTabSetting::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// Caret
+////
+//GuiConfigCaret::GuiConfigCaret(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigCaret::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// ScintillaGlobalSettings
+////
+//GuiConfigScintillaGlobalSettings::GuiConfigScintillaGlobalSettings(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigScintillaGlobalSettings::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// AppPosition
+////
+//GuiConfigAppPosition::GuiConfigAppPosition(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigAppPosition::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// NewDocDefaultSettings
+////
+//GuiConfigNewDocDefaultSettings::GuiConfigNewDocDefaultSettings(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigNewDocDefaultSettings::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// langsExcluded
+////
+//GuiConfigLangsExcluded::GuiConfigLangsExcluded(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigLangsExcluded::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// Print
+////
+//GuiConfigPrint::GuiConfigPrint(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigPrint::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// ScintillaPrimaryView
+////
+//GuiConfigScintillaPrimaryView::GuiConfigScintillaPrimaryView(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigScintillaPrimaryView::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// Backup
+////
+//GuiConfigBackup::GuiConfigBackup(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigBackup::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// DockingManager
+////
+//GuiConfigDockingManager::GuiConfigDockingManager(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigDockingManager::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// globalOverride
+////
+//GuiConfigGlobalOverride::GuiConfigGlobalOverride(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigGlobalOverride::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// auto-completion
+////
+//GuiConfigAutoCompletion::GuiConfigAutoCompletion(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigAutoCompletion::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// auto-insert
+////
+//GuiConfigAutoInsert::GuiConfigAutoInsert(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigAutoInsert::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// sessionExt
+////
+//GuiConfigSessionExt::GuiConfigSessionExt(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigSessionExt::operator ()()
+//{
+//	
+//}
+//
+//
+///////////////////////////////////////////////////////////////////////////////////////////////
+//
+////
+//// workspaceExt
+////
+//GuiConfigWorkspaceExt::GuiConfigWorkspaceExt(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigWorkspaceExt::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// noUpdate
+////
+//GuiConfigNoUpdate::GuiConfigNoUpdate(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigNoUpdate::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// openSaveDir
+////
+//GuiConfigOpenSaveDir::GuiConfigOpenSaveDir(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigOpenSaveDir::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// titleBar
+////
+//GuiConfigTitleBar::GuiConfigTitleBar(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigTitleBar::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// stylerTheme
+////
+//GuiConfigStylerTheme::GuiConfigStylerTheme(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigStylerTheme::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// wordCharList
+////
+//GuiConfigWordCharList::GuiConfigWordCharList(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigWordCharList::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// delimiterSelection
+////
+//GuiConfigDelimiterSelection::GuiConfigDelimiterSelection(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigDelimiterSelection::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// multiInst
+////
+//GuiConfigMultiInst::GuiConfigMultiInst(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigMultiInst::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// searchEngine
+////
+//GuiConfigSearchEngine::GuiConfigSearchEngine(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigSearchEngine::operator ()()
+//{
+//	
+//}
+//
+//
+////
+//// MISC
+////
+//GuiConfigMisc::GuiConfigMisc(TiXmlNode * node, NppParameters * parameters) : GuiConfigBaseClass(node, parameters)
+//{
+//}
+//void GuiConfigMisc::operator ()()
+//{
+//
+//}
+//
+///////////////////////////////////////////////////////////////////////////////////////////////
+//
+
+/*
+* ToolBar
+*/
+void /*NppParameters::*/GuiConfigToolBar::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode, TiXmlElement * element)
+{
+	const TCHAR* val = element->Attribute(TEXT("visible"));
+	if (val)
+	{
+		if (!lstrcmp(val, TEXT("no")))
+		{
+			_nppGUI._toolbarShow = false;
+		}
+		else// if (!lstrcmp(val, TEXT("yes")))
+		{
+			_nppGUI._toolbarShow = true;
+		}
+	}
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		val = n->Value();
+		if (val)
+		{
+			if (!lstrcmp(val, TEXT("small")))
+			{
+				_nppGUI._toolBarStatus = TB_SMALL;
+			}
+			else if (!lstrcmp(val, TEXT("large")))
+			{
+				_nppGUI._toolBarStatus = TB_LARGE;
+			}
+			else// if (!lstrcmp(val, TEXT("standard")))    //assume standard in all other cases
+			{
+				_nppGUI._toolBarStatus = TB_STANDARD;
+			}
+		}
+	}
+
+}
+
+
+/*
+* StatusBar
+*/
+void /*NppParameters::*/GuiConfigStatusBar::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			if (!lstrcmp(val, TEXT("hide")))
+				_nppGUI._statusBarShow = false;
+			else if (!lstrcmp(val, TEXT("show")))
+				_nppGUI._statusBarShow = true;
+		}
+	}
+}
+
+
+/*
+* MenuBar
+*/
+void /*NppParameters::*/GuiConfigMenuBar::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			if (!lstrcmp(val, TEXT("hide")))
+				_nppGUI._menuBarShow = false;
+			else if (!lstrcmp(val, TEXT("show")))
+				_nppGUI._menuBarShow = true;
+		}
+	}
+}
+
+
+/*
+* TabBar
+*/
+void /*NppParameters::*/GuiConfigTabBar::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	bool isFailed = false;
+	int oldValue = _nppGUI._tabStatus;
+	const TCHAR* val = element->Attribute(TEXT("dragAndDrop"));
+	if (val)
+	{
+		if (!lstrcmp(val, TEXT("yes")))
+			_nppGUI._tabStatus = TAB_DRAGNDROP;
+		else if (!lstrcmp(val, TEXT("no")))
+			_nppGUI._tabStatus = 0;
+		else
+			isFailed = true;
+	}
+
+	val = element->Attribute(TEXT("drawTopBar"));
+	if (val)
+	{
+		if (!lstrcmp(val, TEXT("yes")))
+			_nppGUI._tabStatus |= TAB_DRAWTOPBAR;
+		else if (!lstrcmp(val, TEXT("no")))
+			_nppGUI._tabStatus |= 0;
+		else
+			isFailed = true;
+	}
+
+	val = element->Attribute(TEXT("drawInactiveTab"));
+	if (val)
+	{
+		if (!lstrcmp(val, TEXT("yes")))
+			_nppGUI._tabStatus |= TAB_DRAWINACTIVETAB;
+		else if (!lstrcmp(val, TEXT("no")))
+			_nppGUI._tabStatus |= 0;
+		else
+			isFailed = true;
+	}
+
+	val = element->Attribute(TEXT("reduce"));
+	if (val)
+	{
+		if (!lstrcmp(val, TEXT("yes")))
+			_nppGUI._tabStatus |= TAB_REDUCE;
+		else if (!lstrcmp(val, TEXT("no")))
+			_nppGUI._tabStatus |= 0;
+		else
+			isFailed = true;
+	}
+
+	val = element->Attribute(TEXT("closeButton"));
+	if (val)
+	{
+		if (!lstrcmp(val, TEXT("yes")))
+			_nppGUI._tabStatus |= TAB_CLOSEBUTTON;
+		else if (!lstrcmp(val, TEXT("no")))
+			_nppGUI._tabStatus |= 0;
+		else
+			isFailed = true;
+	}
+
+	val = element->Attribute(TEXT("doubleClick2Close"));
+	if (val)
+	{
+		if (!lstrcmp(val, TEXT("yes")))
+			_nppGUI._tabStatus |= TAB_DBCLK2CLOSE;
+		else if (!lstrcmp(val, TEXT("no")))
+			_nppGUI._tabStatus |= 0;
+		else
+			isFailed = true;
+	}
+	val = element->Attribute(TEXT("vertical"));
+	if (val)
+	{
+		if (!lstrcmp(val, TEXT("yes")))
+			_nppGUI._tabStatus |= TAB_VERTICAL;
+		else if (!lstrcmp(val, TEXT("no")))
+			_nppGUI._tabStatus |= 0;
+		else
+			isFailed = true;
+	}
+
+	val = element->Attribute(TEXT("multiLine"));
+	if (val)
+	{
+		if (!lstrcmp(val, TEXT("yes")))
+			_nppGUI._tabStatus |= TAB_MULTILINE;
+		else if (!lstrcmp(val, TEXT("no")))
+			_nppGUI._tabStatus |= 0;
+		else
+			isFailed = true;
+	}
+
+	val = element->Attribute(TEXT("hide"));
+	if (val)
+	{
+		if (!lstrcmp(val, TEXT("yes")))
+			_nppGUI._tabStatus |= TAB_HIDE;
+		else if (!lstrcmp(val, TEXT("no")))
+			_nppGUI._tabStatus |= 0;
+		else
+			isFailed = true;
+	}
+
+	val = element->Attribute(TEXT("quitOnEmpty"));
+	if (val)
+	{
+		if (!lstrcmp(val, TEXT("yes")))
+			_nppGUI._tabStatus |= TAB_QUITONEMPTY;
+		else if (!lstrcmp(val, TEXT("no")))
+			_nppGUI._tabStatus |= 0;
+		else
+			isFailed = true;
+	}
+	if (isFailed)
+		_nppGUI._tabStatus = oldValue;
+
+}
+
+
+/*
+* Auto-detection
+*/
+void /*NppParameters::*/GuiConfigAutoDetection::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			if (!lstrcmp(val, TEXT("yesOld")))
+				_nppGUI._fileAutoDetection = cdEnabledOld;
+			else if (!lstrcmp(val, TEXT("autoOld")))
+				_nppGUI._fileAutoDetection = (cdEnabledOld | cdAutoUpdate);
+			else if (!lstrcmp(val, TEXT("Update2EndOld")))
+				_nppGUI._fileAutoDetection = (cdEnabledOld | cdGo2end);
+			else if (!lstrcmp(val, TEXT("autoUpdate2EndOld")))
+				_nppGUI._fileAutoDetection = (cdEnabledOld | cdAutoUpdate | cdGo2end);
+			else if (!lstrcmp(val, TEXT("yes")))
+				_nppGUI._fileAutoDetection = cdEnabledNew;
+			else if (!lstrcmp(val, TEXT("auto")))
+				_nppGUI._fileAutoDetection = (cdEnabledNew | cdAutoUpdate);
+			else if (!lstrcmp(val, TEXT("Update2End")))
+				_nppGUI._fileAutoDetection = (cdEnabledNew | cdGo2end);
+			else if (!lstrcmp(val, TEXT("autoUpdate2End")))
+				_nppGUI._fileAutoDetection = (cdEnabledNew | cdAutoUpdate | cdGo2end);
+			else //(!lstrcmp(val, TEXT("no")))
+				_nppGUI._fileAutoDetection = cdDisabled;
+		}
+	}
+}
+
+
+/*
+* TrayIcon
+*/
+void /*NppParameters::*/GuiConfigTrayIcon::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			_nppGUI._isMinimizedToTray = (lstrcmp(val, TEXT("yes")) == 0);
+		}
+	}
+}
+
+
+/*
+* RememberLastSession
+*/
+void /*NppParameters::*/GuiConfigRememberLastSession::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			if (lstrcmp(val, TEXT("yes")) == 0)
+				_nppGUI._rememberLastSession = true;
+			else
+				_nppGUI._rememberLastSession = false;
+		}
+	}
+}
+
+
+/*
+* DetectEncoding
+*/
+void /*NppParameters::*/GuiConfigDetectEncoding::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			if (lstrcmp(val, TEXT("yes")) == 0)
+				_nppGUI._detectEncoding = true;
+			else
+				_nppGUI._detectEncoding = false;
+		}
+	}
+}
+
+
+/*
+* MaitainIndent
+*/
+void /*NppParameters::*/GuiConfigMaitainIndent::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			if (lstrcmp(val, TEXT("yes")) == 0)
+				_nppGUI._maitainIndent = true;
+			else
+				_nppGUI._maitainIndent = false;
+		}
+	}
+}
+
+
+/*
+* SmartHighLight
+*/
+void /*NppParameters::*/GuiConfigSmartHighLight::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode, TiXmlElement * element)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			if (lstrcmp(val, TEXT("yes")) == 0)
+				_nppGUI._enableSmartHilite = true;
+			else
+				_nppGUI._enableSmartHilite = false;
+		}
+
+		val = element->Attribute(TEXT("matchCase"));
+		if (val)
+		{
+			if (lstrcmp(val, TEXT("yes")) == 0)
+				_nppGUI._smartHiliteCaseSensitive = true;
+			else if (!lstrcmp(val, TEXT("no")))
+				_nppGUI._smartHiliteCaseSensitive = false;
+		}
+
+		val = element->Attribute(TEXT("wholeWordOnly"));
+		if (val)
+		{
+			if (lstrcmp(val, TEXT("yes")) == 0)
+				_nppGUI._smartHiliteWordOnly = true;
+			else if (!lstrcmp(val, TEXT("no")))
+				_nppGUI._smartHiliteWordOnly = false;
+		}
+
+		val = element->Attribute(TEXT("useFindSettings"));
+		if (val)
+		{
+			if (lstrcmp(val, TEXT("yes")) == 0)
+				_nppGUI._smartHiliteUseFindSettings = true;
+			else if (!lstrcmp(val, TEXT("no")))
+				_nppGUI._smartHiliteUseFindSettings = false;
+		}
+
+		val = element->Attribute(TEXT("onAnotherView"));
+		if (val)
+		{
+			if (lstrcmp(val, TEXT("yes")) == 0)
+				_nppGUI._smartHiliteOnAnotherView = true;
+			else if (!lstrcmp(val, TEXT("no")))
+				_nppGUI._smartHiliteOnAnotherView = false;
+		}
+	}
+}
+
+
+/*
+* TagsMatchHighLight
+*/
+void /*NppParameters::*/GuiConfigTagsMatchHighLight::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode, TiXmlElement * element)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			_nppGUI._enableTagsMatchHilite = !lstrcmp(val, TEXT("yes"));
+			const TCHAR *tahl = element->Attribute(TEXT("TagAttrHighLight"));
+			if (tahl)
+				_nppGUI._enableTagAttrsHilite = !lstrcmp(tahl, TEXT("yes"));
+
+			tahl = element->Attribute(TEXT("HighLightNonHtmlZone"));
+			if (tahl)
+				_nppGUI._enableHiliteNonHTMLZone = !lstrcmp(tahl, TEXT("yes"));
+		}
+	}
+}
+
+
+/*
+* TaskList
+*/
+void /*NppParameters::*/GuiConfigTaskList::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			_nppGUI._doTaskList = (!lstrcmp(val, TEXT("yes"))) ? true : false;
+		}
+	}
+}
+
+
+/*
+* MRU
+*/
+void /*NppParameters::*/GuiConfigMru::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+			_nppGUI._styleMRU = (!lstrcmp(val, TEXT("yes")));
+	}
+}
+
+
+/*
+* URL
+*/
+void /*NppParameters::*/GuiConfigUrl::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			if (!lstrcmp(val, TEXT("1")))
+				_nppGUI._styleURL = 1;
+			else if (!lstrcmp(val, TEXT("2")))
+				_nppGUI._styleURL = 2;
+			else
+				_nppGUI._styleURL = 0;
+		}
+	}
+}
+
+
+/*
+* CheckHistoryFiles
+*/
+void /*NppParameters::*/GuiConfigCheckHistoryFiles::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			if (!lstrcmp(val, TEXT("no")))
+				_nppGUI._checkHistoryFiles = false;
+			else if (!lstrcmp(val, TEXT("yes")))
+				_nppGUI._checkHistoryFiles = true;
+		}
+	}
+}
+
+
+/*
+* ScintillaViewsSplitter
+*/
+void /*NppParameters::*/GuiConfigScintillaViewsSplitter::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			if (!lstrcmp(val, TEXT("vertical")))
+				_nppGUI._splitterPos = POS_VERTICAL;
+			else if (!lstrcmp(val, TEXT("horizontal")))
+				_nppGUI._splitterPos = POS_HORIZOTAL;
+		}
+	}
+}
+
+
+/*
+* UserDefineDlg
+*/
+void /*NppParameters::*/GuiConfigUserDefineDlg::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode, TiXmlElement * element)
+{
+	bool isFailed = false;
+	int oldValue = _nppGUI._userDefineDlgStatus;
+
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+		{
+			if (!lstrcmp(val, TEXT("hide")))
+				_nppGUI._userDefineDlgStatus = 0;
+			else if (!lstrcmp(val, TEXT("show")))
+				_nppGUI._userDefineDlgStatus = UDD_SHOW;
+			else
+				isFailed = true;
+		}
+	}
+
+	const TCHAR* val = element->Attribute(TEXT("position"));
+	if (val)
+	{
+		if (!lstrcmp(val, TEXT("docked")))
+			_nppGUI._userDefineDlgStatus |= UDD_DOCKED;
+		else if (!lstrcmp(val, TEXT("undocked")))
+			_nppGUI._userDefineDlgStatus |= 0;
+		else
+			isFailed = true;
+	}
+	if (isFailed)
+		_nppGUI._userDefineDlgStatus = oldValue;
+}
+
+
+/*
+* TabSetting
+*/
+void /*NppParameters::*/GuiConfigTabSetting::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	int i;
+	const TCHAR* val = element->Attribute(TEXT("size"), &i);
+	if (val)
+		_nppGUI._tabSize = i;
+
+	if ((_nppGUI._tabSize == -1) || (_nppGUI._tabSize == 0))
+		_nppGUI._tabSize = 4;
+
+	val = element->Attribute(TEXT("replaceBySpace"));
+	if (val)
+		_nppGUI._tabReplacedBySpace = (!lstrcmp(val, TEXT("yes")));
+}
+
+
+/*
+* Caret
+*/
+void /*NppParameters::*/GuiConfigCaret::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	int i;
+	const TCHAR* val = element->Attribute(TEXT("width"), &i);
+	if (val)
+		_nppGUI._caretWidth = i;
+
+	val = element->Attribute(TEXT("blinkRate"), &i);
+	if (val)
+		_nppGUI._caretBlinkRate = i;
+
+}
+
+
+/*
+* ScintillaGlobalSettings
+*/
+void /*NppParameters::*/GuiConfigScintillaGlobalSettings::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	const TCHAR* val = element->Attribute(TEXT("enableMultiSelection"));
+	if (val)
+	{
+		if (lstrcmp(val, TEXT("yes")) == 0)
+			_nppGUI._enableMultiSelection = true;
+		else if (lstrcmp(val, TEXT("no")) == 0)
+			_nppGUI._enableMultiSelection = false;
+	}
+}
+
+
+/*
+* AppPosition
+*/
+void /*NppParameters::*/GuiConfigAppPosition::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	RECT oldRect = _nppGUI._appPos;
+	bool fuckUp = true;
+	int i;
+
+	if (element->Attribute(TEXT("x"), &i))
+	{
+		_nppGUI._appPos.left = i;
+
+		if (element->Attribute(TEXT("y"), &i))
+		{
+			_nppGUI._appPos.top = i;
+
+			if (element->Attribute(TEXT("width"), &i))
+			{
+				_nppGUI._appPos.right = i;
+
+				if (element->Attribute(TEXT("height"), &i))
+				{
+					_nppGUI._appPos.bottom = i;
+					fuckUp = false;
+				}
+			}
+		}
+	}
+	if (fuckUp)
+		_nppGUI._appPos = oldRect;
+
+	const TCHAR* val = element->Attribute(TEXT("isMaximized"));
+	if (val)
+		_nppGUI._isMaximized = (lstrcmp(val, TEXT("yes")) == 0);
+}
+
+
+/*
+* NewDocDefaultSettings
+*/
+void /*NppParameters::*/GuiConfigNewDocDefaultSettings::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	int i;
+	if (element->Attribute(TEXT("format"), &i))
+	{
+		EolType newFormat = EolType::osdefault;
+		switch (i)
+		{
+		case static_cast<LPARAM>(EolType::windows) :
+			newFormat = EolType::windows;
+			break;
+		case static_cast<LPARAM>(EolType::macos) :
+			newFormat = EolType::macos;
+			break;
+		case static_cast<LPARAM>(EolType::unix) :
+			newFormat = EolType::unix;
+			break;
+		default:
+			/*assert(false and "invalid buffer format - fallback to default");*/
+			break;
+		}
+		_nppGUI._newDocDefaultSettings._format = newFormat;
+	}
+
+	if (element->Attribute(TEXT("encoding"), &i))
+		_nppGUI._newDocDefaultSettings._unicodeMode = (UniMode)i;
+
+	if (element->Attribute(TEXT("lang"), &i))
+		_nppGUI._newDocDefaultSettings._lang = (LangType)i;
+
+	if (element->Attribute(TEXT("codepage"), &i))
+		_nppGUI._newDocDefaultSettings._codepage = (LangType)i;
+
+	const TCHAR* val = element->Attribute(TEXT("openAnsiAsUTF8"));
+	if (val)
+		_nppGUI._newDocDefaultSettings._openAnsiAsUtf8 = (lstrcmp(val, TEXT("yes")) == 0);
+}
+
+
+/*
+* langsExcluded
+*/
+void /*NppParameters::*/GuiConfigLangsExcluded::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	// TODO
+	int g0 = 0; // up to 8
+	int g1 = 0; // up to 16
+	int g2 = 0; // up to 24
+	int g3 = 0; // up to 32
+	int g4 = 0; // up to 40
+	int g5 = 0; // up to 48
+	int g6 = 0; // up to 56
+	int g7 = 0; // up to 64
+	int g8 = 0; // up to 72
+	int g9 = 0; // up to 80
+	int g10 = 0; // up to 88
+	int g11 = 0; // up to 96
+	int g12 = 0; // up to 104
+
+				 // TODO some refactoring needed here....
+	{
+		int i;
+		if (element->Attribute(TEXT("gr0"), &i))
+		{
+			if (i <= 255)
+				g0 = i;
+		}
+		if (element->Attribute(TEXT("gr1"), &i))
+		{
+			if (i <= 255)
+				g1 = i;
+		}
+		if (element->Attribute(TEXT("gr2"), &i))
+		{
+			if (i <= 255)
+				g2 = i;
+		}
+		if (element->Attribute(TEXT("gr3"), &i))
+		{
+			if (i <= 255)
+				g3 = i;
+		}
+		if (element->Attribute(TEXT("gr4"), &i))
+		{
+			if (i <= 255)
+				g4 = i;
+		}
+		if (element->Attribute(TEXT("gr5"), &i))
+		{
+			if (i <= 255)
+				g5 = i;
+		}
+		if (element->Attribute(TEXT("gr6"), &i))
+		{
+			if (i <= 255)
+				g6 = i;
+		}
+		if (element->Attribute(TEXT("gr7"), &i))
+		{
+			if (i <= 255)
+				g7 = i;
+		}
+		if (element->Attribute(TEXT("gr8"), &i))
+		{
+			if (i <= 255)
+				g8 = i;
+		}
+		if (element->Attribute(TEXT("gr9"), &i))
+		{
+			if (i <= 255)
+				g9 = i;
+		}
+		if (element->Attribute(TEXT("gr10"), &i))
+		{
+			if (i <= 255)
+				g10 = i;
+		}
+		if (element->Attribute(TEXT("gr11"), &i))
+		{
+			if (i <= 255)
+				g11 = i;
+		}
+		if (element->Attribute(TEXT("gr12"), &i))
+		{
+			if (i <= 255)
+				g12 = i;
+		}
+	}
+
+	UCHAR mask = 1;
+	for (int i = 0; i < 8; ++i)
+	{
+		if (mask & g0)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	mask = 1;
+	for (int i = 8; i < 16; ++i)
+	{
+		if (mask & g1)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	mask = 1;
+	for (int i = 16; i < 24; ++i)
+	{
+		if (mask & g2)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	mask = 1;
+	for (int i = 24; i < 32; ++i)
+	{
+		if (mask & g3)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	mask = 1;
+	for (int i = 32; i < 40; ++i)
+	{
+		if (mask & g4)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	mask = 1;
+	for (int i = 40; i < 48; ++i)
+	{
+		if (mask & g5)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	mask = 1;
+	for (int i = 48; i < 56; ++i)
+	{
+		if (mask & g6)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	mask = 1;
+	for (int i = 56; i < 64; ++i)
+	{
+		if (mask & g7)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	mask = 1;
+	for (int i = 64; i < 72; ++i)
+	{
+		if (mask & g8)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	mask = 1;
+	for (int i = 72; i < 80; ++i)
+	{
+		if (mask & g9)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	mask = 1;
+	for (int i = 80; i < 88; ++i)
+	{
+		if (mask & g10)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	mask = 1;
+	for (int i = 88; i < 96; ++i)
+	{
+		if (mask & g11)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	mask = 1;
+	for (int i = 96; i < 104; ++i)
+	{
+		if (mask & g12)
+			_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)i));
+		mask <<= 1;
+	}
+
+	const TCHAR* val = element->Attribute(TEXT("langMenuCompact"));
+	if (val)
+		_nppGUI._isLangMenuCompact = (!lstrcmp(val, TEXT("yes")));
+
+}
+
+
+/*
+* Print
+*/
+void /*NppParameters::*/GuiConfigPrint::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	const TCHAR* val = element->Attribute(TEXT("lineNumber"));
+	if (val)
+		_nppGUI._printSettings._printLineNumber = (!lstrcmp(val, TEXT("yes")));
+
+	int i;
+	if (element->Attribute(TEXT("printOption"), &i))
+		_nppGUI._printSettings._printOption = i;
+
+	val = element->Attribute(TEXT("headerLeft"));
+	if (val)
+		_nppGUI._printSettings._headerLeft = val;
+
+	val = element->Attribute(TEXT("headerMiddle"));
+	if (val)
+		_nppGUI._printSettings._headerMiddle = val;
+
+	val = element->Attribute(TEXT("headerRight"));
+	if (val)
+		_nppGUI._printSettings._headerRight = val;
+
+
+	val = element->Attribute(TEXT("footerLeft"));
+	if (val)
+		_nppGUI._printSettings._footerLeft = val;
+
+	val = element->Attribute(TEXT("footerMiddle"));
+	if (val)
+		_nppGUI._printSettings._footerMiddle = val;
+
+	val = element->Attribute(TEXT("footerRight"));
+	if (val)
+		_nppGUI._printSettings._footerRight = val;
+
+
+	val = element->Attribute(TEXT("headerFontName"));
+	if (val)
+		_nppGUI._printSettings._headerFontName = val;
+
+	val = element->Attribute(TEXT("footerFontName"));
+	if (val)
+		_nppGUI._printSettings._footerFontName = val;
+
+	if (element->Attribute(TEXT("headerFontStyle"), &i))
+		_nppGUI._printSettings._headerFontStyle = i;
+
+	if (element->Attribute(TEXT("footerFontStyle"), &i))
+		_nppGUI._printSettings._footerFontStyle = i;
+
+	if (element->Attribute(TEXT("headerFontSize"), &i))
+		_nppGUI._printSettings._headerFontSize = i;
+
+	if (element->Attribute(TEXT("footerFontSize"), &i))
+		_nppGUI._printSettings._footerFontSize = i;
+
+
+	if (element->Attribute(TEXT("margeLeft"), &i))
+		_nppGUI._printSettings._marge.left = i;
+
+	if (element->Attribute(TEXT("margeTop"), &i))
+		_nppGUI._printSettings._marge.top = i;
+
+	if (element->Attribute(TEXT("margeRight"), &i))
+		_nppGUI._printSettings._marge.right = i;
+
+	if (element->Attribute(TEXT("margeBottom"), &i))
+		_nppGUI._printSettings._marge.bottom = i;
+}
+
+
+/*
+* ScintillaPrimaryView
+*/
+void /*NppParameters::*/GuiConfigScintillaPrimaryView::operator ()(ScintillaViewParams & _svp, TiXmlElement * node)
+{
+	TiXmlElement* element = node->ToElement();
+
+	// Line Number Margin
+	const TCHAR *nm = element->Attribute(TEXT("lineNumberMargin"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("show")))
+			_svp._lineNumberMarginShow = true;
+		else if (!lstrcmp(nm, TEXT("hide")))
+			_svp._lineNumberMarginShow = false;
+	}
+
+	// Bookmark Margin
+	nm = element->Attribute(TEXT("bookMarkMargin"));
+	if (nm)
+	{
+
+		if (!lstrcmp(nm, TEXT("show")))
+			_svp._bookMarkMarginShow = true;
+		else if (!lstrcmp(nm, TEXT("hide")))
+			_svp._bookMarkMarginShow = false;
+	}
+
+	// Indent GuideLine
+	nm = element->Attribute(TEXT("indentGuideLine"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("show")))
+			_svp._indentGuideLineShow = true;
+		else if (!lstrcmp(nm, TEXT("hide")))
+			_svp._indentGuideLineShow = false;
+	}
+
+	// Folder Mark Style
+	nm = element->Attribute(TEXT("folderMarkStyle"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("box")))
+			_svp._folderStyle = FOLDER_STYLE_BOX;
+		else if (!lstrcmp(nm, TEXT("circle")))
+			_svp._folderStyle = FOLDER_STYLE_CIRCLE;
+		else if (!lstrcmp(nm, TEXT("arrow")))
+			_svp._folderStyle = FOLDER_STYLE_ARROW;
+		else if (!lstrcmp(nm, TEXT("simple")))
+			_svp._folderStyle = FOLDER_STYLE_SIMPLE;
+		else if (!lstrcmp(nm, TEXT("none")))
+			_svp._folderStyle = FOLDER_STYLE_NONE;
+	}
+
+	// Line Wrap method
+	nm = element->Attribute(TEXT("lineWrapMethod"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("default")))
+			_svp._lineWrapMethod = LINEWRAP_DEFAULT;
+		else if (!lstrcmp(nm, TEXT("aligned")))
+			_svp._lineWrapMethod = LINEWRAP_ALIGNED;
+		else if (!lstrcmp(nm, TEXT("indent")))
+			_svp._lineWrapMethod = LINEWRAP_INDENT;
+	}
+
+	// Current Line Highlighting State
+	nm = element->Attribute(TEXT("currentLineHilitingShow"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("show")))
+			_svp._currentLineHilitingShow = true;
+		else if (!lstrcmp(nm, TEXT("hide")))
+			_svp._currentLineHilitingShow = false;
+	}
+
+	// Scrolling Beyond Last Line State
+	nm = element->Attribute(TEXT("scrollBeyondLastLine"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("yes")))
+			_svp._scrollBeyondLastLine = true;
+		else if (!lstrcmp(nm, TEXT("no")))
+			_svp._scrollBeyondLastLine = false;
+	}
+
+	// Disable Advanced Scrolling
+	nm = element->Attribute(TEXT("disableAdvancedScrolling"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("yes")))
+			_svp._disableAdvancedScrolling = true;
+		else if (!lstrcmp(nm, TEXT("no")))
+			_svp._disableAdvancedScrolling = false;
+	}
+
+	// Current wrap symbol visibility State
+	nm = element->Attribute(TEXT("wrapSymbolShow"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("show")))
+			_svp._wrapSymbolShow = true;
+		else if (!lstrcmp(nm, TEXT("hide")))
+			_svp._wrapSymbolShow = false;
+	}
+
+	// Do Wrap
+	nm = element->Attribute(TEXT("Wrap"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("yes")))
+			_svp._doWrap = true;
+		else if (!lstrcmp(nm, TEXT("no")))
+			_svp._doWrap = false;
+	}
+
+	// Do Edge
+	nm = element->Attribute(TEXT("edge"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("background")))
+			_svp._edgeMode = EDGE_BACKGROUND;
+		else if (!lstrcmp(nm, TEXT("line")))
+			_svp._edgeMode = EDGE_LINE;
+		else
+			_svp._edgeMode = EDGE_NONE;
+	}
+
+	// Do Scintilla border edge
+	nm = element->Attribute(TEXT("borderEdge"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("yes")))
+			_svp._showBorderEdge = true;
+		else if (!lstrcmp(nm, TEXT("no")))
+			_svp._showBorderEdge = false;
+	}
+
+	int val;
+	nm = element->Attribute(TEXT("edgeNbColumn"), &val);
+	if (nm)
+	{
+		_svp._edgeNbColumn = val;
+	}
+
+	nm = element->Attribute(TEXT("zoom"), &val);
+	if (nm)
+	{
+		_svp._zoom = val;
+	}
+
+	nm = element->Attribute(TEXT("zoom2"), &val);
+	if (nm)
+	{
+		_svp._zoom2 = val;
+	}
+
+	// White Space visibility State
+	nm = element->Attribute(TEXT("whiteSpaceShow"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("show")))
+			_svp._whiteSpaceShow = true;
+		else if (!lstrcmp(nm, TEXT("hide")))
+			_svp._whiteSpaceShow = false;
+	}
+
+	// EOL visibility State
+	nm = element->Attribute(TEXT("eolShow"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("show")))
+			_svp._eolShow = true;
+		else if (!lstrcmp(nm, TEXT("hide")))
+			_svp._eolShow = false;
+	}
+
+	nm = element->Attribute(TEXT("borderWidth"), &val);
+	if (nm)
+	{
+		if (val >= 0 && val <= 30)
+			_svp._borderWidth = val;
+	}
+
+	// Do antialiased font
+	nm = element->Attribute(TEXT("smoothFont"));
+	if (nm)
+	{
+		if (!lstrcmp(nm, TEXT("yes")))
+			_svp._doSmoothFont = true;
+		else if (!lstrcmp(nm, TEXT("no")))
+			_svp._doSmoothFont = false;
+	}
+}
+
+
+/*
+* Backup
+*/
+void /*NppParameters::*/GuiConfigBackup::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	int i;
+	if (element->Attribute(TEXT("action"), &i))
+		_nppGUI._backup = (BackupFeature)i;
+
+	const TCHAR *bDir = element->Attribute(TEXT("useCustumDir"));
+	if (bDir)
+	{
+		_nppGUI._useDir = (lstrcmp(bDir, TEXT("yes")) == 0);;
+	}
+	const TCHAR *pDir = element->Attribute(TEXT("dir"));
+	if (pDir)
+		_nppGUI._backupDir = pDir;
+
+	const TCHAR *isSnapshotModeStr = element->Attribute(TEXT("isSnapshotMode"));
+	if (isSnapshotModeStr && !lstrcmp(isSnapshotModeStr, TEXT("no")))
+		_nppGUI._isSnapshotMode = false;
+
+	int timing;
+	if (element->Attribute(TEXT("snapshotBackupTiming"), &timing))
+		_nppGUI._snapshotBackupTiming = timing;
+}
+
+
+/*
+* DockingManager
+*/
+void /*NppParameters::*/GuiConfigDockingManager::operator ()(NppGUI & _nppGUI, TiXmlElement * node)
+{
+	TiXmlElement *element = node->ToElement();
+
+	int i;
+	if (element->Attribute(TEXT("leftWidth"), &i))
+		_nppGUI._dockingData._leftWidth = i;
+
+	if (element->Attribute(TEXT("rightWidth"), &i))
+		_nppGUI._dockingData._rightWidth = i;
+
+	if (element->Attribute(TEXT("topHeight"), &i))
+		_nppGUI._dockingData._topHeight = i;
+
+	if (element->Attribute(TEXT("bottomHeight"), &i))
+		_nppGUI._dockingData._bottomHight = i;
+
+
+
+	for (TiXmlNode *childNode = node->FirstChildElement(TEXT("FloatingWindow"));
+		childNode;
+		childNode = childNode->NextSibling(TEXT("FloatingWindow")))
+	{
+		TiXmlElement *floatElement = childNode->ToElement();
+		int cont;
+		if (floatElement->Attribute(TEXT("cont"), &cont))
+		{
+			int x = 0;
+			int y = 0;
+			int w = 100;
+			int h = 100;
+
+			floatElement->Attribute(TEXT("x"), &x);
+			floatElement->Attribute(TEXT("y"), &y);
+			floatElement->Attribute(TEXT("width"), &w);
+			floatElement->Attribute(TEXT("height"), &h);
+			_nppGUI._dockingData._flaotingWindowInfo.push_back(FloatingWindowInfo(cont, x, y, w, h));
+		}
+	}
+
+	for (TiXmlNode *childNode = node->FirstChildElement(TEXT("PluginDlg"));
+		childNode;
+		childNode = childNode->NextSibling(TEXT("PluginDlg")))
+	{
+		TiXmlElement *dlgElement = childNode->ToElement();
+		const TCHAR *name = dlgElement->Attribute(TEXT("pluginName"));
+
+		int id;
+		const TCHAR *idStr = dlgElement->Attribute(TEXT("id"), &id);
+		if (name && idStr)
+		{
+			int curr = 0; // on left
+			int prev = 0; // on left
+
+			dlgElement->Attribute(TEXT("curr"), &curr);
+			dlgElement->Attribute(TEXT("prev"), &prev);
+
+			bool isVisible = false;
+			const TCHAR *val = dlgElement->Attribute(TEXT("isVisible"));
+			if (val)
+			{
+				isVisible = (lstrcmp(val, TEXT("yes")) == 0);
+			}
+
+			_nppGUI._dockingData._pluginDockInfo.push_back(PluginDlgDockingInfo(name, id, curr, prev, isVisible));
+		}
+	}
+
+	for (TiXmlNode *childNode = node->FirstChildElement(TEXT("ActiveTabs"));
+		childNode;
+		childNode = childNode->NextSibling(TEXT("ActiveTabs")))
+	{
+		TiXmlElement *dlgElement = childNode->ToElement();
+
+		int cont;
+		if (dlgElement->Attribute(TEXT("cont"), &cont))
+		{
+			int activeTab = 0;
+			dlgElement->Attribute(TEXT("activeTab"), &activeTab);
+			_nppGUI._dockingData._containerTabInfo.push_back(ContainerTabInfo(cont, activeTab));
+		}
+	}
+}
+
+
+/*
+* globalOverride
+*/
+void /*NppParameters::*/GuiConfigGlobalOverride::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	const TCHAR *bDir = element->Attribute(TEXT("fg"));
+	if (bDir)
+		_nppGUI._globalOverride.enableFg = (lstrcmp(bDir, TEXT("yes")) == 0);
+
+	bDir = element->Attribute(TEXT("bg"));
+	if (bDir)
+		_nppGUI._globalOverride.enableBg = (lstrcmp(bDir, TEXT("yes")) == 0);
+
+	bDir = element->Attribute(TEXT("font"));
+	if (bDir)
+		_nppGUI._globalOverride.enableFont = (lstrcmp(bDir, TEXT("yes")) == 0);
+
+	bDir = element->Attribute(TEXT("fontSize"));
+	if (bDir)
+		_nppGUI._globalOverride.enableFontSize = (lstrcmp(bDir, TEXT("yes")) == 0);
+
+	bDir = element->Attribute(TEXT("bold"));
+	if (bDir)
+		_nppGUI._globalOverride.enableBold = (lstrcmp(bDir, TEXT("yes")) == 0);
+
+	bDir = element->Attribute(TEXT("italic"));
+	if (bDir)
+		_nppGUI._globalOverride.enableItalic = (lstrcmp(bDir, TEXT("yes")) == 0);
+
+	bDir = element->Attribute(TEXT("underline"));
+	if (bDir)
+		_nppGUI._globalOverride.enableUnderLine = (lstrcmp(bDir, TEXT("yes")) == 0);
+
+}
+
+
+/*
+* auto-completion
+*/
+void /*NppParameters::*/GuiConfigAutoCompletion::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	int i;
+	if (element->Attribute(TEXT("autoCAction"), &i))
+		_nppGUI._autocStatus = static_cast<NppGUI::AutocStatus>(i);
+
+	if (element->Attribute(TEXT("triggerFromNbChar"), &i))
+		_nppGUI._autocFromLen = i;
+
+	const TCHAR * optName = element->Attribute(TEXT("autoCIgnoreNumbers"));
+	if (optName)
+		_nppGUI._autocIgnoreNumbers = (lstrcmp(optName, TEXT("yes")) == 0);
+
+	optName = element->Attribute(TEXT("funcParams"));
+	if (optName)
+		_nppGUI._funcParams = (lstrcmp(optName, TEXT("yes")) == 0);
+}
+
+
+/*
+* auto-insert
+*/
+void /*NppParameters::*/GuiConfigAutoInsert::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode, TiXmlElement * element)
+{
+	const TCHAR * optName = element->Attribute(TEXT("htmlXmlTag"));
+	if (optName)
+		_nppGUI._matchedPairConf._doHtmlXmlTag = (lstrcmp(optName, TEXT("yes")) == 0);
+
+	optName = element->Attribute(TEXT("parentheses"));
+	if (optName)
+		_nppGUI._matchedPairConf._doParentheses = (lstrcmp(optName, TEXT("yes")) == 0);
+
+	optName = element->Attribute(TEXT("brackets"));
+	if (optName)
+		_nppGUI._matchedPairConf._doBrackets = (lstrcmp(optName, TEXT("yes")) == 0);
+
+	optName = element->Attribute(TEXT("curlyBrackets"));
+	if (optName)
+		_nppGUI._matchedPairConf._doCurlyBrackets = (lstrcmp(optName, TEXT("yes")) == 0);
+
+	optName = element->Attribute(TEXT("quotes"));
+	if (optName)
+		_nppGUI._matchedPairConf._doQuotes = (lstrcmp(optName, TEXT("yes")) == 0);
+
+	optName = element->Attribute(TEXT("doubleQuotes"));
+	if (optName)
+		_nppGUI._matchedPairConf._doDoubleQuotes = (lstrcmp(optName, TEXT("yes")) == 0);
+
+	for (TiXmlNode *subChildNode = childNode->FirstChildElement(TEXT("UserDefinePair"));
+		subChildNode;
+		subChildNode = subChildNode->NextSibling(TEXT("UserDefinePair")))
+	{
+		int open = -1;
+		int openVal = 0;
+		const TCHAR *openValStr = (subChildNode->ToElement())->Attribute(TEXT("open"), &openVal);
+		if (openValStr && (openVal >= 0 && openVal < 128))
+			open = openVal;
+
+		int close = -1;
+		int closeVal = 0;
+		const TCHAR *closeValStr = (subChildNode->ToElement())->Attribute(TEXT("close"), &closeVal);
+		if (closeValStr && (closeVal >= 0 && closeVal <= 128))
+			close = closeVal;
+
+		if (open != -1 && close != -1)
+			_nppGUI._matchedPairConf._matchedPairsInit.push_back(pair<char, char>(char(open), char(close)));
+	}
+}
+
+
+/*
+* sessionExt
+*/
+void /*NppParameters::*/GuiConfigSessionExt::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+			_nppGUI._definedSessionExt = val;
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+* workspaceExt
+*/
+void /*NppParameters::*/GuiConfigWorkspaceExt::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+			_nppGUI._definedWorkspaceExt = val;
+	}
+}
+
+
+/*
+* noUpdate
+*/
+void /*NppParameters::*/GuiConfigNoUpdate::operator ()(NppGUI & _nppGUI, TiXmlNode    * childNode, TiXmlElement * element)
+{
+	TiXmlNode *n = childNode->FirstChild();
+	if (n)
+	{
+		const TCHAR* val = n->Value();
+		if (val)
+			_nppGUI._autoUpdateOpt._doAutoUpdate = (!lstrcmp(val, TEXT("yes"))) ? false : true;
+
+		int i;
+		val = element->Attribute(TEXT("intervalDays"), &i);
+		if (val)
+			_nppGUI._autoUpdateOpt._intervalDays = i;
+
+		val = element->Attribute(TEXT("nextUpdateDate"));
+		if (val)
+			_nppGUI._autoUpdateOpt._nextUpdateDate = Date(val);
+	}
+}
+
+
+/*
+* openSaveDir
+*/
+void /*NppParameters::*/GuiConfigOpenSaveDir::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	const TCHAR * value = element->Attribute(TEXT("value"));
+	if (value && value[0])
+	{
+		if (lstrcmp(value, TEXT("1")) == 0)
+			_nppGUI._openSaveDir = dir_last;
+		else if (lstrcmp(value, TEXT("2")) == 0)
+			_nppGUI._openSaveDir = dir_userDef;
+		else
+			_nppGUI._openSaveDir = dir_followCurrent;
+	}
+
+	const TCHAR * path = element->Attribute(TEXT("defaultDirPath"));
+	if (path && path[0])
+	{
+		lstrcpyn(_nppGUI._defaultDir, path, MAX_PATH);
+		::ExpandEnvironmentStrings(_nppGUI._defaultDir, _nppGUI._defaultDirExp, MAX_PATH);
+	}
+
+}
+
+
+/*
+* titleBar
+*/
+void /*NppParameters::*/GuiConfigTitleBar::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	const TCHAR * value = element->Attribute(TEXT("short"));
+	_nppGUI._shortTitlebar = false;    //default state
+	if (value && value[0])
+	{
+		if (lstrcmp(value, TEXT("yes")) == 0)
+			_nppGUI._shortTitlebar = true;
+		else if (lstrcmp(value, TEXT("no")) == 0)
+			_nppGUI._shortTitlebar = false;
+	}
+}
+
+
+/*
+* stylerTheme
+*/
+void /*NppParameters::*/GuiConfigStylerTheme::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	const TCHAR *themePath = element->Attribute(TEXT("path"));
+	if (themePath != NULL && themePath[0])
+		_nppGUI._themeName.assign(themePath);
+}
+
+
+/*
+* wordCharList
+*/
+void /*NppParameters::*/GuiConfigWordCharList::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	const TCHAR * value = element->Attribute(TEXT("useDefault"));
+	if (value && value[0])
+	{
+		if (lstrcmp(value, TEXT("yes")) == 0)
+			_nppGUI._isWordCharDefault = true;
+		else if (lstrcmp(value, TEXT("no")) == 0)
+			_nppGUI._isWordCharDefault = false;
+	}
+
+	const TCHAR *charsAddedW = element->Attribute(TEXT("charsAdded"));
+	if (charsAddedW)
+	{
+		WcharMbcsConvertor& wmc = WcharMbcsConvertor::getInstance();
+		_nppGUI._customWordChars = wmc.wchar2char(charsAddedW, SC_CP_UTF8);
+	}
+
+}
+
+
+/*
+* delimiterSelection
+*/
+void /*NppParameters::*/GuiConfigDelimiterSelection::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	int leftmost = 0;
+	element->Attribute(TEXT("leftmostDelimiter"), &leftmost);
+	if (leftmost > 0 && leftmost < 256)
+		_nppGUI._leftmostDelimiter = static_cast<char>(leftmost);
+
+	int rightmost = 0;
+	element->Attribute(TEXT("rightmostDelimiter"), &rightmost);
+	if (rightmost > 0 && rightmost < 256)
+		_nppGUI._rightmostDelimiter = static_cast<char>(rightmost);
+
+	const TCHAR *delimiterSelectionOnEntireDocument = element->Attribute(TEXT("delimiterSelectionOnEntireDocument"));
+	if (delimiterSelectionOnEntireDocument != NULL && !lstrcmp(delimiterSelectionOnEntireDocument, TEXT("yes")))
+		_nppGUI._delimiterSelectionOnEntireDocument = true;
+	else
+		_nppGUI._delimiterSelectionOnEntireDocument = false;
+
+}
+
+
+/*
+* multiInst
+*/
+void /*NppParameters::*/GuiConfigMultiInst::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	int val = 0;
+	element->Attribute(TEXT("setting"), &val);
+	if (val < 0 || val > 2)
+		val = 0;
+	_nppGUI._multiInstSetting = (MultiInstSetting)val;
+}
+
+
+/*
+* searchEngine
+*/
+void /*NppParameters::*/GuiConfigSearchEngine::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	int i;
+	if (element->Attribute(TEXT("searchEngineChoice"), &i))
+		_nppGUI._searchEngineChoice = static_cast<NppGUI::SearchEngineChoice>(i);
+
+	const TCHAR * searchEngineCustom = element->Attribute(TEXT("searchEngineCustom"));
+	if (searchEngineCustom && searchEngineCustom[0])
+		_nppGUI._searchEngineCustom = searchEngineCustom;
+
+}
+
+
+/*
+* MISC
+*/
+void /*NppParameters::*/GuiConfigMisc::operator ()(NppGUI & _nppGUI, TiXmlElement * element)
+{
+	const TCHAR * optName = element->Attribute(TEXT("fileSwitcherWithoutExtColumn"));
+	if (optName)
+		_nppGUI._fileSwitcherWithoutExtColumn = (lstrcmp(optName, TEXT("yes")) == 0);
+
+	const TCHAR * optNameBackSlashEscape = element->Attribute(TEXT("backSlashIsEscapeCharacterForSql"));
+	if (optNameBackSlashEscape && !lstrcmp(optNameBackSlashEscape, TEXT("no")))
+		_nppGUI._backSlashIsEscapeCharacterForSql = false;
+
+	const TCHAR * optNameNewStyleSaveDlg = element->Attribute(TEXT("newStyleSaveDlg"));
+	if (optNameNewStyleSaveDlg)
+		_nppGUI._useNewStyleSaveDlg = (lstrcmp(optNameNewStyleSaveDlg, TEXT("yes")) == 0);
+
+	const TCHAR * optNameFolderDroppedOpenFiles = element->Attribute(TEXT("isFolderDroppedOpenFiles"));
+	if (optNameFolderDroppedOpenFiles)
+		_nppGUI._isFolderDroppedOpenFiles = (lstrcmp(optNameFolderDroppedOpenFiles, TEXT("yes")) == 0);
+
+	const TCHAR * optDocPeekOnTab = element->Attribute(TEXT("docPeekOnTab"));
+	if (optDocPeekOnTab)
+		_nppGUI._isDocPeekOnTab = (lstrcmp(optDocPeekOnTab, TEXT("yes")) == 0);
+
+	const TCHAR * optDocPeekOnMap = element->Attribute(TEXT("docPeekOnMap"));
+	if (optDocPeekOnMap)
+		_nppGUI._isDocPeekOnMap = (lstrcmp(optDocPeekOnMap, TEXT("yes")) == 0);
+
 }
