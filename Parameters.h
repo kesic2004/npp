@@ -35,7 +35,7 @@
 #include "Scintilla.h"
 #include "ScintillaRef.h"
 
-//#include "ToolBar.h"
+#include "ToolBar.h"
 #include "UserDefineLangReference.h"
 #include "colors.h"
 #include "shortcut.h"
