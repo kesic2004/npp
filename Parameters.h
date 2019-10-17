@@ -43,7 +43,7 @@
 #include "dpiManager.h"
 #include <assert.h>
 #include <tchar.h>
-#include <functional>
+//#include <functional>
 #include <unordered_map>
 
 class NativeLangSpeaker;
@@ -1350,6 +1350,11 @@ public:
 
 struct ScintillaViewParams
 {
+	static const TCHAR * const SHOW;
+	static const TCHAR * const HIDE;
+	static const TCHAR * const YES;
+	static const TCHAR * const NO;
+
 	//"simple", "arrow", "circle", "box" and "none"
 	lineWrapMethod _lineWrapMethod = LINEWRAP_ALIGNED;
 
@@ -1375,6 +1380,95 @@ struct ScintillaViewParams
 	bool _disableAdvancedScrolling = false;
 	bool _doSmoothFont             = false;
 	bool _showBorderEdge           = true;
+public:
+	const TCHAR * lineWrapMethodToConstTcharPointer() const
+	{
+		switch (_lineWrapMethod)
+		{
+		case LINEWRAP_ALIGNED :
+			return TEXT("aligned");
+		case LINEWRAP_INDENT :
+			return TEXT("indent");
+		default:
+			return TEXT("default");
+		}
+	}
+	const TCHAR * folderStyleToConstTcharPointer() const
+	{
+		switch (_folderStyle)
+		{
+		case FOLDER_STYLE_SIMPLE:
+			return TEXT("simple");
+		case FOLDER_STYLE_ARROW:
+			return TEXT("arrow");
+		case FOLDER_STYLE_CIRCLE:
+			return TEXT("circle");
+		case FOLDER_STYLE_NONE:
+			return TEXT("none");
+		default:
+			return TEXT("box");
+		}
+	}
+	const TCHAR * edgeModeToConstTcharPointer() const
+	{
+		switch (_edgeMode)
+		{
+		case EDGE_NONE:
+			return TEXT("no");
+		case EDGE_LINE:
+			return TEXT("line");
+		default:
+			return TEXT("background");
+		}
+	}
+	const TCHAR * lineNumberMarginShowToConstTcharPointer() const
+	{
+		return _lineNumberMarginShow ? SHOW: HIDE;
+	}
+	const TCHAR * bookMarkMarginShowToConstTcharPointer() const
+	{
+		return _bookMarkMarginShow ? SHOW : HIDE;
+	}
+	const TCHAR * indentGuideLineShowToConstTcharPointer() const
+	{
+		return _indentGuideLineShow ? SHOW : HIDE;
+	}
+	const TCHAR * currentLineHilitingShowToConstTcharPointer() const
+	{
+		return _currentLineHilitingShow ? SHOW : HIDE;
+	}
+	const TCHAR * scrollBeyondLastLineToConstTcharPointer() const
+	{
+		return _scrollBeyondLastLine ? YES : NO;
+	}
+	const TCHAR * disableAdvancedScrollingToConstTcharPointer() const
+	{
+		return _disableAdvancedScrolling ? YES : NO;
+	}
+	const TCHAR * wrapSymbolShowToConstTcharPointer() const
+	{
+		return _wrapSymbolShow ? SHOW : HIDE;
+	}
+	const TCHAR * doWrapToConstTcharPointer() const
+	{
+		return _doWrap ? YES : NO;
+	}
+	const TCHAR * showBorderEdgeToConstTcharPointer() const
+	{
+		return _showBorderEdge ? YES : NO;
+	}
+	const TCHAR * whiteSpaceShowToConstTcharPointer() const
+	{
+		return _whiteSpaceShow ? SHOW : HIDE;
+	}
+	const TCHAR * eolShowToConstTcharPointer() const
+	{
+		return _eolShow ? SHOW : HIDE;
+	}
+	const TCHAR * doSmoothFontToConstTcharPointer() const
+	{
+		return _doSmoothFont ? YES : NO;
+	}
 };
 
 
@@ -1799,9 +1893,18 @@ const bool FREE     = false;
 
 const int RECENTFILES_SHOWFULLPATH     = -1;
 const int RECENTFILES_SHOWONLYFILENAME = 0;
+
+
+
 class NppParametersInitial
 {
 public:
+	static NppParametersInitial * getInstance()
+	{
+		static NppParametersInitial instance;
+		return & instance;
+	}
+private:
 	NppParametersInitial();
 	~NppParametersInitial();
 };
@@ -3110,6 +3213,17 @@ private:
  */
 class GuiConfigBaseClass
 {
+#pragma warning( disable : 4521 )
+#pragma warning( disable : 4522 )
+	GuiConfigBaseClass(GuiConfigBaseClass &)        = delete;
+	GuiConfigBaseClass(GuiConfigBaseClass &&)       = delete;
+	GuiConfigBaseClass(const GuiConfigBaseClass &)  = delete;
+	GuiConfigBaseClass(const GuiConfigBaseClass &&) = delete;
+	GuiConfigBaseClass & operator = (GuiConfigBaseClass &)        = delete;
+	GuiConfigBaseClass & operator = (GuiConfigBaseClass &&)       = delete;
+	GuiConfigBaseClass & operator = (const GuiConfigBaseClass &)  = delete;
+	GuiConfigBaseClass & operator = (const GuiConfigBaseClass &&) = delete;
+	GuiConfigBaseClass & operator = (const GuiConfigBaseClass) = delete;
 public:
 	enum Mode{ unknow = 0, childNode = 1, element = 2, svpElement = 3,childNode_and_element = 4};
 	const Mode mode;
