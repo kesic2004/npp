@@ -563,30 +563,152 @@ const int COLORSTYLE_BACKGROUND = 0x02;
 const int COLORSTYLE_ALL        = COLORSTYLE_FOREGROUND | COLORSTYLE_BACKGROUND;
 
 
+/*
+ * 单表关键字的结构体
+ */
 struct Style
 {
+	/*
+	 * <NotepadPlus>
+     *     <LexerStyles>
+     *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+     *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应WordsStyle标签的styleID属性(风格id),默认值-1
+	 */
 	int _styleID = -1;
 
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle=""  nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应WordsStyle标签的fgColor属性(前景色),默认值STYLE_NOT_USED
+	 */
 	COLORREF _fgColor = COLORREF(STYLE_NOT_USED);
+
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle=""  nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应WordsStyle标签的bgColor属性(背景色),默认值STYLE_NOT_USED
+	 */
 	COLORREF _bgColor = COLORREF(STYLE_NOT_USED);
 
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应WordsStyle标签的colorStyle属性(颜色风格),默认值COLORSTYLE_ALL
+	 */
 	int _colorStyle = COLORSTYLE_ALL;
 
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应WordsStyle标签的fontStyle属性(字体风格),默认值FONTSTYLE_NONE
+	 */
 	int _fontStyle  = FONTSTYLE_NONE;
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应WordsStyle标签的fontSize属性(字体大小),默认值STYLE_NOT_USED
+	 */
 	int _fontSize   = STYLE_NOT_USED;
 
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应WordsStyle标签的nesting属性(),默认值FONTSTYLE_NONE
+	 */
 	int _nesting    = FONTSTYLE_NONE;
 
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应WordsStyle标签的keywordClass属性(),默认值STYLE_NOT_USED
+	 */
 	int _keywordClass = STYLE_NOT_USED;
 
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应WordsStyle标签的所包含的文本标签(),默认值STYLE_NOT_USED
+	 */
 	generic_string * _keywords = nullptr;
 
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应WordsStyle标签的fontName属性(字符名称),默认值-1
+	 */
 	const TCHAR* _fontName = nullptr;
 
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 如果styleID是16进制的FXXXX这样的值
+	 * 那么对应name属性
+	 * 否则从用户定义的某人地方根据FXXXX中的XXXX获取
+	 */
 	const TCHAR * _styleDesc = nullptr;
 
+	/*
+	 * 无参构造
+	 */
 	Style() = default;
 
+	/*
+	 * 复制构造
+	 */
 	Style(const Style & style)
 	{
 		_styleID	  = style._styleID;
@@ -602,12 +724,18 @@ struct Style
 		_keywords     = (style._keywords) ? new generic_string(*(style._keywords)) : nullptr;
 	}
 
+	/*
+	 * 析构
+	 */
 	~Style()
 	{
 		delete _keywords;
 	}
 
-	Style& operator = (const Style & style)
+	/*
+	 * 重载赋值操作符
+	 */
+	Style & operator = (const Style & style)
 	{
 		if (this != &style)
 		{
@@ -639,12 +767,20 @@ struct Style
 		return *this;
 	}
 
+	/*
+	 * 重新设置关键字
+	 */
 	void setKeywords(const TCHAR *str)
 	{
-		if (!_keywords)
-			_keywords = new generic_string(str);
+		if (_keywords)
+		{
+//			*_keywords = str;
+			_keywords->operator = (str);
+		}
 		else
-			*_keywords = str;
+		{
+			_keywords = new generic_string(str);
+		}
 	}
 };
 
@@ -665,6 +801,9 @@ struct GlobalOverride final
 };
 
 
+/*
+ * 包含多个WordsStyle对象的数组，类似于std::array
+ */
 struct StyleArray
 {
 public:
@@ -702,6 +841,20 @@ public:
 		return (_nbStyler < SCE_STYLE_ARRAY_SIZE);
 	}
 
+	/*
+	 * 处理
+	 *
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext="" excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应WordsStyle标签的所有属性(styleID标签除外)
+	 * @param styleID styleID
+	 * @param styleNode WordsStyle标签
+	 */
 	void addStyler(int styleID, TiXmlNode * styleNode);
 
 	void addStyler(int styleID, const TCHAR * styleName)
@@ -739,10 +892,25 @@ public:
 
 protected:
 	Style _styleArray[SCE_STYLE_ARRAY_SIZE];
+	/*
+	 * 指向下一个的指针
+	 */
 	int   _nbStyler = 0;
 };
 
-
+/*
+ * <NotepadPlus>
+ *     <LexerStyles>
+ *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+ *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+ *         </LexerType>
+ *     </LexerStyles>
+ * </NotepadPlus>
+ * 对应WordsStyle标签的styleID属性(风格id),默认值-1
+ * 被编辑的“文本的所对应的语言”对应的关键字的集合的展示的方式
+ * 包含多个关键字
+ * 包含了单个LexerType节点的内容
+ */
 struct LexerStyler : public StyleArray
 {
 public:
@@ -789,14 +957,47 @@ public:
 	}
 
 private :
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应LexerType标签的name属性(名称，即具体的编辑文本对应的语言)
+	 */
 	generic_string _lexerName;
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应LexerType标签的desc属性(描述，即具体的编辑文本对应的语言的描述)
+	 */
 	generic_string _lexerDesc;
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 对应LexerType标签的ext属性()
+	 */
 	generic_string _lexerUserExt;
 };
 
 
 const int MAX_LEXER_STYLE = 100;
 
+/*
+ * 被编辑的“文本的所对应的语言”对应的关键字的集合的展示的方式的数组，类似于std::array
+ */
 struct LexerStylerArray
 {
 public :
@@ -857,11 +1058,31 @@ public :
 		return (_nbLexerStyler < MAX_LEXER_STYLE);
 	}
 
+	/*
+	 * <NotepadPlus>
+	 *     <LexerStyles>
+	 *         <LexerType name="actionscript" desc="ActionScript" ext=""  excluded="">
+	 *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+	 *         </LexerType>
+	 *     </LexerStyles>
+	 * </NotepadPlus>
+	 * 新加单个的LexerType节点
+	 * @param lexerName    name属性
+	 * @param lexerDesc    desc属性
+	 * @param lexerUserExt ext属性
+	 * @param lexerNode    LexerType节点
+	 */
 	void addLexerStyler(const TCHAR *lexerName, const TCHAR *lexerDesc, const TCHAR *lexerUserExt, TiXmlNode *lexerNode);
 
 	void eraseAll();
 private :
+	/*
+	 * 具体的数组
+	 */
 	LexerStyler _lexerStylerArray[MAX_LEXER_STYLE];
+	/*
+	 * 所指量的下一个ITEM的下标
+	 */
 	int _nbLexerStyler;
 };
 
@@ -1149,6 +1370,9 @@ public:
 
 	toolBarStatusType _toolBarStatus = TB_STANDARD;
 
+	/*
+	 * 要被排除的编辑文本语言的清单
+	 */
 	std::vector<LangMenuItem> _excludedLangList;
 
 public:
@@ -1577,6 +1801,23 @@ struct Lang final
 };
 
 
+/*
+ * <NotepadPlus>
+ *     <UserLang name="RC File" ext="rc" udlVersion="">
+ *         <Settings>
+ *              <Global caseSensitive="yes" caseIgnored="" allowFoldOfComments="" forcePureLC="" decimalSeparator="" foldCompact="" />
+ *              <Prefix /><!-- see GlobalMappers -->
+ *              <Comment commentSymbol="yes" commentLineSymbol="yes"/>
+ *         </Settings>
+ *         <KeywordLists>
+ *             <Keywords name="Folder+">BEGIN</Keywords>
+ *         </KeywordLists>
+ *         <Styles>
+ *             <WordsStyle name = "DEFAULT"      styleID = "11" fgColor = "000000" bgColor = "FFFFFF" fontName = "" fontStyle = "0" fontSize = "" colorStyle = "" nesting = "" keywordClass = "" fontName = "" />
+ *         </Styles>
+ *     </UserLang>
+ * </NotepadPlus>
+ */
 class UserLangContainer final
 {
 public:
@@ -1653,13 +1894,14 @@ private:
 	generic_string _ext;
 	generic_string _udlVersion;
 
+	int  _forcePureLC;
+	int _decimalSeparator;
+
 	TCHAR _keywordLists[SCE_USER_KWLIST_TOTAL][max_char];
 	bool _isPrefix[SCE_USER_TOTAL_KEYWORD_GROUPS];
 
 	bool _isCaseIgnored;
 	bool _allowFoldOfComments;
-	int  _forcePureLC;
-	int _decimalSeparator;
 	bool _foldCompact;
 
 	// nakama zone
@@ -2735,9 +2977,15 @@ private:
 	/*
 	 * @member
 	 */
+	/*
+	 * 用户定义的语言的指针数组
+	 */
 	UserLangContainer     * _userLangArray[NB_MAX_USER_LANG];
 
 	// won't be exceeded to 255;
+	/*
+	 * _userLangArray对应的指向下一个的下标
+	 */
 	unsigned char          _nbUserLang                              = 0;
 
 	/******************************************************
@@ -2767,7 +3015,15 @@ private:
 	 * @member
 	 */
 	// All Styles (colours & fonts)
+	/*
+	 * 被编辑的文本的语言中的关键字的展示的对象的数组
+	 * 存放LexerStyles节点的内容
+	 */
 	LexerStylerArray _lexerStylerArray;
+	/*
+	 * 被编辑的文本的语言中的关键字的展示的对象的数组
+	 * 存放GlobalStyles节点的内容
+	 */
 	StyleArray       _widgetStyleArray;
 
 	/***********************************************************************************************************************/

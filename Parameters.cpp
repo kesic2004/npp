@@ -946,7 +946,9 @@ NppParameters::~NppParameters()
 	_pXmlExternalLexerDoc.clear();
 }
 
-
+/*
+ * 重新加载stylers.xml
+ */
 bool NppParameters::reloadStylers(TCHAR* stylePath)
 {
 	delete _pXmlUserStylerDoc;
@@ -1311,7 +1313,7 @@ bool NppParameters::load()
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// 处理stylers.xml起                                                                                                    //
-	// 文件中的语言的显示风格                                                                                               //
+	// 文件中的语言(默认)的显示风格                                                                                         //
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/******************************
 	 * stylers.xml : for per user *
@@ -1363,6 +1365,11 @@ bool NppParameters::load()
 	// 处理stylers.xml止                                                                                                    //
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 处理userDefineLang.xml起                                                                                             //
+	// 文本中语言的关键字(用户定义)的展示信息                                                                               //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	_themeSwitcher._stylesXmlPath = _stylerPath;
 	// Firstly, add the default theme
 	_themeSwitcher.addDefaultThemeFromXml(_stylerPath);
@@ -1411,7 +1418,14 @@ bool NppParameters::load()
 			}
 	    }
 	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 处理userDefineLang.xml止                                                                                             //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 处理nativeLang.xml起                                                                                                 //
+	// 主菜单中的文字信息                                                                                                   //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//----------------------------------------------//
 	// nativeLang.xml : for per user                //
 	// In case of absence of user's nativeLang.xml, //
@@ -1455,6 +1469,9 @@ bool NppParameters::load()
 	    _pXmlNativeLangDocA = nullptr;
 	    isAllLaoded = false;
 	}
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 处理nativeLang.xml止                                                                                                 //
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//---------------------------------//
 	// toolbarIcons.xml : for per user //
@@ -1841,7 +1858,9 @@ bool NppParameters::getUserParametersFromXmlTree()
 	return true;
 }
 
-
+/*
+ * 解析 userDefineLang.xml
+ */
 std::pair<unsigned char, unsigned char> NppParameters::addUserDefineLangsFromXmlTree(TiXmlDocument *tixmldoc)
 {
 	if (!tixmldoc)
@@ -2395,129 +2414,253 @@ void NppParameters::feedFileBrowserParameters(TiXmlNode *node)
 	}
 }
 
+//void NppParameters::feedFindHistoryParameters(TiXmlNode *node)
+//{
+//	TiXmlNode * findHistoryRoot = node->FirstChildElement(TEXT("FindHistory"));
+//	if (!findHistoryRoot) return;
+//
+//	(findHistoryRoot->ToElement())->Attribute(TEXT("nbMaxFindHistoryPath"), &_findHistory._nbMaxFindHistoryPath);
+//	if ((_findHistory._nbMaxFindHistoryPath > 0) && (_findHistory._nbMaxFindHistoryPath <= NB_MAX_FINDHISTORY_PATH))
+//	{
+//	    for (TiXmlNode *childNode = findHistoryRoot->FirstChildElement(TEXT("Path"));
+//	        childNode && (_findHistory._findHistoryPaths.size() < NB_MAX_FINDHISTORY_PATH);
+//	        childNode = childNode->NextSibling(TEXT("Path")) )
+//	    {
+//	        const TCHAR *filePath = (childNode->ToElement())->Attribute(TEXT("name"));
+//	        if (filePath)
+//	        {
+//	            _findHistory._findHistoryPaths.push_back(generic_string(filePath));
+//	        }
+//	    }
+//	}
+//
+//	(findHistoryRoot->ToElement())->Attribute(TEXT("nbMaxFindHistoryFilter"), &_findHistory._nbMaxFindHistoryFilter);
+//	if ((_findHistory._nbMaxFindHistoryFilter > 0) && (_findHistory._nbMaxFindHistoryFilter <= NB_MAX_FINDHISTORY_FILTER))
+//	{
+//	    for (TiXmlNode *childNode = findHistoryRoot->FirstChildElement(TEXT("Filter"));
+//	        childNode && (_findHistory._findHistoryFilters.size() < NB_MAX_FINDHISTORY_FILTER);
+//	        childNode = childNode->NextSibling(TEXT("Filter")))
+//	    {
+//	        const TCHAR *fileFilter = (childNode->ToElement())->Attribute(TEXT("name"));
+//	        if (fileFilter)
+//	        {
+//	            _findHistory._findHistoryFilters.push_back(generic_string(fileFilter));
+//	        }
+//	    }
+//	}
+//
+//	(findHistoryRoot->ToElement())->Attribute(TEXT("nbMaxFindHistoryFind"), &_findHistory._nbMaxFindHistoryFind);
+//	if ((_findHistory._nbMaxFindHistoryFind > 0) && (_findHistory._nbMaxFindHistoryFind <= NB_MAX_FINDHISTORY_FIND))
+//	{
+//	    for (TiXmlNode *childNode = findHistoryRoot->FirstChildElement(TEXT("Find"));
+//	        childNode && (_findHistory._findHistoryFinds.size() < NB_MAX_FINDHISTORY_FIND);
+//	        childNode = childNode->NextSibling(TEXT("Find")))
+//	    {
+//	        const TCHAR *fileFind = (childNode->ToElement())->Attribute(TEXT("name"));
+//	        if (fileFind)
+//	        {
+//	            _findHistory._findHistoryFinds.push_back(generic_string(fileFind));
+//	        }
+//	    }
+//	}
+//
+//	(findHistoryRoot->ToElement())->Attribute(TEXT("nbMaxFindHistoryReplace"), &_findHistory._nbMaxFindHistoryReplace);
+//	if ((_findHistory._nbMaxFindHistoryReplace > 0) && (_findHistory._nbMaxFindHistoryReplace <= NB_MAX_FINDHISTORY_REPLACE))
+//	{
+//	    for (TiXmlNode *childNode = findHistoryRoot->FirstChildElement(TEXT("Replace"));
+//	        childNode && (_findHistory._findHistoryReplaces.size() < NB_MAX_FINDHISTORY_REPLACE);
+//	        childNode = childNode->NextSibling(TEXT("Replace")))
+//	    {
+//	        const TCHAR *fileReplace = (childNode->ToElement())->Attribute(TEXT("name"));
+//	        if (fileReplace)
+//	        {
+//	            _findHistory._findHistoryReplaces.push_back(generic_string(fileReplace));
+//	        }
+//	    }
+//	}
+//
+//	const TCHAR *boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("matchWord"));
+//	if (boolStr)
+//	    _findHistory._isMatchWord = (lstrcmp(TEXT("yes"), boolStr) == 0);
+//
+//	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("matchCase"));
+//	if (boolStr)
+//	    _findHistory._isMatchCase = (lstrcmp(TEXT("yes"), boolStr) == 0);
+//
+//	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("wrap"));
+//	if (boolStr)
+//	    _findHistory._isWrap = (lstrcmp(TEXT("yes"), boolStr) == 0);
+//
+//	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("directionDown"));
+//	if (boolStr)
+//	    _findHistory._isDirectionDown = (lstrcmp(TEXT("yes"), boolStr) == 0);
+//
+//	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("fifRecuisive"));
+//	if (boolStr)
+//	    _findHistory._isFifRecuisive = (lstrcmp(TEXT("yes"), boolStr) == 0);
+//
+//	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("fifInHiddenFolder"));
+//	if (boolStr)
+//	    _findHistory._isFifInHiddenFolder = (lstrcmp(TEXT("yes"), boolStr) == 0);
+//
+//	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("dlgAlwaysVisible"));
+//	if (boolStr)
+//	    _findHistory._isDlgAlwaysVisible = (lstrcmp(TEXT("yes"), boolStr) == 0);
+//
+//	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("fifFilterFollowsDoc"));
+//	if (boolStr)
+//	    _findHistory._isFilterFollowDoc = (lstrcmp(TEXT("yes"), boolStr) == 0);
+//
+//	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("fifFolderFollowsDoc"));
+//	if (boolStr)
+//	    _findHistory._isFolderFollowDoc = (lstrcmp(TEXT("yes"), boolStr) == 0);
+//
+//	int mode = 0;
+//	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("searchMode"), &mode);
+//	if (boolStr)
+//	    _findHistory._searchMode = (FindHistory::searchMode)mode;
+//
+//	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("transparencyMode"), &mode);
+//	if (boolStr)
+//	    _findHistory._transparencyMode = (FindHistory::transparencyMode)mode;
+//
+//	(findHistoryRoot->ToElement())->Attribute(TEXT("transparency"), &_findHistory._transparency);
+//	if (_findHistory._transparency <= 0 || _findHistory._transparency > 200)
+//	    _findHistory._transparency = 150;
+//
+//	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("dotMatchesNewline"));
+//	if (boolStr)
+//	    _findHistory._dotMatchesNewline = (lstrcmp(TEXT("yes"), boolStr) == 0);
+//
+//	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("isSearch2ButtonsMode"));
+//	if (boolStr)
+//	    _findHistory._isSearch2ButtonsMode = (lstrcmp(TEXT("yes"), boolStr) == 0);
+//}
+
 void NppParameters::feedFindHistoryParameters(TiXmlNode *node)
 {
 	TiXmlNode * const findHistoryRoot = node->FirstChildElement(TEXT("FindHistory"));
 	if (!findHistoryRoot) return;
 	TiXmlElement * const element = findHistoryRoot->ToElement();
 
-	(findHistoryRoot->ToElement())->Attribute(TEXT("nbMaxFindHistoryPath"), &_findHistory._nbMaxFindHistoryPath);
+	(element)->Attribute(TEXT("nbMaxFindHistoryPath"), &_findHistory._nbMaxFindHistoryPath);
 	if ((_findHistory._nbMaxFindHistoryPath > 0) && (_findHistory._nbMaxFindHistoryPath <= NB_MAX_FINDHISTORY_PATH))
 	{
-	    for (TiXmlNode *childNode = findHistoryRoot->FirstChildElement(TEXT("Path"));
-	        childNode && (_findHistory._findHistoryPaths.size() < NB_MAX_FINDHISTORY_PATH);
-	        childNode = childNode->NextSibling(TEXT("Path")) )
-	    {
-	        const TCHAR *filePath = (childNode->ToElement())->Attribute(TEXT("name"));
-	        if (filePath)
-	        {
-	            _findHistory._findHistoryPaths.push_back(generic_string(filePath));
-	        }
-	    }
+		for (TiXmlNode *childNode = findHistoryRoot->FirstChildElement(TEXT("Path"));
+			childNode && (_findHistory._findHistoryPaths.size() < NB_MAX_FINDHISTORY_PATH);
+			childNode = childNode->NextSibling(TEXT("Path")))
+		{
+			const TCHAR *filePath = (childNode->ToElement())->Attribute(TEXT("name"));
+			if (filePath)
+			{
+				_findHistory._findHistoryPaths.push_back(generic_string(filePath));
+			}
+		}
 	}
 
-	(findHistoryRoot->ToElement())->Attribute(TEXT("nbMaxFindHistoryFilter"), &_findHistory._nbMaxFindHistoryFilter);
+	(element)->Attribute(TEXT("nbMaxFindHistoryFilter"), &_findHistory._nbMaxFindHistoryFilter);
 	if ((_findHistory._nbMaxFindHistoryFilter > 0) && (_findHistory._nbMaxFindHistoryFilter <= NB_MAX_FINDHISTORY_FILTER))
 	{
-	    for (TiXmlNode *childNode = findHistoryRoot->FirstChildElement(TEXT("Filter"));
-	        childNode && (_findHistory._findHistoryFilters.size() < NB_MAX_FINDHISTORY_FILTER);
-	        childNode = childNode->NextSibling(TEXT("Filter")))
-	    {
-	        const TCHAR *fileFilter = (childNode->ToElement())->Attribute(TEXT("name"));
-	        if (fileFilter)
-	        {
-	            _findHistory._findHistoryFilters.push_back(generic_string(fileFilter));
-	        }
-	    }
+		for (TiXmlNode *childNode = findHistoryRoot->FirstChildElement(TEXT("Filter"));
+			childNode && (_findHistory._findHistoryFilters.size() < NB_MAX_FINDHISTORY_FILTER);
+			childNode = childNode->NextSibling(TEXT("Filter")))
+		{
+			const TCHAR *fileFilter = (childNode->ToElement())->Attribute(TEXT("name"));
+			if (fileFilter)
+			{
+				_findHistory._findHistoryFilters.push_back(generic_string(fileFilter));
+			}
+		}
 	}
 
-	(findHistoryRoot->ToElement())->Attribute(TEXT("nbMaxFindHistoryFind"), &_findHistory._nbMaxFindHistoryFind);
+	(element)->Attribute(TEXT("nbMaxFindHistoryFind"), &_findHistory._nbMaxFindHistoryFind);
 	if ((_findHistory._nbMaxFindHistoryFind > 0) && (_findHistory._nbMaxFindHistoryFind <= NB_MAX_FINDHISTORY_FIND))
 	{
-	    for (TiXmlNode *childNode = findHistoryRoot->FirstChildElement(TEXT("Find"));
-	        childNode && (_findHistory._findHistoryFinds.size() < NB_MAX_FINDHISTORY_FIND);
-	        childNode = childNode->NextSibling(TEXT("Find")))
-	    {
-	        const TCHAR *fileFind = (childNode->ToElement())->Attribute(TEXT("name"));
-	        if (fileFind)
-	        {
-	            _findHistory._findHistoryFinds.push_back(generic_string(fileFind));
-	        }
-	    }
+		for (TiXmlNode *childNode = findHistoryRoot->FirstChildElement(TEXT("Find"));
+			childNode && (_findHistory._findHistoryFinds.size() < NB_MAX_FINDHISTORY_FIND);
+			childNode = childNode->NextSibling(TEXT("Find")))
+		{
+			const TCHAR *fileFind = (childNode->ToElement())->Attribute(TEXT("name"));
+			if (fileFind)
+			{
+				_findHistory._findHistoryFinds.push_back(generic_string(fileFind));
+			}
+		}
 	}
 
-	(findHistoryRoot->ToElement())->Attribute(TEXT("nbMaxFindHistoryReplace"), &_findHistory._nbMaxFindHistoryReplace);
+	(element)->Attribute(TEXT("nbMaxFindHistoryReplace"), &_findHistory._nbMaxFindHistoryReplace);
 	if ((_findHistory._nbMaxFindHistoryReplace > 0) && (_findHistory._nbMaxFindHistoryReplace <= NB_MAX_FINDHISTORY_REPLACE))
 	{
-	    for (TiXmlNode *childNode = findHistoryRoot->FirstChildElement(TEXT("Replace"));
-	        childNode && (_findHistory._findHistoryReplaces.size() < NB_MAX_FINDHISTORY_REPLACE);
-	        childNode = childNode->NextSibling(TEXT("Replace")))
-	    {
-	        const TCHAR *fileReplace = (childNode->ToElement())->Attribute(TEXT("name"));
-	        if (fileReplace)
-	        {
-	            _findHistory._findHistoryReplaces.push_back(generic_string(fileReplace));
-	        }
-	    }
+		for (TiXmlNode *childNode = findHistoryRoot->FirstChildElement(TEXT("Replace"));
+			childNode && (_findHistory._findHistoryReplaces.size() < NB_MAX_FINDHISTORY_REPLACE);
+			childNode = childNode->NextSibling(TEXT("Replace")))
+		{
+			const TCHAR *fileReplace = (childNode->ToElement())->Attribute(TEXT("name"));
+			if (fileReplace)
+			{
+				_findHistory._findHistoryReplaces.push_back(generic_string(fileReplace));
+			}
+		}
 	}
 
-	const TCHAR *boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("matchWord"));
+	const TCHAR *boolStr = (element)->Attribute(TEXT("matchWord"));
 	if (boolStr)
-	    _findHistory._isMatchWord = (lstrcmp(TEXT("yes"), boolStr) == 0);
+		_findHistory._isMatchWord = (lstrcmp(TEXT("yes"), boolStr) == 0);
 
-	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("matchCase"));
+	boolStr = (element)->Attribute(TEXT("matchCase"));
 	if (boolStr)
-	    _findHistory._isMatchCase = (lstrcmp(TEXT("yes"), boolStr) == 0);
+		_findHistory._isMatchCase = (lstrcmp(TEXT("yes"), boolStr) == 0);
 
-	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("wrap"));
+	boolStr = (element)->Attribute(TEXT("wrap"));
 	if (boolStr)
-	    _findHistory._isWrap = (lstrcmp(TEXT("yes"), boolStr) == 0);
+		_findHistory._isWrap = (lstrcmp(TEXT("yes"), boolStr) == 0);
 
-	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("directionDown"));
+	boolStr = (element)->Attribute(TEXT("directionDown"));
 	if (boolStr)
-	    _findHistory._isDirectionDown = (lstrcmp(TEXT("yes"), boolStr) == 0);
+		_findHistory._isDirectionDown = (lstrcmp(TEXT("yes"), boolStr) == 0);
 
-	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("fifRecuisive"));
+	boolStr = (element)->Attribute(TEXT("fifRecuisive"));
 	if (boolStr)
-	    _findHistory._isFifRecuisive = (lstrcmp(TEXT("yes"), boolStr) == 0);
+		_findHistory._isFifRecuisive = (lstrcmp(TEXT("yes"), boolStr) == 0);
 
-	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("fifInHiddenFolder"));
+	boolStr = (element)->Attribute(TEXT("fifInHiddenFolder"));
 	if (boolStr)
-	    _findHistory._isFifInHiddenFolder = (lstrcmp(TEXT("yes"), boolStr) == 0);
+		_findHistory._isFifInHiddenFolder = (lstrcmp(TEXT("yes"), boolStr) == 0);
 
-	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("dlgAlwaysVisible"));
+	boolStr = (element)->Attribute(TEXT("dlgAlwaysVisible"));
 	if (boolStr)
-	    _findHistory._isDlgAlwaysVisible = (lstrcmp(TEXT("yes"), boolStr) == 0);
+		_findHistory._isDlgAlwaysVisible = (lstrcmp(TEXT("yes"), boolStr) == 0);
 
-	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("fifFilterFollowsDoc"));
+	boolStr = (element)->Attribute(TEXT("fifFilterFollowsDoc"));
 	if (boolStr)
-	    _findHistory._isFilterFollowDoc = (lstrcmp(TEXT("yes"), boolStr) == 0);
+		_findHistory._isFilterFollowDoc = (lstrcmp(TEXT("yes"), boolStr) == 0);
 
-	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("fifFolderFollowsDoc"));
+	boolStr = (element)->Attribute(TEXT("fifFolderFollowsDoc"));
 	if (boolStr)
-	    _findHistory._isFolderFollowDoc = (lstrcmp(TEXT("yes"), boolStr) == 0);
+		_findHistory._isFolderFollowDoc = (lstrcmp(TEXT("yes"), boolStr) == 0);
 
 	int mode = 0;
-	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("searchMode"), &mode);
+	boolStr = (element)->Attribute(TEXT("searchMode"), &mode);
 	if (boolStr)
-	    _findHistory._searchMode = (FindHistory::searchMode)mode;
+		_findHistory._searchMode = (FindHistory::searchMode)mode;
 
-	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("transparencyMode"), &mode);
+	boolStr = (element)->Attribute(TEXT("transparencyMode"), &mode);
 	if (boolStr)
-	    _findHistory._transparencyMode = (FindHistory::transparencyMode)mode;
+		_findHistory._transparencyMode = (FindHistory::transparencyMode)mode;
 
-	(findHistoryRoot->ToElement())->Attribute(TEXT("transparency"), &_findHistory._transparency);
+	(element)->Attribute(TEXT("transparency"), &_findHistory._transparency);
 	if (_findHistory._transparency <= 0 || _findHistory._transparency > 200)
-	    _findHistory._transparency = 150;
+		_findHistory._transparency = 150;
 
-	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("dotMatchesNewline"));
+	boolStr = (element)->Attribute(TEXT("dotMatchesNewline"));
 	if (boolStr)
-	    _findHistory._dotMatchesNewline = (lstrcmp(TEXT("yes"), boolStr) == 0);
+		_findHistory._dotMatchesNewline = (lstrcmp(TEXT("yes"), boolStr) == 0);
 
-	boolStr = (findHistoryRoot->ToElement())->Attribute(TEXT("isSearch2ButtonsMode"));
+	boolStr = (element)->Attribute(TEXT("isSearch2ButtonsMode"));
 	if (boolStr)
-	    _findHistory._isSearch2ButtonsMode = (lstrcmp(TEXT("yes"), boolStr) == 0);
+		_findHistory._isSearch2ButtonsMode = (lstrcmp(TEXT("yes"), boolStr) == 0);
 }
+
 
 void NppParameters::feedShortcut(TiXmlNode *node)
 {
@@ -2775,6 +2918,9 @@ bool NppParameters::getShortcuts(TiXmlNode *node, Shortcut & sc)
 }
 
 
+/*
+ * 解析 userDefineLang.xml的根节点
+ */
 std::pair<unsigned char, unsigned char> NppParameters::feedUserLang(TiXmlNode *node)
 {
 	int iBegin = _nbUserLang;
@@ -2792,13 +2938,15 @@ std::pair<unsigned char, unsigned char> NppParameters::feedUserLang(TiXmlNode *n
 	        // UserLang name is missing, just ignore this entry
 	        continue;
 	    }
-
-	    try {
-	        if (!udlVersion)
-	            _userLangArray[_nbUserLang] = new UserLangContainer(name, ext, TEXT(""));
-	        else
-	            _userLangArray[_nbUserLang] = new UserLangContainer(name, ext, udlVersion);
-	        ++_nbUserLang;
+		_userLangArray[_nbUserLang] = new UserLangContainer(name, ext, udlVersion ? udlVersion : TEXT(""));
+		++_nbUserLang;
+	    try
+		{
+//	        if (!udlVersion)
+//	            _userLangArray[_nbUserLang] = new UserLangContainer(name, ext, TEXT(""));
+//	        else
+//	            _userLangArray[_nbUserLang] = new UserLangContainer(name, ext, udlVersion);
+//			++_nbUserLang;
 
 	        TiXmlNode *settingsRoot = childNode->FirstChildElement(TEXT("Settings"));
 	        if (!settingsRoot)
@@ -2830,10 +2978,11 @@ std::pair<unsigned char, unsigned char> NppParameters::feedUserLang(TiXmlNode *n
 	    catch (const std::exception& /*e*/)
 	    {
 	        delete _userLangArray[--_nbUserLang];
+			_userLangArray[--_nbUserLang] = nullptr;
 	    }
 	}
 	int iEnd = _nbUserLang;
-	return pair<unsigned char, unsigned char>(iBegin, iEnd);
+	return std::pair<unsigned char, unsigned char>(iBegin, iEnd);
 }
 
 bool NppParameters::importUDLFromFile(const generic_string& sourceFile)
@@ -3428,6 +3577,9 @@ void NppParameters::removeUserLang(size_t index)
 }
 
 
+/*
+ * 解析 userDefineLang.xml的根节点\UserLang\Settings
+ */
 void NppParameters::feedUserSettings(TiXmlNode *settingsRoot)
 {
 	const TCHAR *boolStr;
@@ -3477,6 +3629,9 @@ void NppParameters::feedUserSettings(TiXmlNode *settingsRoot)
 }
 
 
+/*
+ * 解析 userDefineLang.xml的根节点\UserLang\KeywordLists
+ */
 void NppParameters::feedUserKeywordList(TiXmlNode *node)
 {
 	const TCHAR * udlVersion = _userLangArray[_nbUserLang - 1]->_udlVersion.c_str();
@@ -3560,6 +3715,10 @@ void NppParameters::feedUserKeywordList(TiXmlNode *node)
 	}
 }
 
+
+/*
+ * 解析 userDefineLang.xml的根节点\UserLang\Styles
+ */
 void NppParameters::feedUserStyles(TiXmlNode *node)
 {
 	int id = -1;
@@ -3581,7 +3740,9 @@ void NppParameters::feedUserStyles(TiXmlNode *node)
 }
 
 /*
- * 1、解析stylers.xml的NotepadPlus根标签
+ * 解析stylers.xml的NotepadPlus根节点的子节点
+ * LexerStyles子节点
+ * GlobalStyles子节点
  */
 bool NppParameters::feedStylerArray(TiXmlNode *node)
 {
@@ -3606,8 +3767,10 @@ bool NppParameters::feedStylerArray(TiXmlNode *node)
 	        if (lexerExcluded != NULL && (lstrcmp(lexerExcluded, TEXT("yes")) == 0))
 	        {
 	            int index = getExternalLangIndexFromName(lexerName);
-	            if (index != -1)
-	                _nppGUI._excludedLangList.push_back(LangMenuItem((LangType)(index + L_EXTERNAL)));
+				if (index != -1)
+				{
+					_nppGUI._excludedLangList.push_back(LangMenuItem((LangType)(index + L_EXTERNAL)));
+				}
 	        }
 	    }
 	}
@@ -3634,6 +3797,21 @@ bool NppParameters::feedStylerArray(TiXmlNode *node)
 	return true;
 }
 
+
+/*
+ * <NotepadPlus>
+ *     <LexerStyles>
+ *         <LexerType name="actionscript" desc="ActionScript" ext="" excluded="">
+ *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+ *         </LexerType>
+ *     </LexerStyles>
+ * </NotepadPlus>
+ * 新加单个的LexerType节点
+ * @param lexerName    name属性
+ * @param lexerDesc    desc属性
+ * @param lexerUserExt ext属性
+ * @param lexerNode    LexerType节点
+ */
 void LexerStylerArray::addLexerStyler(const TCHAR *lexerName, const TCHAR *lexerDesc, const TCHAR *lexerUserExt , TiXmlNode *lexerNode)
 {
 	LexerStyler & ls = _lexerStylerArray[_nbLexerStyler++];
@@ -3676,6 +3854,20 @@ void LexerStylerArray::eraseAll()
 	_nbLexerStyler = 0;
 }
 
+/*
+ * 处理
+ *
+ * <NotepadPlus>
+ *     <LexerStyles>
+ *         <LexerType name="actionscript" desc="ActionScript" ext="" excluded="">
+ *             <WordsStyle name="DEFAULT"                   styleID="11" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" fontSize="" colorStyle="" nesting="" keywordClass="" fontName=""/>
+ *         </LexerType>
+ *     </LexerStyles>
+ * </NotepadPlus>
+ * 对应WordsStyle标签的所有属性(styleID标签除外)
+ * @param styleID styleID
+ * @param styleNode WordsStyle标签
+ */
 void StyleArray::addStyler(int styleID, TiXmlNode *styleNode)
 {
 	int index = _nbStyler;
