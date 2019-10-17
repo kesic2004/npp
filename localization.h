@@ -39,7 +39,8 @@ class ShortcutMapper;
 class UserDefineDialog;
 class PluginsAdminDlg;
 
-class MenuPosition {
+class MenuPosition
+{
 public:
 	int _x;
 	int _y;
@@ -48,9 +49,10 @@ public:
 };
 
 
-class NativeLangSpeaker {
+class NativeLangSpeaker
+{
 public:
-    NativeLangSpeaker():_nativeLangA(NULL), _nativeLangEncoding(CP_ACP), _isRTL(false), _fileName(NULL){};
+    NativeLangSpeaker():_nativeLangA(NULL), _nativeLangEncoding(CP_ACP), _isRTL(false), _fileName(NULL){}
     void init(TiXmlDocumentA *nativeLangDocRootA, bool loadIfEnglish = false);
 	void changeConfigLang(HWND hDlg);
 	void changeLangTabContextMenu(HMENU hCM);
@@ -68,21 +70,25 @@ public:
     void changePrefereceDlgLang(PreferenceDlg & preference);
 	void changePluginsAdminDlgLang(PluginsAdminDlg & pluginsAdminDlg);
 
-    bool isRTL() const {
+    bool isRTL() const
+	{
         return _isRTL;
-    };
+    }
 
-    const char * getFileName() const {
+    const char * getFileName() const
+	{
         return _fileName;
-    };
+    }
 
-    const TiXmlNodeA * getNativeLangA() {
+    const TiXmlNodeA * getNativeLangA()
+	{
         return _nativeLangA;
-    };
+    }
 
-    int getLangEncoding() const {
+    int getLangEncoding() const
+	{
         return _nativeLangEncoding;
-    };
+    }
 	bool getMsgBoxLang(const char *msgBoxTagName, generic_string & title, generic_string & message);
 	generic_string getShortcutMapperLangStr(const char *nodeName, const TCHAR *defaultStr) const;
 	generic_string getProjectPanelLangMenuStr(const char * nodeName, int cmdID, const TCHAR *defaultStr) const;
