@@ -2397,8 +2397,9 @@ void NppParameters::feedFileBrowserParameters(TiXmlNode *node)
 
 void NppParameters::feedFindHistoryParameters(TiXmlNode *node)
 {
-	TiXmlNode *findHistoryRoot = node->FirstChildElement(TEXT("FindHistory"));
+	TiXmlNode * const findHistoryRoot = node->FirstChildElement(TEXT("FindHistory"));
 	if (!findHistoryRoot) return;
+	TiXmlElement * const element = findHistoryRoot->ToElement();
 
 	(findHistoryRoot->ToElement())->Attribute(TEXT("nbMaxFindHistoryPath"), &_findHistory._nbMaxFindHistoryPath);
 	if ((_findHistory._nbMaxFindHistoryPath > 0) && (_findHistory._nbMaxFindHistoryPath <= NB_MAX_FINDHISTORY_PATH))
@@ -3941,12 +3942,18 @@ LangType NppParameters::getLangIDFromStr(const TCHAR *langName)
 	return L_TEXT;
 }
 
+
+unordered_map<generic_string, generic_string *> NppParameters::getLocPathFromStrMap =
+{
+};
+
 /*
  * 国际化
  * 如：zh-cn --> chineseSimplified.xml
  */
 generic_string NppParameters::getLocPathFromStr(const generic_string & localizationCode)
 {
+/*
 	if (localizationCode == TEXT("af"))
 	    return TEXT("afrikaans.xml");
 	if (localizationCode == TEXT("sq"))
@@ -4109,8 +4116,9 @@ generic_string NppParameters::getLocPathFromStr(const generic_string & localizat
 	    return TEXT("welsh.xml");
 	if (localizationCode == TEXT("zu") || localizationCode == TEXT("zu-za"))
 	    return TEXT("zulu.xml");
-
-	return generic_string();
+*/
+	generic_string * string = getLocPathFromStrMap[localizationCode];
+	return string ? string->c_str() : generic_string();
 }
 
 /*
@@ -7412,16 +7420,181 @@ std::unordered_map<generic_string, GuiConfigBaseClass *> NppParameters::guiConfi
 NppParametersInitial::NppParametersInitial()
 {
 	NppParameters::initialGuiConfigMap();
+	NppParameters::initialGetLocPathFromStrMap();
 }
 
 NppParametersInitial::~NppParametersInitial()
 {
 	NppParameters::destroyGuiConfigMap();
+	NppParameters::destroyGetLocPathFromStrMap();
+}
+
+void NppParameters::initialGetLocPathFromStrMap()
+{
+	if (NppParameters::getLocPathFromStrMap.size() > 0)
+	{
+		return;
+	}
+	NppParameters::getLocPathFromStrMap.insert({TEXT("af"),           new generic_string(TEXT("afrikaans.xml"))});
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("sq"),          new generic_string(TEXT("albanian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar"),          new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-dz"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-bh"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-eg"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-iq"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-jo"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-kw"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-lb") ,      new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-ly"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-ma"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-om"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-qa"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-sa"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-sy"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-tn"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-ae"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ar-ye"),       new generic_string(TEXT("arabic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("an"),          new generic_string(TEXT("aragonese.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("az"),          new generic_string(TEXT("azerbaijani.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("eu"),          new generic_string(TEXT("basque.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("be"),          new generic_string(TEXT("belarusian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("bn"),          new generic_string(TEXT("bengali.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("bs"),          new generic_string(TEXT("bosnian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("pt-br"),       new generic_string(TEXT("brazilian_portuguese.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("br-fr"),       new generic_string(TEXT("breton.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("bg"),          new generic_string(TEXT("bulgarian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ca"),          new generic_string(TEXT("catalan.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("zh-tw"),       new generic_string(TEXT("chinese.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("zh-hk"),       new generic_string(TEXT("chinese.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("zh-sg"),       new generic_string(TEXT("chinese.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("zh"),          new generic_string(TEXT("chineseSimplified.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("zh-cn"),       new generic_string(TEXT("chineseSimplified.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("co"),          new generic_string(TEXT("corsican.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("co-fr"),       new generic_string(TEXT("corsican.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("hr"),          new generic_string(TEXT("croatian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("cs"),          new generic_string(TEXT("czech.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("da"),          new generic_string(TEXT("danish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("nl"),          new generic_string(TEXT("dutch.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("nl-be"),       new generic_string(TEXT("dutch.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("eo"),          new generic_string(TEXT("esperanto.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("et"),          new generic_string(TEXT("estonian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("fa"),          new generic_string(TEXT("farsi.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("fi"),          new generic_string(TEXT("finnish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("fr"),          new generic_string(TEXT("french.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("fr-be"),       new generic_string(TEXT("french.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("fr-ca"),       new generic_string(TEXT("french.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("fr-fr"),       new generic_string(TEXT("french.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("fr-lu"),       new generic_string(TEXT("french.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("fr-mc"),       new generic_string(TEXT("french.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("fr-ch"),       new generic_string(TEXT("french.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("fur"),         new generic_string(TEXT("friulian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("gl"),          new generic_string(TEXT("galician.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ka"),          new generic_string(TEXT("georgian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("de"),          new generic_string(TEXT("german.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("de-at"),       new generic_string(TEXT("german.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("de-de"),       new generic_string(TEXT("german.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("de-li"),       new generic_string(TEXT("german.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("de-lu"),       new generic_string(TEXT("german.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("de-ch"),       new generic_string(TEXT("german.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("el"),          new generic_string(TEXT("greek.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("gu"),          new generic_string(TEXT("gujarati.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("he"),          new generic_string(TEXT("hebrew.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("hi"),          new generic_string(TEXT("hindi.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("hu"),          new generic_string(TEXT("hungarian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("id"),          new generic_string(TEXT("indonesian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("it"),          new generic_string(TEXT("italian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("it-ch"),       new generic_string(TEXT("italian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ja"),          new generic_string(TEXT("japanese.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("kn"),          new generic_string(TEXT("kannada.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("kk"),          new generic_string(TEXT("kazakh.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ko"),          new generic_string(TEXT("korean.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ko-kp"),       new generic_string(TEXT("korean.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ko-kr"),       new generic_string(TEXT("korean.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ku"),          new generic_string(TEXT("kurdish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ky"),          new generic_string(TEXT("kyrgyz.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("lv"),          new generic_string(TEXT("latvian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("lt"),          new generic_string(TEXT("lithuanian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("lb"),          new generic_string(TEXT("luxembourgish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("mk"),          new generic_string(TEXT("macedonian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ms"),          new generic_string(TEXT("malay.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("mr"),          new generic_string(TEXT("marathi.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("mn"),          new generic_string(TEXT("mongolian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("no"),          new generic_string(TEXT("norwegian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("nb"),          new generic_string(TEXT("norwegian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("nn"),          new generic_string(TEXT("nynorsk.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("oc"),          new generic_string(TEXT("occitan.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("pl"),          new generic_string(TEXT("polish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("pt"),          new generic_string(TEXT("portuguese.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("pt-pt"),       new generic_string(TEXT("portuguese.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("pa"),          new generic_string(TEXT("punjabi.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("pa-in"),       new generic_string(TEXT("punjabi.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ro"),          new generic_string(TEXT("romanian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ro-mo"),       new generic_string(TEXT("romanian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ru"),          new generic_string(TEXT("russian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ru-mo"),       new generic_string(TEXT("russian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("sc"),          new generic_string(TEXT("sardinian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("sr"),          new generic_string(TEXT("serbian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("sr-cyrl-ba"),  new generic_string(TEXT("serbianCyrillic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("sr-cyrl-sp"),  new generic_string(TEXT("serbianCyrillic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("si"),          new generic_string(TEXT("sinhala.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("sk"),          new generic_string(TEXT("slovak.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("sl"),          new generic_string(TEXT("slovenian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es"),          new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-bo"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-cl") ,      new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-co") ,      new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-cr") ,      new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-do"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-ec"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-sv"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-gt"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-hn"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-mx"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-ni"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-pa"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-py"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-pe"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-pr"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-es"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-uy"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-ve"),       new generic_string(TEXT("spanish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("es-ar"),       new generic_string(TEXT("spanish_ar.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("sv"),          new generic_string(TEXT("swedish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("tl"),          new generic_string(TEXT("tagalog.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("tg-cyrl-tj"),  new generic_string(TEXT("tajikCyrillic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ta"),          new generic_string(TEXT("tamil.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("tt"),          new generic_string(TEXT("tatar.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("te"),          new generic_string(TEXT("telugu.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("th"),          new generic_string(TEXT("thai.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("tr"),          new generic_string(TEXT("turkish.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("uk"),          new generic_string(TEXT("ukrainian.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ur"),          new generic_string(TEXT("urdu.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ur-pk"),       new generic_string(TEXT("urdu.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("ug-cn"),       new generic_string(TEXT("uyghur.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("uz"),          new generic_string(TEXT("uzbek.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("uz-cyrl-uz"),  new generic_string(TEXT("uzbekCyrillic.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("vi") ,         new generic_string(TEXT("vietnamese.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("vi-vn"),       new generic_string(TEXT("vietnamese.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("cy-gb"),       new generic_string(TEXT("welsh.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("zu"),          new generic_string(TEXT("zulu.xml")) });
+	NppParameters::getLocPathFromStrMap.insert({ TEXT("zu-za"),       new generic_string(TEXT("zulu.xml")) });
+}
+void NppParameters::destroyGetLocPathFromStrMap()
+{
+	if(NppParameters::getLocPathFromStrMap.size() > 0)
+	{
+		for (auto kv : NppParameters::getLocPathFromStrMap)
+		{
+			delete kv.second;
+		}
+		NppParameters::getLocPathFromStrMap.clear();
+	}
+
 }
 
 void NppParameters::initialGuiConfigMap()
 {
-	if (NppParameters::n) return;
+	if (NppParameters::guiConfigMap.size() > 0) return;
 	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("ToolBar")),                 new GuiConfigToolBar()) );
 	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("StatusBar")),               new GuiConfigStatusBar()) );
 	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("MenuBar")),                 new GuiConfigMenuBar()) );
@@ -7463,22 +7636,20 @@ void NppParameters::initialGuiConfigMap()
 	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("multiInst")),               new GuiConfigMultiInst()) );
 	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("searchEngine")),            new GuiConfigSearchEngine()) );
 	NppParameters::guiConfigMap.insert(std::pair<generic_string, GuiConfigBaseClass *>(generic_string(TEXT("MISC")),                    new GuiConfigMisc()) );
-	NppParameters::n = 1;
 }
 
 void NppParameters::destroyGuiConfigMap()
 {
-	if (NppParameters::n)
+	if (NppParameters::guiConfigMap.size() > 0)
 	{
 		for (auto kv : NppParameters::guiConfigMap)
 		{
 			delete kv.second;
 		}
-		NppParameters::n = 0;
+		NppParameters::guiConfigMap.clear();
 	}
 }
 
-int NppParameters::n = 0;
 
 ////
 //// base class

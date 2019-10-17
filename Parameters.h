@@ -1928,6 +1928,14 @@ public:
 	static LangType getLangIDFromStr(const TCHAR * langName);
 
 	static generic_string getLocPathFromStr(const generic_string & localizationCode);
+	static std::unordered_map<generic_string, generic_string *> getLocPathFromStrMap;
+	static void initialGetLocPathFromStrMap();
+	static void destroyGetLocPathFromStrMap();
+	static/* const*/ std::unordered_map<generic_string, GuiConfigBaseClass *> guiConfigMap;
+	//static const std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<wchar_t const * const, GuiConfigBaseClass> > > > endOfGuiConfigMap;
+	static void initialGuiConfigMap();
+	static void destroyGuiConfigMap();
+//	static int n;
 
 	/*******************
 	 * º”‘ÿXML≈‰÷√Œƒº˛ *
@@ -3199,11 +3207,6 @@ private:
 	//	function<void(TiXmlNode *)> a = [this](TiXmlNode * childNode) {};
 	//}
 	//function<void(TiXmlNode *, TiXmlElement *)> one;
-	static/* const*/ std::unordered_map<generic_string , GuiConfigBaseClass *> guiConfigMap;
-	//static const std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<std::pair<wchar_t const * const, GuiConfigBaseClass> > > > endOfGuiConfigMap;
-	static void initialGuiConfigMap();
-	static void destroyGuiConfigMap();
-	static int n;
 
 };
 
