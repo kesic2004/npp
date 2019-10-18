@@ -1957,20 +1957,51 @@ public:
 
 struct FindHistory final
 {
+	/*
+	 * 查找对话框中的查找模式
+	 */
 	enum searchMode
 	{
+		/*
+		 * 普通查找模式
+		 */
 		normal,
+		/*
+		 * 扩展查找模式
+		 */
 		extended,
+		/*
+		 * 扩展查找模式
+		 */
 		regExpr
 	};
+	/*
+	 * 查找对话框的透明模式
+	 */
 	enum transparencyMode
 	{
+		/*
+		 * 查找对话框不透明
+		 */
 		none,
+		/*
+		 * 查找对话框失去焦点后透明
+		 */
 		onLossingFocus,
+		/*
+		 * 查找对话框总是透明
+		 */
 		persistant
 	};
 
+	/*
+	 * 查找对话框中的查找模式，默认普通查找模式
+	 */
 	searchMode       _searchMode       = normal;
+
+	/*
+	 * 查找对话框的透明模式，默认失去焦点后透明
+	 */
 	transparencyMode _transparencyMode = onLossingFocus;
 	int              _transparency     = 150;
 
