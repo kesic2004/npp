@@ -37,6 +37,10 @@
 const TCHAR Notepad_plus_Window::_className[32] = TEXT("Notepad++");
 const TCHAR Notepad_plus_Window::_titleName[32] = TEXT("Notepad++");
 HWND Notepad_plus_Window::gNppHWND = NULL;
+#if __WINDOW_CALL_BACK_WATCH__ 1
+std::vector<WindowCallBackStruct *> Notepad_plus_Window::staticCallbackVector;
+int Notepad_plus_Window::n = 0;
+#endif
 
 
 /*

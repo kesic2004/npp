@@ -64,54 +64,27 @@ struct SortTaskListPred final
 	}
 };
 
+#if __WINDOW_CALL_BACK_WATCH__ 1
+WindowCallBackStruct::WindowCallBackStruct(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+	:
+	hwnd(hwnd),
+	lParam(lParam),
+	wParam(wParam),
+	message(message),
+	n(++count)
+{
+}
+
+UINT WindowCallBackStruct::count = 0U;
+#endif
+
 LRESULT CALLBACK Notepad_plus_Window::Notepad_plus_Proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (hwnd == NULL)
 	{
 		return FALSE;
 	}
-/*
-	static UINT * MessageVector = new UINT[100];
-	static int count   = 100;
-	static int current = 0;
-	static int created = 0;
-	static int nccreate = 0;
-	switch (created)
-	{
-		case 0: 
-		{
-			if (current >= count)
-			{
-				UINT * newArray = new UINT[count * 2];
-				for (int i = 0; i < count; ++i)
-				{
-					newArray[i] = MessageVector[i];
-				}
-				delete[] MessageVector;
-				MessageVector = newArray;
-				count *= 2;
-			}
-			MessageVector[current++] = message;
-			switch (message)
-			{
-			case  WM_CREATE:
-				created = 1;
-				break;
-			case WM_NCCREATE:
-				nccreate = current;
-				break;
-			}
-			break;
-		}
-		case 1:
-		{
-			delete[] MessageVector;
-			MessageVector = nullptr;
-			created = 2;
-			break;
-		}
-	}
-*/
+	LONG_PTR lptr = 0LL;
 	/*****************************************************************
 	 * 把窗口句柄和Notepad_plus_Window对象的地址一一绑定在一起       *
 	 * 在需要时进行调用对象的runProc函数                             *
@@ -121,11 +94,110 @@ LRESULT CALLBACK Notepad_plus_Window::Notepad_plus_Proc(HWND hwnd, UINT message,
 	 *****************************************************************/
 	switch(message)
 	{
+#if __WINDOW_CALL_BACK_WATCH__ 1
+		/*
+		 * 0x0002(2)
+		 */
+		case WM_DESTROY:
+		{
+			FILE * fp = generic_fopen(TEXT("F:\\MyNpp1\\npp_msg.csv"), TEXT("a"));
+//			generic_fprintf(fp, TEXT(",,属性,值,类型,,\r\n"));
+			TCHAR temp[1024];
+			/*LONG_PTR */lptr = ::GetWindowLongPtr(hwnd, GWLP_USERDATA);
+			std::vector<WindowCallBackStruct *> * pVector = (reinterpret_cast<Notepad_plus_Window *>(lptr))->instanceCallbackVector;
+			pVector->push_back(new WindowCallBackStruct(hwnd, message, wParam, lParam));
+			if (lptr)
+			{
+				int i = 0;
+				for (WindowCallBackStruct * it : *pVector)
+				{
+					/*
+					 * n
+					 */
+					wsprintf(temp, TEXT(",,n,%u,unsigned int,((Notepad_plus_Window *)lptr)->instanceCallbackVector[%d],\r\n"), (unsigned int)it->n, i++);
+					generic_fprintf(fp, temp);
+					/*
+					 * hwnd
+					 */
+					wsprintf(temp, TEXT(",,hwnd,0X%p {unused=??? },HWND__ *,,\r\n"), (PVOID)it->hwnd);
+					generic_fprintf(fp, temp);
+					/*
+					 * message
+					 */
+					wsprintf(temp, TEXT(",,message,0X%x(%u),unsigned int,\r\n"), (PVOID)it->message, (unsigned int)it->message);
+					generic_fprintf(fp, temp);
+					/*
+					 * wParam
+					 */
+					wsprintf(temp, TEXT(",,wParam,0X%p(%u),unsigned __int64,\r\n"), (PVOID)it->wParam, (unsigned __int64)it->lParam);
+					generic_fprintf(fp, temp);
+					/*
+					 * lParam
+					 */
+					wsprintf(temp, TEXT(",,lParam,0X%p(%d),__int64,,\r\n"), (PVOID)it->lParam, (__int64)it->lParam);
+					generic_fprintf(fp, temp);
+					delete it;
+				}
+				--Notepad_plus_Window::n;
+				if (Notepad_plus_Window::n < 1)
+				{
+					generic_fprintf(fp, TEXT("static,,,,,,\r\n"));
+					i = 0;
+					for (WindowCallBackStruct * it : Notepad_plus_Window::staticCallbackVector)
+					{
+						/*
+						 * n
+						 */
+						wsprintf(temp, TEXT(",,n,%u,unsigned int,Notepad_plus_Window::staticCallbackVector[%d],\r\n"), (unsigned int)it->n, i++);
+						generic_fprintf(fp, temp);
+						/*
+						 * hwnd
+						 */
+						wsprintf(temp, TEXT(",,hwnd,0X%p {unused=??? },HWND__ *,,\r\n"), (PVOID)it->hwnd);
+						generic_fprintf(fp, temp);
+						/*
+						 * message
+						 */
+						wsprintf(temp, TEXT(",,message,0X%x(%u),unsigned int,\r\n"), (PVOID)it->message, (unsigned int)it->message);
+						generic_fprintf(fp, temp);
+						/*
+						 * wParam
+						 */
+						wsprintf(temp, TEXT(",,wParam,0X%p(%u),unsigned __int64,\r\n"), (PVOID)it->wParam, (unsigned __int64)it->lParam);
+						generic_fprintf(fp, temp);
+						/*
+						 * lParam
+						 */
+						wsprintf(temp, TEXT(",,lParam,0X%p(%d),__int64,,\r\n"), (PVOID)it->lParam, (__int64)it->lParam);
+						generic_fprintf(fp, temp);
+						delete it;
+					}
+				}
+			}
+			fclose(fp);
+			break;
+		}
+		/*
+		 * 0x0024(36)
+		 */
 		case WM_GETMINMAXINFO:
 		{
 			MINMAXINFO * info = (MINMAXINFO *)(reinterpret_cast<LPCREATESTRUCT>(lParam));
+			/*LONG_PTR */lptr = ::GetWindowLongPtr(hwnd, GWLP_USERDATA);
+			if (lptr)
+			{
+				reinterpret_cast<Notepad_plus_Window *>(lptr)->instanceCallbackVector->push_back(new WindowCallBackStruct(hwnd, message, wParam, lParam));
+			}
+			else
+			{
+				Notepad_plus_Window::staticCallbackVector.push_back(new WindowCallBackStruct(hwnd, message, wParam, lParam));
+			}
 			break;
 		}
+#endif
+		/*
+		 * 0x0081(129)
+		 */
 		case WM_NCCREATE:
 		{
 			// First message we get the ptr of instantiated object
@@ -138,6 +210,9 @@ LRESULT CALLBACK Notepad_plus_Window::Notepad_plus_Proc(HWND hwnd, UINT message,
 				);
 			pM30ide->_hSelf = hwnd;
 			::SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pM30ide));
+#if __WINDOW_CALL_BACK_WATCH__ 1
+			++Notepad_plus_Window::n;
+#endif
 		}
 
 		default:
@@ -147,7 +222,17 @@ LRESULT CALLBACK Notepad_plus_Window::Notepad_plus_Proc(HWND hwnd, UINT message,
 			 * 由于该址可能为0(为空)，所以在之后的调用时，先作this是否为空的判断 *
 			 * 因为message的值有可能不是默认值，所以在被调用的类中进行判断       *
 			 *********************************************************************/
-			LONG_PTR lptr = ::GetWindowLongPtr(hwnd, GWLP_USERDATA);
+			/*LONG_PTR*/ lptr = ::GetWindowLongPtr(hwnd, GWLP_USERDATA);
+#if __WINDOW_CALL_BACK_WATCH__ 1
+			if (lptr)
+			{
+				reinterpret_cast<Notepad_plus_Window *>(lptr)->instanceCallbackVector->push_back(new WindowCallBackStruct(hwnd, message, wParam, lParam));
+			}
+			else
+			{
+				Notepad_plus_Window::staticCallbackVector.push_back(new WindowCallBackStruct(hwnd, message, wParam, lParam));
+			}
+#endif
 			return (reinterpret_cast<Notepad_plus_Window *>(lptr)->runProc(hwnd, message, wParam, lParam));
 		}
 	}
@@ -206,14 +291,16 @@ LRESULT Notepad_plus::process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 
 	switch (message)
 	{
-		case WM_NCACTIVATE:/* 0x0086(134) */
+		/* 0x0086(134) */
+		case WM_NCACTIVATE:
 		{
 			// Note: lParam is -1 to prevent endless loops of calls
 			::SendMessage(_dockingManager.getHSelf(), WM_NCACTIVATE, wParam, -1);
 			return ::DefWindowProc(hwnd, message, wParam, lParam);
 		}
 
-		case WM_DRAWITEM:/* 0x002B(43) */
+		/* 0x002B(43) */
+		case WM_DRAWITEM:
 		{
 			DRAWITEMSTRUCT *dis = reinterpret_cast<DRAWITEMSTRUCT *>(lParam);
 			if (dis->CtlType == ODT_TAB)
@@ -221,18 +308,49 @@ LRESULT Notepad_plus::process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 			break;
 		}
 
+		/*
+		 * = (SCINTILLA_USER + 1), SCINTILLA_USER = (WM_USER + 2000), WM_USER = 0x0400(1024)
+		 * = WM_USER + 2000 + 1
+		 * = 1024 + 2000 + 1
+		 * = 0x0BD1(3025)
+		 */
 		case WM_DOCK_USERDEFINE_DLG:
 		{
 			dockUserDlg();
 			return TRUE;
 		}
 
+		/*
+		 * = (SCINTILLA_USER + 2), SCINTILLA_USER = (WM_USER + 2000), WM_USER = 0x0400(1024)
+		 * = WM_USER + 2000 + 2
+		 * = 1024 + 2000 + 2
+		 * = 0x0BD2(3026)
+		 */
 		case WM_UNDOCK_USERDEFINE_DLG:
 		{
 			undockUserDlg();
 			return TRUE;
 		}
 
+		/*
+		* = (SCINTILLA_USER + 3), SCINTILLA_USER = (WM_USER + 2000), WM_USER = 0x0400(1024)
+		* = WM_USER + 2000 + 3
+		* = 1024 + 2000 + 3
+		* = 0x0BD3(3027)
+		*/
+		case WM_CLOSE_USERDEFINE_DLG:
+		{
+			checkMenuItem(IDM_LANG_USER_DLG, false);
+			_toolBar.setCheck(IDM_LANG_USER_DLG, false);
+			return TRUE;
+		}
+
+		/*
+		 * = (SCINTILLA_USER + 4), SCINTILLA_USER = (WM_USER + 2000), WM_USER = 0x0400(1024)
+		 * = WM_USER + 2000 + 4
+		 * = 1024 + 2000 + 4
+		 * = 0x0BD4(3028)
+		 */
 		case WM_REMOVE_USERLANG:
 		{
 			TCHAR *userLangName = reinterpret_cast<TCHAR *>(lParam);
@@ -251,6 +369,12 @@ LRESULT Notepad_plus::process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 			return TRUE;
 		}
 
+		/*
+		* = (SCINTILLA_USER + 5), SCINTILLA_USER = (WM_USER + 2000), WM_USER = 0x0400(1024)
+		* = WM_USER + 2000 + 5
+		* = 1024 + 2000 + 5
+		* = 0x0BD5(3029)
+		*/
 		case WM_RENAME_USERLANG:
 		{
 			if (!lParam || !((reinterpret_cast<TCHAR *>(lParam))[0]) || !wParam || !((reinterpret_cast<TCHAR *>(wParam))[0]))
@@ -266,13 +390,6 @@ LRESULT Notepad_plus::process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lPa
 				if (buf->getLangType() == L_USER && oldName == buf->getUserDefineLangName())
 					buf->setLangType(L_USER, newName.c_str());
 			}
-			return TRUE;
-		}
-
-		case WM_CLOSE_USERDEFINE_DLG:
-		{
-			checkMenuItem(IDM_LANG_USER_DLG, false);
-			_toolBar.setCheck(IDM_LANG_USER_DLG, false);
 			return TRUE;
 		}
 

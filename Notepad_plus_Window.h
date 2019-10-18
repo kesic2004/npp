@@ -26,7 +26,15 @@
 // Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #pragma once
 //#include <map>
-//#include <vector>
+/*
+ * 获取获取消息的宏，定义为1时获取消息
+ */
+#define __WINDOW_CALL_BACK_WATCH__ 0
+
+#if __WINDOW_CALL_BACK_WATCH__ 1
+#include <vector>
+#endif
+
 #include "Notepad_plus.h"
 
 
@@ -66,7 +74,30 @@ filePath : file or folder name to open (absolute or relative path name)\r\
 
 
 
-
+#if __WINDOW_CALL_BACK_WATCH__ 1
+struct WindowCallBackStruct
+{
+	HWND   hwnd;
+	LPARAM lParam;
+	WPARAM wParam;
+	UINT   message;
+	UINT   n;
+	WindowCallBackStruct(HWND, UINT, WPARAM, LPARAM);
+	/*
+	 * 不允许复制
+	 */
+	WindowCallBackStruct(WindowCallBackStruct &)        = delete;
+	WindowCallBackStruct(WindowCallBackStruct &&)       = delete;
+	WindowCallBackStruct(const WindowCallBackStruct &)  = delete;
+	WindowCallBackStruct(const WindowCallBackStruct &&) = delete;
+	WindowCallBackStruct & operator = (WindowCallBackStruct &)        = delete;
+	WindowCallBackStruct & operator = (WindowCallBackStruct &&)       = delete;
+	WindowCallBackStruct & operator = (const WindowCallBackStruct &)  = delete;
+	WindowCallBackStruct & operator = (const WindowCallBackStruct &&) = delete;
+	WindowCallBackStruct & operator = (const WindowCallBackStruct)    = delete;
+	static UINT count;
+};
+#endif
 class Notepad_plus_Window : public Window
 {
 public:
@@ -74,9 +105,19 @@ public:
 	/**********************
 	 * 无参构造函数(唯一) *
 	 **********************/
+#if __WINDOW_CALL_BACK_WATCH__ 1
+	Notepad_plus_Window() : Window(), instanceCallbackVector(new std::vector<WindowCallBackStruct *>())
+	{
+	}
+	~Notepad_plus_Window()
+	{
+		delete instanceCallbackVector;
+	}
+#else
 	Notepad_plus_Window() : Window()
 	{
 	}
+#endif
 
 	void init(HINSTANCE, HWND, const TCHAR * cmdLine, CmdLineParams * cmdLineParams);
 
@@ -137,6 +178,16 @@ private:
 	 * keep the availability of quote parameters for thread using *
 	 **************************************************************/
 	QuoteParams  _quoteParams;
+
+#if __WINDOW_CALL_BACK_WATCH__ 1
+	/*
+	 * 当前的消息的vector
+	 */
+	static std::vector<WindowCallBackStruct *> staticCallbackVector;   /* 本类的消息 */
+	static int n;
+	std::vector<WindowCallBackStruct *>   *    instanceCallbackVector; /* 本类的对象的消息 */
+#endif
+
 
 	/*********************************************************
 	 * keep the availability of this string for thread using *
