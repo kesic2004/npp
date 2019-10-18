@@ -51,10 +51,6 @@
 #define WindowsApi
 #define WIN32EXCEPTION_MESSAGE_FORMATTER TEXT("An exception occured. Notepad++ cannot recover and must be shut down.\r\nThe exception details are as follows:\r\nCode:\t0x%08X\r\nType:\t%S\r\nException address: 0x%p")
 
-// typedef std::vector<generic_string> ParamVector;
-
-
-
 namespace
 {
 	/*
